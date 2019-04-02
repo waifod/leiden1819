@@ -1,0 +1,370 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+
+\begin{document}
+
+\title{Representation Theory - Assignment 3}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{5.7}
+
+\begin{proof}
+	We will start by proving that. in an abelian category, an object $a$ is a zero object if and only if $End(a)$ is the zero-ring.
+	
+	Since we are in abelian category, we already know that for any object $b$ its endomorphisms assemble into a ring $End(b)$, where the zero is the zero-morphism and the unit is the identity.
+	
+	If $a$ is a zero-object, then there is a unique morphism $a\rightarrow a$, hence identity and zero-morphism coincide and $End(a)=0$.
+	
+	Viceversa, if $End(a)=0$ we have that identity and zero-endomorphism coincide. Consider another object $b$. Since $\Hom(a,b),\ \Hom(b,a)$ are abelian groups, there exists at least one morphism in both, $f,\ g$.
+	
+	We want to prove that they are both zero-morphisms and therefore the two groups are trivial, which will imply that for every object $b$ there is a unique map from and to $a$.
+	
+	Indeed, notice that $f+f=(f+f)\Id_a=f\Id_a+f\Id_a=f(\Id_a+\Id_a)=f\Id_a=f$ and, in the same way, $g+g=\Id_a(g+g)=\Id_ag+\Id_ag=(\Id_a+\Id_a)g=\Id_ag=g$, hence the thesis.
+	
+	~\\
+	We will now prove that, given an additive functor $\mathcal{A}\xrightarrow{F}\mathcal{B}$, $F(0)\cong 0$.
+	
+	Remember that it induces a group homomorphism $\Hom_{\mathcal{A}}(0,0)\rightarrow \Hom_{\mathcal{B}}(F(0),F(0))$, thus it sends the zero-endomorphism of 0 to the zero-endomorphism of $F(0)$. Also, by definition, it sends $\Id_0$ to $\Id_{F(0)}$. However, since the identity and the zero-endomorphism of 0 coincide, the same goes for the identity and the zero-endomorphism of $F(0)$, which will then be a zero object.
+	
+	~\\
+	
+	$(1\implies 2)$ Consider an exact sequence $0\rightarrow X\rightarrow Y\rightarrow Z$ in $\mathcal{A}$ and apply the functor $F$, getting $F(0)\rightarrow F(X)\rightarrow F(Y)\rightarrow F(Z)$.
+	
+	Since the subsequences $0\rightarrow X\rightarrow Y,\ X\rightarrow Y\rightarrow Z$ are exact by the definition of exact sequence, being $F$ exact we get that the subsequences $F(0)\rightarrow F(X)\rightarrow F(Y),\ F(X)\rightarrow F(Y)\rightarrow F(Z)$ are also exact, hence $F(0)\rightarrow F(X)\rightarrow F(Y)\rightarrow F(Z)$ is exact. Since $F(0)\cong 0$, we get that $0\rightarrow F(X)\rightarrow F(Y)\rightarrow F(Z)$ is exact, as desired.
+	
+	The proof of the right-exactness is essentially the same.
+	
+	$(2\implies 3)$ Consider a short exact sequence $0\rightarrow X\rightarrow Y\rightarrow Z\rightarrow 0$, which gives us two exact subsequences $0\rightarrow X\rightarrow Y\rightarrow Z,\ X\rightarrow Y\rightarrow Z\rightarrow 0$. By left/right-exactness of $F$, we get two exact sequences $0\rightarrow F(X)\rightarrow F(Y)\rightarrow F(Z),\ F(X)\rightarrow F(Y)\rightarrow F(Z)\rightarrow 0$, hence they are exact at $F(X),\ F(Y),\ F(Z)$. Now, the sequence $0\rightarrow F(X)\rightarrow F(Y)\rightarrow F(Z)\rightarrow 0$ is exact if and only if it is exact at $F(X),\ F(Y),\ F(Z)$, which it is because the sequences we chained are, thus we have the thesis.
+	
+	$(3\implies 1)$ Consider a sequence $X\xrightarrow{f} Y\xrightarrow{g} Z$. Saying that it is exact is equivalent to saying that it fits in a commutative diagram of the following form, where the vertical sequence and the horizontal ones are exact:
+	\[
+		\begin{tikzcd}
+			&&& 0\arrow{d} \\
+			0\arrow{r}
+			& J\arrow{r}
+			& X\arrow{r}\arrow[swap]{dr}{f}
+			& K\arrow{r}\arrow{d}
+			& 0 \\
+			&&& Y\arrow{d}\arrow{dr}{g} \\
+			&& 0\arrow{r}
+			& P\arrow{r}\arrow{d}
+			& N\arrow{r}
+			& Q\arrow{r}
+			& 0 \\
+			&&& 0
+		\end{tikzcd}
+	\]
+	
+	Since the functor preserves short exact sequences, we have that the following diagram commutes and again the vertical sequence and the horizontal ones are exact:
+	\[
+		\begin{tikzcd}
+			&&& 0\arrow{d} \\
+			0\arrow{r}
+			& F(J)\arrow{r}
+			& F(X)\arrow{r}\arrow[swap]{dr}{F(f)}
+			& F(K)\arrow{r}\arrow{d}
+			& 0 \\
+			&&& F(Y)\arrow{d}\arrow{dr}{F(g)} \\
+			&& 0\arrow{r}
+			& F(P)\arrow{r}\arrow{d}
+			& F(N)\arrow{r}
+			& F(Q)\arrow{r}
+			& 0 \\
+			&&& 0
+		\end{tikzcd}
+	\]
+	
+	By applying the same equivalence we used at the beginning, we get that the sequence $F(X)\xrightarrow{F(f)} F(Y)\xrightarrow{F(g)} F(Z)$ is exact.
+\end{proof}
+	
+
+
+
+
+
+
+~\\~\\~\\~\\~\\~\\~\\~\\~\\
+\exercise{5.11}
+
+\begin{proof}
+    $(a)$ Consider some elements $\sum_{g\in G}c^j_gg\in\K[G]$ and $\lambda_j\in\K$. We have the following:
+    \begin{align*}
+        \iota (\sum_j(\lambda_j\cdot \sum_{g\in G}c^j_gg))
+        &=\iota(\sum_j\sum_{g\in G}\lambda_j\cdot c^j_gg) \\
+        &=\iota(\sum_{g\in G}(\sum_j\lambda_jc^j_g)g) \\
+        &=\sum_{g\in G}(\sum_j\lambda_jc^j_g)g^{-1} \\
+        &=\sum_j\sum_{g\in G}\lambda_j\cdot c^j_gg^{-1} \\
+        &=\sum_j(\lambda_j\cdot\sum_{g\in G}c^j_gg^{-1}) \\
+        &=\sum_j\lambda_j\cdot \iota(\sum_{g\in G} c^j_gg)
+    \end{align*}
+
+    It follows that the map is $\K$-linear.
+
+    Clearly, since the unit $1$ of $\K[G]$ is given by $1_g\in G$, we have that
+    $\iota(1)=\iota(1_g)=(1_g)^{-1}=1_g$.
+
+    Also, we have the following, which completes the proof:
+    \begin{align*}
+        \iota((\sum_{g\in G}c^1_gg)(\sum_{g\in G}c^2_gg)) &=\iota(\sum_{g\in G}(\sum_{g_1g_2=g} c^1_{g_1}c^2_{g_2})g) \\
+        &=\sum_{g\in G}(\sum_{g_1g_2=g} c^1_{g_1}c^2_{g_2})g^{-1} \\
+        &=\sum_{g\in G}(\sum_{g_1g_2=g} c^1_{g_1}c^2_{g_2})g_2^{-1}g_1^{-1} \\
+        &=(\sum_{g\in G} c^2_gg^{-1})(\sum_{g\in G} c^1_gg_1^{-1}) \\
+        &=\iota(\sum_{g\in G}c^2_gg)\cdot\iota(\sum_{g\in G}c^1_gg)
+    \end{align*}
+\end{proof}
+
+\begin{proof}
+	$(b)$ We shall assume that the map given by $m\mapsto f(\iota(r)m)$ is indeed an element of $\Hom_{\K}(M,\K)$ and therefore the map $\K[G]\times\Hom_{\K}(M,\K)\rightarrow\Hom_{\K}(M,\K)$ described is well defined.
+	
+	Let now $\sum_g c^j_gg\in\K[G],\ f,h\in\Hom_{\K}(M,\K),\ m\in M$. We have that:
+	\begin{align*}
+		((\sum_{g\in G} c^j_gg)\cdot (f+h))(m) &=(f+h)((\sum_{g\in G} c^j_gg^{-1})\cdot m) \\
+		&=f((\sum_g c^j_gg^{-1})\cdot m)+h((\sum_g c^j_gg^{-1})\cdot m) \\
+		&=((\sum_g c^j_gg)\cdot f)(m)+((\sum_g c^j_gg)\cdot h)(m) \\
+		&=((\sum_g c^j_gg)\cdot f+(\sum_g c^j_gg)\cdot h)(m)
+	\end{align*}
+	\begin{align*}	
+		(((\sum_g c^1_gg)+(\sum_g c^2_gg))\cdot f)(m) &=((\sum_{g\in G} (c^1_g+c^2_g)g)\cdot f)(m) \\
+		&=f((\sum_{g\in G} (c^1_g+c^2_g)g^{-1})\cdot m) \\
+		&=f((\sum_{g\in G} c^1_gg^{-1})\cdot m+(\sum_{g\in G} c^2_gg^{-1})\cdot m) \\
+		&=f((\sum_{g\in G} c^1_gg^{-1})\cdot m)+f((\sum_{g\in G} c^2_gg^{-1})\cdot m) \\
+		&=((\sum_{g\in G} c^1_gg)\cdot f)(m)+((\sum_{g\in G} c^2_gg)\cdot f)(m) \\
+		&=((\sum_{g\in G} c^1_gg)\cdot f+(\sum_{g\in G} c^2_gg)\cdot f)(m)
+	\end{align*}
+	\begin{align*}	
+		(((\sum_{g\in G} c^1_gg)(\sum_{g\in G} c^2_gg))\cdot f)(m) &=((\sum_{g\in G} (\sum_{g_1g_2=g} c^1_{g_1}c^2_{g_2})g)\cdot f)(m) \\
+		&=f(((\sum_{g\in G} c^2_gg^{-1})(\sum_{g\in G} c^1_gg^{-1}))\cdot m) \\
+		&=f((\sum_{g\in G} (\sum_{g_1g_2=g} c^1_{g_1}c^2_{g_2})g^{-1})\cdot m) \\
+		&=f((\sum_{g\in G} c^2_gg^{-1})\cdot ((\sum_{g\in G} c^1_gg^{-1})\cdot m) \\
+		&=((\sum_{g\in G} c^2_gg)\cdot f)(((\sum_{g\in G} c^1_gg^{-1})\cdot m) \\
+		&=((\sum_{g\in G} c^1_gg)\cdot ((\sum_{g\in G} c^2_gg)\cdot f))(m)
+	\end{align*}
+	\begin{align*}
+		(1_g\cdot f)(m) &=f((1_g)^{-1}\cdot m) \\
+		&=f(1_g\cdot m) \\
+		&=f(m)
+	\end{align*}
+	
+	It follows that the function defined induces a $\K[G]$-module structure on $\Hom_{\K}(M,\K)$.
+\end{proof}
+
+\begin{proof}
+	$(c)$ To do this, it is sufficient to show that the map $G\times\Hom_{\K}(M,N)\rightarrow\Hom_{\K}(M,N)$ naturally induces a group homomorphism $G\rightarrow\Aut_{\K}(\Hom_{\K}(M,N))$, which then by~\cite[lemma 4.2]{Tor10} will extend uniquely to a map $\K[G]\times\Hom_{\K}(M,N)\rightarrow\Hom_{\K}(M,N)$ defining a $\K[G]$-module structure on $\Hom_{\K}(M,N)$.
+	
+	Again, we will take for granted that the map mentioned is well defined.
+	
+	Let now $g_1,g_2\in G,\ f,h\in\Hom_{\K}(M,N),\ m\in M,\ \lambda,\mu\in\K$. We see that:
+	\begin{align*}
+		g_i(\lambda f+\mu h)(m) &=g_i((\lambda f+\mu h)(g_i^{-1}m)) \\
+		&=g_i(\lambda f(g_i^{-1}m)+\mu h(g_i^{-1}m)) \\
+		&=g_i(\lambda f(g_i^{-1}m))+g_i(\mu h(g_i^{-1}m)) \\
+		&=\lambda (g_if(g_i^{-1}m))+\mu (g_ih(g_i^{-1}m)) \\
+		&=\lambda g_i(f)(m)+\mu g_i(h)(m) \\
+		&=(\lambda g_i(f)+\mu g_i(h))(m)
+	\end{align*}
+	
+	This shows that the map $\Hom_{\K}(M,N)\rightarrow\Hom_{\K}(M,N)$ induced by $g$ is a $\K$-linear endomorphism.
+	
+	We will now prove that by applying first the endomorphism induced by $g_2$ and then the one induced by $g_1$ (i.e. applying the composite endomorphism) we get the same result	we would have by applying the endomorphism induced by $g_1g_2$, which will imply that our map preserves the operation by transforming products in compositions and in particular sends the elements of $G$ to endomorphisms which are invertible with respect to the composition, i.e. automorphisms of $\Hom_{\K}(M,N)$.
+	
+	\begin{align*}
+		(g_1g_2)(f)(m) &=(g_1g_2)f((g_1g_2)^{-1}m) \\
+		&=g_1(g_2f(g_2^{-1}(g_1^{-1}m))) \\
+		&=g_1(g_2(f)(g_1^{-1}m)) \\
+		&=g_1(g_2(f))(m) \\
+		&=(g_1\circ g_2)(f)(m)
+	\end{align*}
+	
+	This tells us that the map is indeed a group homomorphism $G\rightarrow\Aut_{\K}(\Hom_{\K}(M,N))$.
+\end{proof}
+
+
+~\\
+\exercise{6.5}
+
+\begin{proof}
+	$(a)$ Let $s\in S,\ s\otimes m\in S\otimes_R M$ and set $s\cdot (\sum_j (s_j\otimes m_j)):=\sum_j (ss_j\otimes m_j)$. We will check that this is well defined.
+	
+	Remember that $S\otimes_R M\cong R[S\times M]/H$.
+	
+	Clearly, $(s(s_1+s_2),m)-(ss_1,m)-(ss_2,m)=(ss_1+ss_2,m)-(ss_1,m)-(ss_2,m),(ss',m_1+m_2)-(ss',m_1)-(ss',m_2),(s(s'r),m)-(ss',rm)=((ss')r,m)-(ss',rm)\in H$ and in particular belong to the set of generators of this subgroup (in fact, they describe them all if we set $s=1_S$).
+	
+	This shows that multiplying on the left a generator of $H$ by $s\in S$ gives another element of $H$ and, since any element of $H$ is a sum of elements of the kind we have just described, it follows that for any element $\sum (s,m)\in H$ also $\sum (s's,m)\in H$.
+	
+	Suppose now that $\sum_i s_i\otimes m_i=\sum_j s_j\otimes m_j$ in $S\otimes_R M$. Then, $\sum_i (s_i,m_i)-\sum_j (s_j,m_j)\in H$ and therefore, for any $s\in S$, $s(\sum_i (s_i,m_i)-\sum_j (s_j,m_j))=\sum_i (ss_i,m_i)-\sum_j (ss_j,m_j)\in H$, which implies that $\sum_i ss_i\otimes m_i=\sum_j ss_j\otimes m_j$ in $S\otimes_R M$.
+	
+	We also have the following, which proves that the operation defined gives a left $S$-module structure to $S\otimes_R M$:
+	\begin{align*}
+		s\cdot (\sum_i s_i\otimes m_i+\sum_j s_j\otimes m_j) &=s\cdot(\sum_{i,j:\ m_i=m_j} (s_i+s_j)\otimes m_i+\sum_{i:\ m_i\neq m_j\ \forall j} s_i\otimes m_i+\sum_{j:\ m_j\neq m_i\ \forall i} s_j\otimes m_j) \\
+		&=\sum_{i,j:\ m_i=m_j} s(s_i+s_j)\otimes m_i+\sum_{i:\ m_i\neq m_j\ \forall j} ss_i\otimes m_i+\sum_{j:\ m_j\neq m_i\ \forall i} ss_j\otimes m_j \\
+		&=\sum_{i,j:\ m_i=m_j} (ss_i+ss_j)\otimes m_i+\sum_{i:\ m_i\neq m_j\ \forall j} ss_i\otimes m_i+\sum_{j:\ m_j\neq m_i\ \forall i} ss_j\otimes m_j \\
+		&=\sum_i ss_i\otimes m_i+\sum_j ss_j\otimes m_j \\
+		&=s\cdot\sum_i s_i\otimes m_i+s\cdot\sum_j s_j\otimes m_j \\
+		\\
+		(s_1+s_2)\cdot \sum_i s_i\otimes m_i &=\sum_i ((s_1+s_2)s_i)\otimes m_i \\
+		&=\sum_i (s_1s_i\otimes m_i+s_2s_i\otimes m_i) \\
+		&=\sum_i s_1s_i\otimes m_i+\sum_i s_2s_i\otimes m_i \\
+		&=s_1\cdot\sum_i s_i\otimes m_i+s_2\cdot\sum_i s_i\otimes m_i \\
+		\\
+		s_1\cdot s_2\cdot\sum_i s_i\otimes m_i &=s_1\cdot\sum_i s_2s_i\otimes m_i \\
+		&=\sum_i s_1s_2s_i\otimes m_i \\
+		&=(s_1s_2)\cdot \sum_i s_i\otimes m_i \\
+		\\
+		1_S\cdot\sum_i s_i\otimes m_i &=\sum_i 1_Ss_i\otimes m_i \\
+		&=\sum_i s_i\otimes m_i
+	\end{align*}
+\end{proof}
+
+\begin{proof}
+	$(b)$ Let's consider the map $\Hom_S(S\otimes_R M,N)\xrightarrow{\psi}\Hom_R(M,\phi^*N)$ given by $f\mapsto (m\mapsto \psi(f)(m):=f(1_S\otimes m)$. We will check that it is well defined.
+	
+	Indeed, notice that for any $r\in R,\ m\in M,\ f\in\Hom_S(S\otimes_R M,N)$ we have the following:
+	\begin{align*}
+		\psi(f)(m_1+m_2) &=f(1_S\otimes (m_1+m_2)) \\
+		&=f(1_S\otimes m_1+1_S\otimes m_2) \\
+		&=f(1_S\otimes m_1)+f(1_S\otimes m_2) \\
+		&=\psi(f)(m_1)+\psi(f)(m_2) \\
+		\\
+		\psi(f)(r\cdot m) &=f(1_S\otimes (r\cdot m)) \\
+		&=f((1_S\cdot r)\otimes m) \\
+		&=f(1_S\phi(r)\otimes m) \\
+		&=f(\phi(r)\cdot (1_S\otimes m)) \\
+		&=\phi(r) f(1_S\otimes m) \\
+		&=r\cdot\psi(f)(m)
+	\end{align*}
+	
+	It follows that the map is indeed well defined, as $\psi(f)$ is a $R$-module homomorphism.
+	
+	Now we check that $\psi$ is a group homomorphism:
+	\begin{align*}
+		\psi(f+g)(m) &=(f+g)(1_S\otimes m) \\
+		&=f(1_S\otimes m)+g(1_S\otimes m) \\
+		&=\psi(f)(m)+\psi(g)(m) \\
+		&=(\psi(f)+\psi(g))(m)
+	\end{align*}
+	
+	We still have to check that $\psi$ is a bijection. To do this, we will construct an inverse map $\sigma$.
+	
+	Let $f\in\Hom_R(M,\phi^*N)$. We define $S\otimes_R M\xrightarrow{\sigma(f)} N$ by setting $\sigma(f)(\sum_i s_i\otimes m_i):=\sum_i s_if(m_i)$.
+	
+	We want to check that $\sigma(f)$ is well defined. Let $\sum_i
+        s_i\otimes m_i=\sum_j s_j\otimes m_j$. Then, $\sum_i (s_i,m_i)-\sum_j
+        (s_j,m_j)\in H$, hence we only have to check that $\sigma(f)$ is zero on the
+        elements represented by generators of $H$.
+	
+	\begin{align*}
+		\sigma(f)((s_1+s_2)\otimes m-s_1\otimes m-s_2\otimes m) &=(s_1+s_2)f(m)-s_1f(m)-s_2f(m) \\
+		&=s_1f(m)+s_2f(m)-s_1f(m)-s_2f(m) \\
+		&=0 \\
+		\\
+		\sigma(f)(s\otimes (m_1+m_2)-s\otimes m_1-s\otimes m_2) &=sf(m_1+m_2)-sf(m_1)-sf(m_2) \\
+		&=s(f(m_1)+f(m_2))-sf(m_1)-sf(m_2) \\
+		&=sf(m_1)+sf(m_2)-sf(m_1)-sf(m_2) \\
+		&=0 \\
+		\\
+		\sigma(f)(sr\otimes m-s\otimes rm) &=\sigma(f)(s\phi(r)\otimes m-s\otimes rm) \\
+		&=(s\phi(r))f(m)-sf(rm) \\
+		&=(s\phi(r))f(m)-s(rf(m)) \\
+		&=(s\phi(r))f(m)-s(\phi(r)f(m)) \\
+		&=(s\phi(r))f(m)-(s\phi(r))f(m) \\
+		&=0
+	\end{align*}
+
+	Now we will prove that the map is indeed a $S$-module homomorphism:
+	\begin{align*}
+		\sigma(f)(\sum_i s_i\otimes m_i+\sum_j s_j\otimes m_j) &=\sigma(f)(\sum_{i,j:\ m_i=m_j} (s_i+s_j)\otimes m_i+\sum_{i:\ m_i\neq m_j\ \forall j} s_i\otimes m_i+\sum_{j:\ m_j\neq m_i\ \forall i} s_j\otimes m_j) \\
+		&=\sum_{i,j:\ m_i=m_j} (s_i+s_j)f(m_i)+\sum_{i:\ m_i\neq m_j\ \forall j} s_if(m_i)+\sum_{j:\ m_j\neq m_i\ \forall i} s_jf(m_j) \\
+		&=\sum_i s_i f(m_i)+\sum_j s_j f(m_j) \\
+		&=\sigma(f)(\sum_i s_i\otimes m_i)+\sigma(f)(\sum_j s_j\otimes m_j) \\
+		\\
+		\sigma(f)(s\cdot\sum_i s_i\otimes m_i) &=\sigma(f)(\sum_i
+                ss_i\otimes m_i) \\
+		&=\sum_i ss_if(m_i) \\
+		&=s(\sum_i s_if(m_i)) \\
+		&=s\sigma(f)(\sum_i s_i\otimes m_i)
+	\end{align*}
+	
+	Now we check that $\sigma$ is inverse to $\psi$. Let $f\in\Hom_S(S\otimes_R M,N),\ g\in\Hom_R(M,\phi^*N)$.
+	\begin{align*}
+		(\sigma\circ\psi)(f)(s\otimes m) &=\sigma(\psi(f))(s\otimes m) \\
+		&=s\psi(f)(m) \\
+		&=sf(1_S\otimes m) \\
+		&=f(s(1_S\otimes m)) \\
+		&=f(s\otimes m) \\
+		\\
+		(\psi\circ\sigma)(g)(m) &=\psi(\sigma(g))(m) \\
+		&=\sigma(g)(1_S\otimes m) \\
+		&=1_Sg(m) \\
+		&=g(m)
+	\end{align*}
+\end{proof}
+
+~\\
+\exercise{6.12}
+	
+	Disclaimer: we will denote by $\cong_A$ an isomorphism in the category of $A$-modules.
+	
+\begin{proof}
+	Notice that $1_{R\times S}=(1_R,1_S)=(1_R,0_S)+(0_R,1_S)=e_1+e_2,\ e_i^2=e_i,\ e_1e_2=0_{R\times S}$, thus, considered a $R\times S$-module $M$, for any $m\in M$ we have that $m=1_{R\times S} m=(e_1+e_2)m=e_1m+e_2m$ uniquely. It follows that $M\cong_{R\times S} e_1M\oplus e_2M$.
+	
+	Noticing that $Ann(e_1M)=\{0\}\times S,\ Ann(e_2M)=R\times\{0\}$, we get that $e_1M$ and $e_2M$ are respectively $R\times S/Ann(e_1M)\cong R$ and $R\times S/Ann(e_2M)\cong S$ modules canonically because the action of $R\times S$ factors through these rings, hence as such they are semisimple and $e_iM\cong \bigoplus_{j\in J_i} M_{i,j}$, where the $(M_{1,j})_{j\in J_1}$ are simple $R$-modules and the $(M_{2,j})_{j\in J_2}$ are simple $S$-modules by~\cite[thm. 9.2]{Tor10}.
+	
+	It follows that, turning the $M_{i,j}$ into $R\times S$-modules through the canonical projections onto $R,\ S$ and renaming them as $(M_j)_{j\in J}$, we have that $M\cong_{R\times S} (\bigoplus_{j\in J_1} M_{1,j})\oplus (\bigoplus_{j\in J_2} M_{2,j})\cong\bigoplus_{j\in J} M_j$.
+	
+	The thesis now follows if we can prove that a simple $R$ or $S$ module is a simple $R\times S$-module by~\cite[thm. 9.2]{Tor10}. Let now $N$ be a simple $R$-module. Consider now a non-zero $R\times S$-submodule of $N$, $N'$. Since for any $(r,s)\in R\times S,\ n\in N'$ we have that $(r,s)\cdot n=rn$, it follows that $N'=N$.
+\end{proof}
+
+\printbibliography
+
+\end{document}
+
+

@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+\newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"]}
+\newcommand\dhrightarrow{%
+		\mathrel{\ooalign{$\rightarrow$\cr%
+		$\mkern3.5mu\rightarrow$}}
+}
+
+\newcommand\dhxrightarrow[2][]{%
+		\mathrel{\ooalign{$\xrightarrow[#1\mkern4mu]{#2\mkern4mu}$\cr%
+		\hidewidth$\rightarrow\mkern4mu$}}
+}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Op}{Open}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+
+\begin{document}
+
+\title{Algebraic Geometry 1 - Assignment 6}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{8.6.5}
+
+$(i)$ Suppose that $f$ is not surjective. Then, there is $P\in Y$ s.t. $(a:b)=P\not\in\Ima(f)$. Consider another point $(a':b')=P'\neq P$. Through a projective transformation of $\Ps^1_{\K}$, we may change the coordinate system s.t. $P=(0:1)$, $P'=(1:0)$.
+
+Now we have that $\Ima(f)\subset\Ps^1_{\K}\cap U_1\cong\A^1_{\K}$ and, since every morphism $X\rightarrow\A^1_{\K}$ is constant by~\cite[prop. 4.2.5]{edix} because it is a regular function by~\cite[prop. 4.3.11]{edix} and $X$ is irreducible, so is $X\xrightarrow{f}\Ps^1_{\K}$ as we may restrict its codomain to make it into one.
+
+$(ii)$ We know that, given an open subset $U$ of an algebraic variety $Y$, a map of sets $U\xrightarrow{g}\A^1_{\K}$ is a morphism if and only if $g\in\mathcal{O}_U(U)=\mathcal{O}_Y(U)$ by~\cite[prop. 4.3.11]{edix}.
+
+Now, setting $\emptyset\neq U:=X\setminus f^{-1}\{(1:0)\}$ and restricting the codomain of $f|_U$ to $\Ps^1_{\K}\cap U_1\cong\A^1_{\K}$ (we can because $(1:0)\not\in f(U)\subset\Ps^1_{\K}\cap U_1$), since $U\xrightarrow{f|_U}\A^1_{\K}$ is again a morphism of varieties as above, we have that $f|_U\in\mathcal{O}_U(U)=\mathcal{O}_X(U)$.
+
+By definition, the elements of $K(X)$ are the $[(V,g)]$, where $V$ is open and dense in $X$ and $g\in\mathcal{O}_X(V)$. It follows that, being $U$ dense by the irreducibility of $X$, $[(U,f|_U)]\in K(X)$.
+
+$(iii)$ First we prove the injectivity.
+
+Consider two morphisms of varieties, $X\xrightarrow{f,g}\Ps^1_{\K}$, and then, given the open subsets $U=f^{-1}\{(1:0)\},U'=g^{-1}\{(1:0)\}$, restrict them to $U\xrightarrow{f|_U}\A^1,U'\xrightarrow{g|_{U'}}\A^1_{\K}$. If $[(U,f|_U)]=[(U',g|_{U'})]$, then they coincide on some open $V\subset U\cap U'$, hence the original $f,g$ are s.t. $f|_V=g|_V:V\rightarrow\Ps^1_{\K}$.
+
+Being $V\neq\emptyset$ open and therefore dense in $X$ and since two continuous maps are s.t. the subset they agree on is closed, we get that $f=g$.
+
+Now we prove the surjectivity.
+
+We know by~\cite[prop. 6.5.3(iii)]{edix} that $K(X)$ is a field.
+
+Remember that, for $\tilde{g}\in K(X)^{\times}$, there are finitely many points s.t. $v_P(\tilde{g})\neq 0$ by~\cite[prop. 8.2.8]{edix} as the same theorem applies to $1/\tilde{g}$, hence, given $[(U,g)]=\tilde{g}$, let $V=X\setminus\{P\in X\ |\ v_P(g)<0\}, W=X\setminus\{P\in X\ |\ v_P(g)>0\}$. Then, $g\in\mathcal{O}_X(V)$ and $1/g\in\mathcal{O}_X(W)$ define two morphisms $V\xrightarrow{g}\A^1_{\K}, W\xrightarrow{1/g}\A^1_{\K}$.
+
+Now cover $\Ps^1_{\K}$ with an affine cover given by $U_0,U_1$. Our maps can be extended through this to maps $V\xrightarrow{g'}\Ps^1_{\K},W\xrightarrow{g''}\Ps^1_{\K}$, where $g':=\phi_0^{-1}\circ g, g'':=\phi_1^{-1}\circ\frac{1}{g}$ are s.t. $\Ima(g')\subset U_0,\Ima(g'')\subset U_1$.
+
+We will show that $g'|_{V\cap W}=g''|_{V\cap W}$, with  $\Ima(g'|_{V\cap W})=\Ima(g''|_{V\cap W})\subset U_0\cap U_1\cong\A^1_{\K}\setminus\{0\}$. Furthermore, by glueing the two $\A^1_{\K}$ as in~\cite[ex. 6.2.4]{edix}, using our $\phi_i$, we get $\Ps^1_{\K}$ and the given diagram commutes thanks to our equality, hence we get a unique morphism of varieties $V\cup W=X\xrightarrow{h}\Ps^1_{\K}$ by glueing $g'$ and $g''$ by the universal property of glueings.
+\[
+  \begin{tikzcd}
+    & V\cap W\arrow{r}\ar[dl,equal]
+    & V\arrow{r}{g}\arrow{dddr}{g'}\arrow{dd}
+    & \A^1_{\K}\arrow{ddd}{\phi_0^{-1}} \\
+    V\cap W\arrow{d} \\
+    W\arrow[swap]{d}{1/g}\arrow[swap]{drrr}{g''}\arrow{rr}
+    && X\arrow[dotted]{dr}[description]{h} \\
+    \A^1_{\K}\arrow[swap]{rrr}{\phi_1^{-1}}
+    &&& \Ps^1_{\K}
+  \end{tikzcd}
+\]
+But the equality of the restrictions is immediate, as the isomorphism $\A^1_{\K}\setminus\{0\}\cong U_0\cap(U_0\cap U_1)= U_1\cap (U_0\cap U_1)\cong\A^1_{\K}\setminus\{0\}$ is given by $\K[u,\frac{1}{u}]\rightarrow\K[v,\frac{1}{v}]$ sending $u$ to $\frac{1}{v}$.
+
+We still have to verify (remembering again that $U\cap V\neq\emptyset$ is dense in $X$) that the corresponding $\tilde{h}\in K(X)$ is s.t. $\tilde{h}=[(\A^1_{\K}=\Ps^1_{\K}\setminus h^{-1}\{(1:0)\},h|_{\A^1_{\K}})]=\tilde{g}$, but this is trivial as $h|_V=g'$ and therefore, restricting domain and codomain, $h|_{U\cap V}=g|_{U\cap V}$, hence $\tilde{h}=[(h^{-1}(\A^1_{\K}),h|_{h^{-1}(\A^1_{\K})})]=[(U\cap V,h|_{U\cap V})]=[(U\cap V,g|_{U\cap V})]=[(U,g)]=\tilde{g}$.
+
+$(iv)$ We know that $\Ps^1_{\K}$ is irreducible.
+
+From $(iii)$, we know that, if $X\xrightarrow{g}\Ps^1_{\K}$ has $\Ima(g)\neq\{(1:0)\}$, then there exists a unique $\tilde{g}\in K(X)$ s.t. $[(g^{-1}(\A^1_{\K})=X\setminus g^{-1}\{(1:0)\},g|_{g^{-1}(\A^1_{\K})})]=\tilde{g}$.
+
+Since $f$ is an isomorphism, it can't be constant, hence we have a unique corresponding $\tilde{f}\in K(\Ps^1_{\K})$.
+
+$K(\Ps^1_{\K})\xrightarrow{f^*} K(\Ps^1_{\K})$ is defined as $\tilde{g}=[(U,g)]\mapsto f^*(\tilde{g})=[(f^{-1}(U),g\circ f|_{f^{-1}(U)})]$, hence, in particular, $x=[(\A^1_{\K}=\Ps^1_{\K}\setminus\{(1:0)\},x)]\in K(\Ps^1_{\K})$ is s.t. $f^*(x)=[(f^{-1}(\A^1_{\K}),x\circ f|_{f^{-1}(\A^1_{\K})})]=[(f^{-1}(\A^1_{\K}),f|_{f^{-1}(\A^1_{\K})})]=\tilde{f}$. Notice that we are slightly abusing the notation, as $f|_{f^{-1}(\A^1_{\K})}$ has codomain $\Ps^1_{\K}$, however it may be restricted to $\A^1_{\K}$ and have that $f|_{f^{-1}(\A^1_{\K})}\in\mathcal{O}_X(f^{-1}(\A^1_{\K}))$ because it misses the point at infinity.
+
+$(v)$ Given an isomorphism $\A^1_{\K}\xrightarrow{g}\A^1_{\K}$, we know that $g\in\mathcal{O}_{\A^1_{\K}}(\A^1_{\K})\cong\K[x]$, hence it is a polynomial map. Furthermore, this polynomial has to be linear, for otherwise it would not be injective (degree $>1$) or surjective (constant).
+
+If $f(1:0)=(1:0)$, then $\A^1_{\K}\xrightarrow{f|_{\A^1_{\K}}}\A^1_{\K}$ is again an isomorphism and hence a linear map and therefore $f|_{U_1}(x)=ax+b$, hence $\tilde{f}(x)=ax+b$.
+
+If $f(1:0)=(j:k)=(m:1)=m\in\A^1_{\K}$, $k\neq 0$, consider another isomorphism $\Ps^1_{\K}\xrightarrow{g}\Ps^1_{\K}$ given by $\tilde{g}\in K(\Ps^1_{\K})$, where $g(x:1)=\tilde{g}(x)=\frac{1}{x-m},g(m:1)=(1:0)$. Then, $g\circ f$ is an isomorphism s.t. $g\circ f(1:0)=(1:0)$, hence $g\circ f|_{\A^1_{\K}}(x)=cx+d$, $c\neq 0$, and therefore $\tilde{f}(x)=m+\frac{1}{cx+d}=\frac{ax+b}{cx+d}$, where $a=cm,b=dm$.
+
+We then notice that this $f$, which can be written as $f(x:y)=(ax+by:cx+dy)$, corresponds to the projective transformation given by the following matrix, hence the group of automorphisms of $\Ps^1_{\K}$ can be identified with a subgroup of $PGL_2(\K)$:
+\[
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}
+\]
+
+Indeed, $f(1:0)=(m:1)=(a:c)=A \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $f(x:1)=(ax+b:cx+d)=A \begin{bmatrix} x \\ y \end{bmatrix}$, which is $=\tilde{f}(x)$ if $cx+d\neq 0$, i.e. $x\neq -d/c$, $=(1:0)$ otherwise.
+
+If an automorphism was represented by two elements $A,B$ of $PGL_2(\K)$, then we would have $f(x:y)=A\begin{bmatrix} x \\ y \end{bmatrix}=B\begin{bmatrix} x \\ y \end{bmatrix}$, hence $A^{-1}B\begin{bmatrix} x \\ y \end{bmatrix}=\begin{bmatrix} x \\ y \end{bmatrix}$ and therefore $A^{-1}B=k\Id_2$, where $k\in\K^*$, hence $A=B$ (their representations only differ by an invertible scalar) in $PGL_2(\K)$.
+
+Furthermore, if two automorphisms $f,g$ were represented by the same element $A$ of $PGL_2(\K)$, then they would act in the same way on every point of $\Ps^1_{\K}$ as $f(x:y)=A\begin{bmatrix} x \\ y \end{bmatrix}=g(x:y)$, hence we have confirmed that $Aut(\Ps^1_{\K})\subset PGL_2(\K)$.
+
+Since every element of $PGL_2(\K)$ defines naturally an automorphism, it follows that $PGL_2(\K)$ is the group of automorphisms of $\Ps^1_{\K}$.
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{edix}
+	B. Edixhoven, D. Holmes, A. Kret, L. Taelman,
+	\textit{Algebraic Geometry},
+	2018.
+\end{thebibliography}
+
+\end{document}

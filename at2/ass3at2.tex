@@ -1,0 +1,221 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Map}{Map}
+
+\begin{document}
+
+\title{Algebraic Topology II - Assignment 3}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{2}
+
+\begin{proof}
+	Consider the pointed spaces $(A,x_0),\ (X,x_0),\ (Y,y_0)$, the pointed maps $A\xrightarrow{f}X,\ Cf\xrightarrow{g} Y$ and the pointed homotopy $X\times I\xrightarrow{h} Y$. Also, keep in mind the following commutative diagram:
+	\[
+		\begin{tikzcd}
+			& A\times I\arrow{d}\arrow[bend left]{dddr} \\
+			A\arrow{ur}{i}\arrow{r}\arrow{d}{f}
+			& CA\arrow{ddr}\arrow{d} \\
+			X\arrow{r}\arrow{d}
+			& Cf\arrow[swap]{dr}{g} \\
+			X\times I\arrow{rr}{h}
+			&& Y
+		\end{tikzcd}
+	\]
+	
+	A map $Cf\times I\xrightarrow{H}Y$ extending $g$ and $h$ induces uniquely a map $CA\times I\rightarrow Y$, which in turn defines a map $(A\times I)\times I\xrightarrow{k'} Y$.
+	
+	We will try to define a map $(A\times I)\times I\xrightarrow{k} Y$ which makes the diagram commute and then show that it factors through $CA\times I$.
+	
+	Calling $j$ the map $A\times I\rightarrow Cf$, we see that $gj=k'|_{(A\times I)\times\{0\}}$. Also, we know that $h(f\times \Id_I)=k'(i\times\Id_I)$, hence $k'$ is uniquely defined on $(A\times\{0\})\times I$.
+	
+	Furthermore, since under the map $A\times I\rightarrow CA$ all of $(A\times\{1\})\cup(\{x_0\}\times I)$ is identified, since $k'$ maps $(x_0,0,t)$ to $y_0$ for every $t$ by our latest observation and the pointedness of $h$, we have that $k'$ is uniquely defined (constant) on $((A\times\{1\})\cup(\{x_0\}\times I))\times I$.
+	
+	We have shown that a map $k'$ making the desired diagram commute is uniquely defined on $A\times((I\times\{0\})\cup(\{0,1\}\times I))$. Let now $k'':=k'|_{A\times(I\times\{0\}\cup\{0,1\}\times I)}$. We will define a map $k$ on all of $(A\times I)\times I$ by extending $k''$.
+	
+	To do what we want, we shall define a retract $I\times I\xrightarrow{r} I\times\{0\}\cup\{0,1\}\times I$. This rectract is defined by considering a point in the real plane outside of the square, $(1/2,2)$, and then tracing, for every point in the square, the line passing through the two of them. This line will intersect a unique point in $I\times\{0\}\cup\{0,1\}\times I$, which will then be its image. Notice that points on the border are fixed.
+
+	Set now $k:=k'(\Id_A\times r)$. We want to show that it factors through $CA\times I$. However, this is trivial, for $k|_{A\times(I\times\{0\}\cup\{0,1\}\times I)}=k'|_{A\times(I\times\{0\}\cup\{0,1\}\times I)}$ and therefore, for any $t,t'\in I$, $k(a,1,t')=k''(a,r(1,t'))=k''(a,1,t')=k'(a,1,t')=y_0$ and, in the same way, $k(x_0,t,t')=k''(x_0,r(t,t'))=k'(x_0,r(t,t'))=y_0$. This also proves that it is pointed.
+	
+	Let now $w$ be the pointed map induced by $k$ on $CA\times I$. By construction, it makes the following diagram commute:
+	\[
+		\begin{tikzcd}
+			A\times I\arrow{r}\arrow{d}{f\times\Id_I}
+			& CA\times I\arrow[bend left]{ddr}{w}\arrow{d} \\
+			X\times I\arrow[bend right]{drr}{h}\arrow{r}
+			& Cf\times I\arrow[dotted]{dr}[description]{H} \\
+			&& Y
+		\end{tikzcd}
+	\]
+	
+	By~\cite[p. 50]{Sag17}, since $Cf$ is a pushout with respect to $A\xrightarrow{f} X,\ A\rightarrow CA$, the space $Cf\times I$ is a pushout with respect to $A\times I\xrightarrow{f\times\Id_I} X\times I,\ A\times I\rightarrow CA\times I$, hence from the pair $h,\ w$ we automatically get a unique continuous map $Cf\times I\xrightarrow{H} Y$ making the diagram commute and therefore, by commutativity and the construction of $w$, it is s.t. $H|_{Cf\times\{0\}}=g,\ H|_{X\times I}=h$, thus it is also pointed and the thesis follows.
+\end{proof}
+
+
+~\\
+\exercise{5}
+
+\begin{proof}
+	$(a)$ We will check the continuity of the induced map on a basis of the topology.
+	
+	Let $X\xrightarrow{f}Y$ be continuous, $Z$ another topological space. Consider then an open $U\subset Z$ and a compact $K\subset X$. We have then an open $W(K,U)\subset\Map(X,Z)$.
+	
+	We know that, if $Y\xrightarrow{g}Z$ is continuous, then $f^*(g):=g\circ f$ is too, hence $f^*(g)\in\Map(X,Z)$.
+	
+	By definition, $(f^*)^{-1}(W(K,U))=\{g\in\Map(Y,Z)\ |\ f^*(g)(K):=g(f(K))\subset U\}\subset\Map(Y,Z)$. Since $K$ is compact and $f$ is continuous, $f(K)\subset Y$ is compact, hence $(f^*)^{-1}(W(K,U))=W(f(K),U)$ is open in $\Map(Y,Z)$.
+	
+	We now prove the same result in the same way for $\Map^{\bullet}(Y,Z)\xrightarrow{f^*}\Map^{\bullet}(X,Z)$ assuming that $(X,x_0),\ (Y,y_0)$ and $(Z,z_0)$ are pointed spaces and $f$ is a pointed map.
+	
+	Consider again $U\subset Z$ open, $K\subset X$ compact, $W^{\bullet}(K,U)=\{g\in\Map^{\bullet}(X,Z)\ |\ g(K)\subset U,\ g(x_0)=z_0\}=W(K,U)\cap\Map^{\bullet}(X,Z)\subset\Map^{\bullet}(X,Z)$ open. Notice that the $W^{\bullet}(K,U)$ define natually a basis for the subspace topology.
+	
+	By the same argument as before, given a pointed map $Y\xrightarrow{g}Z$, $f^*(g)$ will be continuous. Also, $f^*(g)(x_0)=g(f(x_0))=g(y_0)=z_0$, hence $f^*(g)\in\Map^{\bullet}(X,Z)$.
+	
+	By definition, $(f^*)^{-1}(W^{\bullet}(K,U))=\{g\in\Map^{\bullet}(Y,Z)\ |\ f^*(g)(K):=g(f(K))\subset U\}\subset\Map^{\bullet}(Y,Z)$. Since $K$ is compact and $f$ is continuous, $f(K)\subset Y$ is compact, hence $(f^*)^{-1}(W^{\bullet}(K,U))=W^{\bullet}(f(K),U)$ is open in $\Map^{\bullet}(Y,Z)$.
+\end{proof}
+
+~\\
+\begin{proof}
+	$(b)$ We know that, by definition, fixed a point $x_0\in X$, $\Omega X=[S^1,X]^{\bullet}$ (for $S^1$ we are fixing the point 1 in the complex plane). The multiplication map $\Omega X\times\Omega X\rightarrow\Omega X$ sends a pair $(g_1,g_2)$ of pointed maps $S^1\xrightarrow{g_1,g_2}X$ to $g$ defined in the following way:
+	\begin{align*}
+		g: S^1 &\rightarrow X \\
+		z &\mapsto \begin{cases}
+			g_1(e^{2i\cdot arg(z)})\textit{ if }Im(z)\geq 0 \\
+			g_2(e^{2i\cdot arg(z)})\textit{ otherwise}
+		\end{cases}			
+	\end{align*}
+
+	We will prove that the function $g$ is a pointed map. The fact that $g(1)=x_0$ is trivial, for $e^{2i\cdot arg(1)}=e^{2i\cdot 0}=1$. We still have to check the continuity of $g$, which is clear because it is the glueing of two functions, its restrictions to the closed subsets $\{z\in S^1\ |\ Im(z)\geq 0\}$ and $\{z\in S^1\ |\ Im(z)\leq 0\}$, which are continuous because they are obtained by precomposing $g_1$ and $g_2$ with two distinct maps, the former sending $z\in\{z\in S^1\ |\ Im(z)\geq 0\}$ to $e^{2i\cdot arg(z)}$ and the other one $z\in\{z\in S^1\ |\ Im(z)\leq 0\}$ to $e^{2i\cdot arg(z)}$.
+
+	We want now to prove that $\Omega X\times\Omega X\cong [S^1\vee S^1,X]^{\bullet}$ and we will do this by constructing a homeomorphism.
+	
+	For any pair of pointed maps $(g_1,g_2)\in\Omega X\times\Omega X$, by making use of the property of the coproduct in the category of topological spaces, we get a new map $S^1_1\amalg S^1_2\xrightarrow{g'} X$ sending the base points of the two $S^1$ seen as subspaces of $S^1_1\amalg S^1_2$ to $x_0\in X$, hence by identifying these two points we get by the universal property of the quotient a continuous map $S^1\vee S^1\xrightarrow{g} X$, which becomes a pointed map by fixing the points we have identified.
+	
+	Viceversa, fixed the common point of the two $S^1$ as base point of $S^1\vee S^1$, any pointed map $S^1_1\vee S^1_2\xrightarrow{g} X$ identifies a pair of pointed maps $(g_1,g_2)\in\Omega X\times\Omega X$ by precomposing it with the obvious inclusions $S^1\xrightarrow{i_1,i_2}S^1_1\vee S^1_2$. Also, noticing that the two constructions are naturally inverse to each other, we have proved that we have a bijection $\Omega X\times\Omega X\cong [S^1_1\vee S^1_2,X]^{\bullet}$.
+	
+	We want to prove that the correspondence hereby defined is a homeomorphism.
+	
+	The continuity of the function $[S^1_1\vee S^1_2,X]^{\bullet}\rightarrow\Omega X\times\Omega X$ is trivial because it is defined by $(i_1^*,i_2^*)$ and by the previous result $i_j^*$ is continuous.
+	
+	We will now show that the map is open.
+	
+	Remembering that $S^1_1\vee S^1_2$ is compact and therefore the only compact subsets are the closed ones, considered a compact $K\subset S^1_1\vee S^1_2$ and an open $U\subset X$, observe $W^{\bullet}(K,U)$. We will prove that $(i_1^*,i_2^*)(W^{\bullet}(K,U))=W^{\bullet}(K\cap S^1_1,U)\times W^{\bullet}(K\cap S^1_2,U)$, where the $K\cap S^1_j$ are closed and hence compact.
+	
+	Since $S^1_j\subset S^1_1\vee S^1_2$ is closed and therefore the same goes for $K\cap S^1_j$, observing that an element $g\in W^{\bullet}(K,U)$ is s.t. $g|_{S^1_j}(K\cap S_j^1)\subset U$, we have that $(i_1^*,i_2^*)(g)\in W^{\bullet}(K\cap S^1_1,U)\times W^{\bullet}(K\cap S^1_2,U)$.
+	
+	On the other hand, let $(g_1,g_2)\in W^{\bullet}(K\cap S^1_1,U)\times W^{\bullet}(K\cap S^1_2,U)$. Since $g_j(K\cap S^1_j)\subset U$, the induced map $g$ will be s.t. $g(K)=g(K\cap S^1_1)\cup g(K\cap S^1_2)=g_1(K\cap S^1_1)\cup g_2(K\cap S^1_2)\subset U$, thus $g\in W^{\bullet}(K,U)$ and therefore $(g_1,g_2)\in (i_1^*,i_2^*)(W^{\bullet}(K,U))$.
+	
+	Thanks to this homeomorphism, fixing 1 in $S^1$, we only have to consider the pointed map $S^1\xrightarrow{f} S^1_{/\sim}\cong S^1_1\vee S^1_2$ given by the relation on $S^1$ identifying $1$ and $-1$ (by convention, the upper half of the circle is mapped to $S^1_1$ and the lower one to $S^1_2$, always counterclockwise). This induces a pointed map $[S^1_1\vee S^1_2,X]^{\bullet}\xrightarrow{f^*}[S^1,X]^{\bullet}=\Omega X$ which, as we will show, precomposed with the previously mentioned pointed homeomorphism $\Omega X\times\Omega X\rightarrow [S^1_1\vee S^1_2,X]^{\bullet}$ gives us the multiplication map as desired.
+	
+	Indeed, consider $(g_1,g_2)\in\Omega X\times\Omega X,\ z\in S^1$. If $Im(z)\geq 0$, then, under our quotient map $S^1\rightarrow S^1_1\vee S^1_2$, $z$ is mapped to $z'\in S^1_1$, $z'=e^{2i\cdot arg(z)}$. Looking at our homeomorphism, the map $g$ induced by our pair maps $z'$ to $g_1(z')=g_1(e^{2i\cdot arg(z)})$. In the same way, for $Im(z)<0$, we get that $z$ is sent by $g$ precomposed with the quotient map to $g_2(e^{2i\cdot arg(z)})$, hence the glued map we have obtained from $(g_1,g_2)$ under the continuous map we have constructed coincides with the one defined by the multiplication map. It follows that the two maps $\Omega X\times\Omega X\rightarrow\Omega X$ we have defined are equal and therefore the multiplication map is continuous.
+	
+	We will now prove the continuity of the inverse loop map. This is defined by sending $g\in\Omega X$ to $i(g)$ defined as $i(g)(z)=g(\overline{z})$. Since the conjugate map is a pointed automorphism of $S^1$, the composition of $g$ with it is trivially continuous by $(a)$ and the thesis follows.
+\end{proof}
+
+~\\
+\begin{proof}
+	$(c)$ Let $X$ be a $H$-space whose multiplication is defined by $m$ and whose base point is $x_0\in X$. We will begin by describing the operations.
+	
+	Remember that $\pi_n(X,x_0)=([S^n,X]^{\bullet}_{/\sim},*)$, where for any $[f],[g]\in [S^n,X]^{\bullet}$ we have that $[f]*[g]=[h]$, where $h$ is defined up to homotopy in the following way (we are choosing a representation of $*$ since as we know the group structures induced by different choices of $i$ are naturally isomorphic):
+	\begin{align*}
+		h: S^n\cong I^n_{/\sim} &\rightarrow X \\
+		t &\mapsto\begin{cases}
+			f(2t_1,t_2,\ldots,t_n)\textit{ if }0\leq t_1\leq 1/2 \\
+			g(2t_1-1,\ldots,t_n)\textit{ if }1/2\leq t_1\leq 1
+		\end{cases}
+	\end{align*}
+	
+	On the other hand, we define a new operation $\circ$ on the elements of $[S^n,X]^{\bullet}_{/\sim}$ in the following way: for any $[f],[g]\in [S^n,X]^{\bullet}_{/\sim}$, $[f]\circ [g]=[h]$, where for any $t\in S^n$ we have that $h(t)=m(f,g)(t):=m(f(t),g(t))$. Since by composing two homotopic functions with another one we get again a pair of homotopic functions and $m$ is pointed with respect to the base point $x_0\in X$, the aforementioned operation is well defined.
+	
+	Consider now two pointed maps $S^n\xrightarrow{e_0,f} X$, $e_0$ constant (that is, $[e_0]$ is the unit of $*$). Since the composition of homotopic maps is homotopic, we have trivially that $m(e_0(t),f(t))=m(x_0,f(t))\cong m(f(t),x_0)=m(f(t),e_0(t))\cong\Id(f(t))=f(t)$, hence $[e_0]\circ [f]=[f]=[f]\circ [e_0]$, i.e. $[e_0]$ is also the unit of $\circ$.
+	
+	Furthermore, let $f,g,h$ be pointed maps $S^n\rightarrow X$. For every $t\in S^n$, remembering again that the composition of homotopic maps with another map is homotopic and $m$ is pointed and associative up to homotopy, we have that:
+	\begin{align*}
+		m(f,m(g,h))(t) &=m(f(t),m(g,h)(t)) \\
+		&=m(f(t),m(g(t),h(t))) \\
+		&=m(-,m(-,-))(f(t),g(t),h(t)) \\
+		&\cong m(m(-,-),-)(f(t),g(t),h(t)) \\
+		&=m(m(f(t),g(t)),h(t)) \\
+		&=m(m(f,g)(t),h(t)) \\
+		&=m(m(f,g),h)(t)
+	\end{align*}
+	
+It follows that $[f]\circ ([g]\circ [h])=([f]\circ [g])\circ [h]$.
+	
+	We have checked that $\circ$ does define a monoidal operation on $[S^n,X]^{\bullet}_{/\sim}$.
+	
+	We want to prove that the two operations are commutative and induce the same structure on $[S^n,X]^{\bullet}_{/\sim}$ by showing that the hypothesis of~\cite[lemma 6.18]{HM19} are satisfied. One has already been verified.
+	
+	From now on, we will denote simply $*$ the binary function on the elements of $[S^n,X]^{\bullet}$ we have implicitly defined earlier and which gives rise to the operation of $\pi_n(X,x_0)$.
+	
+	Let $a,b,c,d$ be pointed maps $S^n\rightarrow X$. We see that, setting $([a]*[c])\circ ([b]*[d])=[g]$ and $([a]\circ [b])*([c]\circ [d])=[h]$, for $0\leq t_1\leq 1/2$ we have the following:
+	\begin{align*}
+		g(t) &=m(a*c,b*d)(t) \\
+		&=m((a*c)(t),(b*d)(t)) \\
+		&=m(a(2t_1,t_2,\ldots,t_n),b(2t_1,t_2,\ldots,t_n)) \\
+		&=m(a,b)(2t_1,t_2,\ldots,t_n) \\
+		&=(m(a,b)*m(c,d))(t) \\
+		&=h(t)
+	\end{align*}
+	
+	In the same way, for $1/2\leq t_1\leq 1$, we get that:
+	\begin{align*}
+		g(t) &=m(a*c,b*d)(t) \\
+		&=m((a*c)(t),(b*d)(t)) \\
+		&=m(c(2t_1-1,t_2,\ldots,t_n),d(2t_1-1,t_2,\ldots,t_n)) \\
+		&=m(c,d)(2t_1-1,t_2,\ldots,t_n) \\
+		&=(m(a,b)*m(c,d))(t) \\
+		&=h(t)
+	\end{align*}
+	
+	It follows that $g=h$, hence $*=\circ$ by~\cite[lemma 6.18]{HM19}.
+\end{proof}
+
+\printbibliography
+
+\end{document}

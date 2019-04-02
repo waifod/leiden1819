@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\newcommand{\Pic}{\operatorname{Pic}}
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 5}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{21}
+
+Remember that a (non-trivial) subring of a domain is a domain.
+
+$\Rightarrow$ Let $x\in C$. Then, it is a root of a monic polynomial $f\in A[X]$, and therefore a root of the same polynomial in $B[X]$ and $C$ is integral over $B$. Now, let $y\in B$. Since $B$ is a subring of $C$, $y\in C$ and it is integral over $A$, hence $B$ is integral over $A$.
+
+$\Leftarrow$ Let $x\in C$. Then, since $C$ is integral over $B$, it is a root of some polynomial $f=X^n+b_1X^{n-1}+\cdots+b_n\in B[X]$. Being $B$ integral over $A$, $A[b_1]$ is a finitely generated $A$-module by~\cite[lemma 3.16]{stev}. By the previous point, since $A\subset A[b_1]\subset A[b_1,b_2]\subset B$, observing that $B$ is integral over $A[b_1]$, we have that $A[b_1,b_2]$ is integral over $A[b_1]$ and therefore $A[b_1,b_2]=A[b_1][b_2]$ is a finitely generated $A[b_1]$-module. It follows that it is finitely generated as a $A$-module by~\cite[prop. 2.16]{atm}.
+
+By using the procedure applied to $b_2$ on the other $b_i$ (starting from $A[b_1,\ldots,b_{i-1}]$), we get that $A[b_1,\ldots,b_n]$ is finitely generated as a $A$-module.
+
+Since $f\in A[b_1,\ldots,b_n][X]$, $x\in C$ is integral over $A[b_1,\ldots,b_n]$, hence $A[b_1,\ldots,b_n,x]$ is finitely generated as a $A[b_1,\ldots,b_n]$-module, and therefore as a $A$-module. This concludes the proof by~\cite[lemma 3.16]{stev} because $xA[b_1,\ldots,b_n,x]\subset A[b_1,\ldots,b_n,x]\subset Q(C)$.
+
+
+~\\
+\exercise{22}
+
+We will ignore the case where $0\in S$, for in this situation the rings become trivial and the thesis is immediate.
+
+Clearly, $S^{-1}R\subset S^{-1}\tilde{R}\subset\K$ because $R\subset\tilde{R}\subset\K$ (notice that $S^{-1}\K=\K$).
+
+Let $x\in S^{-1}\tilde{R}\subset\K$. Then, it can be represented as $x=\frac{\tilde{r}}{s}$, where $\tilde{r}\in\tilde{R}$ and $s\in S\subset R$. This means that, considered a polynomial $f=X^n+a_1X^{n-1}+\cdots+a_n\in R[X]$ s.t. $f(\tilde{r})=0$, we have a polynomial $g=X^n+\frac{a_1}{s}X^{n-1}+\cdots+\frac{a_n}{s^n}\in (S^{-1}R)[X]$ s.t. $g(\tilde{x})=g(\frac{\tilde{r}}{s})=\frac{f(\tilde{r})}{s^n}=0$, thus $S^{-1}\tilde{R}$ is integral over $S^{-1}R$.
+
+Now, let $x\in\widetilde{S^{-1}R}\subset\K$. This means that it is a root of some polynomial $g=X^n+\frac{a_1}{s_1}X^{n-1}+\cdots+\frac{a_n}{s_n}\in (S^{-1}R)[X]$, where $a_i\in R,\ s_i\in S$. It follows that it is a root of$$(s_1\cdots s_n)^ng=(s_1\cdots s_nX)^n+\sum_{i=1}^n a_is_1^{n-i}\cdots s_{i-1}^{n-i}s_i^{n-i-1}s_{i+1}^{n-i}\cdots s_n^{n-i} (s_1\cdots s_nX)^i$$
+
+Now, considering the polynomial $h=X^n+\sum_{i=1}^n a_is_1^{n-i}\cdots s_{i-1}^{n-i}s_i^{n-i-1}s_{i+1}^{n-i}\cdots s_n^{n-i} X^i\in R[X]$, we see that it has root $s_1\cdots s_nx\in\tilde{R}\subset\K$, therefore $x=\frac{s_1\cdots s_nx}{s_1\cdots s_n}\in S^{-1}\tilde{R}$.
+
+\begin{thebibliography}{9}
+\bibitem{atm}
+		M.F. Atiyah, I.G. Macdonald,
+		\textit{Introduction to Commutative Algebra},
+		CRC Press,
+		1994.
+\bibitem{stev}
+		P. Stevenhagen,
+		\textit{Number Rings},
+		2017.
+\end{thebibliography}
+
+\end{document}

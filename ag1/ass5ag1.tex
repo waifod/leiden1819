@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+\newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"]}
+\newcommand\dhrightarrow{%
+		\mathrel{\ooalign{$\rightarrow$\cr%
+		$\mkern3.5mu\rightarrow$}}
+}
+
+\newcommand\dhxrightarrow[2][]{%
+		\mathrel{\ooalign{$\xrightarrow[#1\mkern4mu]{#2\mkern4mu}$\cr%
+		\hidewidth$\rightarrow\mkern4mu$}}
+}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Op}{Open}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+
+\begin{document}
+
+\title{Algebraic Geometry 1 - Assignment 5}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{7.9.12}
+
+Furthermore, we will use the fact that $v_y(fg)=v_y(f)+v_y(g)$ and therefore $v_y(f^n)=n\cdot v_y(f)$.
+
+$(i)$ Notice that, by~\cite[ex. 7.3.6]{edix}, since $\mathcal{O}_U(U)=A=\K[x,y]/(f)$, $\Omega^1(U)\cong\Omega^1_A\cong(A\cdot dx\oplus A\cdot dy)/(A\cdot df)$.
+
+Now, since $f=-y^n+x^{n-1}-1$, $df=-ny^{n-1}dy+(n-1)x^{n-2}dx$.
+
+In $\Omega^1(U)$, this implies that $(n-1)x^{n-2}dx=ny^{n-1}dy$.
+
+$(iii)$ By~\cite[ex. 7.9.10]{edix}, it is sufficient to prove that, given $P=(x_P,y_P)\in U\cap D(x)$, $(\partial f/\partial x)(P)\neq 0$, from which will follow that $y-y(P)$ is a uniformizer of $U$ at $P$.
+
+By definition, a point $P$ lying there is s.t. $x_P\neq 0$, hence $(\partial f/\partial x)(P)=(n-1)x^{n-2}_P\neq 0$ and we are done.
+
+$(iv)$ Again, we only have to prove that $(\partial f/\partial y)(P)\neq 0$ for every $P=(x_P,y_P)\in U\cap D(y)$.
+
+By definition, a point $P$ lying there is s.t. $y_P\neq 0$, hence $(\partial f/\partial y)(P)=-ny^{n-1}_P\neq 0$ and we are done.
+
+$(v)$ We may distinguish among two cases: $P\in U\cap D(x)$ and $P\in U\cap D(y)$.
+
+In the former, since $\omega_0=\frac{dy}{(n-1)x^{n-2}}$ and $y-y(P)$ is a uniformizer of $U$ at $P$, having $\omega_0=g\cdot dy$ for $g=\frac{1}{(n-1)x^{n-2}}\in K(X)$, we have that $v_P(\omega_0)=v_P(g)$.
+
+Furthermore, $g$ is a rational function well defined on $U\cap D(x)$ and $\neq 0$ for every $P\in U\cap D(x)$, therefore $g\in\mathcal{O}_U(U)$. It follows that $g=(y-y(P))^0g$ and thus $v_P(\omega_0)=v_P(g)=0$.
+
+In the latter, since $\omega_0=\frac{dx}{ny^{n-1}}$ and $x-x(P)$ is a uniformizer of $U$ at $P$, having $\omega_0=g\cdot dx$ for $g=\frac{1}{ny^{n-1}}\in K(X)$, we have that $v_P(\omega_0)=v_P(g)$.
+
+Furthermore, $g$ is a rational function well defined on $U\cap D(y)$ and $\neq 0$ for every $P\in U\cap D(y)$, therefore $g\in\mathcal{O}_U(U)$. It follows that $g=(x-x(P))^0g$ and thus $v_P(\omega_0)=v_P(g)=0$.
+
+$(ii)$ We see that $\omega_0$ has no poles in $U=(U\cap D(x))\cup(U\cap D(y))$, for it has order 0 at every point $P\in U$.
+
+$(vi)$ $Q\in X\cap Z(x_2)\subset X\cap U_0$, hence we may work with $A=\mathcal{O}_X(X\cap U_0)\cong\K[x_{01},x_{02}]/(x_{01}^n+x_{02}^n-x_{02})\cong\K[u,v]/(u^n+v^n-v)$ under the isomorphism induced by $\phi_0$. In particular, $\phi_0(Q)=(0,0)\in Z(u^n+v^n-v)\subset\A^2_{\K}$. Notice that $X=(X\cap U_2)\cup\{Q\}$.
+
+We will show that $u=u-u(0,0)$ ($x_{01}=x_{01}-x_{01}(Q)$) is a uniformizer of $Z(u^n+v^n-v)$ ($X\cap U_0$, and hence $X$) at $(0,0)=\phi_0(Q)$ ($Q$) by applying again~\cite[ex. 7.9.10]{edix}.
+
+Indeed, given $f:=u^n+v^n-v$, $\partial f/\partial v=-1\neq 0$ and the thesis follows.
+
+$(vii)$ Remember that $\mathcal{O}_X(X\cap U_0)\cong\K[x_{01},x_{02}]/(x_{01}^n+x_{02}^n-x_{02})$ and $x=x_{20}=x_{02}^{-1}$, $y=x_{21}=x_{01}x_{20}=x_{01}x_{02}^{-1}$.
+
+Notice that $x_{02}(1-x_{02}^{n-1})=x_{01}^n$, hence $x_{02}=\frac{x_{01}^n}{1-x_{02}^{n-1}}=x_{01}^n\frac{1}{1-x_{02}^{n-1}}$ and $x=x_{01}^{-n}\cdot(1-x_{02}^{n-1})$.
+
+Since $1-x_{02}^{n-1}\in\mathcal{O}(X\cap U_0)$ and $(1-x_{02}^{n-1})(Q)\neq 0$, we get that $v_Q(x)=-n$.
+
+In the same way, $y=x_{01}^{-(n-1)}\cdot(1-x_{02}^{n-1})$, hence $v_Q(y)=-(n-1)$.
+
+$(viii)$ Remembering that $\omega_0=\frac{dx}{ny^{n-1}}=\frac{dy}{(n-1)x^{n-2}}$ and having $x=v^{-1}$ and $y=uv^{-1}$ on $X\cap U_0$, we get the following:
+\begin{align*}
+  \omega_0 &=\frac{dx}{ny^{n-1}}=\frac{d(v^{-1})}{nu^{n-1}(v^{-1})^{n-1}} \\
+  & = -\frac{v^{n-3}}{nu^{n-1}}dv \\
+  \omega_0 &=\frac{dy}{(n-1)x^{n-2}}=\frac{d(uv^{-1})}{(n-1)(v^{-1})^{n-2}}=-\frac{v^{n-4}u}{n-1}dv+\frac{v^{n-3}}{n-1}du \\
+  & =\frac{u}{(n-1)v}nu^{n-1}\omega_0+\frac{v^{n-3}}{n-1}du \\
+  \omega_0 &=\frac{v^{n-2}}{(n-1)v-nu^n}du=\frac{v^{n-2}}{(n-1)v+nv^n-nu}du=\frac{(1-u^{n-1})v^{n-2}}{(1-u^{n-1})((n-1)v+nv^n-nu)}du \\
+  & =\frac{(1-u^{n-1})v^{n-3}}{(1-u^{n-1})((n-1)+nv^{n-1})-nv^{n-1}}du
+\end{align*}
+
+Now, $v_Q(\omega_0)=v_Q(v^{n-3}\frac{1-u^{n-1}}{(1-u^{n-1})((n-1)+nv^{n-1})-nv^{n-1}}du)$. Notice that $\frac{(1-u^{n-1})}{(1-u^{n-1})((n-1)+nv^{n-1})-nv^{n-1}}$ is a rational function which is well defined and non-zero in $Q$, hence regular on a neighbourhood.
+
+Remembering that $v=x^{-1}$, it follows that $v_Q(\omega_0)=n(n-3)$.
+
+$(ix)$ Let $p(x,y)\in\mathcal{O}_X(X\cap U_0)\cong\K[x,y]/(x^{n-1}-y^n-1)$.
+
+Then, since $y^n=1-x^{n-1}$, we may substitute $y^n$ with $1-x^{n-1}$ until the maximum exponent $y$ appears with is $<n$. Now, $p(x,y)$ is a linear combination of the $x^iy^j$, where $i\geq 0$ and $0\leq j<n$. This means that the $x^iy^j$ considered form a system of generators.
+
+If $\sum_{i\geq 0,0\leq j<n} a_{ij}x^iy^j=0$ in $\mathcal{O}_X(X\cap U_0)$ for some $a_{ij}\in\K$, then $x^{n-1}-y^n-1|\sum_{i\geq 0,0\leq j<n} a_{ij}x^iy^j$ in $\K[x,y]$. Since $y$ appears with degree $<n$, this implies that $\sum_{i\geq 0,0\leq j<n} a_{ij}x^iy^j=0$ in $\K[x,y]$, where they are linearly independent and hence $a_{ij}=0$ for every $i,j$.
+
+Remembering that we have $v_Q(x)=-n,v_Q(y)=-(n-1)$, we get that $v_Q(x^iy^j)=i\cdot v_Q(x)+j\cdot v_Q(y)=-ni-(n-1)j=-n(i+j)-j$.
+
+We only have to prove the injectivity of $\N\times\{0,\ldots,n-1\}\xrightarrow{h_n}\N$ maping $(i,j)$ to $n(i+j)+j$.
+
+If $n(i+j)+j=n(i'+j')+j'$, then $n(i+j-i'-j')=j'-j$. Since $n\geq 2$ and $-n<j-j'<n$, $n|j-j'$ implies that $j-j'=0$, thus $j=j'$. Since $n(i-i')=0$, $i=i'$ and we are done.
+
+$(x)$ Remember that $\Omega^1(X)$ is a $\mathcal{O}_X(X)\cong\K$-module, hence a $\K$-vector space.
+
+Furthermore, by $(v)$ we know that $\Omega^1(X\cap U_2)=\mathcal{O}_X(X\cap U_2)\cdot\omega_0$, where the latter is a free $\mathcal{O}_X(X\cap U_2)$-module. It follows that $\Omega^1(X\cap U_2)$ has a basis, as a $\K$-vector space, given by $x^iy^j\omega_0$, where $i\geq 0$ and $0\leq j<n$.
+
+Here, I will consider an element of $\Omega^1(X)\subset\Omega^1(X\cap U_0)\oplus\Omega^1(X\cap U_2)$ not as a pair of elements agreeing on the intersection, but as the 1-form obtained by glueing them: indeed, it is equivalent.
+
+Notice that, if two 1-forms defined on $X$ coincide on $X\cap U_2$, then they coincide on $X$ by the irreducibility. Because of this, all of them will be unique extensions of elements of $\Omega^1(X\cap U_2)$, as, given two extensions of one element, they would coincide on $X\cap U_2$.
+
+It follows that all we have to do is to check which elements of $\Omega^1(X\cap U_2)$ are restrictions of the ones in $\Omega^1(X)$; to do this, we may just check their order at $Q$, the only point of $X$ not lying in $X\cap U_2$.
+
+Since $v_Q(x^iy^j\omega_0)=i\cdot v_Q(x)+j\cdot v_Q(y)+v_Q(\omega_0)=n(n-3-i-j)+j$, we only require $n(n-3-i-j)+j\geq 0$. Since $j<n$, it means that $n\geq 3+i+j$.
+
+Notice that an element in $\Omega^1(X\cap U_2)$ is of the form $g\omega_0$, where $g=\sum_{i\geq 0,0\leq j<n} a_{ij} x^iy^j$. Furthermore, since $v_Q(g\omega_0)=v_Q(g)+v_Q(\omega_0)$ and, having every $x^iy^j$ different order, $v_Q(g)=\min\{v_Q(x^iy^j)\ |\ a_{ij}\neq 0\}$, the only 1-forms in $\Omega^1(X\cap U_2)$ extensible to $X$ are precisely those achiavable through linear combinations of the $x^iy^j\omega_0$ which extend to $X$.
+
+This means that the extended $x^iy^j\omega_0$ generate $\Omega^1(X)$, while the linear independence comes from the fact that their restrictions to $X\cap U_2$ are linearly independent.
+
+Now, for $n=2$, the inequality has no solutions, hence $\Omega^1(X)=0$ with basis $\emptyset$.
+
+For $n=3$, we only have $i=j=0$, thus $\Omega^1(X)=\K\cdot\omega_0$ and it has dimension 1, with basis $\{\omega_0\}$.
+
+For $n=4$, the solutions are $(0,0),(1,0),(0,1)$, hence $\Omega^1(X)=\K\cdot\omega_0\oplus\K\cdot x\omega_0\oplus\K\cdot y\omega_0$ and it has dimension 3, with basis $\{\omega_0,x\omega_0,y\omega_0\}$.
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{edix}
+	B. Edixhoven, D. Holmes, A. Kret, L. Taelman,
+	\textit{Algebraic Geometry},
+	2018.
+\end{thebibliography}
+
+\end{document}

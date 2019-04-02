@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\Ps}{\mathbb{P}}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\sgn}{sgn}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Topology 1 - Assignment 10}
+
+\author{M. Durante, s2303760, Leiden University\\M. Fruttidoro, s2287129, Leiden University\\I. Prosepe, s2290162, Leiden University}
+
+\maketitle
+
+
+\exercise{11.4}
+
+$(i)$ Suppose that the natural inclusion $K_n\xrightarrow{i} H$ is homotopic to a constant map for some $n$ and notice that $H_1(K_n,\Z)\cong\pi_1(K_n)\cong\Z$.
+
+Considered the continuous map $H\xrightarrow{\pi} K_n$ sending $x\in K_n$ to $x$ and every other point to 0, since $\pi\circ i=\Id_{K_n}$, we get that $\pi_*\circ i_*=(\pi\circ i)_*=(\Id_{K_n})_*=\Id_{\Z}$.
+
+On the other hand, the generating loop of $H_1(K_n,\Z)$ is mapped by $i$ to a loop in $H$ homotopic to a constant one, hence $i_*$ maps the generator of $H_1(K_n,\Z)$ to $0\in H_1(H,\Z)$, thus $\pi_*\circ i_*(1)=\pi_*(0)=0$, which is absurd.
+
+$(ii)$ Let $H\xrightarrow{f} H$ be a continuous map s.t. $0\neq f(0)\in K_n$ and consider a small enough neighbourhood $U$ of $f(0)$ in $\R^2$ s.t. $U\cap H$ is an arc of $K_n$, and hence contractible. Consider now $U'=f^{-1}(U)$. We know that $0\in U'$, hence for some $\epsilon>0$ we have $B_{\epsilon}(0)\cap H\subset U'$.
+
+Suppose now that $f$ is homotopic to $\Id_H$.
+
+Since for some $m$ we have that $K_m\subset B_{\epsilon}(0)$, we consider the map $K_m\xrightarrow{i} H$.
+
+Then, $i\circ f$ would homotopic to $i\circ\Id_{H}=i$. However, being $U\cap H$ contractible and $\Ima(i\circ f)\subset U\cap H$, $i\circ f$ is homotopic to a constant map, which is absurd by $(i)$.
+
+$(iii)$ Let $x\in H\setminus\{0\}$. Since $H$ is path-connected, there is a path $I\xrightarrow{\alpha} H$ s.t. $\alpha(0)=0,\alpha(1)=x$.
+
+Now, given $\Id_H$, we have a homotopy $\{0\}\times I\xrightarrow{F} H$, which is defined as $F(0,t):=\alpha(t)$, s.t. $F|_{\{0\}\times\{0\}}=\Id_H|_{\{0\}}$.
+
+If $(H,\{0\})$ had the homotopy extension property, then we may extend $F$ to a homotopy $H\times I\xrightarrow{G} H$, $G|_{\{0\}\times I}=F$, between $G|_{H\times\{0\}}=\Id_H$ and $G|_{H\times\{1\}}$. However, $G|_{H\times\{1\}}(0)=F(0,1)=\alpha(1)=x\neq 0$, which can't be by $(ii)$.
+
+
+\begin{thebibliography}{9}
+  \bibitem{sag}
+    S. Sagave,
+    \textit{Algebraic Topology},
+    2017
+\end{thebibliography}
+
+\end{document}

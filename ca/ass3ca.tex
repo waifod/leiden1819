@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\mSpec}{mSpec}
+\DeclareMathOperator{\cont}{cont}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\coker}{coker}
+
+\begin{document}
+
+\title{Commutative Algebra - Assignment 3}
+
+\author{Matteo Durante, 2303760, Leiden University\\Waifod@protonmail.com}
+
+\maketitle
+
+
+\exercise{1}
+
+$(a)$ Let $S$ be a $R$-algebra, $M$ a free $R$-module. We will prove that $M_S:=S\otimes_R M$ is a free $S$-module. Indeed, given a set $I$ s.t. $M\cong\bigoplus_{i\in I} R$, we have that $M_S=S\otimes_R (\bigoplus_{i\in I} R)\cong\bigoplus_{i\in I} (S\otimes_R R)\cong\bigoplus_{i\in I} S$ because the tensor product commutes with direct sums by~\cite[ex. 2.20]{atm} (actually, this is true more generally: left adjoints preserve colimits) and the thesis follows.
+
+Consider now a ring $A$ and a finite subset $F$ s.t. $\sum_{f\in F} f=1$ and s.t. $M_f$ is a free $A_f$-module for every $f\in F$. Then, considered a prime ideal $\pid\subset A$, we have that there exists a $f\in F$ s.t. $f\not\in\pid$, for otherwise $1\in\pid$. Being $M_f$ a free $A_f$-module, by applying our previous result choosing $R=A_f,S=A_{\pid}$ and the canonical homomorphism $A_f\rightarrow A_{\pid}$, recalling~\cite[prop. 3.5]{atm}, we get that $(M_f)_{\pid}\cong A_{\pid}\otimes_{A_f} M_f\cong A_{\pid}\otimes_{A_f}(A_f\otimes_A M)\cong (A_{\pid}\otimes_{A_f} A_f)\otimes_A M\cong A_{\pid}\otimes_A M\cong M_{\pid}$ is a free $A_{\pid}$-module.
+
+$(b)$ We will start with the assumption that $M$ is a basically free $A$-module. Consider a finite subset $F$ s.t. $\sum_{f\in F} f=1$ and $M_f$ is a free $A_f$-module for every $f\in F$. Since for every prime ideal $\pid\subset A$ there is a $f\in F$ s.t. $f\not\in\pid$, we have $\pid\in\Spec(A_f)$ (notice that here we are abusing the notation, for it is $\pid^e$ that lies there), hence $\Spec(A)\subset\bigcup_{f\in F}\Spec(A_f)$. On the other hand, every prime ideal in $A_f$ corresponds to a unique ideal in $A$, its contraction, thus we have that $\Spec(A_f)\subset\Spec(A)$ and the thesis follows (again, another abuse of notation of the same kind; they are both justified in light of the homeomorphism between $\Spec(S^{-1}A)$ and $D(S)\subset\Spec(A)$, which allows us to identify them).
+
+Now we start by assuming that there exists a finite subset $F$ s.t. $\bigcup_{f\in F}\Spec(A_f)=\Spec(A)$ and $M_f$ is a free $A_f$-module for every $f\in F$. Since $\bigcup_{f\in F}\Spec(A_f)=\bigcup_{f\in F} D(f)=V(F)^c$, $V(F)=\emptyset$, which implies that $(F)=A$, i.e. $\sum_{f\in F} a_ff=1$ for some $a_f\in A$. Considering this linear combination, let $F':=\{a_ff\ |\ a_f\neq 0\}$. If we can prove that $i_{a_ff}(f)=f/1$ is invertible (and therefore $i_{a_ff}(f^n)$ is for every $n>0$) in $A_{a_ff}$, where $i_{a_ff}:A\rightarrow A_{a_ff}$ is the canonical homomorphism, then we are done because we would get a canonical homomorphism $A_f\rightarrow A_{a_ff}$ by~\cite[prop. 3.1]{atm} and therefore, in the same way as before, choosing $R=A_f, S=A_{a_ff}$, we would have that $(M_f)_{a_ff}\cong A_{a_ff}\otimes_{A_f} M_f\cong A_{a_ff}\otimes_{A_f} (A_f\otimes_A M)\cong (A_{a_ff}\otimes_{A_f} A_f)\otimes_A M\cong A_{a_ff}\otimes_A M\cong M_{a_ff}$ is a free $A_{a_ff}$-module. The invertibility comes from the fact that $\frac{f}{1}\cdot\frac{a_f}{a_ff}=\frac{a_ff}{a_ff}$, which is s.t. $a_ff\cdot 1-a_ff\cdot 1=0$, i.e. $(a_ff,a_ff)\sim (1,1)$, and therefore $(f/1)^{-1}=a_f/a_ff$.
+
+$(c)$ We want to prove that, for every prime ideal $\pid$, there exists a $f\in A\setminus\pid$ s.t. $M_f$ is a free $A_f$-module. Then, the open subsets $\Spec(A_f)$ will cover $\Spec(A)$ and, being the latter compact by~\cite[ex. 1.17(v)]{atm}, we may find a finite open subcover. At that point, we may apply $(b)$.
+
+Recall that, if $M$ is a finitely generated $R$-module and $S$ a $R$-algebra, then $M_S:=S\otimes_R M$ is a finitely generated $S$-module by~\cite[prop. 2.17]{atm}.
+
+Given a locally free and finitely generated $A$-module $M$ and considered a prime ideal $\pid$, let $m_1/s_1,\ldots,m_n/s_n$ be a $A_{\pid}$-basis of $M_{\pid}$, where $m_i\in M$ and $s_i\in A\setminus\pid$. Fix now the $A$-module epimorphism $g:A^n\rightarrow M$ sending $e_i$ to $m_i$, which induces an isomorphism of $A_{\pid}$-modules by localizing at $\pid$. Let $M'=\ker(g), M''=\coker(g)$, which gives rise to the exact sequence $0\rightarrow M'\rightarrow A^n\rightarrow M\rightarrow M''\rightarrow 0$. Since the localization is exact by~\cite[prop 3.3]{atm}, considering $0\rightarrow M'_{\pid}\rightarrow A_{\pid}^n\xrightarrow{\sim} M_{\pid}\rightarrow M''_{\pid}\rightarrow 0$, we get that $M'_{\pid}=M''_{\pid}=0$. Since $M',M''$ are finitely generated $A$-modules ($M'\subset A^n$, where $A^n$ is a Noetherian $A$-module, while for $M''$ we have a projection from $M$, which is finitely generated), we only have to show that, given a finitely generated $A$-module $N$, $N_{\pid}=0$ implies $N_f=0$ for some $f\in A\setminus\pid$ because then we may just find $f',f''\in A\setminus\pid$ s.t. $M'_{f'}=M''_{f''}=0$ and take $f=f'f''$, which will be s.t. $M'_f=M''_f=0$ (we are repeatedly using~\cite[ex. 3.1]{atm} implicitly) and will get us an exact sequence $0\rightarrow A_f^n\rightarrow M_f\rightarrow 0$ implying that $A_f^n\cong M_f$ as $A_f$-modules. But that is given by~\cite[ex. 3.1]{atm}, hence we are done.
+
+
+~\\
+\exercise{2}
+
+$(a)$ Let $a=\sum_{n\geq 0} a_ns^n$. We want to find some conditions on the $a_n\in\K$ s.t. $a^2=1+s$. Remembering that $a^2=\sum_{n\geq 0}\sum_{i+j=n} a_ia_js^n$, we find the following conditions: $a_0^2=1,\ 2a_0a_1=1,\ \sum_{i+j=n} a_ia_j=0$ for $n>1$. Setting $a_0=1$, we get the following:
+$$  
+  a_0=1 \quad\quad a_1=2^{-1} \quad\quad a_n=-2^{-1}\sum_{i,j>0,\ i+j=n} a_ia_j\textit{ for }n>1
+$$
+
+We have now constructed the element $a\in\K[[s,t]]$ we were looking for. Notice that this construction always works because $2\in\K^*$ and every $a_n$ is defined only in function of the previous ones.
+
+$(b)$ Consider a Noetherian ring $R$, an ideal $\mathfrak{a}$ and a maximal ideal $\mi\supset\mathfrak{a}$ (which will then be finitely generated $R$-modules). Then, the exact sequence $0\rightarrow\mathfrak{a}\rightarrow R\rightarrow R/\mathfrak{a}\rightarrow 0$ leads to $0\rightarrow\hat{\mathfrak{a}}_{\mi}\rightarrow\hat{R}_{\mi}\rightarrow \widehat{R/\mathfrak{a}}_{\mi}\rightarrow 0$ by completing at $\mi$ thanks to~\cite[prop. 10.12]{atm}. It follows that $\widehat{R/\mathfrak{a}}_{\mi}\cong\hat{R}_{\mi}/\hat{\mathfrak{a}}_{\mi}$. Since $\widehat{\K[i,j]}_{(i,j)}=\K[[i,j]]$ and $\widehat{(xy)}_{(x,y)}=(xy),\widehat{(t^2-s^2-s^3)}_{(s,t)}=(t^2-s^2-s^3)$ by~\cite[prop. 10.13]{atm}, we get that $\hat{A}_{\mi_A}\cong\K[[x,y]]/(xy),\hat{B}_{\mi_B}\cong\K[[s,t]]/(t^2-s^2-s^3)$ .
+
+Let $a$ be a square root of $1+s$ in $\K[[s,t]]$. Then, we get $t^2-s^2-s^3=t^2-s^2(1+s)=(t+as)(t-as)$. Now we construct the desired isomorphism. Consider the $\K$-algebra homomorphism $\K[[x,y]]\rightarrow\K[[s,t]]$ s.t. $x\mapsto t+as,y\mapsto t-as$. First of all, we prove the surjectivity. Observing that the linear parts of $t+as,t-as$, i.e. $t+s,t-s$, are linearly independent, we can obtain any linear combination of the form $kt+k's$, modulo the terms of higher degree. Considering $(t+s)^2=t^2+2st+s^2,(t+s)(t-s)=t^2-s^2,(t-s)^2=t^2-2st+t^2$, since they are linearly independent and $\K[[s,t]]_2$ is a $3$-dimensional $\K$-vector space, we get that the same is true for any linear combination of terms of order 2 and, iterating, we get every linear combination of homogeneous elements of any order, modulo the terms of higher degree. By linear combinations of these homogeneous parts, taking now into account the presence of the higher order terms, we get every power series in $\K[[s,t]]$. Quotient now $\K[[s,t]]$ by $(t^2-s^2-s^3)$ and consider the induced epimorphism $f$. Trivially, $xy\in\ker(f)$ because $f(xy)=(t+as)(t-as)=0$, hence we can restrict our attention to elements s.t. $a_{ij}=0$ for $i,j>0$. Such elements will be of the form $d=a_{00}+\sum_{n>0} (a_{n0}x^n+a_{0n}y^n)$ and therefore $f(d)=a_{00}+\sum_{n>0}(a_{n0}(t+as)^n+a_{0n}(t-as)^n)$, which will be $=0$ if and only if $a_{n0}=a_{0n}=0$ for every $n\in\N$, hence the only elements in $\ker(f)$ are precisely those lying in $(xy)$ and we get that $\K[[x,y]]/(xy)\cong\K[[s,t]]/(t^2-s^2-s^3)$.
+
+
+\begin{thebibliography}{9}
+\bibitem{atm}
+		M.F. Atiyah, I.G. Macdonald,
+		\textit{Introduction to Commutative Algebra},
+		CRC Press,
+		1994.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,229 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/documents/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+
+\begin{document}
+
+\title{Algebraic Topology II - Assignment 1}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{4}
+
+We want to prove that we have a long exact sequence of the following form:
+$$\cdots\rightarrow H^n(X)\xrightarrow{(i^*_U,i^*_V)} H^n(U)\oplus
+H^n(V)\xrightarrow{j^*_U-j^*_V} H^n(U\cap V)\xrightarrow{\sigma_{X,V}\delta_{U,U
+\cap V}} H^{n+1}(X)\rightarrow\cdots$$
+
+Consider the following commutative diagram, where the two rows are given by the long exact
+sequences of the pairs $(X,V)$ and $(U,U\cap V)$, the chain homomorphism is
+induced by the inclusions and, considered the closed
+subset of $X$ given by $W=X\setminus U\subset V$, since $H^n(X,V)\cong
+H^n(X\setminus W,V\setminus W)\cong H^n(U,U\cap V)$ by excision, the map
+$H^n(X,V)\rightarrow H^n(U,U\cap V)$ is the identity:
+
+\[
+    \begin{tikzcd}
+        \cdots\arrow{r}
+        & H^n(X,V)\arrow{r}{\sigma_{X,V}}\arrow[equal]{d}
+        & H^n(X)\arrow{r}{i^*_V}\arrow{d}{i^*_U}
+        & H^n(V)\arrow{r}{\delta_{X,V}}\arrow{d}{j^*_V}
+        & H^{n+1}(X,V)\arrow{r}\arrow[equal]{d}
+        & \cdots \\
+        \cdots\arrow{r}
+        & H^n(U,U\cap V)\arrow{r}{\sigma_{U,U\cap V}}
+        & H^n(U)\arrow{r}{j^*_U}
+        & H^n(U\cap V)\arrow{r}{\delta_{U,U\cap V}}
+        & H^{n+1}(U,U\cap V)\arrow{r}
+        & \cdots
+    \end{tikzcd}
+\]
+
+Let $x\in H^n(X)$ be sent to $(0,0)$ in the Mayer-Vietoris sequence. Since the
+image under $i^*_V$ is 0, by exactness there is a $x'\in H^n(X,V)=H^n(U,U\cap V)$ s.t.
+$\sigma_{X,V}(x')=x$ and therefore $i^*_U\sigma_{X,V}(x')=\sigma_{U,U\cap V}(x')
+=0$, hence again by exactness we have a $u'\in H^{n-1}(U\cap V)$ s.t.
+$\delta_{U,U\cap V}(u')=x'$, thus $\sigma_{X,V}\delta_{U,U\cap
+V}(u')=\sigma_{X,V}(x')=x$. 
+
+On the other hand, by commutativity, $(i^*_U,i^*_V)\sigma_{X,V}\delta_{U,U\cap
+V}=(i^*_U\sigma_{X,V}\delta_{U,U\cap V},i^*_V\sigma_{X,V}\delta_{U,U\cap
+V})=(\sigma_{U,U\cap V}\delta_{U,U\cap V},0\delta_{U,U\cap V})=(0,0)$. We have proved
+the exactness at $H^n(X)$ for every $n$.
+
+Let now $(u,v)\in H^n(U)\oplus H^n(V)$ be mapped to 0. By exactness,
+$\delta_{U,U\cap V}j^*_U(u)=0$, thus by commutativity $\delta_{X,V}(v)=\delta_{U,U\cap
+V}j^*_V(v)=\delta_{U,U\cap V}j^*_U(u)=0$. It follows that exists $x\in H^n(X)$
+s.t. $i^*_V(x)=v$. Let $i^*_U(x)=u'$. We have that $j^*_U(u')=j^*_Ui^*_U(x)=
+j^*_Vi^*_V(x)=j^*_V(v)=j^*_U(u)$, hence $j^*_U(u-u')=0$ and by exactness there
+is a $u''\in H^n(U,U\cap V)$ s.t. $\sigma_{U,U\cap V}(u'')=u-u'$.
+
+Consider now in $H^n(X)$ the element $x+\sigma_{X,V}(u'')$. We see that
+$i^*_U(x+\sigma_{X,V}(u''))=i^*_U(x)+i^*_U\sigma_{X,V}(u'')=u'+\sigma_{U,U\cap
+V}(u'')=u'+(u-u')=u$ and
+$i^*_V(x+\sigma_{X,V}(u''))=i^*_V(x)+i^*_V\sigma_{X,V}(u'')=v+0=v$, hence
+$(u,v)$ lies in the image of $(i^*_U,i^*_V)$.
+
+By commutativity and exactness, $(j^*_U-j^*_V)(i^*_U,i^*_V)=j^*_Ui^*_U-j^*_V
+i^*_V=0$, thus we have proved the exactness at $H^n(U)\oplus H^n(V)$.
+
+Let now $u\in H^n(U\cap V)$ be mapped to 0 under $\sigma_{X,V}\delta_{U,U\cap
+V}$. This implies that $\delta_{U,U\cap V}(u)$ lies in $\ker(\sigma_{X,V})$,
+hence there is an element $v\in H^n(V)$ and a $u'=j^*_V(v)$ s.t.
+$\delta_{U,U\cap V}(u')=\delta_{U,U\cap
+V}j^*_V(v)=\delta_{X,V}(v)=\delta_{U,U\cap V}(u)$, i.e. $\delta_{U,U\cap
+V}(u-u')=0$. By exactness, we have a $u''\in H^n(U)$ s.t. $j^*_U(u'')=u-u'$ and,
+considering now $(u'',-v)\in H^n(U)\oplus H^n(V)$, we have that
+$(j^*_U-j^*_V)(u'',-v)=j^*_U(u'')-j^*_V(-v)=(u-u')-(-u')=u$.
+
+On the other hand, $\sigma_{X,V}\delta_{U,U\cap
+V}(j^*_U-j^*_V)=\sigma_{X,V}\delta_{U,U\cap V}j^*_U-\sigma_{X,V}\delta_{U,U\cap
+V}j^*_V=\sigma_{X,V}0-\sigma_{X,V}\delta_{X,V}=0$ by commutativity and
+exactness. We have now proved the thesis.
+
+
+~\\
+\exercise{5}
+
+$(a)$ First of all, consider the homomorphism of rings
+$(\Z/2\Z)[y]\xrightarrow{f}(\Z/2\Z)[x]/(x^2-1)$ s.t. $y\mapsto x+1$. It is
+clearly surjective as $y-1\mapsto x$ and, since $\ker(f)=(y^2)$,
+$(\Z/2\Z)[y]/(y^2)\cong (\Z/2\Z)[x]/(x^2-1)$. Considering this isomorphism, we
+view $\Z/2\Z$ as a $(\Z/2\Z)[y]/(y^2)$-module, where $y$ acts as $x-1$ and hence
+0. From now on we will denote $(\Z/2\Z)[y]/(y^2)$ as $A$ thanks to the
+isomorphism.
+
+Consider the following short exact sequence:
+$$0\rightarrow\Z/2\Z\xrightarrow{\phi}(\Z/2\Z)[y]/(y^2)\rightarrow
+\Z/2\Z\rightarrow 0$$
+where the first $A$-module homomorphism sends 1 to y, the second one 1 to 1 and
+$y$ to $0$. Applying the $\Ext^n_A(-,\Z/2\Z)$ functor, we get the following long
+exact sequence:
+\begin{align*}
+    0 &\rightarrow \Hom_A(\Z/2\Z,\Z/2\Z)\rightarrow \Hom_A(A,\Z/2\Z)\rightarrow
+    \Hom_A(\Z/2\Z,\Z/2\Z)\rightarrow \\
+    &\rightarrow \Ext^1_A(\Z/2\Z,\Z/2\Z)\rightarrow \Ext^1_A(A,\Z/2\Z)\rightarrow
+    \Ext^1_A(\Z/2\Z,\Z/2\Z)\rightarrow\cdots
+\end{align*}
+
+We know that $\Ext^0_A(\Z/2\Z,\Z/2\Z)\cong \Hom_A(\Z/2\Z,\Z/2\Z)\cong\Z/2\Z$ and
+$\Hom_A(A,\Z/2\Z)\cong\Z/2\Z$.
+
+Since $A$ is a free $A$-module, $\Ext^n_A(A,\Z/2\Z)=0$ for all $n>0$, thus we
+have:
+\begin{align*}
+    & \Z/2\Z\rightarrow\Z/2\Z\rightarrow \Ext^1_A(\Z/2\Z,\Z/2\Z)\rightarrow 0 \\
+    & 0\rightarrow \Ext^n_A(\Z/2\Z,\Z/2\Z)\rightarrow
+    \Ext^{n+1}_A(\Z/2\Z,\Z/2\Z)\rightarrow 0\textit{ if }n>1
+\end{align*}
+
+From the last exact sequence, it follows that $\Ext^n_A(\Z/2\Z,\Z/2\Z)\cong
+\Ext^1_A(\Z/2\Z,\Z/2\Z)$ for every $n>1$, while from the previous one
+$\Ext^1_A(\Z/2\Z,\Z/2\Z)\cong\coker(\Z/2\Z\rightarrow\Z/2\Z)$.
+
+Now, an element of $\Hom_A(\Z/2\Z,\Z/2\Z)$ is defined by the 
+image of the unit, hence for any element of $\Hom_A(A,\Z/2\Z)$ we only
+have to check where the unit of $\Z/2\Z$ is sent by it of $\Hom_A(A,\Z/2\Z)$ 
+precomposed with the $\phi$. Remember that the unit of $\Z/2\Z$ is sent to
+$y$. We have then that, for any element $f\in A$,
+$\phi^*(f)(1)=f(\phi(1))=f(y)=y\cdot f(1)=0$, thus $\phi^*$ is the
+zero-homomorphism and $\Ext^1_A(\Z/2\Z,\Z/2\Z)\cong\Z/2\Z$.
+
+$(b)$ First of all, consider the ring epimorphism $R[y]\twoheadrightarrow A$
+s.t. $y\mapsto x+1$. Its kernel is given by $(y(y-2))$, hence we get an
+isomorphism $R[y]/(y(y-2))\cong A$, which turns $R$ into a
+$R[y]/(y(y-2))$-module where $y$ acts as $x+1$, i.e. as 2. From now on, thanks
+to this isomorphism, we will call $A$ the ring $R[y]/(y(y-2))$.
+
+Consider the following short exact sequences:
+$$0\rightarrow R'\xrightarrow{g} A\xrightarrow{f} R\rightarrow 0$$
+$$0\rightarrow R\xrightarrow{g'} A\xrightarrow{f'} R'\rightarrow 0$$
+
+Here, $g$ is given by $r\mapsto r(y-2)$, $f$ by $r\mapsto r$, $y\mapsto 2$ and
+$R'$ is the $A$-module whose underlying abelian group is $R$ and s.t. $y$ acts
+on it as 0.
+
+On the other hand, $g'$ is given by $r\mapsto ry$, $f'$ by $r\mapsto r$,
+$y\mapsto 0$.
+
+It is straightforward to check that all of these are $A$-module homomorphisms and the
+chains are short exact sequences.
+
+Let now $\phi:=gf'$, $\psi:=g'f$. By composing these chains, we get the 
+following free resolution of $R$:
+$$\cdots\rightarrow A\xrightarrow{\phi} A\xrightarrow{\psi} A\xrightarrow{\phi}
+A\xrightarrow{f} R\rightarrow 0$$
+
+Now we apply the functor $\Hom_A(-,R)$:
+$$0\rightarrow\Hom_A(R,R)\xrightarrow{f^*}\Hom_A(A,R)\xrightarrow{\phi^*}
+\Hom_A(A,R)\xrightarrow{\psi^*}\Hom_A(A,R)\xrightarrow{\phi^*}
+\Hom_A(A,R)\rightarrow\cdots$$
+
+Thanks to the isomorphism $\Hom_A(A,R)\cong R$, $f\mapsto f(1)$, we will identify
+each element of this group with the element of $R$ the unit is mapped to.
+
+Furthermore, we see that $\Ext^n_A(R,R)\cong\ker(\psi^*)/\Ima(\phi^*)$ if $n$ is
+odd and $\Ext^n_A(R,R)\cong\ker(\phi^*)/\Ima(\psi^*)$ if $n$ is even and $>0$. 
+Clearly, $\Ext^0_A(R,R)\cong\ker(\phi^*)$.
+
+Let $h\in\Hom_A(A,R)$ and notice that $\phi^*(h)(1)=h(\phi(1))=h(g(f'(1)))=
+h(g(1))=h(y-2)=(y-2)\cdot h(1)=0$. It follows that $\phi^*$ is a zero-homomorphism
+and $\ker(\phi^*)\cong R$, hence $\Ext^0_A(R,R)\cong R$.
+
+Let now $h\in Hom_A(A,R)$. We have that $\psi^*(h)(1)=h(\psi(1))=h(g'(f(1))=
+h(g'(1))=h(y)=y\cdot h(1)=2 h(1)$ and, since $h(1)$ can be mapped anywhere,
+$\Ima(\psi^*)\cong 2R$, thus $\Ext^n(R,R)\cong R/2R$ for $n$ even and $>0$.
+
+By the same reasoning, the elements of $\ker(\psi^*)$ are those s.t. $2h(1)=0$,
+i.e. $\ker(\psi^*)\cong\Tor_2(R)$ and therefore $\Ext^n_A(R,R)\cong\Tor_2(R)$ for
+$n$ odd.
+
+
+\printbibliography
+
+\end{document}

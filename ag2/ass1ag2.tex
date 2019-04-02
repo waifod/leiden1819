@@ -1,0 +1,251 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Spec}{Spec}
+
+\begin{document}
+
+\title{Algebraic Geometry - Assignment 1}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{1}
+
+Throughout the exercise we will call $V$ the closed subsets of $\Spec(R)$.
+
+\begin{proof}
+$(i)$ Let $[\pid]\in\Spec(R)$. Then we have the following by definition:
+$$\overline{\{[\pid]\}}=\bigcap_{[\pid]\in V} V=\bigcap_{\alpha\subset\pid}
+V(\alpha)$$
+
+Since $\pid\subset\pid$, clearly $\bigcap_{\alpha\subset\pid}
+V(\alpha)=V(\pid)\cap (\bigcap_{\alpha\subsetneq\pid} V(\alpha))\subset V(\pid)$.
+On the other hand, by definition $[\qid]\in V(\pid)$ is equivalent to
+$\pid\subset\qid$, hence for every $\alpha\subset\pid$ we have that $[\qid]\in
+V(\alpha)$ and therefore $V(\pid)\subset V(\alpha)$, thus
+$V(\pid)\subset\bigcap_{\alpha\subset\pid} V(\alpha)$.$\quad\square$
+
+\proof $(ii)$ Let $[\pid]\in V(\pid)\subset V\cup V'$, $V,V'$ closed. Then we
+have that $[\pid]\in V$ or $[\pid]\in V'$, let's say the former. Since $V$ is
+closed, it will contain $\overline{\{[\pid]\}}=V(\pid)$, hence we have the thesis.
+
+We will now prove that $[\pid]$ is the unique generic point of $V(\pid)$.
+
+First of all, we know that it is one by $(i)$. Let $[\qid]$ be another. Then,
+$\overline{\{[\qid]\}}=V(\qid)=V(\pid)$, hence $[\pid]\in V(\qid),[\qid]\in
+V(\pid)$. By definition, $\qid\subset\pid$ and $\pid\subset\qid$, hence we are
+done.
+\end{proof}
+
+\begin{proof}
+$(iii)$ Consider $V$, a closed subset of $\Spec(R)$. It will be defined
+by an ideal $\alpha$ of $R$. Clearly, since
+$\sqrt{\alpha}=\bigcap_{\alpha\subset\pid} \pid$, a prime ideal $\pid$ of $R$
+contains $\alpha$ if and only if it contains $\sqrt{\alpha}$, hence
+$V(\alpha)=V(\sqrt{\alpha})$. On the other hand, if for some ideal $\beta$ we
+have that $\beta\not\subset\sqrt{\alpha}$, then there exists an element 
+$x\in\beta\setminus\sqrt{\alpha}\subset\beta\setminus\alpha$ and a prime ideal
+$\pid\supset\alpha$ s.t. $x\not\in\pid$, i.e. $\beta\not\subset\pid$ and
+therefore $[\pid]\not\in V(\beta)$. Also, it is clear that if $V(\alpha)=
+V(\beta)$ we have that $\sqrt{\alpha}=\sqrt{\beta}$ by applying the earlier
+result in both directions. We have shown that any ideal defining a closed
+subset is contained in a unique
+radical one defining the same subset. Furthermore, if $V(\beta)\supset
+V(\alpha)$ with $\alpha$ radical, since any prime ideal $\pid\supset\alpha$ is
+s.t. $\beta\subset\pid$, we get that $\beta\subset\alpha$.
+
+Suppose now that $\alpha$ is an ideal of $R$ s.t. the closed subset $V(\alpha)$ is
+irreducible; let $\beta,\gamma$ be ideals of $R$ s.t.
+$\beta\gamma\subset\sqrt{\alpha}$, i.e. $V(\beta)\cup V(\gamma)=V(\beta\gamma)\supset
+V(\sqrt{\alpha})=V(\alpha)$.
+We know by irreducibility that $V(\beta)\supset V(\sqrt{\alpha})$ or
+$V(\gamma)\supset V(\sqrt{\alpha})$, hence
+$\beta\subset\sqrt{\alpha}$ or $\gamma\subset\sqrt{\alpha}$. Since this holds
+for every pair of ideals whose product is contained in $\sqrt{\alpha}$, the
+latter is a prime ideal.
+\end{proof}
+
+
+~\\
+\exercise{2}
+
+\begin{proof}
+    Consider for an element $(a_P)_{[P]\in U}\in\Gamma(U,\mathcal{O}_X)$ a
+    principal open covering $(X_f)_f$ of $U$, $f\in R$, s.t. for every $f$ there
+    is a $a_f\in R_f$ with the property that, for every $[P]\in X_f$,
+    $a_f\mapsto (a_f)_P=a_P$ under the canonical homomorphism $R_f\rightarrow
+    R_P$. We want to check that $(a_P)_{[P]\in V}\in\Gamma(V,\mathcal{O}_X)$.
+
+    To do this, consider a principal open covering $(X_g)_g$ of $V$, $g\in R$.
+    We know that for every $f,g$ we have that $X_f\cap X_g=X_{fg}$ and, since
+    $\bigcup_{f,g} X_{fg}=\bigcup_f\bigcup_g (X_f\cap X_g)=\bigcup_f
+    (X_f\cap\bigcup_g X_g)=\bigcup_f (X_f\cap V)=U\cap V=V$, $(X_{fg})_{f,g}$ is
+    a new principal open covering of $V$.
+    
+    Consider now for every $X_{fg}$ the element $(a_f)_{fg}=a_{fg}$, image of $a_f$
+    under the canonical homomorphism $R_f\rightarrow R_{fg}$. We know that, for
+    every $[P]\in X_{fg}\subset X_f$, the following diagram commutes:
+    \[
+        \begin{tikzcd}
+            R_f\arrow{rr}{(-)_{fg}}\arrow[swap]{dr}{(-)_P}
+            && R_{fg}\arrow{dl}{(-)_P} \\
+            & R_P
+        \end{tikzcd}
+    \]
+    It follows that $(a_{fg})_P=((a_f)_{fg})_P=(a_f)_P=a_P$, hence we are done.
+\end{proof}
+
+
+~\\
+\exercise{3}
+
+\begin{proof}
+    Remember that, for any $x\in X$, the elements $f_x$ of $\mathcal{O}_{X,x}$,
+    the stalk of $\Gamma(-,\mathcal{O}_X)$ at $x$, are elements $f\in\Gamma(U,
+    \mathcal{O}_X)$, with $U\subset X$ open and containing $x$, under the
+    equivalence relation where $(f,U)\sim (g,V)$ if and only if there exists
+    an open $W\subset U\cap V$ s.t. $x\in W$ and $f|_W=g|_W$.
+
+    Suppose now that $f_x=[(U,f)]\in\mathcal{O}_{X,x}$, $f_x\neq 0_x$, is
+    nilpotent. This means that $(f_x)^n=0_x$ for some $n>1$ and, since for every
+    open $U$ containing $x$ the map
+    $\Gamma(U,\mathcal{O}_X)\xrightarrow{(-)_x}\mathcal{O}_{X,x}$ is a ring
+    homomorphism, $(f^n)_x=0_x$. It follows that there exists an
+    open $W\subset U\cap X$, $x\in W$, s.t. $f^n|_W=0|_W$. Since the restriction
+    $\Gamma(U,\mathcal{O}_X)\xrightarrow{|_W}\Gamma(W,\mathcal{O}_X)$ is again a
+    ring homomorphism, this means that $(f|_W)^n=0|_W$. On the other hand, $f|_W
+    \neq 0|_W$, for otherwise $f_x=[(U,f)]=[(W,f|_W)]=0_x$. It follows that
+    $f|_W\in\Gamma(W,\mathcal{O}_X)$ is nilpotent.
+    
+    Let $U\subset X$ be an open s.t. $\Gamma(U,\mathcal{O}_X)$ has nilpotents.
+    This means that there is a non-zero element $(a_x)_{x\in U}\in\Gamma(U,
+    \mathcal{O}_X)\subset\Pi_{x\in U}\mathcal{O}_{X,x}$ and a $n>1$ for which
+    $((a_x)_{x\in U})^n=(a_x^n)_{x\in U}=(0)_{x\in U}=0|_U$. Since $(a_x)_{x\in U}
+    \neq 0$, we have for some $x\in U$ that $a_x\neq 0$ and $a_x^n=0$, i.e.
+    $a_x\in\mathcal{O}_{X,x}$ is nilpotent.
+    
+    Let now $x\in X$ lie in $U_i$. It will be identified with $[P]\in
+    \Spec(R_i)$. We know that the identification
+    of an open neighbourhood of $x$ with an affine scheme is an isomorphism of
+    locally ringed spaces and that under this isomorphism stalks are carried
+    isomorphically from one scheme to the other. In particular, the stalk of
+    $\Spec(R_i)$ at $[P]$, which is $(R_i)_P$ by~\cite[p. 100]{Mum88}, is mapped
+    isomorphically to the one of $X$ at $x$ i.e.
+    $\mathcal{O}_{X,x}\cong (R_i)_P$. Since the latter has no nilpotents, so
+    does the former, hence $X$ is a reduced scheme by what we have proved
+    earlier.
+\end{proof}
+
+
+~\\
+\exercise{4}
+
+We will take for granted that any maximal ideal in $\Z[X]$ is given by $(p,f)$,
+where $p\in\Z$ is prime and $f\in\Z[X]$ is s.t. $[f]_p\in\F_p[X]$ is
+irreducible.
+
+Consider two distinct primes $p,q\in\Z$. Then, for some $n,m\in\Z\setminus\{0\}$
+we have that $np+mq=1$. It follows that $(p)+(q)=(1)$ in $\Z[X]$, hence
+$V((p))\cap V((q))=V((p)+(q))=V((1))=\emptyset$.
+
+Consider now a prime $p\in\Z$ and an irreducible polynomial $f\in\Z[X]$. Either
+they are s.t. $(p,f)=(1)$, and therefore $V((p))\cap V((f))=V((p,f))=V((1))=
+\emptyset$, or the only prime ideals containing it are the
+maximal ones: indeed, if $q\in\Z$ is prime, $(p,f)\subset (q)$ would mean that
+$q|f$, which is impossible because $f$ is primitive, while if $g\in\Z[X]$ is an
+irreducible polynomial and $(p,f)\subset (g)$ we get that $g|p$, which is again
+not possible.
+
+Now, if $(p,f)\neq (1)$, then the maximal ideals containing it correspond
+bijectively to the ones of $\Z[X]/(p,f)\cong\F_p[X]/([f]_p)$, i.e. to the ones
+in $\F_p[X]$ containing $[f]_p$. Since $\F_p[X]$ is a PID, the irreducible
+polynomials generate prime ideals, which to contain $[f]_p$ have to be generated
+by an element dividing it. It follows that in $\F_p[X]/([f]_p)$ the only prime
+ideals are given by the irreducible factors of $[f]_p\in\F_p[X]$ and
+they are maximal by what we have shown earlier, hence we find that $V((p))\cap
+V((f))=V((p,f))=\{[(p,g)]\ |\ [g]_p\in\F_p[X]\textit{ is irreducible and }
+[g]_p|[f]_p\}$.
+
+Both cases are possible: for the former consider $p=2,\ f=2X+1$, while for the
+latter $p=2,\ f=X$. Furthermore, the intersection is always finite since
+$[f]_p$ has finitely many irreducible factors in $\F_p[X]$.
+
+Finally, consider two irreducible polynomials $f,g\in\Z[X]$ s.t. $(f)\neq
+(g)$ (and therefore coprime). We know that, for any prime element $a\in\Z[X]$,
+$(f,g)\not\subset (a)$, for otherwise $a|f,g$ and therefore $a|\gcd(f,g)$.
+
+It follows that either $(f,g)=(1)$ or the only primes containing it are maximal
+ideals $(p,h)$ such that $h$ is irreducible modulo $p$ and $h|f,g\mod p$, i.e.
+$[h]_p$ is an irreducible factor of $\gcd([f]_p,[g]_p)$, by an argument similar
+to the one previously used and an isomorphism we are about to mention. In particular,
+given a prime $p$ s.t. $(p,f,g)$ is proper, we have a bijection between
+the maximal ideals containing $(p,f,g)$ and the ones of
+$\Z[X]/(p,f,g)\cong\F_p[X]/([f]_p,[g]_p)\cong\F_p[X]/(\gcd([f]_p,[g]_p))$
+(remember that $\F_p[X]$ is a PID, hence every ideal is generated by the gcd of
+a system of generators).
+
+In the former case, $V((f))\cap V((g))=\emptyset$, while in the latter
+$=\{[(p,h)]\ |\ p\in\Z\textit{ is prime},\ [h]_p\in\F_p[X]\textit{ is irreducible}
+\textit{ and }[h]_p|\gcd([f]_p,[g]_p)\}$.
+
+We will prove that even in this latest case the intersection is finite.
+
+Since $f,g$ are coprime, there exists a pair of polynomials $h,l\in\Q[x]$
+s.t. $hf+lg=1$. Let $n,m\in\Z\setminus\{0\}$
+be integers s.t. $nh,mg\in\Z[X]$. We have then that
+$(nmh)f+(nml)g=nm\in (f,g)$ for a pair of integer polynomials
+$nmh,nml\in\Z[X]$. It follows that a prime $p\in\Z$ defining a maximal ideal
+containing $(f,g)$ has to divide $nm$, hence there are finitely many such
+primes. Since for every prime $\gcd([f]_p,[g]_p)$ has finitely many irreducible
+factors, by the previously mentioned bijection we are done.
+
+Both cases are possible: for the former consider $f=X,\ g=X+1$, while for
+the latter $f=X,\ g=X+2$.
+
+
+\printbibliography
+
+\end{document}

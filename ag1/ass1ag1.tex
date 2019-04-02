@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Geometry 1 - Assignment 1}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{1.8.11}
+
+Let's solve the system of equations explicitly.
+
+$$
+\begin{cases}
+		x^2-yz = 0 \\
+		xz-x=x(z-1) = 0
+\end{cases}
+\begin{cases}
+		x^2-yz=0 \\
+		x=0 \lor z=1
+\end{cases}
+$$
+
+If $x=0$, we get that $yz=0$, i.e. $y=0\ \lor\ z=0$. This corresponds to the union of two algebraic sets (the axis $z$ and $y$ respectively): $V_1=\{(0,0,t)\in\A^3\ |\ t\in\K\}$ and $V_2=\{(0,t,0)\in\A^3\ |\ t\in\K\}$. If $z=1$, we get that $x^2-y=0$, and therefore we have a parabola in the plane $z=1$. This is the algebraic set $V_3=\{(t,t^2,1)\in\A^3\ |\ t\in\K\}$. We have proved that $Y=V_1\cup V_2\cup V_3$.
+
+Now, we see that $\I(V_1)=(x,y)$, $\I(V_2)=(x,z)$ and $\I(V_3)=(x^2-y,z-1)$ because these are prime ideals* (and hence radical) of $\K[x,y,z]$ whose generators define the desired algebraic sets. It follows that the latter are irreducible and what we have found is a decomposition of $Y$ in three irreducible components. Since the decomposition is essentially unique, we can conclude.
+
+*Here I prove that $I_1,\ I_2$ and $I_3$ are prime ideals.
+
+Notice that $\K[x,y,z]/(x,y)\cong\K[z]$ by using the map from $\K[x,y,z]$ to $\K[z]$ sending $x$ and $y$ to 0, $z$ to $z$. This is a surjective $\K$-algebra homomorphism with kernel $(x,y)$. A similar proof works for $(x,z)$, which leads to an isomorphism with $\K[y]$. Since these are integral domains, the thesis follows.
+On the other hand, notice that $\K[x,y,z]/(x^2-y,z-1)\cong(\K[x,y,z]/(z-1))/((x^2-y,z-1)/(z-1))\cong\K[x,y]/(x^2-y)$. Being $x^2-y$ irreducible, $(x^2-y)$ is prime, hence $\K[x,y]/(x^2-y)$ is an integral domain and the thesis follows.
+
+~\\
+
+\exercise{2.5.8}
+
+\begin{enumerate}
+		\item Let's consider the radical ideals associated to the algebraic sets defined by the individual points. These are $I_1=(x,y)$, $I_2=(x-1,y)$, $I_3=(x,y-1)$ and $I_4=(x-1,y-1)$; they are maximal and distinct (we can prove this by noticing that $I_i$ is the kernel of the map sending $f\in\K[x,y]$ to $f(P_i)\in\K$, since the elements mapped to $0$ are precisely those vanishing at $P_i$; being the map surjective, this shows that $K[x,y]/I_i\cong\K$; another way to show that they are maximal is observing that, for example, $\K[x,y]/I_1\cong(\K[x,y]/(y))/((x,y)/(y))\cong\K[x]/(x)\cong\K$).
+				We see that these ideals are coprime since they are distinct (otherwise we could sum two of them and get one which would contain both) and therefore, by~\cite[prop. 1.10]{atm}, we have that $\Pi_{i=1}^4 I_i=\bigcap_{i=1}^4 I_i$ is the ideal of all polynomials vanishing over $Y$ (this is because the polynomials have to vanish over each point and thus belong to each $I_i$; viceversa, the elements of the intersection obviously belong to $\I(Y)$).
+			From this follows that $\I(Y)=\Pi_{i=1}^4 I_i$.
+			Furthermore, by the same proposition, the canonical mapping $\K[x,y]\rightarrow\bigoplus^4_{i=1}\K[x,y]/I_i$ is surjective. Since the kernel is $\bigcap_{i=1}^4 I_i=\I(Y)$, we get an isomorphism $A(Y)\rightarrow\bigoplus^4_{i=1}\K[x,y]/I_i\cong\K^4$.
+			Being isomorphic as $\K$-algebras, they have to be as $\K$-vector spaces, thus $A(Y)$ has dimension $4$ as such.
+		\item We see that $f(P_i)=g(P_i)=0$, thus $f,g\in\I(Y)$. Given the generators of the ideal, we have that $x=x^2$ and $y=y^2$ in this ring, hence, considering an element $h+(f,g)\in\K[x,y]/(f,g)$, we may find a new representative of the same class by substituting $x^2$ with $x$ and $y^2$ with $y$, thus reducing the degree of the representative polynomial w.r.t. $x$ and $y$ respectively until it gets $\leq 1$ w.r.t. both variables. Notice that reducing the degree w.r.t. one variable does not affect the degree w.r.t. the other variable, therefore the process is finite. We have showed that each class of polynomials can be represented by one whose degree w.r.t. both $x$ and $y$ is $\leq 1$.
+			Such a polynomial will have the form $a+bx+cy+dxy$, therefore the set $\{1,x,y,xy\}$ gives a system of generators for the $\K$-vector space $\K[x,y]/(f,g)$, which has dimension $\leq 4$.
+			Since we have a surjective $\K$-algebra homomorphism (the natural projection) from it to $A(Y)$, a 4-dimensional $\K$-vector space, being the homomorphism a linear application between $\K$-vector spaces as well, this means that the dimension of the $\K$-vector space $\K[x,y]/(f,g)$ is $\geq 4$, and therefore it is exactly 4. It follows that the previously found set of generators is a $\K$-basis as well. Furthermore, since the two $\K$-vector spaces have the same dimension, the projection is bijective, hence it is a $\K$-algebra isomorphism and $(f,g)=\I(Y)$.
+\end{enumerate}
+
+\begin{thebibliography}{9}
+\bibitem{atm}
+	M.F. Atiyah, I.G. Macdonald,
+	\textit{Introduction to Commutative Algebra},
+	CRC Press,
+	1994.
+\end{thebibliography}
+
+\end{document}

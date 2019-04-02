@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 8}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+\exercise{5}
+
+$\Rightarrow$ To prove the existence of an open neighbourhood $U$ of $x\in G$ s.t. it doesn't contain any other point in $G$, it is sufficient to show that, given a bounded set $D\subset\R^n$, $|L\cap D|\in\N$. Indeed, afterwards we may consider a bounded open set $B_r(x)$ and then reduce $r$ to $\min(\{r\}\cup\{||y||\ |\ y\in L\cap B_r(y),\ x\neq y\})$ to create the desired $U$.
+
+Fix any $\Z$-base $\{v_1,\ldots,v_m\}$ of $L$ (which will be a set of linearly independent vectors of $\R^n$, and hence $m\leq n$), then complete it with $\{v_{m+1},\ldots,v_n\}$ making it into a base of $\R^n$.
+
+Let $x\in L$. Then, given $M=[v_1|\ldots|v_n]$ (an invertible matrix), it can be written as $x=Ma$, where $a\in\Z^n$ as $(a_i)_{i=1}^m\subset\Z$ and $a_i=0$ for $i>m$.
+
+Now, considered a norm on $\R^{n\times n}$ compatible with $||\cdot||_{\infty}$ on $\R^n$, we have that $||a||=||M^{-1}x||\leq ||M^{-1}||||x||=c||x||$. Requiring $x\in D$, where $D$ is bounded, sets a bound on $||x||$ and hence on $|a_i|$, thus there are finitely many $a\in\Z^n$ s.t. $x=Ma\in L\cap D$.
+
+$\Leftarrow$ Let $U$ be the subspace of $V=\R^n$ which is spanned by $L$. Let $d=\dim(U)$. $L$ contains a basis of $U$ as a $\R$-vector space, let's say $\{v_1,\ldots,v_d\}$.
+
+Consider now $L':=\Z v_1+\cdots +\Z v_d$. Since the $v_i$ form an $\R$-basis of $U$, they will form a $\Z$-basis of $L'$, which is a lattice in $V$.
+
+We see that $u\in U$ can be written as $u=\lambda_1 v_1+\ldots +\lambda_d v_d+l'$, where $l'\in L'$ and $0\leq\lambda_i<1$, $\lambda_i\in\R$. This holds in particular for $l\in L$, thus we may represent uniquely an element in the coset $l\in L/L'$ as $\lambda_1 v_1+\ldots +\lambda_d v_d$, where $0\leq\lambda_i<1$, $\lambda_i\in\R$.
+
+This implies that an element of $L/L'$ can be represented by a unique element in $L\cap\{u\in U\ |\ ||u||<\sum_{i=1}^d ||v_i||\}$ (indeed, if $l=\lambda_1 v_1+\ldots +\lambda_d v_d+l'$ with $l'\in L'$, then $l-l'=\lambda_1 v_1+\ldots +\lambda_d v_d$ will represent $l$ in $L/L'$), which is finite because $L$ is discrete in $\R^n$ and therefore in $U$, hence $L/L'$ is finite.
+
+Let $a=[L:L']$. Then, $aL\subset L'$ and $aL$ is a free abelian group of rank $d'\leq d$ as it is a subgroup of a free abelian group of rank $d$. Being the map $L\xrightarrow{a\cdot} aL$ an isomorphism, $L$ is a free abelian group of rank $d'\leq d$, thus, since $L'\subset L$ and therefore $d\leq d'$, it has precisely rank $d$. This means that there are some elements $l_1,\ldots,l_d\in L$ generating $L$, which will therefore be $=\Z l_1+\cdots+\Z l_d$.
+
+-----
+
+We prove that, for a subgroup $G$ of $\R^n$, being discrete implies having finite intersection with every bounded set. It is sufficient to prove it for the compact ones $K$, for the closure of a bounded set is still bounded and hence compact.
+
+Notice that we may just prove that $G$ is closed in $\R^n$ because then $G\cap K$ would be a compact set with the discrete topology, and hence finite.
+
+Now, suppose that it is not closed. Then, there is a point $x\in\overline{G}\setminus G$ s.t. for every open ball $B_{1/n}(x)$ there is a $x_n\in B_{1/n}(x)\cap G$. For every $n,m\geq n_0$, we have that $||x_n-x_m||<||x_n-x||+||x-x_m||<2/n_0$, hence, considering the succession $(y_n)_{n\in\N}$ given by $y_n=x_{n+1}-x_n\in G$, we have that it converges to 0, as $||y_n||<2/n$ for every $n\in\N$. But then $G$ is not discrete, against the hypothesis.
+
+-----
+
+Now we prove that a subgroup $G$ of $\R$ is either dense or a lattice.
+
+We have already proved that being discrete is equivalent to being a lattice, hence we may just prove that a non-discrete subgroup is dense.
+
+Indeed, consider a point $x\in G$ s.t. for every neighbourhood of it $U$ we have that there is a $y\in U\cap G$ with $x\neq y$. Consider an open set $V\subset\R$, which will contain an open interval $(a,b)$. Now, choose $y\in B_{b-a}(x)\cap G$ s.t. $y\neq x$.
+
+Clearly, $z=|x-y|\in G$ and $z<b-a$, hence $\emptyset\neq (a,b)\cap\Z z\subset V\cap G$.
+
+~\\
+\exercise{6}
+
+$*\Rightarrow (i)$ Let $L=\Z x_1+\cdots +\Z x _n$ and define $C:=\{\sum_{i=1}^n \lambda_i x_i\ |\ \lambda_i\in [0,1]\}$. Consider now the projection $\pi:\R^n\rightarrow\R^n/L$, which is s.t. $\pi(x)=\pi(x')$ if and only if $x-x'\in L$. For every $x\in\R^n$, we may find $x'\in C$ s.t. $x-x'\in L$.
+
+By construction, $\pi|_C$ is onto $\R^n/L$. Since $C$ is compact, so is $\R^n/L$.
+
+$(i)\Rightarrow (ii)$ Consider $\pi:\R^n\rightarrow\R^n/L$, which is open as $\pi^{-1}(\pi(U))=U+L=\bigcup_{x\in L} (x+U)$.
+
+Given an open cover of $\R^n$, $(B_r(x))_{x\in\R^n}$, we have that there is a finite index $I$ s.t. $\R^n/L=\bigcup_{i\in I} \pi(B_r(x_i))$. Taking preimages, we get that $\R^n=\bigcup_{i\in I} B_r(x_i)+L$, with $\bigcup_{i\in I} B_r(x_i)$ clearly bounded.
+
+$\neg *\Rightarrow\neg (ii)$ Suppose that $L$ has rank $m<n$ and $B\subset\R^n$ is bounded by $c>0$. Then, there is a $x\in\R^n$ s.t. $x$ is orthogonal to the subspace spanned by $L$. It follows that we have $||\lambda x-l||=\sqrt{\lambda^2||x||^2+||l||^2}\geq |\lambda|||x||$ for every $\lambda\in\R$ and every $l\in L$.
+
+Since $B$ is bounded by $c$, we may choose a $\lambda>0$ large enough s.t. $\lambda||x||>c$ and then $||\lambda x-(l+b)||=||(\lambda x-l)-b||\geq |\lambda|||x||-c>0$ for every $l\in L$, $b\in B$. It follows that $\lambda x\not\in L+B$.
+
+
+\begin{thebibliography}{9}
+  \bibitem{stev}
+		P. Stevenhagen,
+		\textit{Number Rings},
+		2017.
+\end{thebibliography}
+
+\end{document}

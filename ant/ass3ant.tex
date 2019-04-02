@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\newcommand{\Pic}{\operatorname{Pic}}
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 3}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{31}
+
+Let $S=R\setminus\pid$.
+\begin{align*}
+		I_{\pid}+J_{\pid} & = \{\frac{i}{s}+\frac{j}{s'}\ |\ i\in I,\ j\in J,\ s,s'\in S\} \\
+		& = \{\frac{is'+js}{ss'}\ |\ i\in I,\ j\in J,\ s,s'\in S\} \\
+		& = (I+J)_{\pid}
+\end{align*}
+Indeed, we see that, setting $s=1$, $i=0$, $\frac{is'+js}{ss'}=\frac{0+j}{s'}\in (I+J)_{\pid}$. If $s'=1$, $j=0$, we get $\frac{is'+js}{ss'}=\frac{i+0}{s}\in (I+J)_{\pid}$, hence $I_{\pid}+J_{\pid}\subset (I+J)_{\pid}$. On the other hand, $\frac{i+j}{s}=\frac{i}{s}+\frac{j}{s}\in I_{\pid}+J_{\pid}$, thus $(I+J)_{\pid}\subset I_{\pid}+J_{\pid}$.
+\begin{align*}
+		I_{\pid}J_{\pid} & = (\{\frac{i}{s}\frac{j}{s'}\ |\ i\in I,\ j\in J,\ s,s'\in S\}) \\
+		& = (\{\frac{ij}{u}\ |\ i\in I,\ j\in J,\ u\in S\}) \\
+		& = (IJ)_{\pid}
+\end{align*}
+Indeed, if any product of elements $ss'\in S$ can be represented by a single element $u\in S$ (trivial) and viceversa, as we may just consider $s=u,s'=1$.
+\begin{align*}
+		\frac{k}{s}\in (I\cap J)_{\pid} & \Leftrightarrow \exists s'\in S:\ s'k\in I\cap J \\
+		& \Leftrightarrow \exists s'\in S:\ s'k\in I\land s'k\in J \\
+		& \Leftrightarrow \frac{k}{s}\in I_{\pid}\land \frac{k}{s}\in J_{\pid} \\
+		& \Leftrightarrow \frac{k}{s}\in I_{\pid}\cap J_{\pid}
+\end{align*}
+To justify the fact that we may take the same $s'$ for both $I$ and $J$, it may be observed that if $sk\in I\land s'k\in J$, then $ss'k\in I\cap J$ with $ss'\in S$.
+
+
+~\\
+\exercise{39}
+
+$\Leftarrow$ Let $I\neq (0)$ be an integral $R$-ideal. Then, since we have that in a Dedekind domain every non-zero ideal is invertible, $I\in\mathcal{I}(R)$. Since $\Pic(R)=0$, $I\in\mathcal{P}(R)$, hence $I$ is principal.
+
+$\Rightarrow$ Let $\qid\supset\pid\neq (0)$ be prime $R$-ideals. Then, $\pid=pR\subset qR=\qid$, with $p,q\in R$ primes and therefore irreducibles because a PID is an UFD. Now, since $p\in qR$, exists $r\in R$ s.t. $qr=p$. $r\in R^*$ because $q,p$ are irreducibles, hence $\qid=\pid$. It follows that $R$ has Krull-dimension 1. Furthermore, since $R$ is principal, it is Noetherian.
+
+From now on, $S=R\setminus\pid$ and $\pid$ will be a fixed prime ideal.
+
+Now we only have to show that the second condition of~\cite[theorem 2.17]{stev} holds.
+
+First, we will prove that $R_{\pid}$ is a PID. This comes from the fact that, by~\cite[prop. 2.8]{stev}, every ideal is of the form $S^{-1}I$, where $I=(i)$ is an ideal of $R$, hence $S^{-1}I=iS^{-1}R$.
+
+Let $I\neq (0)$ be an integral $R_{\pid}$-ideal. Then, since the localization of a PID is a PID, either $I=R_{\pid}=\pid^0R_{\pid}$ or $I=iR_{\pid}\subset\pid R_{\pid}$, where $i=\frac{q}{s}$ with $q\in\pid$ (and therefore $p|q$), $s\in S$. Being $R$ a PID, it is a UFD, hence $q$ factorizes in an essentially unique way as a product of irreducibles, among which there is $p$: $q=tp^m\Pi_{j=1}^n p_j^{m_j}$, $t\in R^*$. We know that, for every $j$, $p_j\not\in\pid$, otherwise $p|p_j$ and hence $p_j=pt'$, with $t'\in R^*$, by the same argument as before. From this follows that $t\Pi_{j=1}^n p_j^{m_j}=s'\in S$, hence $i=p^m\frac{s'}{s}=p^mu$, $u\in R_{\pid}^*$, thus $I=iR_{\pid}=(\frac{p}{1})^mR_{\pid}=\pid^mR_{\pid}$.
+
+Now, let $I$ be an invertible $R$-ideal. If it is integral, we can conclude. If not, there exists $k\in\K=Q(R)$ s.t. $kI\subset R$. Being $kI$ an $R$-module, it can be seen as an ideal of $R$, thus $kI=xR$ for some $x\in R$. From this follows that $I=k^{-1}xR$ and therefore it is principal.
+
+
+\begin{thebibliography}{9}
+		\bibitem{stev}
+				P. Stevenhagen,
+				\textit{Number Rings},
+				2017.
+\end{thebibliography}
+
+\end{document}

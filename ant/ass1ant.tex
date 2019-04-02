@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 1}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{8}
+
+Let's define the norm on $\mathbb Z[\sqrt 3]$ to be $N(a + b \sqrt 3) = |a^2 - 3 b^2|$.
+
+We notice that
+\begin{align*}
+		N((a+b\sqrt{3})(c+d\sqrt{3})) & = N((ac+3bd)+(ad+bc)\sqrt{3}) \\
+		& =|((ac+3bd)-(ad+bc)\sqrt{3})((ac+3bd)+(ad+bc)\sqrt{3})| \\
+		& =|(a-b\sqrt{3})(c-d\sqrt{3})(a+b\sqrt{3})(c+d\sqrt{3})| \\
+		& =N(a+b\sqrt{3})N(c+d\sqrt{3}),
+\end{align*}
+i.e. it preserves the products.
+
+Let $a,b\in\Z[\sqrt 3]$ with $b\neq 0$ and suppose $a = c + d \sqrt{3}$, $b = e + f \sqrt{3}$.
+
+We can see that 
+\begin{align*}
+		\frac a b &= \frac{c + d \sqrt 3}{e + f \sqrt 3} \frac{e - f \sqrt 3}{e - f \sqrt 3} \\
+		& = \frac{ce-3df}{e^2 - 3f^2} + \frac{-cf + de}{e^2 - 3f^2} \sqrt 3 \\
+		& = p + q\sqrt 3
+\end{align*}
+where $p = \displaystyle \frac{ce - 3df}{e^2 - 3f^2}$ and $q = \displaystyle \frac{-cf + de}{e^2 - 3f^2}$.
+
+Let $n$ be the closest integer to $p$ and let $m$ be the closest integer to $q$ (if there is an ambiguity in the choice, pick any of them). Notice that $| n - p | \leq 1/2$ and $| m - q | \leq 1/2$.
+
+We want to show that $a = (n + m\sqrt 3) b + \gamma$ for some $\gamma \in \mathbb Z[\sqrt 3]$ such that either $\gamma = 0$ or $N(\gamma) < N(b)$.
+
+Define $\theta := (n - p) + (m - q)\sqrt 3$ and let $\gamma = b \theta \in \mathbb Z[\sqrt 3]$; now, notice  that
+\begin{align*}
+		\gamma & = b \theta \\
+		& = b ( (n - p) + (m - q)\sqrt 3) \\
+		& = b (n + m\sqrt 3) - b(p + q\sqrt 3) \\
+		& = b (n + m\sqrt 3) - b \frac a b \\
+		& = b (n + m\sqrt 3) - a
+\end{align*}
+
+From this, we get $a = b(n + m\sqrt 3) + \gamma$.
+
+Observing that
+\begin{align*}
+		N(\gamma) & = N(b \theta) \\
+		& = N(b) N(\theta) \\
+		& = N(b) | (n - p)^2 - 3 (m - q)^2 | \\
+		& \leq N(b) \max\{ (n - p)^2, 3(m - q)^2\} \\
+		& = \leq\frac 3 4 N(b) \\
+		& < N(b)
+\end{align*}
+we can finally conclude that $\Z[\sqrt{3}]$ is an Euclidean Domain, and therefore a Principal Ideal Domain.
+
+
+~\\
+\exercise{17}
+
+Let $\alpha=a+bi$ and consider the chain of ideals $(a^2+b^2)\subset (a+bi)\subset\Z[i]$.
+
+For any positive integer $n$, we get that $[Z[i]:(n)]=n^2$ because $\Z[i]/(n)\cong\Z[x]/(x^2+1,n)\cong(\Z/n\Z)[x]/(x^2+1)$ (by~\cite[chap. 7, thm 8(2)]{dumf} and~\cite[chap. 9, prop. 2]{dumf}), whose elements are the classes of the following ones $\{a+bx\ |\ a,b\in\Z/n\Z\}$ since they can be represented by polinomials of degree $<2$ and with natural coefficients lower than $n$; furthermore, the classes of the elements of the set are all distinct.
+
+Thus, $[Z[i]:(a^2+b^2)]=(a^2+b^2)^2=N(\alpha)^2$.
+
+As an additive group, $[\Z[i]:(a^2+b^2)]=[\Z[i]:(a+bi)][(a+bi):(a^2+b^2)]$.
+
+As a quotient group, $\Z[i]/(a-bi)\cong(a+bi)/(a^2+b^2)$ (we can see this by sending $x+yi$ to $(x+yi)(a+bi)$).
+
+Noticing that $\Z[i]/(a+bi)\cong\Z[i]/(a-bi)$ as additive groups by using complex conjugation, we get that $N(\alpha)=[\Z[i]:(a+bi)]=|\Z[i]/(a+bi)|$, as stated.
+
+\begin{thebibliography}{9}
+\bibitem{dumf}
+	D.S. Dummit, R.M. Foote,
+	\textit{Abstract Algebra},
+	Whiley,
+	Third edition,
+	2003.
+\end{thebibliography}
+
+\end{document}

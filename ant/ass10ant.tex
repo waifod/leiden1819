@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 10}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+~\\
+\exercise{21}
+
+Let $f\in\Z[X]$ be an irreducible polynomial s.t. $\K=\Q(\alpha)\cong\Q[X]/(f)$. It will have degree 3 and only one real root.
+
+We know that the only roots of unity are $\pm 1$ because $r>0$ and, by~\cite[thm. 5.13]{stev}, $\mathcal{O}^*_{\K}$ has rank $1+1-1=1$. We will call $\sigma$ our real embedding, while $\sigma_{\pm}$ the complex ones.
+
+Since $\mathcal{O}^*_{\K}\cong<-1>\times<\mu>$, where $\mu\in\K\setminus\Q$ is a fundamental unit s.t. $\sigma(\mu)>1$, setting for future reference $u=x^2=\sigma(\mu)$, $x>1$, being $<\mu>$ the infinite cyclic subgroup of all units with positive image under $\sigma$, we get that $<\mu>\cong\Z$.
+
+The minimum polynomial of $\mu$ will have degree 3, for $1<[\Q(\mu):\Q]\leq [\Q(\alpha):\Q]=3$ and $[\Q(\mu):\Q]|[\Q(\alpha):\Q]$.
+
+Remember that $\Delta(1,\mu,\mu^2)=\Delta(f^{\mu}_{\Q})=[\mathcal{O}_{\K}:\Z[\mu]]^2\cdot\Delta_{\K}$, hence $|\Delta(1,\mu,\mu^2)|\geq|\Delta_{\K}|$.
+
+Since $\mu$ is a unit, $N_{\K/\Q}(\mu)=\pm 1$, which will be the opposite of the constant term of $f^{\mu}_{\Q}$. It follows that the product of the images of $\mu$ under the embeddings is $\pm 1=x^2a^2>0$, where $\sigma_{\pm}(\mu)=ae^{\pm iy}$, thus $a=x^{-1}$.
+
+Now, considering $\sigma_{\pm}(\mu)=x^{-1}e^{\pm iy}$, we get:
+\begin{align*}
+  |\Delta(1,\mu,\mu^2)|= &\left|\det\begin{bmatrix}
+    1 & x^2 & x^4 \\
+    1 & x^{-1}e^{iy} & (x^{-1}e^{iy})^2 \\
+    1 & x^{-1}e^{-iy} & (x^{-1}e^{-iy})^2
+  \end{bmatrix}\right|^2 \\
+  & =(2\sin(y)(x^3+x^{-3}-2\cos(y)))^2 \\
+  & =4((x^3+x^{-3})\sin(y)-\sin(2y))^2
+\end{align*}
+
+Let's consider $s(y)=(x^3+x^{-3})\sin(y)-\sin(2y)$. Keeping $x$ fixed, we will find a bound as $y$ varies (the function has maximum and minimum because it is differentiable, periodic and bounded; furthermore, this function is odd, thus maximum and minimum coincide up to sign).
+
+$s'(y)=(x^3+x^{-3})\cos(y)-2\cos(2y)=-4\cos^2(y)+(x^3+x^{-3})\cos(y)+2$.
+
+For $h$ s.t. $s'(h)=0$, we have that $\cos(h)\neq 0$ and $t=x^3+x^{-3}=4\cos(h)-\frac{2}{\cos(h)}$, therefore there $s(h)=-2\frac{\sin^3(h)}{\cos(h)}$.
+
+It follows that $(s(h))^2\leq 4(3\cos^2(h)-3+\frac{1}{\cos^2(h)})=t^2+4-4\cos^2(h)$.
+
+Fixing an $h$ which maximizes $s$, this means that $|\Delta_{\K}|\leq|\Delta(1,\mu,\mu^2)|\leq 4(x^6+6+x^{-6}-4\cos^2(h))$.
+
+Let's go back to $s'(h)=0$.
+
+The polynomial $g(y)=4y^2-(x^3+x^{-3})y-2$ has two real roots (positive discriminant), one positive and one negative (their product is $-2$), as the possible values of $\cos(h)$.
+
+Since $g(1)=2-(x^3+x^{-3})<0$, the positive one is $>1$, thus $\cos(h)<0$. Since $g(-\frac{x^{-3}}{2})=\frac{3}{2}(u^{-6}-1)\leq 0$, $\cos(h)\leq -\frac{x^{-3}}{2}$, i.e. $4\cos^2(h)\geq x^{-6}$.
+
+It follows that $|\Delta_{\K}|\leq 4(x^6+6)=4u^3+24$.
+
+
+~\\~\\
+\exercise{22}
+
+First of all, since $f=X^3+aX-1\in\Z[X]$ is s.t. it has no integer roots, for they would have to divide 1, we get that $f$ is irreducible in $\Z[X]$ and $\alpha\not\in\Z$, thus $f$ is irreducible in $\Q[X]$ and $\alpha\in\overline{\Q}\setminus\Q$.
+
+Furthermore, notice that $\alpha\in\mathcal{O}_{\K}$, where $\alpha(\alpha^2+a)=1$, hence $\alpha,\alpha^2+a\in\mathcal{O}^*_{\K}$.
+
+Since $\K=\Q(\alpha)\cong\Q[X]/(f)$ is s.t. $[\K:\Q]=3$, either $\mathcal{O}_{\K}$ (an order of rank 3) has 3 real embeddings or 1 real and 2 complex.
+
+If the real ones were 3, then all of the roots of $f$ would be real, which is absurd because $\sum_{i=1}^3 \alpha^2_i=(\sum_{i=1}^3\alpha_i)^2-2\sum_{1\leq i<j\leq 3} \alpha_i\alpha_j=0-2a=-2a<0$.
+
+It follows that $r=1$ and $s=1$. Let's call our only real embedding $\sigma$.
+
+There are no roots of unity besides $\pm 1$ in $\mathcal{O}_{\K}$ because $r>0$.
+
+By~\cite[thm. 5.13]{stev}, we get that $\mathcal{O}^*_{\K}$ has rank $r+s-1=1$, i.e. it is $=<-1>\times<\mu>$, where $\sigma(\mu)>1$.
+
+Now, we will try to find $\mathcal{O}_{\K}$.
+
+First, we will consider $R=\Z[X]/(f)\cong\Z[\alpha]\cong\Z+\Z\cdot\alpha+\Z\cdot\alpha^2$, which is contained in it and is an order of rank 3 s.t. $Q(R)=\K$.
+
+Notice that $|\Delta(R)|=|\Delta(f)|=4a^3+27$ is square-free, hence, since $\Delta(R)=[\mathcal{O}_{\K}:R]^2\cdot\Delta_{\K}$, $[\mathcal{O}_{\K}:R]=1$, thus $R=\mathcal{O}_{\K}$ and we are done.
+
+We still have to prove $\alpha$ is a fundamental unit. Since the extensions through the different roots of $f$ are isomorphic, we may suppose that $\alpha\in\R$ and therefore $\Z[\alpha]\subset\R$ (here we are choosing to work with the real embedding, that is the real representation of our ring). In particular, $\mu=\sigma(\mu)>1$.
+
+Noticing that $f(0)<0,f(1/2)>0$, we get $0<\alpha<1/2$. We shall show that $\alpha^{-1}=\alpha^2+a>2$ is a fundamental unit and the thesis will follow.
+
+Notice that, by~\cite[ex. 21]{stev}, $|\Delta_{\K}|=4a^3+27\leq 4\mu^3+24$, hence $(a^3+3/4)^{2/3}\leq\mu^2$. If we can prove that $\alpha^2+a<(a^3+3/4)^{2/3}$, i.e. $(\alpha^2+a)^3<(a^3+3/4)^2$, then we are done because it means that ours is a unit satisfying $\mu\leq\alpha^2+a<\mu^2$ and therefore $=\mu$.
+
+However, since $\alpha<1/2$, plugging in $1/2$ we get $(\alpha^2+a)^3<(1/4+a)^3$, hence we may just verify that $(1/4+a)^3\leq(a^3+3/4)^2$, which can be verified by expanding the powers and getting $a^3+3a^2/4+3a/16+1/64\leq a^6+3a^3/2+9/16$, which leads to $a^6+a^3/2+35/64\geq 3a^2/4+3a/16$. This last inequality is verified for $a\geq2$ because $a^6\geq 3a^2/4$ and $a^3/2\geq 3a/16$ for these $a$.
+
+
+\begin{thebibliography}{9}
+  \bibitem{stev}
+		P. Stevenhagen,
+		\textit{Number Rings},
+		2017.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 2}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+Please consider exercises 10 and 24.
+
+
+~\\
+\exercise{10}
+\begin{align*}
+		(H:I):J & = \{x\in\K\ |\ xJ\subset H:I\} \\
+		& = \{x\in\K\ |\ \forall j\in J\ xj\in H:I\} \\
+		& = \{x\in\K\ |\ \forall j\in J\ \forall i\in I\ xij\in H\} \\
+		& = \{x\in\K\ |\ xIJ\subset H\} \\
+		& = H:(IJ) \\ \\
+		(\bigcap_k I_k):J & = \{x\in\K\ |\ xJ\subset\bigcap_k I_k\} \\
+		& = \{x\in\K\ |\ \forall k\ xJ\subset I_k\} \\
+		& = \bigcap_k\{x\in\K\ |\ xJ\subset I_k\} \\
+		& = \bigcap_k (I_k:J) \\ \\
+		I:(\sum_k J_k) & = \{x\in\K\ |\ x(\sum_k J_k)\subset I\} \\
+		& = \{x\in\K\ |\ \sum_k xJ_k\subset I\} \\
+		& = \{x\in\K\ |\ \forall k\ xJ_k\subset I\} \\
+		& = \bigcap_k \{x\in\K\ |\ xJ_k\subset I\} \\
+		& = \bigcap_k (I:J_k)
+\end{align*}
+
+Indeed, let $x\in\K$ be s.t. $x(\sum_k J_k)\subset I$. Then, for every finite set of indexes and any choice of elements $f_{k_i}\in J_{k_i}$, $x(f_{k_1}+\cdots+f_{k_n})=xf_{k_i}+\cdots+xf_{k_n}\in I$, hence $\sum_k xJ_k\subset I$. The proof in the opposite direction follows the steps backwords.
+
+
+~\\
+\exercise{12}
+
+We know that, given a domain $R$ and fractional $R$-ideals $I$ and $J$, $r(I)=I:I$ and $I=IR$.
+
+Being a fractional ideal, $I$ is an $R$-module and the same goes for $r(I)$, hence $\forall x\in R$ we have that $xI\subset I$, therefore $R\subset r(I)$.
+Now, let $x\in r(I)$. Then, $xI\subset I$, ergo $xII^{-1}\subset II^{-1}$, i.e. $xR\subset R$. In particular, $x=x1\in R$, therefore $R=r(I)$.
+
+Now, let $R,\ R'$ be subrings (subdomains) of $\K=Q(R)=Q(R')$ (field) such that $I$ is an invertible $R$-ideal and an invertible $R'$-ideal. Earlier we proved that, given these conditions, we should have $r(I)=R$ and $r(I)=R'$. Since the definition of $r(I)=\{x\in\K\ |\ xI\subset I\}$ is independent from the subring we are considering, we get that $R=R'$.
+
+
+~\\
+\exercise{13}
+
+First, we consider the ring homomorphism $\phi:\Z[\sqrt{-19}]\rightarrow\F_2$ defined as $\phi(a+b\sqrt{-19})=a+b$. Let's prove that it is a homomorphism:
+\begin{align*}
+		\phi((a+b\sqrt{-19})+(c+d\sqrt{-19})) & = \phi((a+c)+(b+d)\sqrt{-19}) \\
+		& = (a+c)+(b+d) \\
+		& =\phi(a+b\sqrt{-19})+\phi(c+d\sqrt{-19}) \\
+		\phi((a+b\sqrt{-19})(c+d\sqrt{-19})) & =\phi((ac-19bd)+(ad+bc)\sqrt{-19}) \\
+		& = ac-19bd+ad+bc \\
+		& = ac+bd+ad+bc \\
+		& =(a+b)(c+d) \\
+		& =\phi(a+b\sqrt{-19})\phi(c+d\sqrt{-19})
+\end{align*}
+
+Notice that $\ker\phi=(2,1+\sqrt{-19})$, hence it is a maximal ideal. We observe that $\frac{1-\sqrt{-19}}{2}\in r(\mi)$ because $2\frac{1-\sqrt{-19}}{2}=1-\sqrt{-19}\in\mi$ and $(1+\sqrt{-19})\frac{1-\sqrt{-19}}{2}=10\in\mi$, therefore $\frac{1-\sqrt{-19}}{2}\in r(\mi)\neq R$.
+
+Observe that $\mi^2=(2^2,2(1+\sqrt{-19}),(1+\sqrt{-19})^2)=(4,2+2\sqrt{-19},-18+2\sqrt{-19})=(4,2+2\sqrt{-19})=2\mi$, hence, if it did have an inverse $J$, setting $R=\Z[\sqrt{-19}]$, we would have $I=IR=I^2J=2IJ=2R$, which is obviously false.
+
+Let $2R=\pid\qid$ with $\pid,\ \qid$ prime ideals. Then, $2\mi=\mi^2\subset\pid\qid\subset\pid\cup\qid$, hence $\mi^2$ is contained in $\pid$ or $\qid$; let's say $\mi^2\subset\pid$. Then, being $\pid$ prime, $\mi\subset\pid$, thus $\mi=\pid$. Now we have that $2R=\mi\qid$, hence $2\mi=\mi^2\qid$, which implies that $\qid=R$. We have arrived at a contradiction.
+
+
+~\\
+\exercise{24}
+
+Let $\alpha\not\subset\pid_i\ \forall i\leq n$. We will prove that $\alpha\not\subset\bigcup_{i=1}^n\pid_i$.
+
+For $n=1$, the thesis is trivial.
+
+Let's assume it is true for $n-1\ n>1$. Then, for any choice of $n-1$ indexes among those $n$, we may find an element $x_j\in(\alpha\setminus\bigcup_{i=1,i\neq j}^n\pid_i)$.
+
+If there is an index $j$ s.t. $x_j\not\in\pid_j$, we are done.
+
+Otherwise, having $x_j\in\pid_j\ \forall j$, consider $y=\sum_{j=1}^n\Pi_{i=1,i\neq j}^n x_i$. We have that $y\in\alpha$ and $y\not\in\pid_j\ \forall j$.
+
+Indeed, if this was not the case, then $\Pi_{i=1,i\neq j}^n x_i\in\pid_j$ for some $j$, hence $x_i\in\pid_j$ for some $i\neq j$ because $\pid_j$ is prime, which is absurd.
+
+\end{document}

@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\ord}{ord}
+
+\begin{document}
+
+\title{Elliptic Curves - Assignment 4}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{2}
+
+\begin{proof}
+	$(a)$ First of all, we know that $\wp(z)=z^{-2}+\sum_{\omega\in\Lambda\setminus\{0\}}((z-\omega)^{-2}-\omega^{-2})$ is even and $\wp'\in\C(\Lambda)$.
+	
+	Notice that $\wp'$ has order 3, hence it has exactly 3 zeroes in the fundamental parallelogram. Since for $\omega\in\Lambda$ we have $-\omega\in\Lambda$, it follows that $\wp'(z)=\wp'(z-\omega)=-\wp'(-z+\omega)$ for every $z\in\C$. Now, choosing $z_i=\omega_i/2$ for $i=1,2$, we see that $\wp'(z_i)=-\wp'(-z_i+\omega_i)=-\wp'(z_i),\ \wp'(z_1+z_2)=-\wp'(-(z_1+z_2)+(\omega_1+\omega_2))=-\wp'(z_1+z_2)$, hence $\wp'(z_i)=\wp'(z_1+z_2)=0$.
+	
+	The fact that their translates by $\omega\in\Lambda$ are also zeroes comes from the fact that it is an elliptic function.
+	
+	Also, since it has order 3, it has precisely three zeroes in the fundamental parallelogram, i.e. $z_1,\ z_2$ and $z_1+z_2$. Given another zero $z$, by traslating it to $z+\omega$ in the fundamental parallelogram, we see that $z+\omega\in\{z_1,z_2,z_1+z_2\}$, thus $z\in\{z_1,z_2,z_1+z_2\}-\omega$.
+\end{proof}
+
+\begin{proof}
+	$(b)$ We know that $\wp$ satisfies the following equation:$$(\wp')^2=4\wp^3-g_2\wp-g_3$$
+	
+	We have then the following equality for some constants $e_i$:$$(\wp')^2=4(\wp-e_1)(\wp-e_2)(\wp-e_3)$$
+	
+	Observe that $\wp(z_1)\neq\wp(z_2),\ \wp(z_1)\neq\wp(z_1+z_2),\ \wp(z_2)\neq\wp(z_1+z_2)$. Indeed, consider $f(z):=\wp(z)-\wp(z_i)$, which has order 2. Since $f(z_i)=f'(z_i)=0$, it has a double zero at $z_i$, which will then be its unique zero in the fundamental parallelogram. It follows that $f(z_j)=\wp(z_j)-\wp(z_i)\neq 0$, thus $\wp(z_i)\neq\wp(z_j)$. In the same way, we get the remaining inequalities.	
+	
+	It follows that $e_i=\wp(z_i),\ e_3=\wp(z_1+z_2)$ in the previous notation, for the $z_i$ and $z_1+z_2$ are precisely (up to traslation by $\omega\in\Lambda$) the zeroes of $\wp'$ in a fundamental parallelogram by $(a)$ and these $e_i$ are the only ones making the right side of the equation $=0$ at the same time.
+\end{proof}
+
+
+~\\
+\exercise{4}
+
+\begin{proof}
+	$(a)$ Given a lattice $\Lambda\subset\C$, let $z_1,z_2\in\C$ be s.t. $z_1,z_2,z_1-z_2,z_1+z_2,2z_1+z_2,z_1+2z_2\not\in\Lambda$. In particular, $z_1\neq\pm z_2$, for otherwise $z_1+z_2$ or $z_1-z_2\in\Lambda$.
+	
+	Consider now $f=\wp'-a\wp-b$ and suppose that $f(z_i)=0$ for both $i$.
+        We get that $\wp'(z_i)-a\wp(z_i)-b=0\ (*)$. Since $z_1-z_2\not\in
+        \Lambda$, $\wp(z_1)\neq\wp(z_2)$, thus from the previous equations we
+        have $a=\frac{\wp'(z_1)-\wp'(z_2)}{\wp(z_1)-\wp(z_2)}$.
+	
+	We also get from $(*)$ for $i=1$ that:$$b=\wp'(z_1)-a\wp(z_1)=\wp'(z_1)-\frac{\wp'(z_1)-\wp'(z_2)}{\wp(z_1)-\wp(z_2)}\wp(z_1)=\frac{\wp(z_1)\wp'(z_2)-\wp(z_2)\wp'(z_1)}{\wp(z_1)-\wp(z_2)}$$
+	
+	We have found a pair $a,b\in\C$ for which $f=\wp'-a\wp-b$ has zeroes $z_1,z_2$ by construction. Since every such pair has to satisfy the same equations, we have its uniqueness.
+\end{proof}
+
+\begin{proof}
+	$(b)$ Let $a,b\in\C$ be the coefficients we have previously found, $f$
+        the function we studied. We have that $f$ is an elliptic function in $\C(\Lambda)$ and $z_1,z_2,z_1+z_2$ identify distinct points in $\C/\Lambda$, for otherwise their sums/differences would lie in $\Lambda$.
+        
+        Remember that $\sum_{z\in\C/\Lambda} \ord_f(z)\cdot z=0$ with $f$ of order
+        3. Also notice that, if $b\neq 0$, $\ord_f(0)=\min\{\ord_{\wp'}(0),\ord_{\wp}(0),
+        \ord_{b}(0)\}=-3$ and in the same way, for $b=0$, $\ord_f(0)=-3$, thus
+        $f$ will not have other poles in the fundamental parallelogram and the
+        contribution of the only one to the previously mentioned sum will be null.
+
+        The $z_i$ are zeroes of order 1, for otherwise one of them would have
+        order 2 and therefore $\ord_f(z_1)\cdot z_1+\ord_f(z_2)\cdot z_2=0$, which
+        would imply that $2z_1+z_2$ or $z_1+2z_2$ lies in $\Lambda$. 	
+	We have then that there is a third element $z_3\in\C/\Lambda$ with
+        $\ord_f(z_3)=1$ and s.t. $\ord_f(z_1)\cdot z_1+\ord_f(z_2)\cdot
+        z_2+\ord_f(z_3)\cdot z_3=z_1+z_2+z_3=0$, thus $z_3=-z_1-z_2$ is another
+        zero of $f$ with order 1.
+\end{proof}
+
+\begin{proof}
+	$(c)$ Remember that, for the previously found $a,b\in\C$, we have $\wp'(z_i)=a\wp(z_i)+b$. Also, from the differential equation mentioned we have that $(\wp')^2=4\wp^3-g_2\wp-g_3$.
+	
+	Notice that, writing $y=ax+b$, the points $(\wp(z_i),\wp'(z_i))$ and
+        $(\wp(z_3),\wp'(z_3))=(\wp(-z_3),\wp'(z_3))$ lie on this line. We only have to study the intersection between it and the cubic $y^2=4x^3-g_2x-g_3$.
+	
+	By substituting, we get that $4x^3-a^2x^2+(2ab-g_2)x+(b-g_3)=0$, which will then have roots $\wp(z_i),\wp(-z_3)$. Applying Vieta's formulas we get that $\wp(z_1)+\wp(z_2)+\wp(-z_3)=\frac{a^2}{4}$.
+	
+	From $(a)$, we know that $a=\frac{\wp'(z_1)-\wp'(z_2)}{\wp(z_1)-\wp(z_2)}$ and, putting together these two equalities, we have the following:$$\wp(z_1+z_2)+\wp(z_1)+\wp(z_2)=\frac{1}{4}\left(\frac{\wp'(z_1)-\wp'(z_2)}{\wp(z_1)-\wp(z_2)}\right)^2$$
+\end{proof}
+
+\printbibliography
+
+\end{document}

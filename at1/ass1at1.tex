@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{faktor}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Topology 1 - Assignment 1}
+
+\author{M. Durante, 2303760, Leiden University\\T.A.H.A Quemener, 2304252, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{1}
+
+We have by definition that $H_0(X,\F_2)=\left(\faktor{\F_2\left[ \,S(X)_0\right]\,}{\Ima(\partial_1)}\right)$.\\
+First we will compute $\F_2\left[ \,S(X)_0\right]$. Since $\Delta^0$ is a point it is trivial that the two constant maps from $\Delta^0$ to $X=\left\{ a,b \right\} $ are continuous. These two maps will be called $a$ and $b$.\\
+We have that $\F_2\left[ \,S(X)_0\right]$ is constituted by the linear combinations of $a$ and $b$ with coefficients in $\F_2$, thus $\F_2\left[ \,S(X)_0\right]=\left\{0,1a,1b,1a+1b\right\}$.
+
+Now we will compute $\Ima\partial_1$.\\
+We have that $\partial_1: \F_2\left[ \,S(X)_1\right] \rightarrow$ $\F_2\left[ \,S(X)_0\right]$, $f\mapsto d_0f-d_1f$. Now we have to work with the elements of $\F_2\left[ \,S(X)_1\right]$, but we only need to understand how these continuous maps behave on the extremities of the 1-simplex.
+Focussing our attention there, we see that there are two relevant classes of continuous maps: the ones having different values at $e_0$ and $e_1$ and the closed paths. Let $\Psi$ be a representative of the first class, $\Phi$ of the second one. All the elements are linear combinations of these kinds of maps, hence we may just look at the elements $s=1\Psi$ and $s'=1\Phi$.
+Looking at the definition of $\partial_1$, we have that $\partial_1(s')=1(\Phi\circ\delta_0) - 1(\Phi\circ\delta_1)=0$ (they are costant 1-simpleces going to the same point) whereas $\partial_1(s)=1(\Psi\circ\delta_0) - 1(\Psi\circ\delta_1)=1a+1b$ (here the signs do not matter since the coefficients lay in $\F_2$ and the coefficients of $a$ and $b$ do not interact because they are different simpleces).\\
+Finally, we have that $\Ima(\partial_1)=\{0,1a+1b\}$.\\
+From this, we get that $H_0(X,\F_2)=\left(\faktor{\F_2\left[ \,S(X)_0\right]\,}{\Ima(\partial_1)}\right) \,= \left(\faktor{\left\{0,1a,1b, 1a+1b\right\}}{\{0,1a+1b\}}\right)\cong\F_2$.
+
+
+~\\
+\exercise{2}
+
+Let's define the 2-simpleces first. We have (taking the freedom of omitting the last coordinate, which is uniquely defined as $t_2=1-t_0-t_1$):
+\begin{align*}
+		\alpha_{p,q}: \Delta^2 & \rightarrow \R^2 \\
+		(t_0,t_1) & \mapsto (p+t_1,q+t_0) \\
+		\beta_{p,q}: \Delta^2 & \rightarrow \R^2 \\
+		(t_0,t_1) & \mapsto (p+1-t_0,q+t_0+t_1)
+\end{align*}
+Let $s_{p,q}:=e\alpha_{p,q}+f\beta_{p,q}$. Now, we will compute the boundaries of the 2-simpleces (conceding ourselves to the same leisure as before).
+$$
+\begin{cases}
+		\alpha_{p,q}\delta_0(t_0)=(p+t_0,q) \\
+		\alpha_{p,q}\delta_1(t_0)=(p,q+t_0) \\
+		\alpha_{p,q}\delta_2(t_0)=(p+1-t_0,q+t_0) \\
+		\beta_{p,q}\delta_0(t_0)=(p+1,q+t_0) \\
+		\beta_{p,q}\delta_1(t_0)=(p+1-t_0,q+t_0) \\
+		\beta_{p,q}\delta_2(t_0)=(p+1-t_0,q+1)
+\end{cases}
+$$
+Now, knowing that $\partial_2(s_{p,q})=e(\alpha_{p,q}\delta_0-\alpha_{p,q}\delta_1+\alpha_{p,q}\delta_2)+f(\beta_{p,q}\delta_0-\beta_{p,q}\delta_1+\beta_{p,q}\delta_2)$, by setting $e=f=1$, since $\alpha_{p,q}\delta_2=\beta_{p,q}\delta_1$ and $\alpha_{p,q}\delta_0=a,\ \alpha_{p,q}\delta_1=d,\ \beta_{p,q}\delta_0=b$ and $\beta_{p,q}\delta_2=c$, we get $s_{p,q}=1\alpha+1\beta$ and $\partial_2(s_{p,q})=1a+1b+1c-1d$, which satisfy the required conditions.
+
+The 2-simplex $s_{0,0}$ is just a special case of the previous one, found setting $p=q=0$, hence I may just write $s_{0,0}=1\alpha_{0,0}+1\beta_{0,0}$ and $\partial_2(s_{0,0})=1a+1b+1c-1d=1[(0,0),(1,0)]+1[(1,0),(1,1)]+1[(1,1),(0,1)]-1[(0,0),(0,1)]$ where $[P,Q]$ is the 1-simplex constituted by the oriented segment going from $P$ to $Q$ and which runs along it with constant speed.
+
+Let's consider$$s=\partial_2(\sum_{p,q=0}^7 s_{p,q})$$
+Now, this element lies in $\Ima\partial_2$, hence this set constitutes its homology class (i.e. its class in $H_1(\R^2,\Z)=\ker\partial_1/\Ima\partial_2$, where it represents the 0-element). If what is required is finding an element of this class which is non-zero over only four simplices, then any $\partial_2(s_{p,q})$ is a valid one for every choice of $p$ and $q$. On the other hand, if we have to find an element in that class which takes only four distinct non-zero values, then we may consider $s'=\partial_2(s_{0,0}+2s_{0,1})=\partial_2(s_{0,0})+2\partial_2(s_{0,1})$, which takes values $1$ on $[(0,0),(1,0)],\ [(1,0),(1,1)]$ and $[(1,1),(0,1)]$, $-1$ on $[(0,0),(0,1)]$, 2 on $[(0,1),(1,1)],\ [(1,1),(1,2)]$ and $[(1,2),(0,2)]$ and $-2$ on $[(0,1),(0,2)]$, while 0 elsewhere. These are valid representatives of the 0-element in $H_1(\R^2,\Z)$.
+
+\end{document}

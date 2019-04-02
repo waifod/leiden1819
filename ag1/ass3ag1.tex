@@ -1,0 +1,243 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+\newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"]}
+\newcommand\dhrightarrow{%
+		\mathrel{\ooalign{$\rightarrow$\cr%
+		$\mkern3.5mu\rightarrow$}}
+}
+
+\newcommand\dhxrightarrow[2][]{%
+		\mathrel{\ooalign{$\xrightarrow[#1\mkern4mu]{#2\mkern4mu}$\cr%
+		\hidewidth$\rightarrow\mkern4mu$}}
+}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Op}{Open}
+
+\begin{document}
+
+\title{Algebraic Geometry 1 - Assignment 3}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+Disclaimer: the letters $U,V,W$ will always indicate open sets contained in the specified topological spaces.
+
+
+~\\
+\exercise{4.6.25}
+
+$(i)$ For any $U\subset X$ set $\ker(f)(U):=\ker[\mathcal{F}(U)\xrightarrow{f(U)}\mathcal{G}(U)]$, $\Ima(f)^p(U):=\Ima[\mathcal{F}(U)\xrightarrow{f(U)}\mathcal{G}(U)]$. They are subgroups of abelian groups, hence they are abelian groups themselves.
+
+For any $V\subset U\subset X$, let the maps $res_{U,V}$ from $\ker(f)(U)$ to $\ker(f)(V)$ and from $\Ima(f)^p(U)$ to $\Ima(f)^p(V)$ be the restrictions of the maps $res^{\mathcal{F}}_{U,V}$ from $\mathcal{F}(U)$ to $\mathcal{F}(V)$ and $res^{\mathcal{G}}_{U,V}$ from $\mathcal{G}(U)$ to $\mathcal{G}(V)$ respectively.
+
+The morphisms collected in $\ker(f)$ are well defined because $f$ is a natural transformation, hence, if $g\in\ker(f)(U)$, $0=(res^{\mathcal{G}}_{U,V}\circ f(U))(g)=(f(V)\circ res^{\mathcal{F}}_{U,V})(g)$, and therefore $res^{\mathcal{F}}_{U,V}(g)\in\ker(f)(V)$.
+
+Similarly, for $\Ima(f)^p$, if $h\in\Ima(f)^p(U)$, then there exists $g\in\mathcal{F}(U)$ s.t. $f(U)(g)=h$, hence $(f(V)\circ res^{\mathcal{F}}_{U,V})(g)=(res^{\mathcal{G}}_{U,V}\circ f(U))(g)=res^{\mathcal{G}}_{U,V}(h)\in\Ima(f)^p(V)$.
+
+The condition that for a third set $W\subset V\subset U\subset X$ we have $res_{U,W}=res_{V,W}\circ res_{U,V}$ comes from the fact that it holds for the original morphisms, of which they are just restrictions having a well defined composition. For the same reason, they are homomorphisms of groups and $res_{U,U}$ is the identity automorphism.
+\[
+\begin{tikzcd}
+		\ker(f)(U)\subset\mathcal{F}(U)\arrow{r}{f(U)}
+		\arrow{d}{res^{\mathcal{F}}_{U,V}}
+		&\mathcal{G}(U)\arrow{d}{res^{\mathcal{G}}_{U,V}}\supset\Ima(f)^p(U) \\
+		\ker(f)(V)\subset\mathcal{F}(V)\arrow{r}{f(V)}
+		&\mathcal{G}(V)\supset\Ima(f)^p(V)
+\end{tikzcd}
+\]
+
+Then, the collections of groups with the induced restriction homomorphisms $\ker(f)$ and $\Ima(f)^p$ are presheafs defined on $X$.
+
+Now, we will prove that $\ker(f)$ is a sheaf.
+
+Since $\mathcal{F}(\emptyset)=0$, $\ker(f)(\emptyset)=0$.
+
+Now, given $U\subset X$, let $(U_i,g_i)_{i\in I}$ be an open cover with a collection of elements of the various $\ker(f)(U_i)\subset\mathcal{F}(U_i)$ agreeing on the intersections. By the glueing axioms, there exists a unique element $g\in\mathcal{F}(U)$ s.t. $g|_{U_i}=g_i$ for every $i$.
+
+Let's now consider $f(U)(g)\in\mathcal{G}(U)$. By the commutativity of the diagram, $f(U)(g)|_{U_i}=f(U_i)(g|_{U_i})=0$ and, by the glueing axioms, since it agrees with $0\in\mathcal{G}(U)$ on every $U_i$, $f(U)(g)=0$, hence $g\in\ker(f)(U)$.
+
+Now, suppose that $g,g'\in\ker(f)(U)$ are s.t., given an open cover $(U_i)_{i\in I}$ of $U$, $g|_{U_i}=g'|_{U_i}$. Then, since they are elements of $\mathcal{F}(U)$ as well and their restrictions lie in $\mathcal{F}(U_i)$, by the glueing axioms we get that $g=g'$ in $\mathcal{F}(U)$ and therefore in $\ker(f)(U)$.
+
+$(ii)$ Since for every set $U\subset X$ we have that $\Ima(f)^p(U)\subset\mathcal{G}(U)$, we shall consider the inclusion morphism $\Ima(f)^p\xrightarrow{j}\mathcal{G}$ sending $g\in\Ima(f)^p(U)$ to $g\in\mathcal{G}(U)$.
+
+We have to show that it is a natural trasformation.
+
+To do this, consider another set $V\subset U\subset X$. Then, since these $j(U)$ and $j(V)$ are just inclusions, given $g\in\Ima(f)^p(U)$, trivially $j(V)(g|_{V})=g|_{V}=j(U)(g)|_{V}$.
+
+Furthermore, for the same reason, $j(U)$ it is trivially a group homomorphism as well.
+
+Now we know that, given the sheafification of $\Ima(f)^p$, $(\Ima(f),u)$, $\Ima(f)^p\xrightarrow{j}\mathcal{G}$ factorizes uniquely through $u$. Let $h$ be the morphism of sheaves $\Ima(f)\xrightarrow{h}\mathcal{G}$ s.t. $j=hu$. This will be our candidate and the following will be the final commutative diagram (for the sake of simplicity, I am drawing it as if $f$ was a morphism between $\mathcal{F}$ and $\Ima(f)^p$, as the latter is the domain of $u$).
+
+\[
+  \begin{tikzcd}
+    \mathcal{F}(U)\arrow{d}{|_V}\arrow{r}{f(U)}
+    &\Ima(f)^p(U)\arrow{d}{|_V}\arrow{r}{u(U)}\arrow[bend left, swap]{rr}{j(U)}
+    &\Ima(f)(U)\arrow{d}{|_V}\arrow{r}{h(U)}
+    &\mathcal{E}(U)\subset\mathcal{G}(U)\arrow{d}{|_V} \\
+    \mathcal{F}(V)\arrow{r}{f(V)}
+    &\Ima(f)^p(V)\arrow{r}{u(V)}\arrow[bend right]{rr}{j(V)}
+    &\Ima(f)(V)\arrow{r}{h(V)}
+    &\mathcal{E}(V)\subset\mathcal{G}(V)
+  \end{tikzcd}
+\]
+
+First, we have to find $h$ by constructing it. We see that the natural way to do this is sending an element $s:U\rightarrow\sqcup_{x\in U} \Ima(f)^p_x$ to an element $g\in\mathcal{G}(U)$ s.t. $s(x)=g_x$ for every $x\in U$.
+
+Assuming that for every $s\in\Ima(f)(U)$ there exists such a $g$, this $g$ is unique: indeed, if $g_x=g'_x$ for every $x\in U$, then for every $x\in U$ the pairs $(U,g), (U,g')$ are s.t. there exists a set $U_x\subset U$ containing $x$ s.t. $g|_{U_x}=g'|_{U_x}$, i.e. they agree locally. Since the $U_x$ cover $U$, by the glueing axioms $g=g'$ (actually, we may have just mentioned~\cite[ex. 4.6.21]{edix}).
+
+Notice that, for $g\in\Ima(f)^p(U)\subset\mathcal{G}(U)$, since $u(g)=s_g$, where $s_g(x)=g_x$ for every $x\in U$, we have $h(U)(s_g)=g$, hence $j=hu$ as we desired. As long as we can prove that this construction is a morphism, we are done showing that it is the one we have mentioned earlier (and hence the label is appropriate).
+
+Now we prove that all of the other elements $s\in\Ima(f)(U)$ have an image under $h$. Indeed, consider $x\in U$ and $(U_x,g^x)$ s.t. $x\in U_x\subset U$, $g^x\in\Ima(f)^p(U_x)\subset\mathcal{G}(U_x)$ and, for all $y\in U_x$, $s(y)=g^x_y$ (this is possible because of the definition of an element of $\Ima(f)(U)$).
+
+Then, since the $(U_x)_{x\in U}$ cover $U$ and, for every $w\in U_x\cap U_y$, $x,y\in U$, $g^x_w=s(w)=g^y_w$, and therefore $g^x|_{U_x\cap U_y}=g^y|_{U_x\cap U_y}$, by the glueing axioms there is a unique $g\in\mathcal{G}(U)$ s.t. $g|_{U_x}=g^x$ and hence $g_x=s(x)$ for every $x\in U$ (this comes from the fact that, for every $y\in V\subset U$, $(U,g)\sim_y (V,g|_V)$).
+
+By slightly modifying the argument, it follows as well that an element $g\in h(U)(\Ima(f)(U))$ can be obtained by glueing together elements in the $\Ima(f)^p(U_i)$, where $(U_i)_{i\in I}$ is an open cover of $U$. Indeed, let $g\in h(U)(\Ima(f)(U))$. Then, we have an $s\in\Ima(f)(U)$ s.t. $h(U)(s)=g$, thus, since by definition for every $x\in U$ we have a $g^x\in\Ima(f)^p(U_x)\subset\mathcal{G}(U_x)$ with $x\in U_x\subset U$ s.t., for every $y\in U_x$, $s(y)=g^x_y=g_y$, $g^x=g|_{U_x}$, hence the $g^x$ agree on the intersections and their glueing is precisely $g$.
+
+Another way to say this is that locally $g$ is the image of some elements of the various $\Ima(f)^p(U_i)$.
+
+We have finished proving that $h$ is well defined.
+
+We still have to prove that $h$ is a natural transformation from $\Ima(f)$ to $\mathcal{G}$. First, we show that it commutes with the restriction homomorphisms: indeed, let $s\in\Ima(f)(U)$. Then, by definition, $h(U)(s)$ is an element $g\in\mathcal{G}(U)$ s.t. $s(x)=g_x$ for all $x\in U$. Let $V\subset U$. We have that, for all $x\in V$, $s|_{V}(x)=s(x)$, hence the image of $s|_{V}$ defines the same germ as $g$ (and therefore $g|_V$, since $(U,g)\sim_x (V,g|_V)$ for every $x\in V$) on all points in $V$, thus $h(U)(s)|_V=g|_{V}=h(V)(s|_{V})$.
+
+Now, we show that $h(U)$ is a homomorphism of abelian groups.
+
+Indeed, let $s,s'\in\Ima(f)(U)$. Then, since for every $x\in U$ we have pairs $(U_x,t^x),(U'_x,t'^x)$ s.t., for every $y\in U_x,y'\in U'_x$, $s(y)=t^x_y,s'(y')=t'^x_{y'}$, and hence, setting $V_x=U_x\cap U'_x$, noticing that $x\in V_x$, $s|_{V_x}=u(V_x)(t^x|_{V_x}),s'|_{V_x}=u(V_x)(t'^x|_{V_x})$, we have that $(s+s')|_{V_x}=s|_{V_x}+s'|_{V_x}=u(V_x)(t^x|_{V_x})+u(V_x)(t'^x|_{V_x})=u(V_x)(t^x|_{V_x}+t'^x|_{V_x})$.
+
+Now, since $j=hu$, by the commutativity of the diagrams, $h(U)(s+s')|_{V_x}=h(V_x)((s+s')|_{V_x})=j(V_x)(t^x|_{V_x}+t'^x|_{V_x})=j(V_x)(t^x|_{V_x})+j(V_x)(t'^x|_{V_x})=h(V_x)(s|_{V_x})+h(V_x)(s'|_{V_x})=h(U)(s)|_{V_x}+h(U)(s')|_{V_x}=(h(U)(s)+h(U)(s'))|_{V_x}$. Since the $V_x$ form an open cover of $U$ and $h(U)(s+s')$ agrees with $h(U)(s)+h(U)(s')$ on every $V_x$, we have by the glueing axioms that $h(U)(s+s')=h(U)(s)+h(U)(s')$.
+
+The injectivity of each $h(U)$ comes for free: indeed, if $s,s'\in\Ima(f)(U)$ have both image $g\in\mathcal{G}(U)$, then, for every $x\in U$, $s(x)=g_x=s'(x)$, i.e. they coincide at every point of $U$, hence $s=s'$.
+
+Now we prove that the image of $\Ima(f)$ under $h$ is a subsheaf of $\mathcal{G}$. We shall denote $h(U)(\Ima(f)(U))$ and the associated sheaf by $\mathcal{E}(U)$ and $\mathcal{E}$.
+
+First of all, the restriction morphisms $res_{U,V}$ induced by the restrictions of the $res^{\mathcal{G}}_{U,V}$ are still well defined morphisms: indeed, given $g\in\mathcal{E}(U)$, $s\in\Ima(f)(U)$ s.t. $h(U)(s)=g$, $res_{U,V}(g)=res^{\mathcal{G}}_{U,V}(g)=(res^{\mathcal{G}}_{U,V}\circ h(U))(s)=(h(V)\circ res_{U,V})(s)=h(V)(s|_V)\in \mathcal{E}(V)$. Being the restrictions of some group homomorphisms to subgroups, they still are group homomorphisms and $res_{U,U}$ is the identity automorphism.
+
+The fact that $\mathcal{E}(\emptyset)=0$ comes from the fact that $\mathcal{E}(\emptyset)\subset\mathcal{G}(\emptyset)=0$.
+
+Let now $g,g'\in\mathcal{E}(U)$ be s.t., given an open cover $(U_i)_{i\in I}$ of $U$, $g|_{U_i}=g'|_{U_i}$. Since they both belong to $\mathcal{G}(U)$, $g=g'$ by the glueing axioms.
+
+Let $(U_i,g_i)_{i\in I}$ be the usual collection, $g_i\in\mathcal{E}(U_i)\subset\mathcal{G}(U_i)$. We know that there is a unique $g\in\mathcal{G}(U)$ s.t. $g|_{U_i}=g_i$ for all $i$. Consider for each $g_i$ the unique $s_i\in\Ima(f)(U_i)$ s.t. $h(U_i)(s_i)=g_i$. Glueing the $s_i$, we get a unique $s\in\Ima(f)(U)$ s.t. $s|_{U_i}=s_i$ for all $i$. By naturality, $h(U)(s)|_{U_i}=h(U_i)(s|_{U_i})=h(U_i)(s_i)=g_i$, hence $h(U)(s)$ agrees with $g$ on every $U_i$ and, by the glueing axioms, $h(U)(s)=g$ in $\mathcal{G}(U)$, hence $g\in\mathcal{E}(U)$.
+
+It follows that $\mathcal{E}$ is a subsheaf of $\mathcal{G}$.
+
+Now, given the restriction of $h$ $\Ima(f)\xrightarrow{h'}\mathcal{E}$, since it is naturally again a morphism of sheaves of abelian groups, we only have to construct the inverse morphism $l$. We know that this restriction is a bijection for every $U\subset X$, hence we have only one way to do it, i.e. sending $g\in\mathcal{E}(U)$ to $s:U\rightarrow\sqcup_{x\in U} \Ima(f)^p_x$ s.t. $s(x)=g_x$ for every $x\in U$. This is clearly well defined since, if $s,s'\in\Ima(f)(U)$ are s.t. $s(x)=g_x=s'(x)$ for every $x\in U$, then $s=s'$. Continuing, every element $g\in\mathcal{E}(U)$ is the image of some $s\in\Ima(f)(U)$, hence by construction $s(x)=g_x$ for every $x\in U$ and therefore $l(U)(g)=s$.
+
+Furthermore, since $h(U)(s)$ is the element $g\in\mathcal{E}(U)$ s.t. $s(x)=g_x$ for every $x\in U$, by definition $l(U)(h(U)(s))=l(U)(g)=s$. In the same way, $h(U)(l(U)(g))=h(U)(s)=g$, thus we only have to show that $l$ makes the diagrams commute and each $l(U)$ is a group homomorphism.
+
+Indeed, let $V\subset U\subset X$, $g\in\mathcal{E}(U)$, $l(U)(g)=s\in\Ima(f)(U)$. Then, $l(U)(g)|_V=s|_V$, and, since $g|_V$ is s.t. $(g|_V)_x=g_x$ at every $x\in V$, we see that $l(V)(g|_V)(x)=(g|_V)_x=g_x=s(x)=s|_V(x)$ at every $x\in V$, hence $l(V)(g|_V)=l(U)(g)|_V$.
+
+Now, let $g,g'\in\mathcal{E}(U)$, $s,s'\in\Ima(f)(U)$ be s.t. $h(U)(s)=g, h(U)(s')=g'$. Then, $l(U)(g+g')=l(U)(h(U)(s)+h(U)(s'))=l(U)(h(U)(s+s'))=s+s'=l(U)(g)+l(U)(g')$.
+
+This concludes the proof.
+
+$(iii)$ First we prove that, given a morphism $\mathcal{E}\xrightarrow{\phi}\mathcal{F}$, $x\in U\subset X$ and $f\in\mathcal{E}(U)$, $\phi_x(f_x)=\phi(U)(f)_x$.
+
+Remember that, given $f_x=[(U,f)]\in\mathcal{F}_x$, we have by definition $\phi_x(f_x)=\phi_x([(U,f)])=[(U,\phi(U)(f))]\in\mathcal{F}_x$. But this is precisely the equivalence class at $x$ of $\phi(U)(f)$ with its corresponding open set, i.e. $\phi(U)(f)_x$, thus we have the following commutative diagram:
+\[
+  \begin{tikzcd}
+    \mathcal{F}(U) \arrow{r}{\phi(U)} \arrow{d}{x}
+    & \mathcal{E}(U) \arrow{d}{x} \\
+    \mathcal{F}_x \arrow{r}{\phi_x}
+    & \mathcal{E}_x
+  \end{tikzcd}
+\]
+
+Now, consider a sequence of sheaves of abelian groups $0\rightarrow\mathcal{E}\xrightarrow{\phi}\mathcal{F}\xrightarrow{\psi}\mathcal{G}\rightarrow 0$ s.t. at every $x\in X$ the sequence $0\rightarrow\mathcal{E}_x\xrightarrow{\phi_x}\mathcal{F}_x\xrightarrow{\psi_x}\mathcal{G}_x\rightarrow 0$ is exact.
+
+We will show that the original sequence is exact by proving a slightly more general result.
+
+Consider a sequence of sheaves of abelian groups $\mathcal{A}\xrightarrow{\phi}\mathcal{B}\xrightarrow{\psi}\mathcal{C}$ defined on $X$ s.t. for every $x\in X$ the sequence $\mathcal{A}_x\xrightarrow{\phi_x}\mathcal{B}_x\xrightarrow{\psi_x}\mathcal{C}_x$ is exact at $\mathcal{B}_x$. We will show that the original sequence is exact at $\mathcal{B}$.
+
+Let now $b\in\mathcal{B}(U)$ be s.t. there exists some $s\in\Ima(\phi)(U)$ with $h(U)(s)=b$, where $h$ was defined before. Then, for every $x\in U$ there is some $U_x\subset U$ with $a^x\in\mathcal{A}(U_x)$ s.t. $h(U_x)(s|_{U_x})=\phi(U_x)(a^x)=b|_{U_x}$. Furthermore, $\phi_x(a^x_x)=\phi(U_x)(a^x)_x=(b|_{U_x})_x=b_x$ and, by exactness, $\psi_x(b_x)=0\in\mathcal{C}_x$. Since $\phi(U)(b)\in\mathcal{C}(U)$ defines all points $x\in U$ the same germ as $0\in\mathcal{C}(U)$, $\psi(U)(b)=0$, hence $b\in\ker(\psi)(U)$.
+
+Let $b\in\ker(\psi)(U)\subset\mathcal{B}(U)$. Then, for every $x\in U$, we have that $\psi_x(b_x)=\psi(U)(b)_x=0_x=0$, hence, by exactness, there exists some $U_x\subset X$, $a^x\in\mathcal{A}(U_x)$ s.t. $\phi(U_x)(a)_x=\phi_x(a^x_x)=b_x$. This implies that there is a $V_x\subset U\cap U_x$ with $x\in V_x$ and $b|_{V_x}=\phi(U_x)(a^x)|_{V_x}=\phi(V_x)(a^x|_{V_x})$, i.e. $b$ locally belongs to some $\Ima(\phi)^p(V_x)$. It follows that $b\in h(U)(\Ima(\phi)(U))$.
+
+Since the induced sequence we were asked to study is exact at $\mathcal{F}_x,\mathcal{E}_x$ and $\mathcal{G}_x$ for every $x\in X$, the original one is exact at $\mathcal{F},\mathcal{E}$ and $\mathcal{G}$ and is therefore exact.
+
+Now, assume conversely that the aforementioned sequence of sheaves of abelian groups is exact at $\mathcal{B}$. This means that $\Ima(\phi)\cong h(\Ima(\phi))=\ker(\psi)$, where all three are sheaves of abelian groups and they are isomorphic by $(i)$ and $(ii)$ through the previously constructed morphisms.
+
+Now, since the stalkification is a functor by~\cite[ex. 4.6.22]{edix} and $j=hu$, given that $u_x$ is an isomorphism from $\Ima(\phi)^p_x$ to $\Ima(\phi)_x$, we have that $\Ima(\phi)_x=j_x(\Ima(\phi)^p_x)=h_x(u_x(\Ima(\phi)^p_x))=h_x(\Ima(\phi)_x)=\ker(\psi)_x$, hence the induced sequence on the stalks is exact for every $x\in X$.
+
+Now I give a proof which does not rely on $u_x$ being an isomorphism.
+
+Let $b_x=[(U,b)]\in\ker(\psi_x)$. Then, $[(U,\psi(U)(b)]=0$, i.e. there is some neighborood of $x$, $V\subset U$, where $\psi(V)(b|_V)=\psi(U)(b)|_V=0$. This means that $b|_V\in\ker(\psi)(V)$, therefore locally it is the image of some $a_i\in\mathcal{A}(V_i)$, $V_i\subset V$, thus $\phi(V_i)(a_i)=b|_{V_i}$. It follows that, considering the $i$ s.t. $x\in V_i$, $\phi_x((a_i)_x)=b_x$.
+
+Now, consider $a_x=[(U,a)]\in\mathcal{A}_x$. Then, $\psi_x(\phi_x(a_x))=\psi_x([(U,\phi(U)(a))])=[(U,\psi(U)(\phi(U)(a)))]=[(U,0)]=0$.
+
+By the generality of $x$, we may conclude.
+
+Since the sequence we were interested in is exact at $\mathcal{F},\mathcal{E}$ and $\mathcal{G}$, for all $x\in X$ the sequence of stalks is exact at $\mathcal{F}_x,\mathcal{E}_x$ and $\mathcal{G}_x$ and hence it is exact for all $x\in X$.
+
+~\\
+\exercise{5.5.2}
+
+$(i)$ Since they are affine, we can assume that $X\subset\A^n_{\K},Y\subset\A^m_{\K}$ and they are closed in their respective affine spaces. We have that $A(X):=\K[x_1,\ldots,x_n]/\I(X)\cong\mathcal{O}_X(X),A(Y):=\K[y_1,\ldots,y_m]/\I(Y)\cong\mathcal{O}_Y(Y)$. This induces the unique $\K$-algebra homomorphism $A(Y)\dhxrightarrow{g} A(X)$ making the following diagram commute:
+\[
+\begin{tikzcd}
+		\mathcal{O}_Y(Y) \arrow[above,two heads]{r}{f^*}
+		\isoarrow{d}
+		&\mathcal{O}_X(X) \isoarrow{d} \\
+		A(Y) \arrow[dotted,two heads]{r}[description]{g}
+		&A(X)
+\end{tikzcd}
+\]
+
+Being $A(X)$ reduced, $\ker(g)$ is a radical ideal, hence $\ker(f^*)$ is a radical ideal.
+
+Actually, we may have just used the same argument without mentioning $A(Y)$ and $g$ by referring to the fact that $\mathcal{O}_X(X)\cong A(X)$ is reduced, however this setup will be useful later on.
+
+$(ii)$ This comes from the fact that $\mathcal{O}_Y(Y)\dhxrightarrow{f^*}\mathcal{O}_X(X)$ factorizes, by the fundamental isomorphism theorem for rings, as $\mathcal{O}_Y(Y)\dhxrightarrow{\pi}\mathcal{O}_Y(Y)/\ker(f^*)\xrightarrow{\tilde f^*}\mathcal{O}_X(X)$, where $\tilde f^*$ is an isomorphism.
+
+Knowing that $\mathcal{O}_Y(Y)/\ker(f^*)\cong A(Y)/\ker(g)$, we only have to show that $A(Y)/\ker(g)\cong A(Z)\cong\mathcal{O}_Z(Z)$ for some subvariety $Z\subset Y$.
+
+Indeed, consider the chain of projection homomorphisms $\K[x_1,\ldots,x_m]\dhxrightarrow{\pi'} A(Y)\dhxrightarrow{\pi} A(Y)/\ker(g)$, $\pi''=\pi\circ\pi'$. Clearly, $\I(Y)=\ker(\pi')\subset\ker(\pi'')$ and, since the latter is a radical ideal of $\K[x_1,\ldots,x_m]$, $\ker(\pi'')=\I(Z)$ for some algebraic set $Z\subset\A^m_{\K}$. Being $\I(Y)\subset\I(Z)$, $Z\subset Y$ and $A(Y)/\ker(g)\cong\K[x_1,\ldots,x_m]/\I(Z)\cong A(Z)\cong\mathcal{O}_Z(Z)$.
+
+$(iii)$ By~\cite[thm. 5.1.5]{edix}, we know that a $\K$-algebra homomorphism corresponds to a morphism among the associated affine algebraic varieties in the opposite direction. More explicitly, we have an anti-equivalence of categories. This implies that an isomorphism in one category corresponds to an isomorphism in the other and a composition of morphisms is reversed, i.e. $(\phi\circ\psi)^*=\psi^*\circ\phi^*$.
+
+It follows that $\mathcal{O}_Z(Z)\xrightarrow{\tilde f^*}\mathcal{O}_X(X)$ induces an isomorphism $X\xrightarrow{f'}Z$.
+
+Now, we only have to prove that the projection $\mathcal{O}_Y(Y)\dhxrightarrow{\pi}\mathcal{O}_Z(Z)$ corresponds to the inclusion $Z\xhookrightarrow{i} Y$ since we already know that it induces a morphism $Z\rightarrow Y$. In order to do this, we may just prove that $i^*=\pi$ by the anti-equivalence of categories.
+
+To do this, notice that $i^*$ acts as the restriction homomorphism, where, given $h\in\mathcal{O}_Y(Y)\cong A(Y)$, $i^*h=h\circ i=h|_Z$. Since $\pi$ acts in the same way on the elements of $A(Y)$, sending a function $Y\xrightarrow{h}\K$ to its restriction $Z\xrightarrow{h|_Z}\K$, we have the desired result (we can see the elements of these rings either as functions on a specified algebraic set or as elements of a quotient ring obtained from a ring of polynomials; the two perspectives are equivalent, thus I am using the former).
+
+
+\begin{thebibliography}{9}
+\bibitem{edix}
+	B. Edixhoven, D. Holmes, A. Kret, L. Taelman,
+	\textit{Algebraic Geometry},
+	2018.
+\end{thebibliography}
+
+\end{document}

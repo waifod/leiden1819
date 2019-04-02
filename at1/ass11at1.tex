@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\Ps}{\mathbb{P}}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\sgn}{sgn}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Topology 1 - Assignment 11}
+
+\author{M. Durante, s2303760, Leiden University\\M. Fruttidoro, s2287129, Leiden University\\I. Prosepe, s2290162, Leiden University}
+
+\maketitle
+
+
+\exercise{12.1}
+
+Let $m\leq n$ and consider a class $\alpha\in\pi_m(X,*\in A)$. This is represented by a map $(S^m,*)\xrightarrow{f} (X,*)$ and, seeing $(S^m,*)$ as a CW complex, since $f(\{*\})=\{*\}\subset A$, $f$ is a map of relative CW complexes. It follows by~\cite[thm. 12.1]{sag} that it is homotopic relative to $\{*\}$ to a cellular map $(S^m,*)\xrightarrow{g} (X,A)$, $g(*)=*$, which will again represent $\alpha$.
+
+Given this, since $g(S^m)\subset X_m\subset X_n$, we can factor $g$ uniquely through $i_n$, which gives us a map $S^m\xrightarrow{\tilde{g}} X_n$ s.t. $g=i_n\circ\tilde{g}$. This implies that $(i_n)_*([\tilde{g}])=[i_n\circ\tilde{g}]=[g]=\alpha$, where $[\tilde{g}]\in\pi_n(X,*)$. The surjectivity of $(i_n)_*$ follows.
+
+Consider the case where $m<n$. We shall prove its injectivity.
+
+Let $\alpha,\beta\in\pi_m(X_n,*)$ and represent them by cellular maps $S^m\xrightarrow{f} X_n$ and $S^m\xrightarrow{g} X_n$ (the procedure to produce them is the same one we used earlier).
+
+Assume that we can find a homotopy $S^m\times I\xrightarrow{H} X$ between $f$ and $g$, i.e. they represent the same element in $\pi_m(X,*)$. Since $I$ and $\partial I$ are finite CW complexes, $S^m\times I$ is a CW complex and the subspace $S^m\times\partial I$ is a subcomplex by~\cite[cor. 12.9]{sag}.
+
+By~\cite[thm. 12.1]{sag}, we can find a cellular map $S^m\times I\xrightarrow{H'} X$ which restricts to $f$ and $g$ on the boundary components.
+
+This implies that the map factors through the inclusion $i_n$, giving a homotopy $S^m\times I\xrightarrow{\tilde{H}} X_n$ between $f$ and $g$. It follows that $\alpha=\beta$.
+
+\begin{thebibliography}{9}
+  \bibitem{sag}
+    S. Sagave,
+    \textit{Algebraic Topology},
+    2017
+\end{thebibliography}
+
+\end{document}

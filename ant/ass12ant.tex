@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise: }}
+
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 12}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+\exercise #compute the invariants of your ``favorite'' (and maximally impressive) number field $\K$.
+
+~\\
+We shall study the invariants of $\K=\Q(\alpha)\cong\Q[X]/(f)$, where $f=X^3-65$ and $\alpha=\sqrt[3]{65}$. This is an interesting number ring because it is the first one defined by a polynomial of the form $X^3-a$, $a\in\N$, whose Picard group is not cyclic.
+
+Since $f$ has degree 3 and it has no integer roots, it is irreducible in $\Q[X]$ and $\K$ really is a number field. Since it has discriminant $\Delta(f)=-114075<0$, it has one real root and two complex, hence $\K$ has one real and two complex embeddings. We fix the real one and hence the real representation(s) of our ring(s).
+
+We shall start looking for its ring of integers by considering $R=\Z[\alpha]\cong\Z[X]/(f)$, an order of rank 3 and with $\Delta(R)=\Delta(f)=-114075=-3^3\cdot 5^2\cdot 13^2$.
+
+However, by~\cite[ex. 3.15]{stev}, $R$ is a Dedekind ring and hence $R=\mathcal{O}_{\K}$ (remember that we have already fixed a representation for all of our rings).
+
+We now proceed to compute $\Pic(\mathcal{O}_{\K})$, the distinguishing invariant of our number field.
+
+First of all, remembering that $r=s=1$, $M_{\K}\approx 95.56$. To compute the Picard group, it is useful to look at the primes factorizing ideals whose norm is smaller than it.
+
+To do this, we construct the following table (notice that the last column comes from the table which follows this one and~\cite[thm. 7.2]{stev}, however we include it for compactness):
+
+\begin{tabular}{|l|l|l|l|} \hline
+  $k$ & $f(k)$ & factor $f(k)$ & factor $(k-\alpha)$ \\ \hline \hline
+  $-18$ & $-5897$ & $-1 \cdot 5897$ & $\pid_{5897}$ \\ \hline
+  $-17$ & $-4978$ & $-1 \cdot 2 \cdot 19 \cdot 131$ & $\pid_2\mathfrak{r}_{19}$ \\ \hline
+  $-16$ & $-4161$ & $-1 \cdot 3 \cdot 19 \cdot 73$ & $\pid_3\qid_{19}\qid_{73}$ \\ \hline
+  $-15$ & $-3440$ & $-1 \cdot 2^{4} \cdot 5 \cdot 43$ & $\pid_2\pid_5\qid_{43}$ \\ \hline
+  $-14$ & $-2809$ & $-1 \cdot 53^{2}$ & $\pid_{53}^2$ \\ \hline
+  $-13$ & $-2262$ & $-1 \cdot 2 \cdot 3 \cdot 13 \cdot 29$ & $\pid_3\pid_{13}\pid_{29}$ \\ \hline
+  $-12$ & $-1793$ & $-1 \cdot 11 \cdot 163$ & $\pid_{11}\pid_{163}$ \\ \hline
+  $-11$ & $-1396$ & $-1 \cdot 2^{2} \cdot 349$ & $\pid_2^2\pid_{349}$ \\ \hline
+  $-10$ & $-1065$ & $-1 \cdot 3 \cdot 5 \cdot 71$ & $\pid_3\pid_5\pid_{71}$ \\ \hline
+  $-9$ & $-794$ & $-1 \cdot 2 \cdot 397$ & $\pid_2\pid_{397}$ \\ \hline
+  $-8$ & $-577$ & $-1 \cdot 577$ & $\pid_{577}$\\ \hline
+  $-7$ & $-408$ & $-1 \cdot 2^{3} \cdot 3 \cdot 17$ & $\pid_2^3\pid_3\pid_{17}$ \\ \hline
+  $-6$ & $-281$ & $-1 \cdot 281$ & $\pid_{281}$ \\ \hline
+  $-5$ & $-190$ & $-1 \cdot 2 \cdot 5 \cdot 19$ & $\pid_2\pid_5\pid_{19}$ \\ \hline
+  $-4$ & $-129$ & $-1 \cdot 3 \cdot 43$ & $\pid_3\pid_{43}$ \\ \hline
+  $-3$ & $-92$ & $-1 \cdot 2^{2} \cdot 23$ & $\pid_2^2\pid_{23}$ \\ \hline
+  $-2$ & $-73$ & $-1 \cdot 73$ & $\pid_{73}$\\ \hline
+  $-1$ & $-66$ & $-1 \cdot 2 \cdot 3 \cdot 11$ & $\pid_2\pid_3\pid_{11}$ \\ \hline
+  $0$ & $-65$ & $-1 \cdot 5 \cdot 13$ & $\pid_5\pid_{13}$ \\ \hline
+  $1$ & $-64$ & $-1 \cdot 2^{6}$ & $\pid_2^6$ \\ \hline
+  $2$ & $-57$ & $-1 \cdot 3 \cdot 19$ & $\pid_3\mathfrak{r}_{19}$ \\ \hline
+  $3$ & $-38$ & $-1 \cdot 2 \cdot 19$ & $\pid_2\qid_{19}$ \\ \hline
+  $4$ & $-1$ & $-1$ & $(1)$ \\ \hline
+  $5$ & $60$ & $2^{2} \cdot 3 \cdot 5$ & $\pid_2^2\pid_3\pid_5$ \\ \hline
+  $6$ & $151$ & $151$ & $\pid_{151}$ \\ \hline
+  $7$ & $278$ & $2 \cdot 139$ & $\pid_2\pid_{139}$ \\ \hline
+  $8$ & $447$ & $3 \cdot 149$ & $\pid_3\pid_{149}$ \\ \hline
+  $9$ & $664$ & $2^{3} \cdot 83$ & $\pid_2^3\pid_{83}$ \\ \hline
+  $10$ & $935$ & $5 \cdot 11 \cdot 17$ & $\pid_5\pid_{11}\pid_{17}$ \\ \hline
+  $11$ & $1266$ & $2 \cdot 3 \cdot 211$ & $\pid_2\pid_3\pid_{211}$ \\ \hline
+  $12$ & $1663$ & $1663$ & $\pid_{1663}$ \\ \hline
+  $13$ & $2132$ & $2^{2} \cdot 13 \cdot 41$ & $\pid_2^2\pid_{13}\pid_{41}$ \\ \hline
+  $14$ & $2679$ & $3 \cdot 19 \cdot 47$ & $\pid_3\pid_{19}\pid_{47}$ \\ \hline
+  $15$ & $3310$ & $2 \cdot 5 \cdot 331$ & $\pid_2\pid_5\pid_{331}$ \\ \hline
+  $16$ & $4031$ & $29 \cdot 139$ & $\pid_{29}\pid_{139}$ \\ \hline
+  $17$ & $4848$ & $2^{4} \cdot 3 \cdot 101$ & $\pid_2^4\pid_3\pid_{101}$ \\ \hline
+  $18$ & $5767$ & $73 \cdot 79$ & $\mathfrak{r}_{73}\mathfrak{r}_{79}$ \\ \hline
+\end{tabular}
+
+~\\
+The list $\{2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89\}$ contains every prime we are interested in. However, the ones in the list $\{7,31,37,59,61,67,89\}$ are missing, thus we shall only consider $\{2,3,5,11,13,17,19,23,29,41,43,47,53,71,73,79,83\}$.
+
+We have the following factorizations of $f$ modulo these primes, which give us factorizations of the corresponding $(p)$:
+
+~\\
+\begin{tabular}{|l|l|l|} \hline
+  $2$ & $(X+1)(X^2+X+1)$ & $\pid_2\pid_4$ \\ \hline
+  $3$ & $(X+1)^3$ & $\pid_3^3$ \\ \hline
+  $5$ & $X^3$ & $\pid_5^3$ \\ \hline
+  $11$ & $(X+1)(X^2+10X+1)$ & $\pid_{11}\pid_{11^2}$ \\ \hline
+  $13$ & $X^3$ & $\pid_{13}^3$ \\ \hline
+  $17$ & $(X+7)(X^2+10X+15)$ & $\pid_{17}\pid_{17^2}$ \\ \hline
+  $19$ & $(X+5)(X+16)(X+17)$ & $\pid_{19}\qid_{19}\mathfrak{r}_{19}$ \\ \hline
+  $23$ & $(X+3)(X^2+20X+9)$ & $\pid_{23}\pid_{23^2}$ \\ \hline
+  $29$ & $(X+13)(X^2+16X+24)$ & $\pid_{29}\pid_{29^2}$ \\ \hline
+  $41$ & $(X+28)(X^2+13X+5)$ & $\pid_{41}\pid_{41^2}$ \\ \hline
+  $43$ & $(X+4)(X+15)(X+24)$ & $\pid_{43}\qid_{43}\mathfrak{r}_{43}$ \\ \hline
+  $47$ & $(X+33)(X^2+14X+8)$ & $\pid_{47}\pid_{47^2}$ \\ \hline
+  $53$ & $(X+14)(X^2+39X+37)$ & $\pid_{53}\pid_{53^2}$ \\ \hline
+  $71$ & $(X+10)(X^2+61X+29)$ & $\pid_{71}\pid_{71^2}$ \\ \hline
+  $73$ & $(X+2)(X+16)(X+55)$ & $\pid_{73}\qid_{73}\mathfrak{r}_{73}$ \\ \hline
+  $79$ & $(X+37)(X+60)(X+61)$ & $\pid_{79}\qid_{79}\mathfrak{r}_{79}$ \\ \hline
+  $83$ & $(X+74)(X^2+9X+81)$ & $\pid_{83}\pid_{83^2}$ \\ \hline
+\end{tabular}
+
+~\\
+Notice that $11^2>M_{\K}$, thus the only primes relevant to the computation of the Picard group are those of prime norm $p<M_{\K}$. Furthermore, we see that the only primes among these appearing in our previous table are $\pid_2=(2,1+\alpha),\pid_3=(3,1+\alpha),\pid_5=(5,\alpha),\pid_{11}=(11,1+\alpha),\pid_{17}=(17,7+\alpha),\pid_{19}=(19,5+\alpha),\qid_{19}=(19,16+\alpha),\mathfrak{r}_{19}=(19,17+\alpha),\pid_{23}=(23,3+\alpha),\pid_{29}=(29,13+\alpha),\pid_{41}=(41,28+\alpha),\pid_{43}=(43,4+\alpha),\qid_{43}=(43,15+\alpha),\pid_{47}=(47,33+\alpha),\pid_{53}=(53,14+\alpha),\pid_{73}=(73,2+\alpha),\qid_{73}=(73,16+\alpha),\mathfrak{r}_{73}=(73,55+\alpha),\mathfrak{r}_{79}=(79,61+\alpha),\pid_{83}=(83,74+\alpha)$.
+
+Observe that $\pid_5=(5-\alpha)\pid_2^{-2}\pid_3^{-1},\pid_{11}=(1+\alpha)\pid_2^{-1}\pid_3^{-1},\pid_{17}=(7+\alpha)\pid_2^{-3}\pid_3^{-1},\pid_{19}=(5+\alpha)\pid_2^{-1}\pid_5^{-1},\qid_{19}=(3-\alpha)\pid_2^{-1},\mathfrak{r}_{19}=(2-\alpha)\pid_3^{-1},\pid_{23}=(3+\alpha)\pid_2^{-2},\pid_{29}=(13+\alpha)\pid_3^{-1}\pid_{13}^{-1},\pid_{41}=(13-\alpha)\pid_2^{-2}\pid_{13}^{-1},\pid_{43}=(4+\alpha)\pid_3^{-1},\pid_{47}=(14-\alpha)\pid_3^{-1}\pid_{19}^{-1},\pid_{73}=(2+\alpha),\qid_{73}=(16+\alpha)\pid_3^{-1}\qid_{19}^{-1},\mathfrak{r}_{73}=(73)\pid_{73}^{-1}\qid_{73}^{-1}$ (to verify this, look at the line indicated by the $k$ in the $(k-\alpha)$ which appears at the right of the equality sign).
+
+We get that we only have to consider the following ones: $\pid_2,\pid_3,\pid_{53}$.
+
+In what follows we shall use the fact that, being in a Dedekind ring, the norm map is multiplicative.
+
+Hopefully, the generating classes are the ones of $\pid_2$ and $\pid_3$, whose order divides respectively $6$ and $3$. Furthermore, notice that $\pid_{53}$ has order dividing 2, thus it should lie in $[\pid_2^3]$.
+
+By computing, $\pid_2^3\pid_{53}=(424,279+\alpha,175+\alpha^2)$. Since $11-3\alpha=117\cdot 424-178(279+\alpha)+\alpha(175+\alpha^2)\in\pid_2^3\pid_{53}$ has norm $2^3\cdot 53$, $\pid_2^3\pid_{53}=(11-3\alpha)$ and thus we may disregard $\pid_{53}$.
+
+Since in $\Pic(\mathcal{O}_{\K})$ the classes of $\pid_2$ and $\pid_3$ have order dividing 6 and 3 respectively and not having found any relation between the two of them, we may conjecture that the Picard group is isomorphic to $\Z/6\Z\times\Z/3\Z$, where each class is given by $a[\pid_2]+b[\pid_3]$, $0\leq a<6,0\leq b<3$.
+
+If we can prove that $\pid_2,\pid_3$ are indeed independent and the orders are $6,3$, then we will have that $\Z/6\Z\times\Z/3\Z$ is a subgroup of $\Pic(\mathcal{O}_{\K})$, which will then have order $\geq 18$.
+
+We start by showing that $\pid_2^2$ is not principal. Indeed it has norm 4 and, knowing that $N(a+b\alpha+c\alpha^2)=(a+b\alpha_0+c\alpha_0^2)(a+b\alpha_1+c\alpha_1^2)(a+b\alpha_2+c\alpha_2^2)=\ldots=a^3+65b^3+65^2c^3-3\cdot 65abc$ (it's just a matter of using Vieta's formulas), its generating element would have to satisfy $a^3\equiv\pm 4\mod 13$, which is not possible, hence the thesis. Furthermore, we get that $\pid_2$ itself is not principal.
+
+We proceed with $\pid_2^3$. A generating element $b$ would be s.t. $b^2=u(1-\alpha)$, where $u$ is a unit and hence $u=\pm (4-\alpha)^n$ (look at the discussion concerning units in the following section). Consider a homomorphism $\Z[\alpha]\rightarrow\F_{41}$ sending $\alpha$ to 13, a root of $f$ in $\F_{41}$. Then, $b^2=u(1-\alpha)$ would go to $\pm 9^n\cdot 12=\pm 3^{2n+1}\cdot 2^2$. However, $\pm 3$ is not a square residue in $\F_{41}$, hence we reach a contradiction.
+
+We prove that $\pid_3$ is not principal, s.t. then $[\pid_3]$ will have order 3. Again, a generating element would have to satisfy $a^3\equiv\pm 3\mod 13$, which is not possible and hence the thesis.
+
+We prove that $\pid_2^2\pid_3$ is not principal. If it were, there would be a generating element $b$ s.t. $b^3=3u(1-\alpha)$, where $u=\pm (4-\alpha)^n$ is a unit. Consider now the homomorphism $\Z[\alpha]\rightarrow\F_{19}$ sending $\alpha$ to $-16$ (i.e. 3). Then, $b^3$ is sent to $\pm 6$, which is absurd because it is not a cubic residue modulo 19.
+
+We prove that $\pid_2^4\pid_3$ is not principal. Indeed, if it was, then it would be generated by an element $a+b\alpha+c\alpha^2$ s.t. $a^3\equiv\pm 2^4\cdot3\equiv\pm 9\mod 13$. However, $\pm 9$ is not a cubic residue in $\F_{13}$, hence this is not possible.
+
+Now we try to compute $\mathcal{O}_{\K}^*$. By~\cite[thm. 5.13]{stev}, since $r>0$, we have that it is $\cong<-1>\times<\eta_0>$, where $\eta_0>1$ (remember that we have already fixed an embedding).
+
+By looking at the first table, we see that $\eta=(4-\alpha)^{-1}=16+4\alpha+\alpha^2>1$ is a unit because $(4-\alpha)=(1)$.
+
+Since $Reg(\mathcal{O}_{\K})=\log(\eta_0)\geq\frac{1}{3}\log(\frac{114075-24}{4})\approx 3.41$ by~\cite[ex. 5.21]{stev} and $\log(\eta)\approx 3.87$, having $\eta=\eta_0^n$ for some $n\in\N_{>0}$, $1\leq n=\frac{\log(\eta)}{\log(\eta_0)}<2$, thus $n=1$ and $\eta$ is a fundamental unit.
+
+We may now compute the residue at 1 of the Dedekind zeta function of this ring to conclude that what we have previously found is indeed the Picard group.
+
+Remembering that this residue equals $\Pi_{p} E(p)$ and $E(p)^{-1}=\frac{\Pi_{\pid|p} (1-N_{\K/\Q}(\pid)^{-1})}{1-p^{-1}}$, we may compute it explicitly for the primes $p<1000000$ and then get a good approximation of the residue of the Dedekind zeta function.
+
+We know that, given a prime $p$ which doesn't ramify, we have that $(p)$ either factorizes as $\pid_p\qid_p\mathfrak{r}_p$ or $\pid_p\pid_{p^2}$ or is inert, depending on the irreducible factors of $f\mod p$.
+
+In the first case, $E(p)^{-1}=\frac{(1-p^{-1})^3}{1-p^{-1}}=(1-p^{-1})^2$, in the second one $E(p)^{-1}=\frac{(1-p^{-1})(1-(p^2)^{-1})}{1-p^{-1}}=1-p^{-2}$ and in the third one $E(p)^{-1}=\frac{1-(p^3)^{-1}}{1-p}=1+p^{-1}+p^{-2}$. For the primes which ramify, we have that $E(p)=1$.
+
+Multiplying them, we get that $\Pi_{p} E(p)\approx 1.298$. Confronting this with $\frac{2^1(2\pi)^1\cdot 18\cdot 3.87}{2\cdot\sqrt{|-114075|}}\approx 1.296$, we can confirm that the Picard group is indeed the one we have found and conclude.
+
+
+
+\begin{thebibliography}{9}
+  \bibitem{stev}
+		P. Stevenhagen,
+		\textit{Number Rings},
+		2017.
+\end{thebibliography}
+
+\end{document}

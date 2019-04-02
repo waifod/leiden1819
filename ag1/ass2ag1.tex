@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\begin{document}
+
+\title{Algebraic Geometry 1 - Assignment 2}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{1}
+
+$(a)$ First notice that, given a line $L$ or a plane $A$ in a projective space $\Ps^3$, we have the following: given distinct points $P,P'\in L$, $Q,Q',Q''\in A$, the latter not aligned, $L=\{(\lambda p_0+\mu p'_0:\ldots:\lambda p_3+\mu p'_3)\ |\ (\lambda,\mu)\in\K^2\setminus\{(0,0)\}\}$ and $A=\{(\lambda q_0+\mu q'_0+\nu q''_0:\ldots:\lambda q_3+\mu q'_3+\nu q''_3)\ |\ (\lambda,\mu,\nu)\in\K^3\setminus\{(0,0,0)\}\}$. It follows that $L=q(\mathcal{L}((p_1,\ldots,p_4),(p'_1,\ldots,p'_4))\setminus\{(0,\ldots,0)\})$ and $A=q(\mathcal{L}((q_1,\ldots,q_4),(q'_1,\ldots,q'_4),(q''_1,\ldots,q''_4))\setminus\{(0,\ldots,0)\})$, i.e. they are the projections of a 2 and a 3-dimensional vector space respectively.
+
+Going back to our problem, consider the plane $A$ containing the line $M$ and $P\in L$ ($L$ and $M$ are disjoint, for they do not lie in a common plane, and therefore this plane is unique because $P\not\in M$). We see that it is defined by a 3-dimensional vector space $U$ in $\K^4$.
+
+Now, let $V$ be the 2-dimensional vector space in $\K^4$ corresponding to $N$.
+
+By Grassmann's formula, the intersection between these two vector spaces must have dimension 1 or 2. If it were 2, then $V\subset U$ and therefore $M,N\subset A$, against the assumption.
+
+This means that $N\cap A=\{P'''\}$. Now, consider in the plane $A$ the line $L'$ passing through $P'''$ and $P$. This will meet both $L$ and $N$. Furthermore, being in the same plane as $M$, it will meet $M$ as well.
+
+Consider now two points $Q,Q'\in L$. If through this construction we got the same line $L'$, then it would mean that $Q,Q'\in L\cap L'$. If $L=L'$, then $L$ and $N$ would lie in the same plane, which is absurd. This means that $Q=Q'$, for two distinct lines meet at most once.
+
+$(b)$ Consider now the planes $U,V\subset\K^4$ corresponding to $L,M$ in $\Ps^3$. These are defined, given four distinct points $P,P'\in L$, $Q,Q'\in M$, by the following linear spans:
+\begin{align*}
+		U=\mathcal{L}((p_1,\ldots,p_4),(p'_1,\ldots,p'_4)) \\
+		V=\mathcal{L}((q_1,\ldots,q_4),(q'_1,\ldots,q'_4))
+\end{align*}
+
+If the intersection $U\cap V$ was not trivial, then it would be a vector space of dimension at least 1, hence $L\cap M\neq\emptyset$, against the assumption.
+
+It follows that $U+V=\K^4$ and $\{(q_1,\ldots,q_4),(q'_1,\ldots,q'_4),(p_1,\ldots,p_4),(p'_1,\ldots,p'_4)\}$ provides a basis, therefore we have an automorphism of $\K^4$ changing basis from the canonical one to the new one. This is induced by an invertible matrix, which induces the desired projective transformation on $\Ps^3$.
+
+$(c)$ Now, an automorphism of $\K^4$ mapping $U$ to $U$ and $V$ to $V$ is in particular an automorphism of $U$ and of $V$, hence it must be of the following form:
+$$
+\begin{bmatrix}
+		a_1 & a_2 & 0 & 0 \\
+		a_3 & a_4 & 0 & 0 \\
+		0 & 0 & b_1 & b_2 \\
+		0 & 0 & b_3 & b_4
+\end{bmatrix}
+$$
+
+Here, both submatrices $A$ and $B$ have non-zero determinant.
+
+By the same reasoning as before, considered two distinct points $R,R'\in N$, we get a basis of the 2-dimensional vector space $W$ defining $N$ and $W$ has trivial intersection with both $U$ and $V$. This means that the vectors $w,w'\in W$ defined up to scaling by the two points will have to be a linear combination of two uniquely defined vectors, one in $U$ and one in $V$.
+
+Given $u,u'\in U$, $v,v'\in V$ s.t. $w=u+v$, $w'=u'+v'$, if we can prove that $\{v,v',u,u'\}$ forms a basis we are done because the automorphism of $\K^4$ induced by the base change (which will be represented by a matrix like the one previously shown) will bring forth the desired projective transformation of $\Ps^3$.
+
+It suffices to show that $u$ is linearly independent from $u'$ because they are contained in $U$, hence their span will be linearly independent from the one of $v,v'$ and by symmetry we may conclude.
+
+If we had $u'=\lambda u$, then $\lambda w-w'=\lambda v-v'\in V$, thus the intersection between $V$ and $W$ would be non-trivial, which is absurd.
+
+$(d)$ Now, let $P=(0:0:s:t)\in L,P'=(s':t':0:0)\in M$. The plane in $\K^4$ corresponding to the line passing through $P,P'$ in $\Ps^3$ is defined by the linear span $\mathcal{L}((0,0,s,t),(s',t',0,0))$, thus it corresponds to the variety $\V(sx_3-tx_2,s'x_1-t'x_0)$.
+
+We require this line to meet $N$ as well. This means that the intersection between $U'=\mathcal{L}((0,0,s,t),(s',t',0,0))$ and $W=\mathcal{L}((1,0,1,0),(0,1,0,1))$ should be non-trivial. An element in the intersection will have to satisfy $\lambda s=\lambda' s',\lambda t=\lambda't'$, where both $\lambda$ and $\lambda'$ must be $\neq 0$ by reasons previously given. Then, we rewrite the equations defining the previous variety in order to satisfy this condition, getting $\V(sx_3-tx_2,\frac{\lambda}{\lambda'}sx_1-\frac{\lambda}{\lambda'}tx_0)=\V(sx_3-tx_2,sx_1-tx_0)$.
+
+This is the union of all the lines in $\Ps^3$ passing through $P$ and meeting both $M$ and $N$.
+
+We see that $\V(sx_3-tx_2,sx_1-tx_0)\subset\V(x_0x_3-x_1x_2)$.
+
+Indeed, at least one among $s,t$ is $\neq 0$ (let's say $s$), thus, for any $(a_0:\ldots:a_3)\in\V(sx_3-tx_2,sx_1-tx_0)$, $a_3=\frac{t}{s}a_2,a_1=\frac{t}{s}a_0$. Substituting in $x_0x_3-x_1x_2$, we get 0.
+
+Now, let $(a_0:\ldots:a_3)\in\V(x_0x_3-x_1x_2)$. One among the coordinates is $\neq 0$, let's say $a_0\neq 0$. Then, taking $s=a_0,t=a_1$, we find that $sa_3-ta_2=0$ and, trivially, $sa_1-ta_0=0$, hence $(a_0,\ldots,a_3)\in\bigcup_{(s,t)\in\R^2\setminus\{(0,0)\}}\V(sx_3-tx_2,sx_1-tx_0)$ and therefore $\bigcup_{(s,t)\in\R^2\setminus\{(0,0)\}} \V(sx_3-tx_2,sx_1-tx_0)=\V(x_0x_3-x_1x_2)$.
+
+This implies that $Q=\{(x_0:x_1:x_2:x_3)\in\Ps^3\ |\ x_0x_3-x_1x_2=0\}$.
+
+$(e)$ Since every line intersecting $L,M,N$ is contained in $Q$, a line intersecting $L,M,N,K$ must also lie in $Q$, and hence meet one of the two points in $K\cap Q$. In particular, given a point in the intersection, we know that it belongs to a line in $Q$ meeting $L,M,N$, and thus meeting all four lines.
+
+If such a line met both points, then it would be equal to $K$, which then would lie in $Q$, which is absurd because the intersection is finite.
+
+Let's focus on one of them, $S$, and let there be two lines, $L'$ and $L''$, meeting all four lines and that point.
+
+If they are distinct, then they will not meet again, hence they will intersect $L$ and $M$ at four different points (two for each line). Since $L',L''$ intersect, they lie in a common plane and $L,M$ meet this plane twice. It follows $L,M$ lie in the same plane, against the assumption, thus the two lines are equal.
+
+
+~\\
+\exercise{2}
+
+$(i)$ Given an open set $V\subset U\subset X$, since $U$ is open in $X$ and hence $V$ is as well, let $f\in\mathcal{O}_X|_U(V)=\mathcal{O}_X(V)$, which is a sub-$\K$-algebra because $(X,\mathcal{O}_X)$ is a variety and therefore a $\K$-space. Considered an open subset $W\subset V$ (which will be open in $U$ and $X$ as well), $f|_W\in\mathcal{O}_X(W)=\mathcal{O}_X|_U(W)$.
+
+Now, let $V\subset U\subset X$ be open. Then, $f:V\rightarrow\K$ is in $\mathcal{O}_X|_U(V)=\mathcal{O}_X(V)$ if and only if for every $P\in V$ there is an open $V_P\subset V$ s.t. $f|_{V_P}\in\mathcal{O}_X(V_P)=\mathcal{O}_X|_{U}(V_P)$.
+
+Now, consider the natural inclusion map $j:U\rightarrow X$. It is clearly continuous, as $U$ is provided with the subspace topology and in particular, if $V\subset X$ is open, then $j^{-1}(V)=V\cap U$ is open in $U$.
+
+Let $f\in\mathcal{O}_X(V)$. Then, the function $j^*f:=f\circ j:j^{-1}(V)=V\cap U\rightarrow\K$ is such that, since $j^*f=f|_{V\cap U}$, being $V\cap U\subset V$, $j^*f\in\mathcal{O}_X(V\cap U)$ and therefore it is regular on $V\cap U=j^{-1}(V)$. It follows that $j^*f\in\mathcal{O}_X|_U(j^{-1}(V))$.
+
+These facts together imply that $j:X\rightarrow Y$ is a morphism of $\K$-spaces.
+
+$(ii)$ First of all, we will show that, if $j\circ f$ is continuous, then $f:Z\rightarrow U$ is continuous. The other implication is obvious.
+
+Let $V\subset U$ be open. Then, there exists a $W\subset X$ open s.t. $W\cap U=V$ and therefore $j^{-1}(W)=V$. We know by hypothesis that $(j\circ f)^{-1}(W)=f^{-1}(j^{-1}(W))=f^{-1}(V)$ is open, which concludes the proof.
+
+In the same way, supposing that $(Z,\mathcal{O}_Z)$ is a $\K$-space, if $f$ is a morphism of $\K$-spaces, then for any $V\subset X$ and any $g\in\mathcal{O}_X(V)$ we have that $j^*g\in\mathcal{O}_X|_U(j^{-1}(V))$ and $j^{-1}(V)$ is open in $U$ and hence $(j\circ f)^*g=f^*j^*g\in\mathcal{O}_Z(f^{-1}(j^{-1}(V)))=\mathcal{O}_Z((j\circ f)^{-1}(V))$.
+
+Now, suppose that $j\circ f$ is a morphism and let $g\in\mathcal{O}_X|_U(V)$ for some open $V\subset U\subset X$. Then, $g\in\mathcal{O}_X(V)$ by definition and $j^*g:j^{-1}(V)=V\rightarrow\K$ is s.t. $j^*g=g$ (here we are using the same name to represent an element in two different rings). Then, since $f^*g=f^*j^*g=(j\circ f)^*g$, we get that $f^*g=(j\circ f)^*g\in\mathcal{O}_Z((j\circ f)^{-1}(V))=\mathcal{O}_Z(f^{-1}(j^{-1}(V)))=\mathcal{O}_Z(f^{-1}(V))$, which concludes the proof.
+
+$(iii)$ We know that, for all $x\in U\subset X$, there is an open $U_x\subset X$ s.t. $x\in U_x$ (and hence $x\in U_x\cap U$) and $(U_x,\mathcal{O}_X|_{U_x})$ is isomorphic through an isomorphism $\phi$ to some $(Y,\mathcal{O}_Y)$, where $Y\subset\A^k$ is closed for some $k$, as a $\K$-space. This means, in particular, that $(U_x\cap U,\mathcal{O}_X|_{U_x\cap U})$ is isomorphic to $(\phi(U_x\cap U),\mathcal{O}_X|_{\phi(U_x\cap U)})$, $\phi(U_x\cap U)$ open in $Y$.
+
+Now we only have to show that the $\K$-space induced by an open subset of an affine algebraic variety is an affine algebraic variety.
+
+Let $(X\subset\A^n_{\K},\mathcal{O}_X)$ be an affine algebraic variety, $U\subset X$ open. Then, $(U,\mathcal{O}_X|_U)$ is a $\K$-space, where $U=X\cap V$ with $V=D(f_1,\ldots,f_m)=D(f_1)\cup D(f_2,\ldots,f_m)$ and $X=\V(g_1,\ldots,g_k)$.
+
+By~\cite[cor. 5.1.7]{edix}, we know that$$(X\cap D(f_1),\mathcal{O}_X|_{X\cap D(f_1)})\cong(\V(g_1,\ldots,g_k,x_{n+1}f_1-1)\subset\A^{n+1}_{\K},\mathcal{O}_{\V(g_1,\ldots,g_k,x_{n+1}f_1-1)})$$
+
+Therefore it is an affine algebraic variety, which comes from the following isomorphism with the previously given one:
+$$\phi:X\cap D(f_1)\rightarrow \V(g_1,\ldots,g_k,x_{n+1}f_1-1),\ (a_1,\ldots,a_n)\mapsto (a_1,\ldots,a_n,\frac{1}{f_1(a_1,\ldots,a_n)})$$
+
+Now, let $(a_1,\ldots,a_n,a_{n+1})\in\V(g_1,\ldots,g_k,x_{n+1}f_1-1)\cap D(f_2,\ldots,f_m)$, where the $f_i$ are the previous $n$-variables polynomials seen as $(n+1)$-variables ones. This means, in particular, that $f_i(a_1,\ldots,a_n,a_{n+1})=f_i(a_1,\ldots,a_n)\neq 0$, and in the same way $f_1(a_1,\ldots,a_n,a_{n+1})=f_1(a_1,\ldots,a_n)\neq 0$ by construction. It follows that, since $(a_1,\ldots,a_n)\in U$, $\V(g_1,\ldots,g_k,x_{n+1}f_1-1)\cap D(f_2,\ldots,f_m)\subset\phi(U)$.
+
+On the other hand, let $(a_1,\ldots,a_n,a_{n+1})\in\phi(U)$. This means that, in the same way as before, since $(a_1,\ldots,a_n)\in U$, $f_i(a_1,\ldots,a_n)=f_i(a_1,\ldots,a_n,a_{n+1})\neq 0$, hence $(a_1,\ldots,a_n,a_{n+1})\in\V(g_1,\ldots,g_k,x_{n+1}f_1-1)\cap D(f_2,\ldots,f_m)$ and $\phi(U)\subset\V(g_1,\ldots,g_k,x_{n+1}f_1-1)\cap D(f_2,\ldots,f_m)$.
+
+This implies that the restriction of $\phi$ to $U$ and $\V(g_1,\ldots,g_k,x_{n+1}f_1-1)\cap D(f_2,\ldots,f_m)$ induces an isomorphism of $\K$-spaces.
+
+By iterating the construction, we can conclude because we get that$$(U,\mathcal{O}_X|_U)\cong(\V(g_1,\ldots,g_k,x_{n+1}f_1-1,\ldots,x_{n+m}f_m-1)\subset\A^{n+m}_{\K},\mathcal{O}_{\V(g_1,\ldots,g_k,x_{n+1}f_1-1,\ldots,x_{n+m}f_m-1)})$$
+
+
+
+\begin{thebibliography}{9}
+\bibitem{edix}
+	B. Edixhoven, D. Holmes, A. Kret, L. Taelman,
+	\textit{Algebraic Geometry},
+	2018.
+\end{thebibliography}
+
+\end{document}

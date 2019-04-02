@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+
+\begin{document}
+
+\title{Algebraic Number Theory - Assignment 7}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+\exercise{13}
+
+First of all, given the number field $\K=Q(R)$, $R$ an order, we have that $R\subset\mathcal{O}_{\K}$ and they have the same rank as $\Z$-algebras.
+
+Remembering that $\Delta(R)=[\mathcal{O}_{\K}:R]^2\cdot\Delta(\mathcal{O}_{\K})$, since a square in $\Z$ is $\equiv 0,1\mod 4$, we only have to show that $\Delta(\mathcal{O}_{\K})\equiv 0,1\mod 4$.
+
+Consider now an integral basis for $\K$ over $\Q$, $X=\{a_1,\ldots,a_n\}$, and all of the embeddings $\sigma_i:\K\rightarrow\C$. By definition, $\Delta_{\K}=(\det([\sigma_i(a_j)]_{i,j=1}^n))^2$, which can be rewritten in the following way:
+\begin{align*}
+  \Delta_{\K} & = \left(\sum_{\pi\in S_n} \sgn(\pi)\Pi_{i=1}^n \sigma_{\pi(i)}(a_i)\right)^2 \\
+  & =\left(\sum_{\pi\in A_n}\Pi_{i=1}^n \sigma_{\pi(i)}(a_i)-\sum_{\pi\not\in A_n}\Pi_{i=1}^n \sigma_{\pi(i)}(a_i)\right)^2 \\
+  & =(P-N)^2 \\
+  & P:=\sum_{\pi\in A_n}\Pi_{i=1}^n \sigma_{\pi(i)}(a_i) \\
+  & N:=\sum_{\pi\not\in A_n}\Pi_{i=1}^n \sigma_{\pi(i)}(a_i)
+\end{align*}
+
+We will prove that $P+N,PN\in\Q$.
+
+Let $L$ be a finite extension of $\Q$ which is Galois and contains $\K$. Let's show that $\sigma(P+N)=P+N,\sigma(PN)=PN$ for every $\sigma\in\Gal(L/\Q)$.
+
+Let's extend every $\sigma_i$ to an embedding $\overline{\sigma_i}:L\rightarrow\C$. By the normality of $L$, $\overline{\sigma}_i(L)=L$, hence $\sigma_i(\K)\subset L$. It follows that we can create an embedding $\sigma\sigma_i:\K\rightarrow\C$. The association $\{\sigma_1,\ldots,\sigma_n\}\rightarrow\{\sigma_1,\ldots,\sigma_n\}$ given by $\sigma_i\mapsto\sigma\sigma_i$ defines a bijection, i.e. a permutation $\tau\in S_n$ s.t. $\sigma\sigma_i=\sigma_{\tau(i)}$.
+
+If $\tau$ is even, then:
+\begin{align*}
+  \sigma(P) & =\sum_{\pi\in A_n}\Pi_{i=1}^n \sigma\sigma_{\pi(i)}(a_i) \\
+  & =\sum_{\pi\in A_n}\Pi_{i=1}^n \sigma_{\tau\pi(i)}(a_i) \\
+  & =\sum_{\pi\in\tau A_n}\Pi_{i=1}^n \sigma_{\pi(i)}(a_i) \\
+  & =\sum_{\pi\in A_n}\Pi_{i=1}^n \sigma_{\pi(i)}(a_i) \\
+  & = P
+\end{align*}
+
+The same goes for $N$.
+
+If it is odd, then $\tau A_n=S_n\setminus A_n$ and $\tau(S_n\setminus A_n)=A_n$, thus, repeating the computations, $\sigma(P)=N$ and $\sigma(N)=P$.
+
+It follows that $\sigma(P+N)=P+N,\sigma(PN)=PN$.
+
+Since every embedding fixes $P+N$ and $PN$, they both belong to $\Q$ and, specifically, $P+N,PN\in\Z$ because both $P$ and $N$ are algebraic integers (they are linear combinations of products of algebraic integers since the image of an algebraic integer under an embedding is an algebraic integer).
+
+Since $(P-N)^2=(P+N)^2-4PN$, by an argument previously given we have the thesis.
+
+
+~\\
+\exercise{17}
+
+By definition, $\Delta_{\K}=\Delta(\mathcal{O}_{\K})$. Having $\K=\Q(\xi_{p^k})$, consider the order $R=\Z[\xi_{p^k}]\cong\Z[X]/(\phi_{p^k})$, where $\phi_{p^k}$ is the minimum (cyclotomic) polynomial of $\xi_{p^k}$.
+
+By~\cite[thm. 3.12]{stev}, $R$ is a Dedekind domain, hence $\mathcal{O}_{\K}\subset R$ by~\cite[thm. 3.20(3)]{stev}. Furthermore, given that $\Z\subset\mathcal{O}_{\K}$ and $\xi_{p^k}\in\mathcal{O}_{\K}$, $R\subset\mathcal{O}_{\K}$, thus we have an equality.
+
+Now we only have to compute $\Delta(\phi_{p^k})$ by~\cite[cor. 4.7]{stev}.
+
+Knowing that $\phi_{p^k}=\frac{X^{p^k}-1}{X^{p^{k-1}}-1}=\sum_{i=0}^{p-1}X^{ip^{k-1}}$, considered a primitive root of unity $\xi_{p^k}$, for any $1\leq j\leq p^k$ s.t. $(j,p)=1$, since $\phi'_{p^k}=\frac{p^kX^{p^k-1}(X^{p^{k-1}}-1)-p^{k-1}X^{p^{k-1}-1}(X^{p^k}-1)}{(X^{p^{k-1}}-1)^2}$, we have $\phi'_{p^k}(\xi^j_{p^k})=\frac{p^k(\xi^j)^{-1}}{(\xi^j)^{p^{k-1}}-1}=\frac{p^k(\xi^j)^{-1}}{(\xi^{p^{k-1}})^j-1}$.
+
+Now, let $\mu=\xi^{p^{k-1}}$, and hence $\mu^j=(\xi^j)^{p^{k-1}}$. For any $j$, $\mu$ is a $p$th root of unity.
+
+Remembering that $\Delta(\phi_{p^k})=(-1)^{p^k(p^k-1)/2}Res(\phi_{p^k},\phi'_{p^k})=(-1)^{p^k(p^k-1)/2}\Pi_{j=1,(j,p)=1}^{p^k}\phi'_{p^k}(\xi^j_{p^k})=(-1)^{p^k(p^k-1)/2}\Pi_{j=1,(j,p)=1}^{p^k}\frac{p^k(\xi^j)^{-1}}{(\xi^{p^{k-1}})^j-1}$, we shall compute numerator and denominator separately.
+
+Noticing that $\sum_{j=1,(j,p)=1}^{p^k} j=1+\ldots+p^k-p(1+\ldots+p^{k-1})=p^k\frac{p^k-p^{k-1}}{2}$, since $\xi^{p^k\frac{p^k-p^{k-1}}{2}}=(\xi^{p^k})^\frac{p^k-p^{k-1}}{2}=1$, the numerator is $(p^k)^{p^k-p^{k-1}}=p^{p^{k-1}(pk-k)}$.
+
+On the other hand, we see that:
+\begin{align*}
+  \Pi_{j=1,(j,p)=1}^{p^k} (\mu^j-1) & =\Pi_{i=1}^{p^{k-1}}\Pi_{j=p(i-1)+1}^{pi-1} (-1)(1-\mu^j) \\
+  & =\Pi_{i=1}^{p^{k-1}} (-1)^{p-1}\Pi_{j=1}^{p-1} (1-\mu^j) \\
+  & =(-1)^{p^{k-1}(p-1)}(\phi_p(1))^{p^{k-1}} \\
+  & =(-1)^{p^{k-1}(p-1)}p^{p^{k-1}} \\
+  & =p^{p^{k-1}}
+\end{align*}
+
+It follows that $\Delta_{\K}=\Delta(\phi_{p^k})=(-1)^{\frac{p^k-p^{k-1}}{2}}p^{p^{k-1}(pk-k-1)}$.
+
+
+\begin{thebibliography}{9}
+\bibitem{stev}
+		P. Stevenhagen,
+		\textit{Number Rings},
+		2017.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\cont}{cont}
+\DeclareMathOperator{\Ima}{Im}
+
+\begin{document}
+
+\title{Commutative Algebra - Assignment 1}
+
+\author{Matteo Durante, 2303760, Leiden University\\Waifod@protonmail.com}
+
+\maketitle
+
+
+\exercise{1}
+
+In this proof we will prove that the hypothesis of~\cite[cor. 3.2]{atm} are satisfied for the natural ring homomorphism $A\xrightarrow{g} A[x]/(xf-1)$ s.t. $a\mapsto a$ and thus find the desired $A$-algebra isomorphism $A_f\xrightarrow{h} A[x]/(xf-1)$.
+
+First, observe that $g(f^n)=(g(f))^n$ has inverse $x^n$ in $A[x]/(xf-1)$, for $xf=1$.
+
+Furthermore, the elements of $A[x]/(xf-1)$ have a representative of the form $b=\sum_{i=0}^n a_ix^i$, $a_i\in A$, hence, rewriting the representative as $b=\sum_{i=0}^n a_if^{n-i}x^n=(\sum_{i=0}^n a_if^{n-i})x^n$, we get that $b=g(\sum_{i=0}^n a_if^{n-i})(g(f^n))^{-1}$.
+
+Suppose that $g(a)=0$. This means that, for some $p=\sum_{i=0}^n a_ix^i$, $a=p(xf-1)$ in $A[x]$, i.e. $a=-a_0$, $\forall i<n$ we have that $a_{i+1}=a_if$ and finally $a_nf=0$. Inductively, we get that $a_n=a_0f^n=-af^n$, and in particular $0=-a_nf=af^{n+1}$, which concludes the proof.
+
+Now, we have shown that there is a canonical $A$-algebra isomorphism (indeed, by the same proposition, $hi=g$, where $i:A\rightarrow A_f$ is the natural arrow) $A_f\xrightarrow{h} A[x]/(xf-1)$, which is defined as $h(a/f^n)=g(a)g(f^n)^{-1}$.
+
+
+~\\
+\exercise{2}
+
+$(a)$ We know that $A/aA$ is an $A$-module, hence we will prove that $A/aA\otimes_A M\cong M/aM$ and later use this result.
+
+Consider a flat $A$-module $M$. Then, applying the exact functor $-\otimes_A M$, we get the following exact sequence:
+$$0\rightarrow aA\otimes_A M\xrightarrow{i} A\otimes_A M\rightarrow A/aA\otimes_A M\rightarrow 0$$
+
+Being the sequence exact, $A/aA\otimes_A M\cong (A\otimes_A M)/\Ima(i)$. Knowing that $A\otimes_A M\cong M$ and the canonical isomorphism sends $b\otimes_A m$ to $bm$, we have that $\Ima(i)$ is sent to $aM$, hence $A/aA\otimes_A M\cong M/aM$.
+
+Applying this to the case $M=A/aA$, we see that $A/aA\otimes_A A/aA\cong (A/aA)/(aA/aA)\cong A/aA$.
+
+Applying the exact functor $-\otimes_A A/aA$ to the original exact sequence, we get the following one:
+$$0\rightarrow aA\otimes_A A/aA\rightarrow A\otimes_A A/aA\rightarrow A/aA\otimes_A A/aA\rightarrow 0$$
+
+This, thanks to the isomorphisms previously remarked, becomes:
+$$0\rightarrow aA\otimes_A A/aA\rightarrow A/aA\xrightarrow{Id_{A/aA}} A/aA\rightarrow 0$$
+
+Indeed, $b\in A/aA$ in is sent through $1\otimes_A b\in A\otimes_A A/aA$ to $1\otimes_A b\in A/aA\otimes_A A/aA$ and finally in $b\in A/aA$.
+
+By exactness, $aA\otimes_A A/aA\cong 0$.
+
+$(b)$ Consider the following exact sequence:
+$$0\rightarrow aA\rightarrow A\rightarrow A/aA\rightarrow 0$$
+
+Apply the right-exact functor $-\otimes_A aA$:
+$$aA\otimes_A aA\rightarrow A\otimes_A aA\rightarrow A/aA\otimes_A aA\rightarrow 0$$
+
+Remembering the previously shown isomorphisms, this becomes:
+$$aA\otimes_A aA\rightarrow aA\rightarrow 0\rightarrow 0$$
+
+Now, notice that the induced epimorphism $aA\otimes_A aA\rightarrow A\otimes_A aA\xrightarrow{\sim} aA$ is such that $ab\otimes_A ab'$ is sent to $ab\otimes_A ab'$ and finally to $a^2bb'$, hence its image is precisely $a^2A$ (we may pick $b'=1$) and it is equal, by exactness, to $aA$. It follows that the inclusion $a^2A\rightarrow aA$ is an epimorphism making the desired sequence exact.
+
+$(c)$ Being the last sequence exact, since all of $aA$ is mapped to 0, there must be an element $a^2b\in a^2A$ s.t. $a=a^2b$.
+
+
+~\\
+\exercise{3}
+
+$(a)$ Let $f\in\Q[x]$. Fixate a representation where each numerator is coprime to its denominator, which we require to be positive. Then, there exist some $N\in\Z_{>0}$ s.t. $Nf\in\Z[x]$. Let $N$ be the minimum among them, $M$ another one. Then, to be the minimum, $N$ will be the lcm among all the denominators, while $M$ will have to be divisible by $N$.
+
+\begin{align*}
+		\frac{1}{M}\cont(Mf) & =\frac{1}{M}\gcd(Mq_0,\ldots,Mq_n) \\
+		& =\frac{N}{M}\frac{1}{N}\gcd(\frac{M}{N}Nq_0,\ldots,\frac{M}{N}Nq_n) \\
+		& =\frac{N}{M}\frac{1}{N}\frac{M}{N}\cont(Nq_0,\ldots,Nq_n) \\
+		& =\frac{1}{N}\gcd(Nq_0,\ldots,Nq_n) \\
+		& =\frac{1}{N}\cont(Nf)
+\end{align*}
+
+This proves that our function does not depend on the choice of $M$ for each $f\in\Q[x]$.
+
+Now notice that, $\forall n\in\Z\setminus\{0\}$, chosen an $N$ big enough, s.t. $Nf\in\Z[x]$, we get that:
+$$\cont(nf)=\frac{1}{N}\gcd(Nnq_0,\ldots,Nnq_n)=n\frac{1}{N}\gcd(Nq_0,\ldots,Nq_n)=n\cont(f)$$
+
+Thanks to this, we may assume that $f$ is a polynomial in $\Z[x]$ while computing.
+
+Since $f\in\Z[x]$, we have that $f=\cont(f)f'$, $f'\in\Z[x]$ (we are taking $f'=f/\cont(f)$, i.e. dividing the coefficients by their gcd, s.t. $f'$ is a primitive polynomial). Doing the same for $g$, we have $fg=\cont(f)\cont(g)f'g'$. Since the product of two primitive polynomials is primitive, we get that $\cont(fg)=\cont(\cont(f)\cont(g)f'g')=\cont(f)\cont(g)\cont(f'g')=\cont(f)\cont(g)$.
+
+$(b)$ Let $\mi$ be a maximal ideal of $\Z[x]$ and suppose $\mi\cap\Z=(0)$. Let $\mi'$ be a maximal ideal of $\Q[x]$ containing $\mi$. It is a proper ideal of $\Q[x]$ because it doesn't contain any units, hence $\mi'\cap\Z[x]=\mi$ (for otherwise it would be a proper ideal of $\Z[x]$ containing $\mi$) with $\mi'=(f(x))$, $\deg(f)>0$, where $f$ is irreducible in $\Q[x]$ and hence in $\Z[x]$. Without loss of generality, let $f\in\Z[x]$, $\cont(f)=1$ (we can do this by looking at the arguments given earlier in point $(a)$; furthermore, by an argument I am about to give, $\cont(f)=1$ is a necessary requirement to be irreducible in $\Z[x]$).
+
+We will show that $\mi=(f(x))$.
+
+Let $h\in\mi$ be an irreducible polynomial $\Z[x]$. It has to have content 1, for otherwise it would be divisible by a non-invertible element of $\Z$ and a polynomial of degree greater than 0, which are both non-invertible elements of $\Z[x]$. It is a multiple of $f$ by an element of $\Q[x]$, $h=fg$. This element, since $\cont(h)=\cont(fg)=\cont(f)\cont(g)$, has to have $\cont(g)=1$.
+
+If $g\in\Z[x]$, then we are done. Suppose $g\not\in\Z[x]$. Then, there would be an $n\in\Z_{>0}$ s.t. $ng\in\Z[x]$, thus $nh=nfg$. Being $\Z[x]$ a UFD, since $f$ is irreducible and hence prime, $nh\in (f)$ implies that $h\in(f)$, for otherwise $n\in(f)\subset\mi$, against the assumption. It follows that $(f)=\mi$ because, given any element of $\mi$, there is an irreducible factor in $\mi$.
+
+Now, we prove that $\Z[x]/(f(x))$ is not a field. Let $a\in\Z$ be s.t. $f(a)\not\in\Z\setminus\{0,\pm 1\}$, while $p$ is prime dividing $f(a)$. Consider $\phi:\Z[x]\rightarrow\F_{p}$, the unique homomorphism with $\phi(x)=[a]$.
+
+$\phi$ factors through $\Z[x]/(f(x))$ because $\phi(f(a))=[f(a)]=[0]$. Since $\Z[x]/(f(x))$ is infinite, the induced map $\tilde{\phi}:\Z[x]/(f(x))\rightarrow\F_{p}$ is not bijective.
+
+Now, we want to show that $\tilde{\phi}$ is not the zero-map, such that  $\ker(\tilde{\phi})$ will be a non-trivial ideal of $\Z[x]/(f(x))$, which therefore will not be a field.
+
+If it was the zero-map, then $\tilde{\phi}(1)=0$, i.e. there would be $u,v\in\Z[x]$ s.t. $1=u(x)f(x)+pv(x)$. Choosing $x=a$, we get $1=u(a)f(a)+pv(a)$, which is divisible by $p$ and at the same time equal to 1, hence the map can't be trivial.
+
+$(c)$ Now, assume that $\mi\cap\Z\neq(0)$. Since $\Z/(\mi\cap\Z)$ injects into $\Z[x]/\mi$, it is a domain, hence $\mi\cap\Z$ is prime in $\Z$ and $\mi\cap\Z=(p)$, where $p$ is prime.
+
+Let $\mi'$ be the image of $\mi$ in $\F_{p}[x]$ (under the epimorphism). By the 1:1 correspondence between the ideals containing the kernel and the ones in the codomain, composing the projections, we get the isomorphism $\Z[x]/\mi\cong \F_{p}[x]/\mi'$. It follows that, since $\F_{p}[x]$ is a PID, $\mi'=(f(x))$, where $f(x)\in\F_{p}[x]$ is irreducible.
+
+Now, let $g(x)\in\Z[x]$ be s.t. $g(x)=f(x)\mod p$. Clearly, $\mi=(p,g(x))$, and the proof is finished.
+
+
+\begin{thebibliography}{9}
+\bibitem{atm}
+		M.F. Atiyah, I.G. Macdonald,
+		\textit{Introduction to Commutative Algebra},
+		CRC Press,
+		1994.
+\end{thebibliography}
+
+\end{document}

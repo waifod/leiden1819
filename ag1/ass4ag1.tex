@@ -1,0 +1,269 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+\newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"]}
+\newcommand\dhrightarrow{%
+		\mathrel{\ooalign{$\rightarrow$\cr%
+		$\mkern3.5mu\rightarrow$}}
+}
+
+\newcommand\dhxrightarrow[2][]{%
+		\mathrel{\ooalign{$\xrightarrow[#1\mkern4mu]{#2\mkern4mu}$\cr%
+		\hidewidth$\rightarrow\mkern4mu$}}
+}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Op}{Open}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+
+\begin{document}
+
+\title{Algebraic Geometry 1 - Assignment 4}
+
+\author{Matteo Durante, 2303760, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{6.6.7}
+
+We will first try to determine a pair of affine open subspaces of $\Ps^2_{\K}$, $U_i,U_j$, with $i<j$, s.t. $X\subset U_i\cup U_j$. In order to do this, we may just fix $x_i=0$ for some $i$ in order to determine if there is any point of $X$ not lying in $U_i$ and to which other $U_j$ this point belongs.
+\begin{align*}
+  x_0=0 \quad\quad & x_1^n+x_2^n=0 & X\cap\V(x_0)\subset U_1,U_2 \\
+  x_1=0 \quad\quad & x_2(x_0^{n-1}-x_2^{n-1})=0 & X\cap\V(x_1)\subset U_0 \\
+  x_2=0 \quad\quad & x_1^n=0 & X\cap\V(x_2)\subset U_0
+\end{align*}
+It follows that, after setting $X_i=X\cap U_i$, $X=(X\cap U_0)\cup (X\cap U_2)=X_0\cup X_2$ is a decomposition in affine open subsets, thanks to the isomorphism between $U_i$ and $\A^2_{\K}$ and the fact that $X\cap U_i$ is closed in $U_i$ (and hence isomorphic to an affine algebraic variety), but open in $X$. Furthermore, being $X$ a projective variety, it is separated by~\cite[ex. 6.6.1]{edix}, hence by~\cite[prop. 6.1.5]{edix} $X_{01}=X_0\cap X_1$ is an affine open subset.
+
+We see that $X_0=\{(1:x_1:x_2)\in\Ps^2_{\K}\ |\ x_1^n=x_2-x_2^n\}$ and $X_2=\{(x_0:x_1:1)\ |\ x_1^n-x_0^{n-1}+1=0\}$, hence, considering the isomorphisms $\phi_i:U_i\rightarrow\A^2_{\K}$ to carry over the problem to $\A^2_{\K}$, we have that $\mathcal{O}_{\phi_0(X_0)}(\phi_0(X_0))\cong\K[x_1,x_2]/(x_1^n+x_2^n-x_2)$ and $\mathcal{O}_{\phi_2(X_2)}(\phi_2(X_2))\cong\K[x_0,x_1]/(x_1^n-x_0^{n-1}+1)$.
+
+Indeed, by applying the generalized Eisenstein criterion to the primitive polynomial $x_1^n+x_2^n-x_2\in\K[x_2][x_1]$ using the irreducible element $x_2$, we see that $x_1^n+x_2^n-x_2$ is irreducible, hence $\I(\phi_0(X_0))=(x_1^n+x_2^n-x_2)$.
+
+Furthermore, if the characteristic of $\K$ is 0 or $p\not |\ n-1$, then $x_1^n-x_0^{n-1}+1$ is s.t. $x_0^{n-1}-1$ has no multiple roots because $|\Delta(x_0^{n-1}-1)|=(n-1)^{n-1}\neq 0$, hence we may apply the generalized Eisenstein criterion to the primitive polynomial $x_1^n-(x_0^{n-1}-1)\in\K[x_0][x_1]$ using the irreducible element $x_0-1$ and see that $x_1^n-x_0^{n-1}+1$ is irreducible in $\K[x_0,x_1]$.
+
+If the characteristic $p|n-1$, then $p\not |\ n$ and we consider the primitive polynomial $x_0^{n-1}-(x_1^n+1)\in\K[x_1][x_0]$. Again, $|\Delta(x_1^n+1)|=n^n\neq 0$, hence it has no multiple roots and we may apply again the generalized Eisenstein criterion using $x_1+1$ to derive that the polynomial $x_1^n-x_0^{n-1}+1$ is an irreducible element of $\K[x_0,x_1]$.
+
+In both cases, $\I(\phi_2(X_2))=(x_1^n-x_0^{n-1}+1)$.
+
+Using again the isomorphisms, we get that $\mathcal{O}_X(X_0)=\mathcal{O}_{X_0}(X_0)\cong\K[x_{01},x_{02}]/(x_{01}^n+x_{02}^n-x_{02})$ and $\mathcal{O}_X(X_2)=\mathcal{O}_{X_2}(X_2)\cong\K[x_{20},x_{21}]/(x_{21}^n-x_{20}^{n-1}+1)$.
+
+Now we shall find $\mathcal{O}_X(X_{02})$. Carrying over again the problem to $\A^2_{\K}$, we see that $\phi_0(X_{02})=\phi_0(X_0\cap U_2)=\phi_0(X_0)\cap D(x_2)$.
+
+By~\cite[thm. 5.1.7]{edix}, using again the fact that $\phi_0$ is an isomorphism, and hence even its adequate restriction is, we have that $\mathcal{O}_X(X_{02})=\mathcal{O}_{X_0}(X_{02})\cong\mathcal{O}_{\phi_0(X_0)}(\phi_0(X_{02}))\cong\mathcal{O}_{\phi_0(X_0)}(\phi_0(X_0)\cap D(x_2))\cong\K[x_1,x_2,y]/(x_1^n+x_2^n-x_2,yx_2-1)$. Given how the isomorphism in~\cite[thm. 5.1.7]{edix} and $\phi_0$ are defined, we have that $\mathcal{O}_X(X_{02})\cong\K[x_{01},x_{02},x_{20}]/(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1)$ (indeed, $y$ is sent to an element which is inverse to the image of $x_2$, which is $x_{02}$).
+
+We may still adjoin $x_{21}$ (which is well defined on $X_{02}$) and expand the ideal by adding the relations defining it. In order to do this, we construct a projection from $\K[x_{01},x_{02},x_{20},x_{21}]$ onto $\K[x_{01},x_{02},x_{20}]/(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1)$ mapping $x_{ij}$ to $x_{ij}$ for $(i,j)\neq (2,1)$ and $x_{21}$ to $x_{20}x_{01}$. The kernel will be given by $(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1)$, to which are added $x_{20}x_{01}-x_{21}$ and, since $0=x_{01}-x_{01}=x_{02}(x_{20}x_{01})-x_{01}$, $x_{20}x_{01}-x_{21}$. It follows that $\mathcal{O}_X(X_{02})\cong\K[x_{01},x_{02},x_{20},x_{21}]/(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1,x_{02}x_{21}-x_{01},x_{20}x_{01}-x_{21})$.
+
+With the same procedure, we get that $\mathcal{O}_X(X_{20})\cong\K[x_{01},x_{02},x_{20},x_{21}]/(x_{21}^n-x_{20}^{n-1}+1,x_{02}x_{20}-1,x_{02}x_{21}-x_{01},x_{20}x_{01}-x_{21})$.
+
+To exhibit the identity isomorphism, it is enough to show that the two ideals we are quotienting by are equal.
+
+Considering $\mathcal{O}_X(X_{02})$ and working with the classes, we see that $x_{21}^n+x_{20}^{n-1}+1=x_{20}^n(x_{01}^n+x_{02}^n-x_{02})=0$, i.e. $x_{21}^n+x_{20}^{n-1}+1\in(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1,x_{20}x_{01}-x_{21},x_{20}x_{01}-x_{21})$. In the same way, considering $\mathcal{O}_X(X_{20})$, $x_{01}^n+x_{02}^n-x_{02}=x_{01}^n(x_{12}^n-x_{12}x_{10}^{n-1}+1)=0$, therefore we are done.
+
+The maps $\psi_{ij}:\mathcal{O}_X(X_{ij})\xrightarrow{\sim}\mathcal{O}_X(X_{ji})$ are given by the identities, while the maps $\psi_i:\mathcal{O}_{X}(X_j)\rightarrow\mathcal{O}_{X}(X_{ji})$ are given by the restrictions. Furthermore, $\psi_{ii}=\Id_i:\mathcal{O}_X(X_i)\rightarrow\mathcal{O}_X(X_i)$ as $X_{ii}=X_i$.
+
+Notice that, for any $n$ and every field $\K$, seeing $x_1^n-x_2x_0^{n-1}+x_2^n=x_1^n+(x_2^{n-1}-x_0^{n-1})x_2$ as a primitive polynomial in $x_1$ with coefficients in $\K[x_0,x_2]$, we may apply the generalized Eisenstein criterion using the prime element $x_2$, which tells us that this polynomial is an irreducible element of $\K[x_0,x_2][x_1]$ and hence $X$ is an irreducible variety with $\I(X)=(x_1^n-x_2x_0^{n-1}+x_2^n)$.
+
+Now we shall find the points at which this variety is smooth or singular.
+
+To do this, we may simply check if these points are smooth in $X_0,X_2$, for smoothness is a local condition and it is satisfied as long as there is an affine neighbourhood where it holds, hence looking at a point in $X$ or in an affine open subset is equivalent. As we have seen, these are open subsets isomorphic to affine varieties in $\A^2_{\K}$ of dimension $1=2-1$, as the latter are defined by single irreducible polynomials.
+
+We may therefore check smoothness there (on the varieties in $\A^2_{\K}$) by looking at the solutions of the system of equations given by their defining polynomials and their Jacobian matrices by what has been stated during the lectures (we have been given a slightly different version of~\cite[thm. 6.4.5]{edix} linking our definition to Hartshorne's).
+
+To shorten the computations, we shall work anyway with $x_1^n-x_2x_0^{n-1}+x_2^n$ in $\Ps^2_{\K}$, since it is then sufficient to differentiate between the solutions in $X_0$ (setting $x_0=1$) and the ones in $X_2$ ($x_2=1$), which have to be considered together in the end anyway, rendering the distinction superfluous.
+
+Fixing $n>2$, $\nabla(x_1^n-x_2x_0^{n-1}+x_2^n)=(-(n-1)x_0^{n-2}x_2,nx_1^{n-1},nx_2^{n-1}-x_0^{n-1})$, to find the singular points $P\in X$ we only have to find the non-trivial solutions of the following system of equations for fields with different characteristics:
+$$
+\begin{cases}
+  x_1^n-x_2x_0^{n-1}+x_2^n=0 \\
+  -(n-1)x_0^{n-2}x_2=0 \\
+  nx_1^{n-1}=0 \\
+  nx_2^{n-1}-x_0^{n-1}=0 \\
+\end{cases}
+$$
+
+If the field has characteristic 0 or $p\not |\ n(n-1)$, then this translates to:
+$$
+\begin{cases}
+  x_1^n-x_2x_0^{n-1}+x_2^n=0 \\
+  x_0=0\ \lor\ x_2=0 \\
+  x_1=0 \\
+  x_0^{n-1}=nx_2^{n-1}
+\end{cases}
+$$
+
+This system only has trivial solutions, hence the variety is smooth at every point in $\Ps^2_{\K}$.
+
+If the field has characteristic $p|n$, then it becomes:
+$$
+\begin{cases}
+  x_1^n-x_2x_0^{n-1}+x_2^n=0 \\
+  x_0=0\ \lor\ x_2=0 \\
+  0=0 \\
+  x_0=0
+\end{cases}
+\begin{cases}
+  x_1^n+x_2^n=0 \\
+  x_0=0
+\end{cases}
+$$
+
+It follows that in this case the variety is smooth at every point, except for those which lie in the set $\{(0:p_1:p_2)\in\Ps^2_{\K}\ |\ p_1^n+p_2^n=0\}=\{(0:1:p_2)\in\Ps^2_{\K}\ |\ p_2^n=-1\}$.
+
+If the field has characteristic $p\ |\ n-1$:
+$$
+\begin{cases}
+  x_1^n-x_2x_0^{n-1}+x_2^n=0 \\
+  0=0 \\
+  x_1=0 \\
+  x_0^{n-1}=x_2^{n-1}
+\end{cases}
+\begin{cases}
+  x_1=0 \\
+  x_0^{n-1}=x_2^{n-1}
+\end{cases}
+$$
+
+It follows that in this case the variety is smooth at every point, except for those which lie in the set $\{(p_0:0:p_2)\in\Ps^2_{\K}\ |\ p_0^{n-1}+p_2^{n-1}=0\}=\{(1:0:p_2)\in\Ps^2_{\K}\ |\ p_2^n=-1\}$.
+
+Now we shall consider the case where $n=2$. We see that $X=\V(x_1^2-x_0x_2+x_2^2)$, hence $\nabla(x_1^2-x_0x_2+x_2^2)=(-x_2,2x_1,2x_2)$. The system of equations becomes:
+$$
+\begin{cases}
+  x_1^2-x_0x_2+x_2^2=0 \\
+  -x_2=0 \\
+  2x_1=0 \\
+  2x_2-x_0=0
+\end{cases}
+$$
+
+If the field has characteristic $\neq 2$, then it becomes:
+$$
+\begin{cases}
+  x_1^2-x_0x_2+x_2^2=0 \\
+  x_2=0 \\
+  x_1=0 \\
+  x_0=2x_2
+\end{cases}
+$$
+
+It follows that in this case, since there is only the trivial solution, the variety is smooth at every point.
+
+If instead the field has characteristic 2, then:
+$$
+\begin{cases}
+  x_1^2-x_0x_2+x_2^2=0 \\
+  x_2=0 \\
+  0=0 \\
+  x_0=0
+\end{cases}
+\begin{cases}
+  x_1=0 \\
+  x_2=0 \\
+  x_0=0
+\end{cases}
+$$
+
+It follows again that in this case, since there is only the trivial solution, the variety is smooth at every point.
+
+Now we shall give a presentation of $X\times X$. Notice that $X\times X =\bigcup_{i,j=0,2} X_i\times X_j$, hence we may make use of what we constructed earlier.
+
+We see that, by a slight generalization of~\cite[lemma 5.2.1]{edix}, since each $X_i$ is an affine variety, $\mathcal{O}_{X\times X}(X_0\times X_0)\cong\mathcal{O}_X(X_0)\otimes_{\K}\mathcal{O}_X(X_0)\cong\K[x_{01},x_{02}]/(x_{01}^n+x_{02}^n-x_{02})\otimes_{\K}\K[y_{01},y_{02}]/(y_{01}^n+y_{02}^n-y_{02})\cong\K[x_{01},x_{02},y_{01},y_{02}]/(x_{01}^n+x_{02}^n-x_{02},y_{01}^n+y_{02}^n-y_{02})$.
+
+In the same way we get that $\mathcal{O}_{X\times X}(X_0\times X_2)\cong\K[x_{01},x_{02},y_{20},y_{21}]/(x_{01}^n+x_{02}^n-x_{02},y_{21}^n-y_{20}^{n-1}+1)$, $\mathcal{O}_{X\times X}(X_2\times X_0)\cong\K[x_{20},x_{21},y_{01},y_{02}]/(x_{21}^n-x_{20}^{n-1}+1,y_{01}^n+y_{02}^n-y_{02})$ and $\mathcal{O}_{X\times X}(X_2\times X_2)\cong\K[x_{20},x_{21},y_{20},y_{21}]/(x_{21}^n-x_{20}^{n-1}+1,y_{21}^n-y_{20}^{n-1}+1)$.
+
+We still need to define $\mathcal{O}_{X\times X}((X_h\times X_i)\cap(X_j\times X_k))$. Thanks to the same considerations, noticing that all the possible intersections $(X_h\times X_i)\cap(X_j\times X_k)=X_{hj}\times X_{ik}$ (up to reordering the indexes, which would give us the same varieties and hence isomorphic subvarieties anyway) are $X_0\times X_{02},X_2\times X_{02},X_{02}\times X_0,X_{02}\times X_2,X_{02}\times X_{02}$, we get the following, which comes from the fact that $\mathcal{O}_{X\times X}(X_{hi}\times X_{jk})\cong\mathcal{O}_X(X_{hi})\otimes_{\K}\mathcal{O}_X(X_{jk})$ by the previously mentioned lemma:
+\begin{align*}
+  \mathcal{O}_{X\times X}(X_0\times X_{02})\cong\frac{K[x_{01},x_{02},y_{01},y_{02},y_{20},y_{21}]}{(x_{01}^n+x_{02}^n-x_{02},y_{01}^n+y_{02}^n-y_{02},y_{02}y_{20}-1,y_{02}y_{21}-y_{01},y_{20}y_{01}-y_{21})} \\
+  \mathcal{O}_{X\times X}(X_2\times X_{02})\cong\frac{\K[x_{20},x_{21},y_{01},y_{02},y_{20},y_{21}]}{(x_{21}^n-x_{20}^{n-1}+1,y_{01}^n+y_{02}^n-y_{02},y_{02}y_{20}-1,y_{02}y_{21}-y_{01},y_{20}y_{01}-y_{21})} \\
+  \mathcal{O}_{X\times X}(X_{02}\times X_0)\cong\frac{\K[x_{01},x_{02},x_{20},x_{21},y_{01},y_{02}]}{(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1,x_{02}x_{21}-x_{01},x_{20}x_{01}-x_{21},y_{01}^n+y_{02}^n-y_{02})} \\
+  \mathcal{O}_{X\times X}(X_{02}\times X_2)\cong\frac{\K[x_{01},x_{02},x_{20},x_{21},y_{20},y_{21}]}{(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1,x_{02}x_{21}-x_{01},x_{20}x_{01}-x_{21},y_{21}^n-y_{20}^{n-1}+1)} \\
+  \mathcal{O}_{X\times X}(X_{02}\times X_{02})\cong\K[x_{01},x_{02},x_{20},x_{21},y_{01},y_{02},y_{20},y_{21}]/(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1,x_{02}x_{21}-x_{01},x_{20}x_{01}-x_{21},\\ y_{01}^n+y_{02}^n-y_{02},y_{02}y_{20}-1,y_{02}y_{21}-y_{01},y_{20}y_{01}-y_{21})
+\end{align*}
+Here I have not given a representation of the products involving $X_{20}$ because what they should be is clear from what I have written so far, but that data is part of the presentation.
+
+The homomorphism $\psi_{jk}:\mathcal{O}_{X\times X}(X_h\times X_i)\rightarrow\mathcal{O}_{X\times X}(X_{hj}\times X_{ik})$ is given by $\psi_j\otimes_{\K}\psi_k$, while $\psi_{hi,jk}:=\psi_{hi}\otimes_{\K}\psi_{jk}$. The required properties are trivially satisfied because the tensor product commutes with the composition, hence they derive from the corresponding properties of the original ones.
+
+
+~\\
+\exercise{6.6.8}
+
+$(i)$ Let $f\in\ker(\delta_0)$. Then, for every $i$ we have $f|_{X_i}=0=0|_{X_i}$ and, being $\mathcal{O}_X$ a sheaf, $(X_i)_{i\in I}$ an open cover of $X$, by the glueing axioms $f=0$ in $\mathcal{O}_X(X)$.
+
+Let now $(f_i)_{i\in I}\in\ker(\delta_1)$. Then, for each $i,j$ we have that $f_i|_{X_i\cap X_j}-f_j|_{X_i\cap X_j}=0$, i.e. $f_i|_{X_i\cap X_j}=f_j|_{X_i\cap X_j}$. Again, by the glueing axioms, there exists $f\in\mathcal{O}_X(X)$ s.t. $f|_{X_i}=f_i$ for every $i$, thus $\delta_0(f)=(f|_{X_i})_{i\in I}=(f_i)_{i\in I}$.
+
+Furthermore, since for every $f\in\mathcal{O}_X(X)$ and every $i,j$ we have that $\delta_0(f)_i|_{X_{ij}}=f|_{X_i}|_{X_{ij}}=f|_{X_{ij}}=f|_{X_j}|_{X_{ij}}=\delta_0(f)_j|_{X_{ij}}$ by the commutativity of the diagram, $\delta_1(\delta_0(f))=0$, thus $\Ima(\delta_0)=\ker(\delta_1)$.
+
+$(ii)$ Remembering that $X$ is an irreducible closed subset of $\Ps^2_{\K}$, it is connected and, being any element of $\mathcal{O}_X(X)$ locally constant by~\cite[thm. 4.2.5]{edix}, it has to be constant on all of $X$. It follows that $\mathcal{O}_X(X)=\K$.
+
+$(iii)$ We have that $\Ima(\delta_1)$ has a system of generators, as a $\K$-vector space, given by the images of $\{(x_{01}^ix_{02}^j,0)\ |\ 0\leq i<n,j\in\N\}\cup\{(0,x_{20}^ix_{21}^j)\ |\ i\in\N, 0\leq j<n\}$.
+
+Indeed, any element of $\mathcal{O}_X(X_0)$ is a linear combination of the $x_{01}^ix_{02}^j$ and, since $x_{01}^n=x_{02}-x_{02}^n$, every time $i\geq n$ we can represent $x_{01}^ix_{02}^j$ with $x_{01}^{i-n}x_{02}^{j+1}-x_{01}^{i-n}x_{02}^{j+n}$, hence any element with $i\geq n$ can be removed from the system of generators and we will still have a system of generators.
+
+In the same way, in $\mathcal{O}_X(X_2)$, every element can be written as a linear combination of the $x_{20}^ix_{21}^j$ and, since $x_{21}^n=x_{20}^{n-1}-1$, we may represent any element with $j\geq n$ as $x_{20}^ix_{21}^j=x_{20}^{i+(n-1)}x_{21}^{j-n}-x_{20}^i$, hence any element with $j\geq n$ can be removed from the system of generators and we will still have a system of generators.
+
+We have to find a base of $\coker(\delta_1)$.
+
+Remembering that $\mathcal{O}_X(X_{02})\cong\K[x_{01},x_{02},x_{20}]/(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1)$, observing that the only elements which are not in $\Ima(\delta_1)$ are s.t. $x_{20}$ appears with an exponent $>0$, we get that the classes of the following elements give a system of generators for $\coker(f)$: $\{x_{01}^hx_{02}^jx_{20}^k\ |\ i,j\in\N, k>0\}$.
+
+Clearly, $j<k$, for otherwise we may represent the element with $x_{01}^hx_{02}^{j-k}\in\Ima(\delta_1)$. Furthermore, since for $j\leq k$ we have $x_{01}^hx_{02}^jx_{20}^k=x_{01}^hx_{20}^{k-j}$, we may just ignore the elements s.t. the exponent of $x_{02}$ is $\neq 0$.
+
+The refined system of generators is $\{x_{01}^hx_{20}^k\ |\ h\in\N,k>0\}$. We may furthermore use the fact that $x_{01}^n=x_{02}-x_{02}^n$ to represent $x_{01}^hx_{20}^k$ as $x_{01}^{h-n}x_{02}x_{20}^k-x_{01}^{h-n}x_{02}^nx_{20}^k$, thus we may discard the elements with $h\geq n$.
+
+Now, we have that $\{x_{01}^hx_{20}^k\ |\ 0\leq h<n,k>0\}$ is again a system of generators. In particular, they are linearly independent in $\mathcal{O}_X(X_{02})$, as combining linearly the elements we can't get a multiple of $x_{01}^n+x_{02}^n-x_{02}$. Furthermore, $x_{20}$ does not appear at all.
+
+Seeing that $\mathcal{O}_X(X_{02})\cong\K[x_{01},x_{02},x_{20}]/(x_{01}^n+x_{02}^n-x_{02},x_{02}x_{20}-1,x_{02}x_{21}-x_{01},x_{20}x_{01}-x_{21})$, $(0,x_{21})$ is sent to $-x_{21}=-x_{01}x_{20}$, hence $(0,x_{20}^ix_{21}^j)$ goes to $-x_{01}^jx_{20}^{i+j}$.
+
+We remember that $j<n$, $i\in\N$. We notice that, for an element $x_{01}^hx_{20}^k$ to be an image (up to sign) of a $(0,x_{20}^ix_{21}^j)$, it is necessary to have $h=j$, hence any element with $k<h$ will not lie in the image.
+
+Remembering that $k>0$, we fix a $h$ and then count the $k$ which are $>0$ and $<h$. As for $h=0,1$ we don't miss anything, we can start from $h=2$, where we miss only $k=1$, and then go on until $h=n-1$, missing every time one more element of our system of generators. It follows that overall, supposing $n>2$, we miss $((n-2)+1)(n-2)/2$ generators of the form $x_{01}^hx_{20}^{h-k}$, where $k$ ranges from $1$ to $h-1$ and $h$ goes from $2$ to $n-1$.
+
+If $n=2$, then the cokernel is trivial.
+
+We only have left to prove that all of them together are linearly independent in $\mathcal{O}_X(X_{02})$ and the subspace they span has trivial intersection with $\Ima(\delta_1)$, then we will be done.
+
+The linear independence is granted from the fact that we started from a set of linearly independent elements of $\mathcal{O}_X(X_{02})$, hence we only have to check the intersection. But by construction, each of these elements does not lie in the image, nor do their linear combinations, as $x_{20}$ appears with exponent $>0$ but lower than the one of the accompanying $x_{01}$, hence we are done.
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{edix}
+	B. Edixhoven, D. Holmes, A. Kret, L. Taelman,
+	\textit{Algebraic Geometry},
+	2018.
+\end{thebibliography}
+
+\end{document}
