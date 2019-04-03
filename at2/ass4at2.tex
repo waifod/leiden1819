@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+
+
+\begin{document}
+
+\title{Algebraic Topology II - Assignment 4}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+
+~\\
+\exercise{3}
+
+\begin{proof}
+    Our strategy will be to construct the space $K(\Z,n)$ from $S^n$ by glueing
+    disks of dimension $>n+1$.
+    
+    Assuming its construction, we will first prove that $H^n(X)\cong[X,S^n]$.
+    
+    By definition we have that, for $n>0$,
+    $H^n(-)\cong \tilde{H}^n(-)\cong [-,K(\Z,n)]$, thus $H^n(X)\cong[X,K(\Z,n)]$
+    and, by the cellular
+    approximation theorem, any class of maps in $[X,K(\Z,n)]$ is represented by
+    a cellular map. Since by assumption $X$ is a CW-complex of dimension $n$, we
+    have that the image of this map is contained in $S^n\subset K(\Z,n)$,
+    therefore it factors uniquely through $S^n$. This gives us a map
+    $[X,K(\Z,n)]\rightarrow[X,S^n]$.
+    
+    $(*)$ This association is well defined, for if two maps (which we may assume
+    cellular) $X\xrightarrow{f,g}K(\Z,n)$ are homotopic we have a homotopy $X\times I
+    \xrightarrow{H'} K(\Z,n)$ among them. Since $X\times I$ is a CW-complex of
+    dimension $n+1$ and there are no
+    $(n+1)$-cells in $K(\Z,n)$, being $f,g$ cellular maps, it corresponds to a
+    cellular homotopy $H$ between $f,g$ whose image is again in $S^n\subset
+    K(\Z,n)$. By factorizing $H$ through $S^n$, it follows that this homotopy
+    induces a homotopy between $f$ and $g$ seen as maps $X\rightarrow S^n$.
+
+    Viceversa, any equivalence class of $[X,S^n]$ induces naturally a
+    class of maps $X\rightarrow K(\Z,n)$ thanks to the composition with the
+    natural inclusion $S^n\xhookrightarrow{i} K(\Z,n)$. We will now check that
+    even this association is well defined.
+    
+    Let $f,g$ be homotopic maps $X\rightarrow S^n$. If there is a homotopy
+    $X\times I\xrightarrow{H}S^n$ among them, we
+    may naturally turn it into a homotopy between $i\circ f$ and $i\circ g$ by
+    considering $i\circ H$, hence we are done.
+
+    The association is injective, for if two maps $f,g$ are extended to
+    homotopic maps $i\circ f,i\circ g$, then we may apply the same reasoning as
+    before $(*)$ to deduce that $f$ and $g$ are homotopic as well.
+
+    In the same way, if we have two (cellular) maps $X\xrightarrow{f,g} K(\Z,n)$
+    inducing homotopic maps $X\rightarrow S^n$, then we may extend the homotopy
+    to a map $X\times I\rightarrow K(\Z,n)$ through the inclusion and get
+    another between $f$ and $g$.
+
+    We see that the two associations are naturally inverse to each other, hence
+    we have a bijection and it follows that $H^n(X)\cong[X,K(\Z,n)]\cong[X,S^n]$
+    for every $CW$-complex of dimension $n$.
+
+    We will now construct the aforementioned Eilenberg-MacLane space.
+
+    First of all, observe that we can choose $M(\Z,n)=S^n$. Indeed, $\pi_kS^n=0$
+    for $k<n$ by the cellular approximation theorem, which tells us that maps
+    $S^k\rightarrow S^n$ are homotopic to the constant map because $S^n$ can be
+    constructed using only a 0-cell and a $n$-cell. Furthermore, $\pi_nS^n=\Z$
+    by~\cite[cor. 15.7]{Sag17} and the well-known result about $n=1$. Also, this
+    fact is stated in~\cite[ex. 8.8]{HM19}.
+
+    By the proof of~\cite[thm. 8.9]{HM19}, $K(\Z,n)^{st}=P_n^{st}(S^n)$ is a
+    space with the desired properties. Notice that in its construction,
+    given in~\cite[lemmaa 8.4]{HM19}, no $(n+1)$-cells are attached to $S^n$,
+    hence we are done.
+\end{proof}
+
+
+\printbibliography
+
+\end{document}
+
+
