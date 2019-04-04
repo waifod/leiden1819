@@ -113,15 +113,44 @@
     by~\cite[cor. 15.7]{Sag17} and the well-known result about $n=1$. Also, this
     fact is stated in~\cite[ex. 8.8]{HM19}.
 
-    By the proof of~\cite[thm. 8.9]{HM19}, $K(\Z,n)^{st}=P_n^{st}(S^n)$ is a
-    space with the desired properties. Notice that in its construction,
-    given in~\cite[lemmaa 8.4]{HM19}, no $(n+1)$-cells are attached to $S^n$,
-    hence we are done.
+    By the proof of~\cite[thm. 8.9]{HM19}, $K(\Z,n)^{st}=P_n^{st}(S^n)$ is an
+    Eilenberg-MacLane space for $\tilde{H}^n(-)$. Notice that in its
+    construction, given in~\cite[lemmaa 8.4]{HM19}, no $(n+1)$-cells are
+    attached to $S^n$, hence we are done.
 \end{proof}
+
+
+~\\
+\exercise{4}
+
+\begin{proof}
+    Let $\gamma$ be the path mentioned. First, we define the natural map
+    required. To do so, for any $[f]\in\pi_n(F_{p(e_1)},e_1)$ let's look at the
+    following commutative diagram, where $h(t,\lambda)=p\gamma(\lambda)$ and $f$
+    is seen as a map $I^n\rightarrow E$:
+    \[
+        \begin{tikzcd}
+            I^n\arrow{r}{f}\arrow{d}
+            & E\arrow{d}{p} \\
+            I^n\times I\arrow[dotted]{ur}[description]{g}\arrow{r}{h}
+            & B
+        \end{tikzcd}
+    \]
+
+    Since $p$ is a Serre fibration, it induces a map $g$ s.t. $pg=h$. Also, this
+    map is unique by the homotopy lifting property.
+
+    We set the image of $[f]$ under the map we want to construct to be the class
+    of $g(t,1)$ in $\pi_n(F_{p(e_2)},e_2)$.
+
+    We want to show that this map is well defined, i.e. that $g(t,1)$ does
+    define a class of the desired homotopy group and that it is unique.
+
+    The fact that $g(t,1)$ is a map $I^n\rightarrow F_{p(e_2)}$
+\end{proof}
+
 
 
 \printbibliography
 
 \end{document}
-
-
