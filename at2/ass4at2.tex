@@ -69,7 +69,7 @@
     approximation theorem, any class of maps in $[X,K(\Z,n)]$ is represented by
     a cellular map. Since by assumption $X$ is a CW-complex of dimension $n$, we
     have that the image of this map is contained in $S^n\subset K(\Z,n)$,
-    therefore it factors uniquely through $S^n$. This gives us a map
+    therefore it factors through $S^n$. This gives us a map
     $[X,K(\Z,n)]\rightarrow[X,S^n]$.
     
     $(*)$ This association is well defined, for if two maps (which we may assume
@@ -124,32 +124,138 @@
 \exercise{4}
 
 \begin{proof}
-    Let $\gamma$ be the path mentioned. First, we define the natural map
-    required. To do so, for any $[f]\in\pi_n(F_{p(e_1)},e_1)$ let's look at the
-    following commutative diagram, where $h(t,\lambda)=p\gamma(\lambda)$ and $f$
-    is seen as a map $I^n\rightarrow E$:
+    $(a)$ We will first show how a map $X\rightarrow F_{p(e_1)}$ induces, with
+    the path mentioned, a map $X\rightarrow F_{p(e_2)}$, which we will show to
+    be unique up to homotopy.
+
+    Let $X$ be a CW-complex, $s$ the path from $p(e_1)$ to $p(e_2)$ induced
+    by the $\gamma$, $X\xrightarrow{f} F_{p(e_1)}$ continuous. Let's look at the
+    following commutative diagram, where $\tilde{\phi}$ is given by the
+    composition of $f$ with the inclusion $F_{p(e_1)}\hookrightarrow E$, 
+    $\Phi(x,t)=s(t)$:
     \[
         \begin{tikzcd}
-            I^n\arrow{r}{f}\arrow{d}
+            X\arrow{r}{\tilde{\phi}}\arrow{d}
             & E\arrow{d}{p} \\
-            I^n\times I\arrow[dotted]{ur}[description]{g}\arrow{r}{h}
+            X\times I\arrow[dotted]{ur}[description]{\tilde{\Phi}}\arrow{r}{\Phi}
             & B
         \end{tikzcd}
     \]
 
-    Since $p$ is a Serre fibration, it induces a map $g$ s.t. $pg=h$. Also, this
-    map is unique by the homotopy lifting property.
+    Since $p$ is a Serre fibration, by~\cite[p. 107, p.110]{FF16}, it induces a
+    map $\tilde{\Phi}$ s.t. $p\tilde{\Phi}=\Phi$ and
+    $\tilde{\Phi}|_{X\times\{0\}}=\tilde{\phi}$ (which we may pick s.t., for a
+    base point $x_0$ of $X$, $\tilde{\Phi}(x_0,t)=\gamma(t)$). We consider now
+    the map $h=\tilde{\Phi}|_{X\times\{1\}}$. By construction,
+    $ph(X)=p\tilde{\Phi}(X,1)=\Phi(X,1)=s(1)=e_2$ and therefore $h(X)\subset
+    p^{-1}(e_2)=F_{p(e_2)}$, hence we may define a map $g$ by restricting the
+    codomain of $h$ to $F_{p(e_2)}$. Also, $g(x_0)=e_2$.
 
-    We set the image of $[f]$ under the map we want to construct to be the class
-    of $g(t,1)$ in $\pi_n(F_{p(e_2)},e_2)$.
+    We now show that the homotopy class of $g$ does not depend on the lifting
+    $\tilde{\Phi}$ considered or on the choice of the path, as long as the
+    latter belongs to the same homotopy class.
 
-    We want to show that this map is well defined, i.e. that $g(t,1)$ does
-    define a class of the desired homotopy group and that it is unique.
+    Indeed, let $I\xrightarrow{s'}B$ be defined as $p\gamma'$, where $\gamma'$
+    is a path homotopic to $\gamma$ and going from $e_1$ to $e_2$. Let $\Phi',
+    \tilde{\Phi}',h'$ and $g'$ be defined from $f$ as their counterparts, this
+    time using $s'$.
 
-    The fact that $g(t,1)$ is a map $I^n\rightarrow F_{p(e_2)}$
+    Using the homotopy between $s$ and $s'$, we define a map $[-1,1]\times
+    I\xrightarrow{S}B$ which is a homotopy between $s*s'^{-1}$ and the constant
+    path at $p(e_2)$. Then, we define $(X\times[-1,1])\times I\xrightarrow{\psi}
+    B$ as $\psi(x,u,t)=S(u,t)$ and a map
+    $X\times[-1,1]\xrightarrow{\tilde{\psi}}E$ as
+    $\tilde{\psi}(x,u)=\tilde{\Phi}(x,-u)$ if $u\leq0$, $=\tilde{\Phi}'(x,u)$
+    otherwise. Applying the homotopy lifting property of the Serre fibration as
+    before, we get a homotopy $(X\times[-1,1])\times
+    I\xrightarrow{\tilde{\Psi}}E$, which restricted to $X\times(\{-1\}\times
+    I\cup [-1,1]\times\{0\}\cup\{1\}\times I)$ becomes a homotopy between $g$
+    and $g'$.
+
+    Now, setting $X=S^n$, we get that a map $S^n\xrightarrow{f}F_{p(e_1)}$
+    defines a map $S^n\xrightarrow{g}F_{p(e_2)}$ which is unique up to homotopy
+    and depends only on the homotopy class of $\gamma$, hence we have an
+    association $\pi_n(F_{p(e_1)},e_1)\xrightarrow{\alpha_{\gamma}}
+    \pi_n(F_{p(e_2)},e_2)$.
+
+    We want to prove that, given two paths $I\xrightarrow{\gamma,\gamma'}E$,
+    $\alpha_{\gamma*\gamma'}=\alpha_{\gamma'}\circ\alpha_{\gamma}$ when
+    $\gamma(1)=\gamma'(0)$.
+
+    Let $S^n\xrightarrow{f}F_{p(e_2)},\Phi,\tilde{\Phi}$ be the maps
+    constructed from $S^n\xrightarrow{r}F_{p(e_1)}$ using $\gamma$,
+    $S^n\xrightarrow{f'}F_{p(e_3)},\Phi',\tilde{\Phi'}$ the ones constructed
+    from $f$ using $\gamma'$ and $S^n\xrightarrow{f''}F_{p(e_3)},\Phi'',
+    \tilde{\Phi}''$ the ones created from $f$ using $\gamma*\gamma'$.
+
+    Observing that $\tilde{\Phi}'(x,0)=f(x)=\tilde{\Phi}(x,1)$, we can choose
+    choose $\tilde{\Phi}''$ s.t. $\tilde{\Phi}''(x,t)=\tilde{\Phi}(x,2t)$ for
+    $t\geq1/2$, $=\tilde{\Phi}(x,2t-1)$ for $t>1/2$ and the diagram will commute
+    because $\Phi''(x,t)=\Phi(x,2t)$ for $t\geq1/2$, $=\Phi(x,2t-1)$ for
+    $t>1/2$. The thesis follows as
+    $f''(x)=\tilde{\Phi}''(x,1)=\tilde{\Phi}'(x,1)=f'(x)$.
 \end{proof}
 
+\begin{proof}
+    $(b)$ We want to show that, given a path $I\xrightarrow{\gamma}E$ from $e_0\in
+    p^{-1}(b_0)$ to $e_1\in p^{-1}(b_1)$, $\alpha_{\gamma}$ defines a group
+    homomorphism $\pi_n(F_{p(e_1)},e_1)\rightarrow\pi_n(F_{p(e_2)},e_2)$ with
+    inverse $\alpha_{\gamma^{-1}}$.
 
+    Let $f,f'$ be maps $S^n\rightarrow F_{p(e_0)}$ with $f(x_0)=g(x_0)=e_0$.
+    Under $\alpha_{\gamma}$, $[f]$ and $[f']$ are sent to the homotopy classes
+    of $g(x)=\tilde{\Phi}(x,1)$ and $g'(x)=\tilde{\Phi}(x,1)$. We can construct
+    from $\tilde{\Phi},\tilde{\Phi}'$ the map $\tilde{\Phi}''$ defining the
+    image of $[f*g]$ by setting
+    $\tilde{\Phi}''(-,t)=\tilde{\Phi}(-,t)*\tilde{\Phi}'(-,t)$ for every $t$.
+    We can do this because, for every $t\in I$,
+    $\tilde{\Phi}(x_0,t)=\gamma(t)=\tilde{\Phi}'(x_0,t)$, hence they both define
+    elements of $\pi_n(E,\gamma(t))$. Also, the resulting map $\tilde{\Phi}''$
+    is continuous.
+
+    The fact that this $\tilde{\Phi}''$ is an adequate lifting comes from the
+    fact that
+    $p\tilde{\Phi}(x,t)=\Phi(x,t)=\gamma(t),\ p\tilde{\Phi}'(x,t)=\Phi'(x,t)=
+    \gamma(t)$ and therefore $p\tilde{\Phi}''(x,t)=\gamma(t)=\Phi''(x,t)$ with
+    $\tilde{\Phi}''(-,0)=\tilde{\Phi}(-,0)*\tilde{\Phi}'(-,0)=f*g$.
+
+    Finally, by definition $g*g'$ is given by $\tilde{\Phi}(-,1)*\tilde{\Phi}'
+    (-,1)$, which is precisely $=\tilde{\Phi}''(-,1)$, that is the map $f*f'$
+    is sent to up to homotopy.
+
+    Now we are going to prove that $\alpha_{\gamma^{-1}}$ is inverse to
+    $\alpha_{\gamma}$. To do this, it will be enough to check that
+    $\alpha_{\gamma^{-1}}\circ\alpha_{\gamma}=\Id_{\pi_n(F_{b_0},e_0)}$ by
+    simmetry.
+
+    By what we proved in $(a)$,
+    $\alpha_{\gamma^{-1}}\circ\alpha_{\gamma}=\alpha_{\gamma*\gamma^{-1}}$ and
+    homotopic paths define the same map, thus, since
+    $\gamma*\gamma^{-1}$ is homotopic to $const_{e_0}$,
+    $\alpha_{\gamma^{-1}}\circ\alpha_{\gamma}=\alpha_{const_{e_0}}$.
+
+    Now, noticing that under the latter map from an element
+    $[f]\in\pi_n(F_{b_0},e_0)$ we can define $\tilde{\Phi}$ simply as
+    $\tilde{\Phi}(-,t)=f$ and therefore associate $f$ to
+    $\tilde{\Phi}(-,1)=f$, we get that
+    $\alpha_{const_{e_0}}=\Id_{\pi_n(F_{b_0},e_0)}$ and we are done.
+\end{proof}
+
+\begin{proof}
+    $(c)$ Fixed $b_0\in B$ as a base point, we see that $F_{b_0}=\pi_1(B,b_0)$.
+    Let $e_0=const_{b_0}$.
+
+    Remember that $\pi_{n-1}(F_{b_0},e_0)=\pi_{n-1}(\Omega B,const_{b_0})\cong
+    \pi_n(B,b_0)$, hence we will define an action of $\pi_1(B,b_0)$ on
+    $\pi_{n-1}(F_{b_0},e_0)$ and we will get what we want.
+
+    Now, for an arbitrary $[\gamma]\in\pi_1(B,b_0)$, we can see it as an element
+    of $F_{b_0}$. Considered an element $[\beta]\in\pi_{n-1}(F_{b_0},e_0)$, we know
+    from $(a,b)$ that it naturally defines an endomorphism
+    $\pi_{n-1}(F_{b_0},e_0)\xrightarrow{\alpha_{\beta}}\pi_{n-1}(F_{b_0},e_0)$.
+
+    Consider $[\gamma]\in\pi_1(B,b_0)$.
+\end{proof}
 
 \printbibliography
 
