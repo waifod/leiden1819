@@ -242,19 +242,37 @@
 \end{proof}
 
 \begin{proof}
-    $(c)$ Fixed $b_0\in B$ as a base point, we see that $F_{b_0}=\pi_1(B,b_0)$.
-    Let $e_0=const_{b_0}$.
+    $(c)$ Remember that $\Omega B=\pi_1(B,b_0)$ is a topological group, hence
+    for any $[\gamma]\in\pi_1(B,b_0)$ the map $\Omega
+    B\xrightarrow{\gamma_\#}\Omega B$, $[\alpha]\mapsto 
+    [\gamma*\alpha*\gamma^{-1}]$ is continuous.
+    
+    Since homotopy relations are
+    preserved by compositions among continuous maps, we may define the action of
+    $[\alpha]\in\pi_1(B,b_0)$ on $\pi_n(\Omega B,[const_{b_0}])$ by defining, for
+    $[f]\in\pi_n(\Omega B,[const_{b_0}])$, $[\alpha]\cdot [f]=[\alpha_\#\circ f]$.
 
-    Remember that $\pi_{n-1}(F_{b_0},e_0)=\pi_{n-1}(\Omega B,const_{b_0})\cong
-    \pi_n(B,b_0)$, hence we will define an action of $\pi_1(B,b_0)$ on
-    $\pi_{n-1}(F_{b_0},e_0)$ and we will get what we want.
+    We will now check that this is an action as claimed.
 
-    Now, for an arbitrary $[\gamma]\in\pi_1(B,b_0)$, we can see it as an element
-    of $F_{b_0}$. Considered an element $[\beta]\in\pi_{n-1}(F_{b_0},e_0)$, we know
-    from $(a,b)$ that it naturally defines an endomorphism
-    $\pi_{n-1}(F_{b_0},e_0)\xrightarrow{\alpha_{\beta}}\pi_{n-1}(F_{b_0},e_0)$.
+    Let $[\beta]\in\pi_1(B,b_0)$. In what follows we shall write $\tilde{f(x)}$
+    to denote a representative of $f(x)$, which is an equivalence class. We see
+    that
+    $(\alpha*\beta)_\#(f(x))=[(\alpha*\beta)*\tilde{f(x)}*(\alpha*\beta)^{-1}]=
+[\alpha*(\beta*\tilde{f(x)}*\beta^{-1})*\alpha^{-1}]=\alpha_\#(\beta_\#(f(x)))$, hence
+    $([\alpha]*[\beta])\cdot [f]=[\alpha]\cdot ([\beta]\cdot [f])$.
 
-    Consider $[\gamma]\in\pi_1(B,b_0)$.
+    In particular,
+    $(const_{b_0})_\#(f(x))=[const_{b_0}*\tilde{f(x)}*const_{b_0}^{-1}]=[\tilde{f(x)}]=f(x)$
+    and therefore $[const_{b_0}]\cdot [f]=[f]$,
+    which confirms that this is a group action as desired.
+    
+    Using the fact that $\pi_{n-1}(\Omega B,[const_{b_0}])\cong\pi_n(B,b_0)$,
+    this induces an action of $\pi_1(B,b_0)$ on $\pi_n(B,b_0)$.
+
+    Notice that, for $n=1$, this is exactly the conjugation action, which, given
+    $[\gamma]\in\pi_1(B,b_0)$, maps $[\alpha]\in\pi_1(B,b_0)$ to $[\gamma]\cdot
+    [\alpha]=[\gamma*\alpha*\gamma^{-1}]$. This also defines a group
+    automorphism of $\pi_1(B,b_0)$ for every $[\gamma]\in\pi_1(B,b_0)$.
 \end{proof}
 
 \printbibliography
