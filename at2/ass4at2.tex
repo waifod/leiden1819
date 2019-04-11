@@ -72,8 +72,8 @@
     therefore it factors through $S^n$. This gives us a map
     $[X,K(\Z,n)]\rightarrow[X,S^n]$.
     
-    $(*)$ This association is well defined, for if two maps (which we may assume
-    cellular) $X\xrightarrow{f,g}K(\Z,n)$ are homotopic we have a homotopy $X\times I
+    $(*)$ This association is well defined, for if two cellular maps
+    $X\xrightarrow{f,g}K(\Z,n)$ are homotopic we have a homotopy $X\times I
     \xrightarrow{H'} K(\Z,n)$ among them. Since $X\times I$ is a CW-complex of
     dimension $n+1$ and there are no
     $(n+1)$-cells in $K(\Z,n)$, being $f,g$ cellular maps, it corresponds to a
@@ -169,7 +169,7 @@
     otherwise. Applying the homotopy lifting property of the Serre fibration as
     before, we get a homotopy $(X\times[-1,1])\times
     I\xrightarrow{\tilde{\Psi}}E$, which restricted to $X\times(\{-1\}\times
-    I\cup [-1,1]\times\{0\}\cup\{1\}\times I)$ becomes a homotopy between $g$
+    I\cup [-1,1]\times\{0\}\cup\{1\}\times I)$ induces a homotopy between $g$
     and $g'$.
 
     Now, setting $X=S^n$, we get that a map $S^n\xrightarrow{f}F_{p(e_1)}$
@@ -267,17 +267,23 @@
     Using the fact that $\pi_{n-1}(\Omega B,[const_{b_0}])\cong\pi_n(B,b_0)$,
     this induces an action of $\pi_1(B,b_0)$ on $\pi_n(B,b_0)$.
 
-    Notice that, for $n=1$, this is exactly the conjugation action, which, given
-    $[\gamma]\in\pi_1(B,b_0)$, maps $[\alpha]\in\pi_1(B,b_0)$ to $[\gamma]\cdot
-    [\alpha]=[\gamma*\alpha*\gamma^{-1}]$. This also defines a group
-    automorphism of $\pi_1(B,b_0)$ for every $[\gamma]\in\pi_1(B,b_0)$.
+    We will now consider the case where $n=1$.
+    
+    Since the elements of $\pi_0(\Omega B,[const_{b_0}])$ are homotopy classes
+    of pointed maps $S^0\xrightarrow{f}\Omega B$, we have that
+    $f(*)=[const_{b_0}],\ f(*_2)=[\alpha]\in\Omega
+    B=\pi_1(B,b_0)$ ($*_2$ is the point in $S^0$ which is not fixed).
 
-    We notice that, for $n=1$, $\pi_0(\Omega B,[const_{b_0}])$ is precisely the
-    set of path components of $\Omega B$, that is the set of homotopy classes of
-    loops in $B$ based at $b_0$. Under the canonical identification, the action
-    of $[\alpha]\in\pi_1(B,b_0)$ sends $[\beta]\in\pi_0(\Omega
-    B,[const_{b_0}])=\pi_1(B,b_0)$ to $[\alpha*\beta*\alpha^{-1}]$, hence it is
-    the conjugacy action and defines for every loop $[\alpha]$ an automorphism
+    In this case, given $[\alpha]\in\pi_1(B,b_0)$, we see that
+    $[\alpha]\cdot[f]=[\alpha_\#\circ f]$ and in particular $\alpha_\#\circ
+    f(*_2)=[\alpha*\tilde{f(*_2)}*\alpha^{-1}]$.
+
+    The canonical identification $\pi_0(\Omega
+    B,[const_{b_0}])\cong\pi_1(B,b_0)$ is s.t. $[f]\mapsto f(*_2)$, hence the
+    induced action of $\pi_1(B,b_0)$ on itself is s.t. for
+    any $[\beta]\in\pi_1(B,b_0)$ we have
+    $[\alpha]\cdot[\beta]=[\alpha*\beta*\alpha^{-1}]$. This is
+    the conjugation action and defines for every loop $[\alpha]$ an automorphism
     of $\pi_1(B,b_0)$.
 \end{proof}
 
