@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+
+
+\begin{document}
+
+\title{Algebraic Topology II - Assignment 5}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{2}
+
+\begin{proof}
+    $(a)$ We will make use of the Serre Spectral sequence given by the usual
+    fibration sequence $\Omega S^n\hookrightarrow PS^n\rightarrow S^n$ to
+    compute the cohomology groups and the cohomology ring of $\Omega S^n$,
+    $n>1$. Since what we are about to do will be useful in $(b)$, we will begin
+    our discussion generally and then specify whether $n$ is even or odd when it
+    matters. To have a graphical representation of the sequence we refer to the
+    notes.
+
+    First of all, since $S^n$ is a simply-connected pointed space, by~\cite[thm.
+    9.5]{HM19} we know that $E^{ij}_2=H^i(S^n,H^j(\Omega S^n))\Rightarrow
+    H^{i+j}(PS^n)$.
+
+    Also, the path space $PS^n$ is contractible, hence the $E_\infty$-page of
+    the spectral sequence has to be zero everywhere except for at $(0,0)$, where
+    it is $\Z$.
+
+    We know that $E^{ij}_2\cong H^j(\Omega S^n)$ for $i=0,n$, $=0$ otherwise. We
+    may then write $E^{0j}=H^j(\Omega S^n),\ E^{nj}_2=H^j(\Omega S^n)\cdot a$
+    for a generator $a\in H^n(S^n)$.
+
+    Observe that, since all of these groups are 0, all the differentials in the
+    sequence are zero, except some in the $n$-page among the following ones:
+    $E^{i,j+(n-1)}_n\xrightarrow{d_n}E^{i+n,j}_n$. This implies that all the
+    positions in the sequence may change only from the $n$-page to the
+    $(n+1)$-page.
+
+    It follows that $E^{0k}_2=E^{0k}_\infty$ for $k<n-1$ and, for $k\neq 0$,
+    $E^{0k}_2=0$.
+
+    Suppose now that $E^{0k}_2=0$ for some $k\in\N$. Remembering that
+    $E^{nk}_2\cong E^{0k}_2$ and these groups have remained stable from the
+    2-page to the n-page, this means that the differential $E^{0,k+(n-1)}_n
+    \xrightarrow{d_n} E^{n,k}_n$ is zero, thus $E^{0,k+(n-1)}_2$ remains stable
+    in the sequence as well and therefore it is $=0$.
+
+    It follows that $H^k(\Omega S^n)=0$ whenever $k\equiv1,\ldots n-2\mod n-1$.
+    Also, the only differentials which may still be non-zero are the ones
+    $E^{0,k(n-1)}\xrightarrow{d_n}E^{n,(k-1)(n-1)}$.
+
+    Now, since $E^{n,0}_m$ eventually has to vanish and the only non-zero map
+    into the $(n,0)$-position is $d_n$, we have that this map is actually
+    surjective. On the other hand,
+    $\ker(d_n)=E^{0,n-1}_{n+1}=E^{0,n-1}_\infty=0$, hence $d_n$ is an
+    isomorphism and $H^{n-1}(\Omega S^n)\cong\Z$.
+
+    Likewise, suppose that $E^{0,(k-1)(n-1)}\cong H^{(k-1)(n-1)}(\Omega S^n)
+    \cong\Z$. By applying the same reasoning as before to the map $d_n$ into
+    $E^{n,(k-1)(n-1)}$, we see that all of the remaining maps are actually
+    isomorphisms, hence $H^{k(n-1)}(\Omega S^n)\cong\Z$ for every $k\in\N$ and
+    it is $=0$ for all other indexes.
+
+    Now we will start describing the multiplicative structure on this ring.
+
+    Let $x_k\in H^{k(n-1)}(\Omega S^n)=E^{0,k(n-1)}$ be a generator. We may set
+    $x_0=1$ and choose $x_k$ for every $k>0$ s.t. $d_n(x_k)=x_{k-1}a$, which is
+    a generator of $E^{n,(k-1)(n-1)}_n$, where $d_n$ is the differential
+    $E^{0,k(n-1)}\xrightarrow{d_n}E^{n,(k-1)(n-1)}$. Notice that the choice is
+    actually unique because the maps are isomorphisms. $(*)$
+    
+    If $n$ is odd, then by the Leibniz rule $d_n(x_1^k)=x\cdot
+    d_n(x^{k-1})+d_n(x)\cdot x^{k-1}=\ldots=kx_1^{k-1}d_n(x_1)=kx_1^{k-1}\cdot
+    a$. Also, we know that $x_1^k\in H^{k(n-1)}(\Omega S^n)$ and therefore
+    $x_1^k=n_kx_k$, which implies that $d_n(x_1^k)=d_n(n_kx_k)=n_k\cdot
+    d(x_k)=n_kx_{k-1}\cdot a$. It follows that $kx_1^{k-1}\cdot a=n_kx_{k-1}
+    \cdot a$ and in particular $kx_1^{k-1}=n_kx_{k-1}$. Iterating, this means
+    that $x_1^k=k!x_k$, thus $x_k=\frac{x_1^k}{k!}$ is a generator of
+    $H^{k(n-1)}(\Omega S^n)$. The fact that $d_n$ is isomorphism guarantees that
+    we may actually ``divide'' uniquely $x_1^k$ by $k!$ in $H^{k(n-1)}(\Omega
+    S^n)$. Also, $x_kx_l=\frac{x_1^k}{k!}\cdot\frac{x_1^l}{l!}=\frac{(k+l)!}
+    {k!l!}\frac{x_1^{k+l}}{(k+l)!}=\binom{k+l}{k}x_{k+l}$.
+
+    All of this implies that $H^*(\Omega S^n)\cong\Gamma[x_1]$, where $x_1\in
+    H^{n-1}(\Omega S^n)$ is an element of degree $n-1$ (where $n$ is odd and
+    positive).
+\end{proof}
+
+\begin{proof}
+    $(b)$ We now begin the discussion of the case where $n$ is even and
+    positive from $(*)$.
+
+    By graded commutativity, since $x_1\in H^{n-1}(\Omega S^n)$ is of odd
+    degree, $x_1^2=0$. Also, $x_1x_k\in H^{(k+1)(n-1)}(\Omega S^n)$ can be
+    written as $n_kx_{k+1}$ for some integer $n_k$, thus
+    $d_n(x_1x_k)=d_n(n_kx_{k+1})=n_k\cdot d_n(x_{k+1})=n_kx_ka$. We also
+    know that $d_n(x_1x_k)=d(x_1)\cdot x_k-x_1\cdot
+    d(x_k)=ax_k-x_1x_{k-1}a=ax_k-n_{k-1}x_k a=(1-n_{k-1})x_ka$. Since
+    $n_1=0$, we get that $n_k$ is equal to $k+1\mod 2$ and therefore
+    $x_1x_k=x_kx_1=x_{k+1}$ if $k$ is even, $x_1x_k=x_kx_1=0$ otherwise.
+
+    We also have that $x_2\in H^{2(n-1)}(\Omega S^n)$ is s.t. it commutes with
+    every other element because of its degree and $d_n(x_2^k)=x_2\cdot
+    d(x_2^{k-1})+d(x_2^{k-1})\cdot x_2=kx_2^{k-1}x_1a$. Also, $x_2^k\in
+    H^{2k(n-1)}(\Omega S^n)$, thus $x_2^k=m_kx_{2k}$ for some integer $m_k$ and
+    $d_n(x_2^k)=d_n(m_kx_{2k})=m_k\cdot d_n(x_{2k})=m_kx_{2k-1}a$. It follows
+    that $m_kx_{2k-1}a=kx_2^{k-1}x_1a=km_{k-1}x_{2(k-1)}x_1a$.
+
+    Since $x_{2k-1}=x_1x_{2(k-1)}$ by what we showed earlier,
+    $m_kx_1x_{2(k-1)}a=km_{k-1}x_{2(k-1)}x_1a$, thus by induction $m_k=k!$ and
+    $x_{2k}=\frac{x_2^k}{k!}$, similarly to the case where $n$ is odd.
+
+    Let's write down all of the meaningful relations which derive from this:
+    \begin{align*}
+        x_1x_k=x_kx_1 &=\begin{cases}
+            x_{k+1}\textit{ if }k\equiv 0\mod 2 \\
+            0\quad\quad\textit{otherwise}
+        \end{cases} \\
+        x_2^k &=k!x_{2k} \\
+        x_{2k}x_{2l} &=\frac{x_2^k}{k!}\cdot\frac{x_2^l}{l!}=\frac{(k+l)!}{k!l!}
+        \frac{x_2^{k+l}}{(k+l)!}=\binom{k+l}{k}x_{2(k+l)} \\
+        x_{2k+1}x_{2l} &=x_1x_{2k}x_{2l}=\binom{k+l}{k}x_{2(k+l)+1}=
+        x_{2k}x_{2l}x_1=x_{2k}x_{2l+1} \\
+        x_{2k+1}x_{2l+1} &=x_{2k}x_1^2x_{2l}=0
+    \end{align*}
+    
+    It follows that, for $n$ even, $H^*(\Omega S^n)\cong\Gamma[x_2][x_1]/(x_1^2)
+    \cong\Gamma[x_2]\otimes\Z[x_1]/(x_1^2)$, where $x_1\in H^{n-1}(\Omega S^n)$
+    has degree $n-1$ and $x_2\in H^{2(n-1)}(\Omega S^n)$ has degree $2(n-1)$.
+\end{proof}
+
+\printbibliography
+
+\end{document}
