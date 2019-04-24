@@ -73,25 +73,25 @@
     it is $\Z$.
 
     We know that $E^{ij}_2\cong H^j(\Omega S^n)$ for $i=0,n$, $=0$ otherwise. We
-    may then write $E^{0j}=H^j(\Omega S^n),\ E^{nj}_2=H^j(\Omega S^n)\cdot a$
-    for a generator $a\in H^n(S^n)$.
+    may then write $E^{0j}=H^j(\Omega S^n),\ E^{nj}_2=H^j(\Omega S^n)\cdot
+    a\cong H^j(\Omega S^n)$ for a generator $a\in H^n(S^n)$.
 
     Observe that, since all of these groups are 0, all the differentials in the
-    sequence are zero, except some in the $n$-page among the following ones:
+    sequence are zero, except some in the $E_n$-page among the following ones:
     $E^{i,j+(n-1)}_n\xrightarrow{d_n}E^{i+n,j}_n$. This implies that all the
-    positions in the sequence may change only from the $n$-page to the
-    $(n+1)$-page.
+    positions in the sequence may change only from the $E_n$-page to the
+    $E_{n+1}$-page.
 
     It follows that $E^{0k}_2=E^{0k}_\infty$ for $k<n-1$ and, for $k\neq 0$,
     $E^{0k}_2=0$.
 
     Suppose now that $E^{0k}_2=0$ for some $k\in\N$. Remembering that
     $E^{nk}_2\cong E^{0k}_2$ and these groups have remained stable from the
-    2-page to the n-page, this means that the differential $E^{0,k+(n-1)}_n
-    \xrightarrow{d_n} E^{n,k}_n$ is zero, thus $E^{0,k+(n-1)}_2$ remains stable
-    in the sequence as well and therefore it is $=0$.
+    $E_2$-page to the $E_n$-page, this means that the differential
+    $E^{0,k+(n-1)}_n\xrightarrow{d_n} E^{n,k}_n$ is zero, thus $E^{0,k+(n-1)}_2$
+    remains stable in the sequence as well and therefore it is $=0$.
 
-    It follows that $H^k(\Omega S^n)=0$ whenever $k\equiv1,\ldots n-2\mod n-1$.
+    It follows that $H^k(\Omega S^n)=0$ whenever $k\equiv1,\ldots,n-2\mod n-1$.
     Also, the only differentials which may still be non-zero are the ones
     $E^{0,k(n-1)}\xrightarrow{d_n}E^{n,(k-1)(n-1)}$.
 
@@ -115,12 +115,14 @@
     $E^{0,k(n-1)}\xrightarrow{d_n}E^{n,(k-1)(n-1)}$. Notice that the choice is
     actually unique because the maps are isomorphisms. $(*)$
     
-    If $n$ is odd, then by the Leibniz rule $d_n(x_1^k)=x\cdot
-    d_n(x^{k-1})+d_n(x)\cdot x^{k-1}=\ldots=kx_1^{k-1}d_n(x_1)=kx_1^{k-1}\cdot
-    a$. Also, we know that $x_1^k\in H^{k(n-1)}(\Omega S^n)$ and therefore
+    If $n$ is odd, then all of the elements of $H^*(\Omega S^n)$ have even
+    degree, thus the cup product is commutative and by the Leibniz rule
+    $d_n(x_1^k)=x\cdot d_n(x^{k-1})+d_n(x)\cdot x^{k-1}=
+    \ldots=kx_1^{k-1}d_n(x_1)=kx_1^{k-1}a$.
+    Also, we know that $x_1^k\in H^{k(n-1)}(\Omega S^n)$ and therefore
     $x_1^k=n_kx_k$, which implies that $d_n(x_1^k)=d_n(n_kx_k)=n_k\cdot
-    d(x_k)=n_kx_{k-1}\cdot a$. It follows that $kx_1^{k-1}\cdot a=n_kx_{k-1}
-    \cdot a$ and in particular $kx_1^{k-1}=n_kx_{k-1}$. Iterating, this means
+    d(x_k)=n_kx_{k-1}a$. It follows that $kx_1^{k-1}a=n_kx_{k-1}a$ and in
+    particular $kx_1^{k-1}=n_kx_{k-1}$. Iterating, this means
     that $x_1^k=k!x_k$, thus $x_k=\frac{x_1^k}{k!}$ is a generator of
     $H^{k(n-1)}(\Omega S^n)$. The fact that $d_n$ is isomorphism and the
     cohomology groups we are considering are $\cong\Z$ guarantees that we may
@@ -148,7 +150,7 @@
 
     We also have that $x_2\in H^{2(n-1)}(\Omega S^n)$ is s.t. it commutes with
     every other element because of its degree and $d_n(x_2^k)=x_2\cdot
-    d(x_2^{k-1})+d(x_2^{k-1})\cdot x_2=kx_2^{k-1}x_1a$. Also, $x_2^k\in
+    d(x_2^{k-1})+d(x_2^{k-1})\cdot x_2=\ldots=kx_2^{k-1}x_1a$. Also, $x_2^k\in
     H^{2k(n-1)}(\Omega S^n)$, thus $x_2^k=m_kx_{2k}$ for some integer $m_k$ and
     $d_n(x_2^k)=d_n(m_kx_{2k})=m_k\cdot d_n(x_{2k})=m_kx_{2k-1}a$. It follows
     that $m_kx_{2k-1}a=kx_2^{k-1}x_1a=km_{k-1}x_{2(k-1)}x_1a$.
