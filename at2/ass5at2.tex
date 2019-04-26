@@ -72,8 +72,9 @@
     the spectral sequence has to be zero everywhere except for at $(0,0)$, where
     it is $\Z$.
 
-    We know that $E^{ij}_2\cong H^j(\Omega S^n)$ for $i=0,n$, $=0$ otherwise. We
-    may then write $E^{0j}=H^j(\Omega S^n),\ E^{nj}_2=H^j(\Omega S^n)\cdot
+    We know that $E^{ij}_2\cong H^j(\Omega S^n)$ for $i=0,n$ and it is $=0$ for
+    all the other indexes. We
+    may then write $E_2^{0j}=H^j(\Omega S^n),\ E_2^{nj}=H^j(\Omega S^n)\cdot
     a\cong H^j(\Omega S^n)$ for a generator $a\in H^n(S^n)$.
 
     Observe that, since all of these groups are 0, all the differentials in the
@@ -86,14 +87,14 @@
     $E^{0k}_2=0$.
 
     Suppose now that $E^{0k}_2=0$ for some $k\in\N$. Remembering that
-    $E^{nk}_2\cong E^{0k}_2$ and these groups have remained stable from the
+    $E^{nk}_2\cong E^{0k}_2$ and these groups remain stable from the
     $E_2$-page to the $E_n$-page, this means that the differential
     $E^{0,k+(n-1)}_n\xrightarrow{d_n} E^{n,k}_n$ is zero, thus $E^{0,k+(n-1)}_2$
     remains stable in the sequence as well and therefore it is $=0$.
 
     It follows that $H^k(\Omega S^n)=0$ whenever $k\equiv1,\ldots,n-2\mod n-1$.
     Also, the only differentials which may still be non-zero are the ones
-    $E^{0,k(n-1)}\xrightarrow{d_n}E^{n,(k-1)(n-1)}$.
+    $E_n^{0,k(n-1)}\xrightarrow{d_n}E_n^{n,(k-1)(n-1)}$.
 
     Now, since $E^{n,0}_m$ eventually has to vanish and the only non-zero map
     into the $(n,0)$-position is $d_n$, we have that this map is actually
@@ -101,19 +102,19 @@
     $\ker(d_n)=E^{0,n-1}_{n+1}=E^{0,n-1}_\infty=0$, hence $d_n$ is an
     isomorphism and $H^{n-1}(\Omega S^n)\cong\Z$.
 
-    Likewise, suppose that $E^{0,(k-1)(n-1)}\cong H^{(k-1)(n-1)}(\Omega S^n)
+    Likewise, suppose that $E_2^{0,(k-1)(n-1)}\cong H^{(k-1)(n-1)}(\Omega S^n)
     \cong\Z$. By applying the same reasoning as before to the map $d_n$ into
-    $E^{n,(k-1)(n-1)}$, we see that all of the remaining maps are actually
+    $E_n^{n,(k-1)(n-1)}$, we see that all of the remaining maps are actually
     isomorphisms, hence $H^{k(n-1)}(\Omega S^n)\cong\Z$ for every $k\in\N$ and
     it is $=0$ for all other indexes.
 
     Now we will start describing the multiplicative structure on this ring.
 
-    Let $x_k\in H^{k(n-1)}(\Omega S^n)=E^{0,k(n-1)}$ be a generator. We may set
-    $x_0=1$ and choose $x_k$ for every $k>0$ s.t. $d_n(x_k)=x_{k-1}a$, which is
-    a generator of $E^{n,(k-1)(n-1)}_n$, where $d_n$ is the differential
-    $E^{0,k(n-1)}\xrightarrow{d_n}E^{n,(k-1)(n-1)}$. Notice that the choice is
-    actually unique because the maps are isomorphisms. $(*)$
+    Let $x_k\in H^{k(n-1)}(\Omega S^n)=E_n^{0,k(n-1)}$ be a generator. We may
+    set $x_0=1$ and choose $x_k$ for every $k>0$ s.t. $d_n(x_k)=x_{k-1}a$, which
+    is a generator of $E^{n,(k-1)(n-1)}_n$, where $d_n$ is the differential
+    $E_n^{0,k(n-1)}\xrightarrow{d_n}E_n^{n,(k-1)(n-1)}$. Notice that the choice
+    is actually unique because the maps are isomorphisms. $(*)$
     
     If $n$ is odd, then all of the elements of $H^*(\Omega S^n)$ have even
     degree, thus the cup product is commutative and by the Leibniz rule
@@ -122,17 +123,22 @@
     Also, we know that $x_1^k\in H^{k(n-1)}(\Omega S^n)$ and therefore
     $x_1^k=n_kx_k$, which implies that $d_n(x_1^k)=d_n(n_kx_k)=n_k\cdot
     d(x_k)=n_kx_{k-1}a$. It follows that $kx_1^{k-1}a=n_kx_{k-1}a$ and in
-    particular $kx_1^{k-1}=n_kx_{k-1}$. Iterating, this means
-    that $x_1^k=k!x_k$, thus $x_k=\frac{x_1^k}{k!}$ is a generator of
-    $H^{k(n-1)}(\Omega S^n)$. The fact that $d_n$ is isomorphism and the
-    cohomology groups we are considering are $\cong\Z$ guarantees that we may
-    actually ``divide'' uniquely $x_1^k$ by $k!$ in $H^{k(n-1)}(\Omega S^n)$.
+    particular $kx_1^{k-1}=n_kx_{k-1}$. For $k=2$, this means that $n_2=2=2!$.
+
+    Suppose now that, for some $k\geq 2$, we have $n_k=k!$. Since
+    $n_{k+1}x_k=(k+1)x_1^k=(k+1)n_kx_k$, we have that
+    $n_{k+1}=(k+1)n_k=(k+1)\cdot k!=(k+1)!$, hence $x_1^k=k!x_k$ and
+    $x_k=\frac{x_1^k}{k!}$ is a generator of $H^{k(n-1)}(\Omega S^n)$. The fact
+    that $d_n$ is isomorphism and the cohomology groups we are considering are
+    $\cong\Z$ guarantees that we may actually ``divide'' uniquely $x_1^k$ by
+    $k!$ in $H^{k(n-1)}(\Omega S^n)$ and get $x_k$.
+    
     Also, $x_kx_l=\frac{x_1^k}{k!}\cdot\frac{x_1^l}{l!}=\frac{(k+l)!}{k!l!}
     \frac{x_1^{k+l}}{(k+l)!}=\binom{k+l}{k}x_{k+l}$.
 
-    All of this implies that $H^*(\Omega S^n)\cong\Gamma[x_1]$, where $x_1\in
-    H^{n-1}(\Omega S^n)$ is an element of degree $n-1$ (where $n$ is odd and
-    positive).
+    All of this implies that $H^*(\Omega S^n)\cong\Gamma[x_1]$ for $n>1$ odd,
+    where $x_1\in H^{n-1}(\Omega S^n)$ is an element of degree $n-1$ (which is
+    even and $>0$).
 \end{proof}
 
 \begin{proof}
@@ -173,9 +179,10 @@
         x_{2k+1}x_{2l+1} &=x_{2k}x_1^2x_{2l}=0
     \end{align*}
     
-    It follows that, for $n$ even, $H^*(\Omega S^n)\cong\Gamma[x_2][x_1]/(x_1^2)
-    \cong\Gamma[x_2]\otimes\Z[x_1]/(x_1^2)$, where $x_1\in H^{n-1}(\Omega S^n)$
-    has degree $n-1$ and $x_2\in H^{2(n-1)}(\Omega S^n)$ has degree $2(n-1)$.
+    It follows that, for $n>1$ even, $H^*(\Omega S^n)\cong
+    \Gamma[x_2][x_1]/(x_1^2)\cong\Gamma[x_2]\otimes\Z[x_1]/(x_1^2)$, where
+    $x_1\in H^{n-1}(\Omega S^n)$ has degree $n-1$ and
+    $x_2\in H^{2(n-1)}(\Omega S^n)$ has degree $2(n-1)$.
 \end{proof}
 
 \printbibliography
