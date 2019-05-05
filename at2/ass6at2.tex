@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\RP}{\R P^\infty}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+
+
+\begin{document}
+
+\title{}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{2}
+
+    We will use the fact that we are working with characteristic 2 to avoid
+    distinguishing between the signs of the terms, s.t. the Leibniz rule and the
+    cup products will be easier to write down.
+
+\begin{proof}
+    Let's consider the path fibration $K(\Z/2\Z,1)\rightarrow
+    PK(\Z/2\Z,1)\rightarrow K(\Z/2\Z,2)$. Since $PK(\Z/2\Z,1)$ is contractible,
+    we know that $E^{ij}_2=H^i(K(\Z/2\Z,2),H^j(K(\Z/2\Z,1),\Z/2\Z))\rightarrow
+    H^{i+j}(PK(\Z/2\Z,1),\Z/2\Z)$ by~\cite[thm. 9.5]{HM19}, hence the
+    $E_\infty$-page is 0 everywhere but at $(0,0)$, where there is $\Z/2\Z$.
+
+    We have that $K(\Z/2\Z,1)\cong\RP$ with $H^*(\RP,\Z/2\Z)=(\Z/2\Z)[a]$ for an
+    element $a$ of degree 1 and $H^j(\RP,\Z/2\Z)=\Z/2\Z\cdot a^j$ for all
+    $j\in\N$. It follows that $E^{ij}_2=H^i(K(\Z/2\Z,2),\Z/2\Z)\cdot a^j$.
+
+    Fixed $i$, we will be computing each $E^{ij}_2$ by determining $E^{i0}_2$
+    and then we will move on to the following integer.
+
+    We start by computing $E^{0j}_2$, which is actually already given as
+    $H^0(K(\Z/2\Z,2),\Z/2\Z)\cdot a^j=\Z/2\Z\cdot a^j$.
+
+    Let now $i=1$.
+    
+    No arrows will ever go into the $(1,0)$ position and all arrows from there
+    will end up below the $x$-axis for $d\geq 2$, hence
+    $E^{10}_2=E^{10}_\infty=0$. It follows that $H^i(K(\Z/2\Z,2),\Z/2\Z)=0$ and
+    therefore $E^{1j}_2=0$ for all $j\in\N$.
+
+    Let now $i=2$.
+
+    Again, there are no arrows into the $(2,0)$-position and for $d>2$ all of
+    the ones from there end up below the $x$-axis, hence
+    $E^{01}_2\xrightarrow{d_2}E^{20}_2$ has to be surjective for
+    $\coker(d_2)=E^{20}_3=E^{20}_\infty=0$. Since this is the only arrow from
+    the $(0,1)$-position, by the same reasoning it has to be also injective,
+    thus it is an isomorphism $(*)$. Let $x\in E^{20}_2$ be the generating
+    element s.t. $d_2(a)=x$. We then have that $E^{2j}_2=\Z/2\Z\cdot xa^j$.
+    
+    Let now $i=3$.
+
+    All of the arrows from the $(3,0)$-position end up below the $x$-axis and
+    there are no arrows going to the $(3,0)$-position besides $d_2$ and $d_3$.
+    However, $d_2$ has as domain $E^{11}_2=0$, thus $E^{30}_2=E^{30}_3$.
+
+    Let's compute $E^{02}_3=\ker(E^{02}_2\xrightarrow{d_2}E^{21}_2)$. We know
+    that $E^{02}_2=\Z/2\Z\cdot a^2$ and $d_2(a^2)=d_2(a)\cdot a+(-1)^{1+0}a\cdot
+    d_2(a)\cdot d(a)=0$, thus $E^{02}_3=E^{02}_2$. By a previous argument $(*)$,
+    it follows that $d_3$ is an isomorphism. Let $y\in E^{30}_3$ be the
+    generating element s.t. $d_3(a^2)=y$. It follows that
+    $E^{3j}_2=E^{3j}_3=\Z/2\Z\cdot ya^j$ for all $j$.
+
+    Let now $i=4$.
+
+    Observe that, for $r>2$, no arrow goes into the $(2,1)$-position and all of
+    the ones from there end up below the $x$-axis, hence
+    $E^{21}_3=E^{21}_\infty=0$. By definition, this means that
+    $\ker(E^{21}_2\xrightarrow{d_2}E^{40}_2)=\im(E^{02}_2\xrightarrow{d_2}E^{21}_2)$,
+    and, since $E^{02}_2\xrightarrow{d_2}E^{21}_2$ is the zero-map,
+    $E^{21}_2\xrightarrow{d_2}E^{40}_2$ is injective.
+
+    By definition, $E^{40}_3=E^{40}_2/\im(E^{21}_2\xrightarrow{d_2}E^{40}_2)$.
+    Also, $E^{40}_5=E^{40}_4/\im(E^{03}_4\xrightarrow{d_4}E^{40}_4)$. We will
+    compute $E^{03}_4$.
+
+    $d_2(a^3)=d_2(a^2)\cdot a-a\cdot d_2(a^2)=d_2(a)\cdot a^2=xa^2$, hence
+    $E^{03}_2\xrightarrow{d_2}E^{22}_2$ is an isomorphism. It follows that
+    $E^{03}_3=E^{03}_4=0$.
+    
+    Also, $\im(E^{03}_4\xrightarrow{d_4}E^{40}_4)=0$. Since for $r>4$ no
+    arrow goes into the $(4,0)$-position and any arrow from there ends up below
+    the $x$-axis, we have that
+    $E^{40}_4=E^{40}_4/\im(E^{03}_4\xrightarrow{d_4}E^{40}_4)=
+    E^{40}_5=E^{40}_\infty=0$. Since $E^{12}_3=0$, this means that
+    $0=E^{40}_4=E^{40}_3/\im(E^{12}_3\xrightarrow{d_3}E^{40}_3)=E^{40}_3$, which
+    implies that $E^{21}_2\xrightarrow{d_2}E^{40}_2$ is also surjective and
+    therefore an isomorphism.
+
+    Observe that $E^{21}_2=\Z/2\Z\cdot xa$ and $d_2(ax)=d_2(x)\cdot a-x\cdot
+    d_2(a)=d_2(d_2(a))-x\cdot x=x^2$, thus $E^{40}_2=\Z/2\Z\cdot x^2$ and
+    $E^{4j}_2=\Z/2\Z\cdot x^2a^j$ for all $j\in\N$.
+
+    Let now $i=5$.
+
+
+\end{proof}
+
+\printbibliography
+
+\end{document}
