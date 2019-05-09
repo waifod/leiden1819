@@ -90,7 +90,8 @@
     the ones from there end up below the $x$-axis, hence
     $E^{01}_2\xrightarrow{d_2}E^{20}_2$ has to be surjective for
     $\coker(d_2)=E^{20}_3=E^{20}_\infty=0$. Since this is the only arrow from
-    the $(0,1)$-position, by the same reasoning it has to be also injective,
+    the $(0,1)$-position which does not end up below the $x$-axis, by the same
+    reasoning it has to be also injective,
     thus it is an isomorphism $(*)$. Let $x\in E^{20}_2$ be the generating
     element s.t. $d_2(a)=x$. We then have that $E^{2j}_2=\Z/2\Z\cdot xa^j$.
     
@@ -101,9 +102,9 @@
     However, $d_2$ has as domain $E^{11}_2=0$, thus $E^{30}_2=E^{30}_3$.
 
     Let's compute $E^{02}_3=\ker(E^{02}_2\xrightarrow{d_2}E^{21}_2)$. We know
-    that $E^{02}_2=\Z/2\Z\cdot a^2$ and $d_2(a^2)=d_2(a)\cdot a+(-1)^{1+0}a\cdot
-    d_2(a)\cdot d(a)=0$, thus $E^{02}_3=E^{02}_2$. By a previous argument $(*)$,
-    it follows that $d_3$ is an isomorphism. Let $y\in E^{30}_3$ be the
+    that $E^{02}_2=\Z/2\Z\cdot a^2$ and $d_2(a^2)=d_2(a)\cdot a+a\cdot
+    d_2(a)=2a\cdot d_2(a)=0$, thus $E^{02}_3=E^{02}_2$. By a previous argument
+    $(*)$, it follows that $d_3$ is an isomorphism. Let $y\in E^{30}_3$ be the
     generating element s.t. $d_3(a^2)=y$. It follows that
     $E^{3j}_2=E^{3j}_3=\Z/2\Z\cdot ya^j$ for all $j$.
 
@@ -120,7 +121,7 @@
     Also, $E^{40}_5=E^{40}_4/\im(E^{03}_4\xrightarrow{d_4}E^{40}_4)$. We will
     compute $E^{03}_4$.
 
-    $d_2(a^3)=d_2(a^2)\cdot a-a\cdot d_2(a^2)=d_2(a)\cdot a^2=xa^2$, hence
+    $d_2(a^3)=d_2(a^2)\cdot a+a\cdot d_2(a^2)=d_2(a)\cdot a^2=xa^2$, hence
     $E^{03}_2\xrightarrow{d_2}E^{22}_2$ is an isomorphism. It follows that
     $E^{03}_3=E^{03}_4=0$.
     
@@ -133,13 +134,139 @@
     implies that $E^{21}_2\xrightarrow{d_2}E^{40}_2$ is also surjective and
     therefore an isomorphism.
 
-    Observe that $E^{21}_2=\Z/2\Z\cdot xa$ and $d_2(ax)=d_2(x)\cdot a-x\cdot
-    d_2(a)=d_2(d_2(a))-x\cdot x=x^2$, thus $E^{40}_2=\Z/2\Z\cdot x^2$ and
+    Observe that $E^{21}_2=\Z/2\Z\cdot xa$ and $d_2(ax)=d_2(x)\cdot a+x\cdot
+    d_2(a)=d_2(d_2(a))+x\cdot x=x^2$, thus $E^{40}_2=\Z/2\Z\cdot x^2$ and
     $E^{4j}_2=\Z/2\Z\cdot x^2a^j$ for all $j\in\N$.
 
     Let now $i=5$.
 
+    By definition, $E^{50}_3=E^{50}_2/\im(E^{31}_2\xrightarrow{d_2}E^{50}_2)$,
+    $E^{50}_4=E^{50}_3/\im(E^{22}_3\xrightarrow{d_3}E^{50}_2)$,
+    $E^{50}_5=E^{50}_4/\im(E^{13}_4\xrightarrow{d_4}E^{50}_4)=E^{50}_4$,
+    $E^{50}_6=E^{50}_5/\im(E^{04}_5\xrightarrow{d_5}E^{50}_5)$. Since there are
+    no other non-zero arrows to and from the $(5,0)$-position, we have that
+    $E^{50}_6=E^{50}_\infty=0$, hence $d_5$ is surjective.
 
+    By the same reasoning,
+    $0=E^{31}_\infty=E^{31}_4=E^{31}_3/\im(E^{03}_3\xrightarrow{d_3}E^{31}_3)$,
+    which means that $d_3$ is surjective. Since $E^{03}_2=\Z/2\Z\cdot
+    a^3\xrightarrow{d_2} E^{22}_2=\Z/2\Z\cdot xa^2$ is an isomorphism as
+    $d_2(a^3)=d_2(a)\cdot a^2+a\cdot d_2(a^2)=xa^2$, it follows that
+    $E^{03}_3=0$ and therefore $E^{31}_3=0$.
+
+    By definition, we have that
+    $0=E^{31}_3=\ker(E^{31}_2\xrightarrow{d_2}E^{50}_2)/
+    \im(E^{12}_2\xrightarrow{d_2}E^{31}_2)
+    =\ker(E^{31}_2\xrightarrow{d_2}E^{50}_2)$, thus
+    $E^{31}_2\xrightarrow{d_2}E^{50}_2$ is injective.
+    
+    Remember that $E^{31}_2=\Z/2\Z\cdot ya,\ E^{30}_2=\Z/2\Z\cdot y$,
+    $d_2(E^{30}_2)=0$ and therefore $d_2(y)=0$, hence $d_2(ya)=d_2(y)\cdot
+    a+y\cdot d_2(a)=yx=xy$. By the injectivity of
+    $E^{31}_2\xrightarrow{d_2}E^{50}_2$, it follows that $0\neq d_2(ya)=xy\in
+    E^{50}_2$ and $E^{50}_3=E^{50}_2/(\Z/2\Z\cdot xy)$.
+
+    As shown earlier, $d_2(a^3)=xa^2$. Also, $d_2(xa^2)=d_2(x)\cdot a^2+x\cdot
+    d_2(a^2)=d_2(d_2(a^2))\cdot a^2=0$, thus
+    $E^{22}_3=\ker(E^{22}_2=\Z/2\Z\cdot xa^2\xrightarrow{d_2}E^{41}_2)/
+    \im(E^{03}_2=\Z/2\Z\cdot a^3\xrightarrow{d_2}E^{22}_2=\Z/2\Z\cdot
+    xa^2)=\Z/2\Z\cdot xa^2/\Z/2\Z\cdot xa^2=0$. This implies that
+    $E^{50}_3=E^{50}_4$, which is also $E^{50}_5$.
+
+    Now, $d_2(a^4)=d_2(a^2)\cdot a^2+a^2\cdot d_2(a^2)=0$ and therefore
+    $E^{04}_3=\ker(E^{04}_2=\Z/2\Z\cdot a^4\xrightarrow{d_2}E^{23}_2)=E^{04}_2$.
+
+    We know that $E^{02}_3=\Z/2\Z\cdot a^2$, thus $d_3(a^4)=d_3(a^2)\cdot
+    a^2+a^2\cdot d_3(a^2)=2a^2\cdot d_3(a^2)=0$, hence
+    $E^{04}_4=\ker(E^{04}_3=\Z/2\Z\cdot
+    a^4\xrightarrow{d_3}E^{32}_3)=\Z/2\Z\cdot a^4$. 
+    
+    Also,
+    $E^{04}_5=\ker(E^{04}_4\xrightarrow{d_4}E^{41}_4)=\Z/2\Z\cdot a^4$ because
+    $0=E^{41}_\infty=E^{41}_5=E^{41}_4/\im(E^{04}_4\xrightarrow{d_4}E^{41}_4)$,
+    and $E^{41}_4=0$ ($E^{41}_3=\ker(E^{41}_2\xrightarrow{d_2}E^{60}_2)/
+    \im(E^{22}_2\xrightarrow{d_2}E^{41}_2)=0$ because $d_2(x^2a)=d_2(x^2)\cdot
+    a+x^2\cdot d_2(a)=x^3\neq 0$ $(**)$).
+    
+    Notice that $E^{04}_5\xrightarrow{d_5}E^{50}_5$ is an isomorphism, for this
+    is the last non-zero arrow from or to the $(0,4)$ and the $(5,0)$-positions.
+    It follows that $E^{50}_2=\Z/2\Z\cdot z$, where $z=d_5(a^4)$. We then have
+    that $E^{50}_2/\Z/2\Z\cdot xy=E^{50}_3=E^{50}_4=E^{50}_5=\Z/2\Z\cdot z$,
+    which implies that $E^{50}_2=\Z/2\Z\cdot xy\oplus\Z/2\Z\cdot z$ because we
+    are working with $\F_2$-vector spaces.
+
+    Finally, $E^{5j}_2=\Z/2\Z\cdot xya^j\oplus\Z/2\Z\cdot za^j$ for every
+    $j\in\N$.
+
+    Let now $i=6$.
+
+    By definition, $E^{60}_3=E^{60}_2/\im(E^{41}_2\xrightarrow{d_2}E^{60}_2)$,
+    $E^{60}_4=E^{60}_3/\im(E^{32}_3\xrightarrow{d_3}E^{60}_3)$,
+    $E^{60}_5=E^{60}_4/\im(E^{23}_4\xrightarrow{d_4}E^{60}_4)$,
+    $E^{60}_6=E^{60}_5/\im(E^{14}_5\xrightarrow{d_5}E^{60}_5)$,
+    $0=E^{60}_\infty=E^{60}_7=E^{60}_6/\im(E^{05}_6\xrightarrow{d_6}E^{60}_6)$.
+
+    We know that
+    $0=E^{41}_4=E^{41}_3/\im(E^{13}_3\xrightarrow{d_3}E^{41}_3)=E^{41}_3$ and
+    $E^{41}_3=\ker(E^{41}_2\xrightarrow{d_2}E^{60}_2)/
+    \im(E^{22}_2\xrightarrow{d_2}E^{41}_2)=\ker(E^{41}_2\xrightarrow{d_2}E^{60}_2)$
+    because $E^{22}_2=\Z/2\Z\cdot xa^2$ and $d_2(xa^2)=0$.
+
+    It follows that $\ker(E^{41}_2\xrightarrow{d_2}E^{60}_2)=0$,
+    $\im(E^{41}_2=\Z/2\Z\cdot x^2a\xrightarrow{d_2}E^{60}_2)=\Z/2\Z\cdot x^3$ as
+    $d_2(x^2a)=d_2(x^2)\cdot a+x^2\cdot d_2(a)=d_2(d_2(a^4))+x^3=x^3$ and
+    $E^{60}_3=E^{60}_2/(\Z/2\Z\cdot x^3)$. $(**)$ Keep in mind that $x^3\neq 0$
+    because the map is injective (the group has to vanish because $E^{41}_4=0$
+    and the only other possibly non-zero arrow to
+    or from the $(4,1)$ position is $E^{13}_3\xrightarrow{d_3}E^{41}_3$, which
+    is however 0 because $E^{13}_3=0$; on the other hand, the map $E^{22}
+    \xrightarrow{d_2}E^{41}_2$ is zero because $d_2(xa^2)=d_2(x)\cdot a^2+x\cdot
+    d_2(a^2)=d_2(d_2(a))=0$, hence it does not contribute to killing $E^{41}_2$).
+
+    Let's compute $E^{23}_4$. We know that $E^{23}_2=\Z/2\Z\cdot xa^3$,
+    $\ker(E^{23}_2\xrightarrow{d_2}E^{42}_2)/\im(E^{04}_2=\Z/2\Z\cdot a^4
+    \xrightarrow{d_2}E^{23}_2)=\ker(E^{23}_2\xrightarrow{d_2}E^{42}_2)
+    E^{23}_2=0$ as $d_2(xa^3)=d_2(x)\cdot a^3+x\cdot d_2(a^3)=d_2(d_2(a))\cdot
+    a^3+3x^2a^2=a^2x^2$, which means that $E^{23}_2\xrightarrow{d_2}E^{42}_2$ is
+    an isomorphism and $E^{23}_3=E^{42}_3=0$. It follows that $E^{23}_4=0$,
+    hence $E^{60}_5=E^{60}_4/\im(E^{23}_4\xrightarrow E^{60}_4)=E^{60}_4$.
+
+    We see that
+    $E^{60}_6=E^{60}_5/\im(E^{14}_5\xrightarrow{d_5}E^{60}_5)=E^{60}_5$ because
+    $E^{14}_5=0$.
+
+    $E^{05}_2=\Z\cdot a^5$,
+    $E^{05}_3=\ker(E^{05}_2\xrightarrow{d_2}E^{24}_2)=0$ as
+    $d_2(a^5)=5a^4\cdot d_2(a)=xa^4$ and therefore $d_2$ is again an
+    isomorphism. It follows that $E^{50}_5=0$, thus $E^{60}_5=E^{60}_6=0$.
+
+    So far we have shown that $0=E^{60}_5=E^{60}_4$, hence
+    $\im(E^{32}_3\xrightarrow{d_3}E^{60}_3)=E^{60}_3$. We know that
+    $E^{32}_2=\Z/2\Z\cdot ya^2$, $d_2(ya^2)=d_2(y)\cdot a^2+y\cdot d_2(a^2)=0$
+    and the map $E^{13}_2\xrightarrow{d_2}E^{32}_2$ is zero, hence
+    $E^{32}_3=E^{32}_2=\Z/2\Z\cdot ya^2$. We have that $d_3(ya^2)=d_3(y)\cdot
+    a^2+y\cdot d_3(a^2)=d_3(d_3(a^2))+y^2=y^2$, hence $E^{60}_4=\Z/2\Z\cdot
+    y^2$. Also, since there are no more non-zero arrows into or from the
+    $(3,2)$-position, we have that $y^2\neq 0$.
+    
+    It follows that $E^{60}_2=\Z/2\Z\cdot x^3\oplus\Z/2\Z\cdot y^2$ as we
+    are still working with $\F_2$-vector spaces. We get 
+    $E^{6j}_2=\Z/2\Z\cdot x^3a^j\oplus\Z/2\Z\cdot y^2a^j$ for all $j\in\N$.
+
+    We can conclude that:
+    \begin{itemize}
+        \item $H^0(K(\Z/2\Z),\Z/2\Z)=E^{00}_2=\Z/2\Z$;
+        \item $H^1(K(\Z/2\Z),\Z/2\Z)=E^{10}_2=0$;
+        \item $H^2(K(\Z/2\Z),\Z/2\Z)=E^{20}_2=\Z/2\Z\cdot x$, where
+            $x=d_2(a)$, with $a$ the generator of $E^{01}_2$;
+        \item $H^3(K(\Z/2\Z),\Z/2\Z)=E^{30}_2=\Z/2\Z\cdot y$, where
+            $y=d_3(a^2)$;
+        \item $H^4(K(\Z/2\Z),\Z/2\Z)=E^{40}_2=\Z/2\Z\cdot x^2$
+        \item $H^5(K(\Z/2\Z),\Z/2\Z)=E^{50}_2=\Z/2\Z\cdot xy\oplus\Z/2\Z\cdot
+            z$, where $z=d_5(a^4)$;
+        \item $H^6(K(\Z/2\Z),\Z/2\Z)=E^{60}_2=\Z/2\Z\cdot
+            x^3\oplus\Z/2\Z\cdot y^2$.
+    \end{itemize}
 \end{proof}
 
 \printbibliography
