@@ -94,6 +94,7 @@
     reasoning it has to be also injective,
     thus it is an isomorphism $(*)$. Let $x\in E^{20}_2$ be the generating
     element s.t. $d_2(a)=x$. We then have that $E^{2j}_2=\Z/2\Z\cdot xa^j$.
+    Also, $d_2(x)=0$ as $d_2(E^{20}_2)=0$.
     
     Let now $i=3$.
 
@@ -135,7 +136,7 @@
     therefore an isomorphism.
 
     Observe that $E^{21}_2=\Z/2\Z\cdot xa$ and $d_2(ax)=d_2(x)\cdot a+x\cdot
-    d_2(a)=d_2(d_2(a))+x\cdot x=x^2$, thus $E^{40}_2=\Z/2\Z\cdot x^2$ and
+    d_2(a)=x^2$, thus $E^{40}_2=\Z/2\Z\cdot x^2$ and
     $E^{4j}_2=\Z/2\Z\cdot x^2a^j$ for all $j\in\N$.
 
     Let now $i=5$.
@@ -161,10 +162,10 @@
     $E^{31}_2\xrightarrow{d_2}E^{50}_2$ is injective.
     
     Remember that $E^{31}_2=\Z/2\Z\cdot ya,\ E^{30}_2=\Z/2\Z\cdot y$,
-    $d_2(E^{30}_2)=0$ and therefore $d_2(y)=0$, hence $d_2(ya)=d_2(y)\cdot
-    a+y\cdot d_2(a)=yx=xy$. By the injectivity of
-    $E^{31}_2\xrightarrow{d_2}E^{50}_2$, it follows that $0\neq d_2(ya)=xy\in
-    E^{50}_2$ and $E^{50}_3=E^{50}_2/(\Z/2\Z\cdot xy)$.
+    $d_2(E^{30}_2)=0$ (it falls below the $x$-axis) 
+    and therefore $d_2(y)=0$, hence $d_2(ya)=d_2(y)\cdot a+y\cdot d_2(a)=yx=xy$.
+    By the injectivity of $E^{31}_2\xrightarrow{d_2}E^{50}_2$, it follows that
+    $0\neq d_2(ya)=xy\in E^{50}_2$ and $E^{50}_3=E^{50}_2/(\Z/2\Z\cdot xy)$.
 
     As shown earlier, $d_2(a^3)=xa^2$. Also, $d_2(xa^2)=d_2(x)\cdot a^2+x\cdot
     d_2(a^2)=d_2(d_2(a^2))\cdot a^2=0$, thus
@@ -221,13 +222,13 @@
     or from the $(4,1)$ position is $E^{13}_3\xrightarrow{d_3}E^{41}_3$, which
     is however 0 because $E^{13}_3=0$; on the other hand, the map $E^{22}_2
     \xrightarrow{d_2}E^{41}_2$ is zero because $d_2(xa^2)=d_2(x)\cdot a^2+x\cdot
-    d_2(a^2)=d_2(d_2(a))=0$, hence it does not contribute to killing $E^{41}_2$).
+    d_2(a^2)=0$, hence it does not contribute to killing $E^{41}_2$).
 
     Let's compute $E^{23}_4$. We know that $E^{23}_2=\Z/2\Z\cdot xa^3$,
     $\ker(E^{23}_2\xrightarrow{d_2}E^{42}_2)/\im(E^{04}_2=\Z/2\Z\cdot a^4
     \xrightarrow{d_2}E^{23}_2)=\ker(E^{23}_2\xrightarrow{d_2}E^{42}_2)
-    E^{23}_2=0$ as $d_2(xa^3)=d_2(x)\cdot a^3+x\cdot d_2(a^3)=d_2(d_2(a))\cdot
-    a^3+3x^2a^2=a^2x^2$, which means that $E^{23}_2\xrightarrow{d_2}E^{42}_2$ is
+    E^{23}_2=0$ as $d_2(xa^3)=d_2(x)\cdot a^3+x\cdot d_2(a^3)=3x^2a^2=a^2x^2$,
+    which means that $E^{23}_2\xrightarrow{d_2}E^{42}_2$ is
     an isomorphism and $E^{23}_3=E^{42}_3=0$. It follows that $E^{23}_4=0$,
     hence $E^{60}_5=E^{60}_4/\im(E^{23}_4\xrightarrow{d_4}E^{60}_4)=E^{60}_4$.
 
