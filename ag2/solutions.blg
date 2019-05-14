@@ -1,0 +1,15 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[0] Config.pm:343> INFO - Logfile is 'solutions.blg'
+[102] biber:287> INFO - === Tue May 14, 2019, 21:05:20
+[331] Biber.pm:348> INFO - Reading 'solutions.bcf'
+[604] Biber.pm:742> INFO - Found 1 citekeys in bib section 0
+[674] Biber.pm:3151> INFO - Processing section 0
+[990] Biber.pm:3308> INFO - Looking for bibtex format file '~/math/references.bib' for section 0
+[1047] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
+[1070] bibtex.pm:974> INFO - Found BibTeX data source '/home/user/math/references.bib'
+[1148] UCollate.pm:65> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1148] UCollate.pm:65> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1148] Biber.pm:3028> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-GB'
+[1148] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-GB'
+[1151] bbl.pm:519> INFO - Writing 'solutions.bbl' with encoding 'UTF-8'
+[1159] bbl.pm:615> INFO - Output to solutions.bbl

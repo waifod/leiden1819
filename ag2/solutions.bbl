@@ -1,0 +1,46 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global}
+    \entry{Uen99}{book}{}
+      \name{author}{1}{}{%
+        {{hash=46854759974ce184f0b966959e357a86}{%
+           family={Ueno},
+           family_i={U\bibinitperiod},
+           given={Kenji},
+           given_i={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Soc.}%
+      }
+      \strng{namehash}{46854759974ce184f0b966959e357a86}
+      \strng{fullhash}{46854759974ce184f0b966959e357a86}
+      \field{sortinit}{U}
+      \field{sortinithash}{8145509bd2718876fc77d31fd2cde117}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Algebraic Geometry: From algebraic varieties to schemes}
+      \field{volume}{1}
+      \field{year}{1999}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
