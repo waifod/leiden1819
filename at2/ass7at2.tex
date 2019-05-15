@@ -73,42 +73,37 @@
 ~\\
 \exercise{3}
 
-\begin{proof}
+\begin{proof}    
+    By the usual argument about cellular maps, $\pi_m(X)=0=\pi_m(X)\otimes\Q$
+    for $m<n$.
+    
+    By~\cite[thm. 12.1]{HM19}, all of the homotopy groups of $X$ are abelian and
+    finitely generated, hence they can be described as
+    $\pi_k(X)=\Z^r\oplus\pi_k(X)^{tors}$ for some $r\in\N$. Also,
+    $\pi_k(X)\otimes\Q=\Q^r$. We will then work with the Hurewicz
+    theorem$\mod\mathcal{C}$, where $\mathcal{C}$ is the class of torsion
+    abelian groups.
+    
     First of all, we shall compute $H_n(X)\otimes\Q$ for all $n$ and $k$.
 
     Using the description of $X$ as a finite CW-complex, we see that its
-    homology corresponds to the homology of the chain complex
+    homology corresponds to the homology of the cellular chain complex
     $(C_\bullet,\partial)$, where $C_0=\Z$, $C_n=\Z$, $C_{n+1}$ and
     $C_{n+1}\xrightarrow{\partial_n}C_n$ is given by $m\mapsto km$. It follows
-    that $H_n(X)=\Z/k\Z,\ H_0(X)=\Z,\ H_m(X)=0$ for $m\neq 0,n$ and
-    $H_0(X)\otimes\Q=\Q,\ H_t(X)\otimes\Q=0$ for all other $t$.
+    that $H_n(X)=\Z/k\Z\in\mathcal{C},\ H_0(X)=\Z,\ H_m(X)=0$ for $m\neq 0,n$
+    and $H_0(X)\otimes\Q=\Q,\ H_t(X)\otimes\Q=0$ for all other $t$.
 
-    By the usual argument about cellular maps, $\pi_m(X)=0=\pi_m(X)\otimes\Q$
-    for $m<n$. By Hurewicz, $\pi_n(X)=H_n(X)=\Z/k\Z$ and $\pi_n(X)\otimes\Q=0$.
+    By Hurewicz, $\pi_n(X)=H_n(X)=\Z/k\Z$ and $\pi_n(X)\otimes\Q=0$.
 
     We also have that $P_nX$ is a $K(\Z/k\Z,n)$. We may then consider the
     fibration sequence $X\langle n\rangle\rightarrow X\rightarrow K(\Z/k\Z,n)$,
     which then gives us the following one: $\Omega
     K(\Z/k\Z,n)=K(\Z/k\Z,n-1)\rightarrow X\langle n\rangle\rightarrow X$.
 
-    We want to compute $\pi_{n+1}(X)=\pi_{n+1}(X\langle
-    n\rangle)=H_{n+1}(X\langle n\rangle)$ and then tensor it by $\Q$. by looking
-    at the converging Serre spectral sequence induced by our fibration. It is
-    s.t. $E_{ij}^2=H_i(X,H_j(K(\Z/k\Z,n-1)))\Rightarrow H_{i+j}(X\langle
-    n\rangle)$.
-    
-    Since
-    $\Q$ is a flat $\Z$-module, $-\otimes\Q$ is an exact functor, not to mention
-    a left adjoint, hence it commutes with taking quotients and direct sums (and
-    finite products, since these are also direct sums in an abelian category).
-
-    It follows that we may start from the page $E_2$ we get by tensoring every
-    group $E^{ij}_2$ with $\Q$ and it will converge to the $E_\infty$ page we
-    get by tensoring the groups $E^{ij}_\infty$ with $\Q$.
-
-    We want to compute $E_{ij}^\infty$ for $i+j=n+1$. Since a $\Q$-module is a
-    $\Q$-vector space, we will have that $H_{n+1}(X\langle
-    n\rangle)=\bigoplus_{i=0}^{n+1}E_{ij}^\infty$.
+    By~\cite[lemma 13.16]{HM19}, $H_n(K(\Z/k\Z,m))\in\mathcal{C}$ for all
+    $m\in\N_{>0}$ and by~\cite[lemma 13.15]{HM19} the same goes for
+    $\pi_{n+1}(X\langle n\rangle)=\pi_{n+1}(X)$. It follows that
+    $\pi_{n+1}(X)\otimes\Q=0$.
 \end{proof}
 
 \printbibliography
