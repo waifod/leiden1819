@@ -74,17 +74,17 @@
 \exercise{3}
 
 \begin{proof}    
-    By the usual argument about cellular maps, $\pi_m(X)=0=\pi_m(X)\otimes\Q$
-    for $m<n$.
+    By the usual argument about cellular maps, $\pi_t(X)=0=\pi_t(X)\otimes\Q$
+    for $t<n$.
     
     By~\cite[thm. 12.1]{HM19}, all of the homotopy groups of $X$ are abelian and
     finitely generated, hence they can be described as
-    $\pi_k(X)=\Z^r\oplus\pi_k(X)^{tors}$ for some $r\in\N$. Also,
-    $\pi_k(X)\otimes\Q=\Q^r$. We will then work with the Hurewicz
+    $\pi_t(X)=\Z^r\oplus\pi_t(X)^{tors}$ for some $r\in\N$. Also,
+    $\pi_t(X)\otimes\Q=\Q^r$. We will then work with the Hurewicz
     theorem$\mod\mathcal{C}$, where $\mathcal{C}$ is the class of torsion
     abelian groups.
     
-    First of all, we shall compute $H_n(X)\otimes\Q$ for all $n$ and $k$.
+    Let's compute $H_t(X)\otimes\Q$ for all $t,\ n,\ k$.
 
     Using the description of $X$ as a finite CW-complex, we see that its
     homology corresponds to the homology of the cellular chain complex
@@ -100,14 +100,13 @@
     which then gives us the following one: $\Omega
     K(\Z/k\Z,n)=K(\Z/k\Z,n-1)\rightarrow X\langle n\rangle\rightarrow X$.
 
-    By~\cite[lemma 13.16]{HM19}, $H_n(K(\Z/k\Z,m))\in\mathcal{C}$ for all
-    $m\in\N_{>0}$ and by~\cite[lemma 13.15]{HM19} the same goes for
-    $\pi_{n+1}(X\langle n\rangle)=\pi_{n+1}(X)$. It follows that
-    $\pi_{n+1}(X)\otimes\Q=0$.
+    By~\cite[lemma 13.16]{HM19}, $H_t(K(\Z/k\Z,m))\in\mathcal{C}$ for all
+    $t\in\N,\ m\in\N_{>0}$ and by~\cite[lemma 13.15]{HM19} the same goes for
+    $H_t(X\langle n\rangle)$, which in particular gives
+    $H_{n+1}(X\langle n\rangle)=\pi_{n+1}(X\langle n\rangle)=\pi_{n+1}(X)$. It
+    follows that $\pi_{n+1}(X)\otimes\Q=0$.
 \end{proof}
 
 \printbibliography
 
 \end{document}
-
-
