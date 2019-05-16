@@ -58,15 +58,52 @@
 \begin{proof}
     $(a)$ It is sufficient to notice that, for any element
     $[f]\in\pi_n(S^n)\cong\Z$, we have by definition that
-    $h_{S^n}([f])=f_*([\alpha])=\deg(f)\cdot [\alpha]$. Since
+    $h_{S^n}([f])=f_*[S^n]=\deg(f)\cdot [S^n]$. Since
     $[\Id_{S^n}]\in\pi_n(S^n)$ is s.t. $\Id_{S^n}$ has degree 1 because it
     induces the identity isomorphism on $H_n(S^n)\cong\Z$, we have then the
     surjectivity.
 \end{proof}
 
 \begin{proof}
-    $(c)$ The two maps $h_{S^n},\ g_{S^n}$ trivially agree up to sign, for they
+    $(c)$ The two maps $g_{S^n},\ h_{S^n}$ trivially agree up to sign, for they
     are isomorphisms from $\pi_n(S^n)\cong\Z$ to $H_n(S^n)\cong\Z$.
+
+    Observe that the isomorphism induced by $h_X$ is natural, for given a map
+    $X\xrightarrow{f} Y$ we have that
+    $h_Y(f_*[\alpha])=h_Y([f\circ\alpha])=(f\circ\alpha)_*[S^n]=
+    f_*(\alpha_*[S^n])=f_*(h_X([\alpha]))$.
+
+    Let's assume $g_{S^n}=h_{S^n}$.
+
+    Now, given any element $[f]\in\pi_n(X)$, considering the map given by a
+    representative $S^n\xrightarrow{f}X$ and making use of the naturality of the
+    maps $g_{S^n},\ g_X,\ h_{S^n},\ h_X$, we have the following commutative
+    diagrams:
+    \[
+        \begin{tikzcd}
+            \pi_n(S^n)\arrow{r}{g_{S^n}}\arrow{d}{f_*}
+            & H_n(S^n)\arrow{d}{f_*} \\
+            \pi_n(X)\arrow{r}{g_X}
+            & H_n(X)
+        \end{tikzcd}
+        \quad
+        \begin{tikzcd}
+            \pi_n(S^n)\arrow{r}{h_{S^n}}\arrow{d}{f_*}
+            & H_n(S^n)\arrow{d}{f_*} \\
+            \pi_n(X)\arrow{r}{h_X}
+            & H_n(X)
+        \end{tikzcd}
+    \]
+    We have then that:
+    \begin{align*}
+        g_X([f]) &=g_X(f_*[\Id_{S^n}]) \\
+        &=f_*(g_{S^n}([\Id_{S^n}])) \\
+        &=f_*(h_{S^n}([\Id_{S^n}])) \\
+        &=h_X(f_*[\Id_{S^n}]) \\
+        &=h_X([f])
+    \end{align*}
+    The discussion of the case $g_{S^n}=-h_{S^n}$ is essentially analogous and
+    leads to $g_X=-h_X$.
 \end{proof}
 
 
@@ -76,7 +113,7 @@
 \begin{proof}    
     By the usual argument about cellular maps, $\pi_t(X)=0$ for $t<n$.
     
-    Since $X$ is a pointed connected space, by~\cite[thm. 12.1]{HM19} and the
+    Since $X$ is pointed and simply connected, by~\cite[thm. 12.1]{HM19} and the
     computation of $H_*(X)$ we will provide,
     all of the homotopy groups of $X$ are abelian and finitely generated, hence
     they can be described as $\pi_t(X)=\Z^r\oplus\pi_t(X)^{tors}$ for some
@@ -88,7 +125,7 @@
 
     Using the description of $X$ as a finite CW-complex, we see that its
     homology corresponds to the homology of the cellular chain complex
-    $(C_\bullet,\partial)$, where $C_0=\Z$, $C_n=\Z$, $C_{n+1}$, $C_t=0$ for
+    $(C_\bullet,\partial)$, where $C_0=C_n=C_{n+1}=\Z$, $C_t=0$ for
     $t\neq 0,n,n+1$ and $C_{n+1}\xrightarrow{\partial_n}C_n$ is given by
     $m\mapsto km$. It follows that $H_n(X)=\Z/k\Z\in\mathcal{C},\ H_0(X)=\Z,\
     H_t(X)=0$ for $t\neq 0,n$.
