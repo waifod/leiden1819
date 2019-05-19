@@ -19,6 +19,27 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global}
+    \entry{Mum88}{book}{}
+      \name{author}{1}{}{%
+        {{hash=da089b3001dc8c50d67ce755a95262a1}{%
+           family={{David}},
+           family_i={D\bibinitperiod},
+           given={Mumford},
+           given_i={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{da089b3001dc8c50d67ce755a95262a1}
+      \strng{fullhash}{da089b3001dc8c50d67ce755a95262a1}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Lecture Notes in Mathematics}
+      \field{title}{The Red Book of Varieties and Schemes}
+      \field{year}{1988}
+    \endentry
     \entry{Uen99}{book}{}
       \name{author}{1}{}{%
         {{hash=46854759974ce184f0b966959e357a86}{%

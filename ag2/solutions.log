@@ -1,7 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.4.3)  14 MAY 2019 21:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.4.3)  18 MAY 2019 18:50
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
 **solutions.tex
 (./solutions.tex
@@ -1311,16 +1310,16 @@ LaTeX Warning: No \author given.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./solutions.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./solutions.aux)
 Package logreq Info: Writing requests to 'solutions.run.xml'.
 \openout1 = `solutions.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22178 strings out of 494953
- 419242 string characters out of 6180978
- 795599 words of memory out of 5000000
- 25041 multiletter control sequences out of 15000+600000
+ 22179 strings out of 494953
+ 419269 string characters out of 6180978
+ 797605 words of memory out of 5000000
+ 25042 multiletter control sequences out of 15000+600000
  39240 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  61i,6n,82p,837b,1395s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1329,10 +1328,10 @@ public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public
 /lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/tex
 mf/fonts/type1/public/lm/lmri10.pfb>
-Output written on solutions.pdf (1 page, 129580 bytes).
+Output written on solutions.pdf (2 pages, 139323 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 39 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
