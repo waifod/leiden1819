@@ -71,7 +71,8 @@
 
 \begin{thm}
     Given a curve $C$ and a rational map $C\xrightarrow{\phi}W\subset\Ps^n$, if
-    $C$ is smooth, then $\phi$ is a morphism.
+    $C$ is smooth at $P\in C$, then $\phi$ is regular at $P$. If $C$ is smooth,
+    then $\phi$ is a morphism.
 \end{thm}
 
 \begin{cor}
@@ -146,12 +147,12 @@ smooth projective curve over $\K$.
 \begin{prop}
     \begin{itemize}
         \item Given any Weierstrass curve $E$ over a field $\K$ not necessarily
-            algebraically closed:\begin{enumerate}
-                \item is smooth $\Leftrightarrow\Delta\neq 0$; also,
+            algebraically closed, it is:\begin{enumerate}
+                \item smooth $\Leftrightarrow\Delta\neq 0$; also,
                     $E(\K)\cong\Pic^0_\K(E)$;
-                \item has a node $\Leftrightarrow\Delta=0\neq C_4$; also,
+                \item a node $\Leftrightarrow\Delta=0\neq C_4$; also,
                     $E^{ns}(\overline{K})\cong\overline{K}^\times$;
-                \item has a cusp $\Leftrightarrow\Delta=C_4=0$; also,
+                \item a cusp $\Leftrightarrow\Delta=C_4=0$; also,
                     $E^{ns}(\K)\cong(\K,+)$.
             \end{enumerate}
         \item Two elliptic curves $E,\ E'$ over $\K$ are isomorphic if and only
@@ -185,6 +186,17 @@ smooth projective curve over $\K$.
     isomorphic to $\Z/n\Z$, where $1\leq n\leq 10$ or $n=12$, or to
     $\Z/2n\Z\oplus\Z/2\Z$, where $1\leq n\leq 4$.
 \end{thm}
+
+\begin{prop}
+    Let $f$ be a non-zero elliptic function on a complex lattice $\Lambda$, $D$
+    a fundamental domain for $\Lambda$ s.t. $f$ has no zeroes/poles on the
+    boundary of $D$. Then:
+    \begin{itemize}
+        \item $\sum_{\gamma\in D} res_{\gamma}(f)=0$;
+        \item $\sum_{\gamma\in D} ord_\gamma(f)=0$;
+        \item $\sum_{\gamma\in D}ord_\gamma(f)\cdot\gamma=0\mod\Lambda$.
+    \end{itemize}
+\end{prop}
 
 \printbibliography
 

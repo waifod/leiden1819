@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\dv}{div}
+\DeclareMathOperator{\Dv}{Div}
+\DeclareMathOperator{\Pic}{Pic}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+
+\begin{document}
+
+\title{Elliptic Curves - Summary}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\begin{defn}
+    Let $\K$ be a field.
+    \begin{itemize}
+        \item The affine $n$-space over $\K$ is
+            $\mathbb{A}^n=\mathbb{A}^n(\overline{K})=\overline{K}^n$.
+        \item The rational $\K$-points of $\mathbb{A}^n$ are $\mathbb{A}^n(\K)=
+            \K^n$.
+        \item For a set $S\subset\overline{\K}[x_0,\ldots,x_n]$ we define
+            $\V(S)=\{P\in\mathbb{A}^n\ |\ f(P)=0\textit{ for all }f\in S\}$. In
+            particular, if $I=(S)$, then $\V(S)=\V(I)$.
+        \item An algebraic variety over $\overline{\K}$ is a set $\V(I)$ for some
+            prime ideal $I$ of $\overline{\K}[x_0,\ldots,x_n]$.
+        \item For a set $V\subset\mathbb{A}^n$, let
+            $\I(V)=\{f\in\overline{\K}[x_0,\ldots,x_n]\ |\ f(P)=0\textit{ for 
+            all }P\in V\}$.
+    \end{itemize}
+\end{defn}
+
+\begin{thm}
+    There is a 1:1 correspondence between the varieties in $\mathbb{A}^n$ and
+    the prime ideals of $\overline{\K}[x_0,\ldots,x_n]$ given by
+    $V\mapsto\I(V),\ I\mapsto\V(I)$.
+\end{thm}
+
+\begin{defn}
+    The affine coordinate ring of a variety $V\subset\mathbb{A}^n$ is
+    $\overline{\K}[V]=\overline{\K}[x_1,\ldots,x_n]/\I(V)$.
+\end{defn}
+
+\printbibliography
+
+\end{document}
