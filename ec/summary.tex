@@ -1,0 +1,191 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\dv}{div}
+\DeclareMathOperator{\Dv}{Div}
+\DeclareMathOperator{\Pic}{Pic}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+
+\begin{document}
+
+\title{Elliptic Curves - Summary}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\begin{thm}[Mordell]
+    Given an elliptic curve $E/\Q$, $\rk(E(\Q))=\rk(E(\Q)/2E(\Q))<\infty$.
+\end{thm}
+
+\begin{thm}
+    Given a curve $C$ and a rational map $C\xrightarrow{\phi}W\subset\Ps^n$, if
+    $C$ is smooth, then $\phi$ is a morphism.
+\end{thm}
+
+\begin{cor}
+    Let $C_1\xrightarrow{\phi}C_2$ be a morphism of smooth curves. If
+    $\deg(\phi)=1$, then it is an isomorphism.
+\end{cor}
+
+\begin{prop}
+    Given any smooth projective curve $C$, a morphism $C\rightarrow\Ps^1$ is
+    either constant or surjective.
+\end{prop}
+
+\begin{prop}
+    Let $C_1\xrightarrow{\phi}C_2$ be a non-constant morphism. Then:
+    \begin{itemize}
+        \item for every $Q\in C_2$, $\deg(\phi)=\sum_{P\in\phi^{-1}(Q)}e_\phi(P)$;
+        \item If $C_2\xrightarrow{\psi}C_3$ is another morphism,
+            $e_{\psi\circ\phi}(P)=e_\phi(P)\cdot e_{\psi}(\phi(P))$.
+    \end{itemize}
+\end{prop}
+
+\begin{prop}
+    For all but finitely many $Q\in C_2$, $\#\phi^{-1}(Q)=\deg_s(\phi)$. If we
+    are working over $\Q$, $=\deg(Q)$.
+\end{prop}
+
+----
+BEWARE: from now on, $\K$ will always be an algebraically closed field, $C$ a
+smooth projective curve over $\K$.
+----
+
+\begin{prop}
+    Given a smooth projective curve over $\K$, we have for any $f\in\K(C)$:
+    \begin{itemize}
+        \item $\dv(f)=0\Leftrightarrow f\in\K^\times$;
+        \item $\deg(\dv(f))=0$
+    \end{itemize}
+\end{prop}
+
+\begin{prop}
+    $\Omega_C$ is a 1-dimensional $\K(C)$-vector space and a morphism
+    $C_1\xrightarrow{\phi}C_2$ induces a map
+    $\Omega_{C_2}\xrightarrow{\phi^*}\Omega_{C_1}$ defined as $\phi^*(f\cdot
+    dx)=\phi^*(f)\cdot d(\phi^*(x))$. Also, $\phi$ is separable if and only if
+    $\phi^*\neq 0$.
+\end{prop}
+
+\begin{thm}[Riemann-Roch]
+    Given $D\in\Dv(C)$, $l(D)-l(K_C-D)=\deg(D)-g+1$.
+\end{thm}
+
+\begin{prop}
+    Let $E$ be a smooth projective curve of genus 1 and defined over $\K$ not
+    algebraically closed. Also, fixed $O\in E(\K)$, there is an isomorphism
+    $C\xrightarrow{\phi}C\subset\Ps^1_{\overline{\K}}$ with $\phi(O)=(0:1:0)$
+    and $C$ given by $y^2+a_1xy+a_2y=x^3+a_3x^2+a_4x+a_5$, which is the General
+    Weierstrass equation.
+\end{prop}
+
+\begin{prop}
+    Given $C$ and fixed $O\in E(\K)$, there is a map $C(\K)\rightarrow\Pic(C)$,
+    $P\mapsto [P-O]$, which gives a bijection $C(\K)\leftrightarrow\Pic^0(C)$.
+\end{prop}
+
+\begin{prop}
+    Let $\char(\K)\neq2,3$. If $C$ is given by a Weierstrass equation, then
+    there exists a change of variables which reduces it to $y^2=x^3+ax+b$. Also,
+    any isomorphism of elliptic curves is given by $x=u^2x',\ y=u^3y'$ for some
+    $u\in\K^\times$.
+\end{prop}
+
+\begin{prop}
+    \begin{itemize}
+        \item Given any Weierstrass curve $E$ over a field $\K$ not necessarily
+            algebraically closed:\begin{enumerate}
+                \item is smooth $\Leftrightarrow\Delta\neq 0$; also,
+                    $E(\K)\cong\Pic^0_\K(E)$;
+                \item has a node $\Leftrightarrow\Delta=0\neq C_4$; also,
+                    $E^{ns}(\overline{K})\cong\overline{K}^\times$;
+                \item has a cusp $\Leftrightarrow\Delta=C_4=0$; also,
+                    $E^{ns}(\K)\cong(\K,+)$.
+            \end{enumerate}
+        \item Two elliptic curves $E,\ E'$ over $\K$ are isomorphic if and only
+            if $j(E)=j(E')$.
+        \item For all $j_0\in\K$, there exists an elliptic curve $E$ over $\K$
+            s.t. $j(E)=j_0$.
+    \end{itemize}
+\end{prop}
+
+\begin{thm}
+    Let $E$ be a Weierstrass curve over $\Q$ and $n\in\Z_{>0}$ s.t. $p\mid n$.
+    Then, we have an injection $E(\Q)[n]\hookrightarrow\tilde{E}(\F_p)$. Also,
+    the order of any point in $E(\Q)^{tors}$ divides
+    $p^k\cdot \#\tilde{E}(\F_p)$ for some $k\in\N$.
+\end{thm}
+
+\begin{cor}
+    Given any elliptic curve $E$ over $\Q$, $E(\Q)^{tors}$ is a finite subgroup
+    of $E(\Q)$.
+\end{cor}
+
+\begin{thm}[Nagell-Lutz]
+    Let $E/\Q$ be an elliptic curve given in short Weierstrass form by
+    $y^2=x^3+ax+b$, $a,b\in\Z$. Suppose that $P=(x_P,y_P)\in E(\Q)^{tors}$.
+    Then, $x_P,y_P\in\Z$ and either $y_P=0$, in which case $P$ has order 2, or
+    $y_P^2|4a^3+27b^2$.
+\end{thm}
+
+\begin{thm}[Mazur]
+    Given an elliptic curve $E/\Q$, we have that $E^{tors}(\Q)$ is either
+    isomorphic to $\Z/n\Z$, where $1\leq n\leq 10$ or $n=12$, or to
+    $\Z/2n\Z\oplus\Z/2\Z$, where $1\leq n\leq 4$.
+\end{thm}
+
+\printbibliography
+
+\end{document}
