@@ -1,0 +1,239 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Tr}{Tr}
+
+
+\begin{document}
+
+\title{Representation Theory of Finite Groups - Assignment 6}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{11.3}
+
+\begin{proof}
+    $(a)$ Let $H$ be the subset of elements of $G$ which act as scalar on $V$,
+    that is $\rho(g)=\lambda_g\Id_V$ for some $\lambda_g\in\C$.
+    
+    Clearly, for any $g\in H$, $\rho(g^{-1})=(\lambda_g\Id_V)^{-1}=
+    \lambda^{-1}_g\Id_V=\lambda_{g^{-1}}\Id_V$ with $\lambda_{g^{-1}}=
+    \lambda_g^{-1}$, hence $g^{-1}\in H$. Also, for any $h\in H$,
+    $\rho(gh^{-1})=\rho(g)\rho(h^{-1})=\lambda_g\Id_V\cdot\lambda_{h^{-1}}\Id_V=
+    (\lambda_g\lambda_{h^{-1}})\Id_V=\lambda_{gh^{-1}}\Id_V$
+    with $\lambda_{gh^{-1}}=\lambda_g\lambda_{h^{-1}}$. It follows that
+    $gh^{-1}\in H$, hence $H\leq G$.
+
+    Let now $x\in G$. We have that
+    $\rho(xgx^{-1})=\rho(x)\rho(g)\rho(x)^{-1}=
+    \rho(x)\cdot\lambda_g\Id_V\cdot\rho(x)^{-1}=
+    \lambda_g\cdot\rho(x)\rho(x)^{-1}=\lambda_g\Id_V$, hence $xgx^{-1}\in H$ and
+    therefore $H\trianglelefteq G$.
+\end{proof}
+
+\begin{proof}
+    $(b)$ If $(V,\rho)$ is a one-dimensional irreducible representation, then
+    $\Aut_\C(V)=\C^\times$ and therefore $\rho(g)=\lambda_g$ for any $g\in G$.
+
+    On the other hand, assume that $(V,\rho)$ is an irreducible representation
+    s.t. $\rho(g)=\lambda_g\Id_V$ for all $g\in G$. We may then find a
+    1-dimensional subrepresentation by considering an element $0\neq v\in V$ and
+    the $\C$-subvector space $\mathcal{L}(v)$ it generates. Since our
+    representation is irreducible, this implies that $V=\mathcal{L}(v)$.
+\end{proof}
+
+
+~\\
+\exercise{11.6}
+
+\begin{proof}
+    $(a)$ By construction, $M>0$. Also, since $\chi$ is an irreducible
+    character, we have that:
+    \begin{align*}
+        1 &=\langle\chi,\chi\rangle \\
+        &=\frac{1}{\#G}\sum_{g\in G}\chi(g)\overline{\chi(g)} \\
+        &=\frac{1}{\#G}\sum_{g\in G}|\chi(g)|^2 \\
+        &=\frac{|\chi(1)|^2+(\#G-1)M}{\#G}
+    \end{align*}
+
+    It follows that $M=\frac{\#G-|\chi(1)|^2}{\#G-1}$. Since
+    $\chi(1)=\dim_\C(V)>1$, it follows that $\#G-|\chi(1)|^2<\#G-1$ and
+    therefore $M<1$. Finally, $|M|<1$.
+\end{proof}
+
+\begin{proof}
+    $(b)$ First of all, $|P|=\sqrt{P\overline{P}}$ and we know that
+    $P\overline{P}=\Pi_{g\in G\setminus\{1\}}\chi(g)\cdot\overline{\Pi_{g\in
+    G\setminus\{1\}}\chi(g)}=\Pi_{g\in G\setminus\{1\}}|\chi(g)|^2$. This gives
+    $|P|=\sqrt{P\overline{P}}\leq\sqrt{M^{\#G-1}}<1$ by applying the inequality
+    between the arithmetic and the geometric means. Notice that this holds for
+    any irreducible $\C$-representation with dimension at least 2.
+
+    We also see that, after picking a basis which makes $\rho(g)\in\GL(n,\K)$
+    for all $g\in G$, for any $\sigma\in Gal(\K/\Q)$ we have $\sigma(P)=
+    \Pi_{g\in G\setminus\{1\}}\sigma(\chi(g))$ and
+    $\sigma(\chi(g))=\sigma(\Tr(\rho(g)))=\Tr(\sigma(\rho(g)))$, where by
+    $\sigma(\rho(g))$ we mean the matrix we get by applying $\sigma$ to every
+    entry of $\rho(g)$.
+
+    Let now $\phi(g):=\sigma(\rho(g))$. We will prove that $\phi$ is again an
+    irreducible representation of dimension $>1$, s.t. we may apply our earlier
+    result to $P'=\Pi_{g\in G\setminus\{1\}}\psi(g)$, $\psi$ the associated
+    irreducible character, and get the thesis. By construction, $\psi$ will be
+    $\sigma\circ\chi$.
+
+    First of all, for any $g,h\in G$ we have
+    $\phi(gh)=\sigma(\rho(gh))=\sigma(\rho(g)\rho(h))=
+    \sigma(\rho(g))\sigma(\rho(h))=\phi(g)\phi(h)$, hence $\phi$ is indeed a
+    representation.
+
+    To show that $\psi$ is irreducible character it is sufficient to prove that
+    $\langle\psi,\psi\rangle=1$, for this is the sum of the $n_i$, where $n_i$
+    denotes the multiplicity the $i$th irreducible representation in the
+    decomposition.
+
+    We see that:
+    \begin{align*}
+        \langle\psi,\psi\rangle &=\frac{1}{\#G}\sum_{g\in
+        G}\psi(g)\overline{\psi(g)} \\
+        &=\frac{1}{\#G}\sum_{g\in G}\psi(g)\psi(g^{-1}) \\
+        &=\frac{1}{\#G}\sum_{g\in G}\sigma(\chi(g))\sigma(\chi(g^{-1})) \\
+        &=\sigma(\frac{1}{\#G}\sum_{g\in G}\chi(g)\chi(g^{-1})) \\
+        &=\sigma(\frac{1}{\#G}\sum_{g\in G}\chi(g)\overline{\chi(g)}) \\
+        &=\sigma(\langle\chi,\chi\rangle) \\
+        &=\sigma(1) \\
+        &=1
+    \end{align*}
+    Also, the representation has trivially the same dimension as the one given
+    by $\rho$, hence it is $>2$.
+\end{proof}
+
+\begin{proof}
+    $(c)$ We know that $P$ is an algebraic integer of $\K/\Q$ as it is the
+    product of algebraic integers of $\K/\Q$. Also, by the definition of
+    norm of $P$ in $\K/\Q$, we have that $|P|_{\K/\Q}=\Pi_{\sigma\in
+    Gal(\K/\Q)}\sigma(P)\in\Q$ is again an algebraic integer. Since
+    $-1<|P|_{\K/\Q}<1$ and the algebraic integers of $\K/\Q$ in $\Q$ are the
+    integers, we have that $|P|_{\K/\Q}=0$, hence $\sigma(\chi(g))=0$ for some
+    $g\in G,\ \sigma\in Gal(\K/\Q)$. However, this means that $\chi(g)=0$ to
+    begin with.
+\end{proof}
+
+
+~\\
+\exercise{12.7}
+
+\begin{proof}
+    Suppose that $f\in X(G)$. Then, being $U$ the $\C$-vector space associated
+    to this character, we have that $\langle f,\chi_W\rangle=
+    \dim_\C\Hom_{\C[G]}(U,Ind^G_HV)=\dim_\C\Hom_{\C[H]}(Res^G_HU,V)=
+    \langle f|_H,\chi_V\rangle$ by~\cite[thm. 10.17]{Tor10} and Frobenius
+    reciprocity.
+
+    Suppose that $f=\sum_{\chi\in X(G)}a_\chi\chi$. Then, by linearity of the
+    inner product, we have that $\langle f,\chi_W\rangle_G=\sum_{\chi\in
+    X(G)}a_\chi\langle\chi,\chi_W\rangle_G=\sum_{\chi\in
+    X(G)}a_\chi\langle\chi|_H,\chi_V\rangle_H=
+    \langle f|_H,\chi_V\rangle_H$.
+\end{proof}
+
+
+~\\
+\exercise{12.11}
+
+\begin{proof}
+    There are three irreducible $\C$-representations of $S_3$, that is the
+    trivial one, the sign one (which are 1-dimensional) and a
+    2-dimensional one. Remember their characters.
+
+    To find the decomposition of the irreducible $S_4$-representation
+    $Ind^{S_4}_{S_3}V_3$ we will try to write its character as a linear
+    combination of the elements of $X(S_4)$ by making use of the result from ex.
+    12.7.
+
+    First, we write down the table of the restrictions of the elements of
+    $X(S_4)$ to $S_3$. We will denote the associated $\C$-vector spaces by
+    $W_i$:
+    
+    \begin{tabular}{l|l|l|l}
+        Conjugacy class & $\Id_{S_4}$ & $(1\ 2)$ & (1\ 2\ 3) \\ \hline
+        Cardinality & 1 & 3 & 2 \\ \hline
+        $\chi_{W_1}|_{S_3}$ & 1 & 1 & 1 \\ \hline
+        $\chi_{W_2}|_{S_3}$ & 1 & -1 & 1 \\ \hline
+        $\chi_{W_3}|_{S_3}$ & 3 & 1 & 0 \\ \hline
+        $\chi_{W_4}|_{S_3}$ & 3 & -1 & 0 \\ \hline
+        $\chi_{W_5}|_{S_3}$ & 2 & 0 & -1
+    \end{tabular}
+
+    We then get the following:
+    \begin{align*}
+        \langle\chi_{W_1},\chi_{Ind^{S_4}_{S_3}V_2}\rangle_{S_4}=
+        \langle\chi_{W_1}|_{S_3},\chi_{V_2}\rangle_{S_3}=\frac{1}{6}(2+0-2)=0 \\
+        \langle\chi_{W_2},\chi_{Ind^{S_4}_{S_3}V_2}\rangle_{S_4}=
+        \langle\chi_{W_2}|_{S_3},\chi_{V_2}\rangle_{S_3}=\frac{1}{6}(2+0-2)=0 \\
+        \langle\chi_{W_3},\chi_{Ind^{S_4}_{S_3}V_2}\rangle_{S_4}=
+        \langle\chi_{W_3}|_{S_3},\chi_{V_2}\rangle_{S_3}=\frac{1}{6}(6+0+0)=1 \\
+        \langle\chi_{W_4},\chi_{Ind^{S_4}_{S_3}V_2}\rangle_{S_4}=
+        \langle\chi_{W_4}|_{S_3},\chi_{V_2}\rangle_{S_3}=\frac{1}{6}(6+0+0)=1 \\
+        \langle\chi_{W_5},\chi_{Ind^{S_4}_{S_3}V_2}\rangle_{S_4}=
+        \langle\chi_{W_5}|_{S_3},\chi_{V_2}\rangle_{S_3}=\frac{1}{6}(4+0+2)=1
+    \end{align*}
+
+    This implies that $Ind^{S_4}_{S_3}V_2=W_3\oplus W_4\oplus W_5$, where $W_3$
+    is the 2-dimensional $\C$-representation and $W_4,\ W_5$ the 3-dimensional
+    ones.
+\end{proof}
+
+
+\printbibliography
+
+\end{document}
+
+

@@ -1,0 +1,287 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Class}{Class}
+
+
+\begin{document}
+
+\title{Representation Theory of Finite Groups - Assignment 4}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{7.1}
+
+\begin{proof}
+    $(a)$ We only have to prove that $V$ is closed with respect to the action of
+    $\K[G]$ onto itself.
+
+    Seeing the $\lambda\sum_{g\in G}g\in V$ as elements of $\K[G]$, for any
+    $h\in G$ we have that $h\cdot\lambda\sum_{g\in G}g=\lambda\sum_{g\in
+    G}hg=\lambda\sum_{g\in G} g$, that is $h$ acts as $\Id_V$.
+    
+    We see that, given $\sum_{h\in G}c_hh\in\K[G]$, we have $(\sum_{h\in
+    G}c_hh)\cdot(\lambda\sum_{g\in G}g)=\sum_{h\in G}\lambda c_h\sum_{g\in G}hg
+    =(\sum_{h\in G}\lambda c_h)\sum_{g\in G}g\in V$.
+\end{proof}
+
+\begin{proof}
+    $(b)$ Consider a $\K[G]$-linear map $\K[G]\xrightarrow{f}V$. We have that
+    $f(\lambda\sum_{g\in G}g)=(\lambda\sum_{g\in G}g)\cdot
+    f(1)=\lambda\sum_{g\in G}g\cdot f(1)=\lambda\sum_{g\in G}\Id_V(f(1))=
+    \lambda\sum_{g\in G}f(1)=\lambda|G|f(1)=0$, thus $\lambda\sum_{g\in G}g\in
+    \ker(f)$ and $V\subset\ker(f)$.
+\end{proof}
+
+\begin{proof}
+    $(c)$ Consider the surjective $\K[G]$-linear map $\K[G]\xrightarrow{f}V$
+    s.t. $f(1)=\sum_{g\in G}g$. If $\K[G]$ was semi-simple, then the short exact
+    sequence $0\rightarrow\ker(f)\rightarrow\K[G]\xrightarrow{f}V\rightarrow 0$
+    would split and therefore there would be a map $V\xrightarrow{r}\K[G]$ s.t.
+    $fr=\Id_V$.
+
+    We shall show that any $\K[G]$-linear map $V\xrightarrow{h}\K[G]$ is s.t.
+    $h(V)\subset V$ and therefore $fr=0\neq\Id_V$, which will give us a
+    contradiction.
+
+    We know that, for any $g'\in G,\ \lambda\sum_{g\in G}g\in\K[G]$, we have
+    that $h(\lambda\sum_{g\in G}g)=h(g'\cdot\lambda\sum_{g\in
+    G}g)=g'\cdot h(\lambda\sum_{g\in G}g)$. Since
+    $h(\lambda\sum_{g\in G}g)=\sum_{g\in G}c_gg$, this
+    tells us that $c_g=c_{g'g}$ for any $g'\in G$, hence choosing $g'=g^{-1}$
+    we see that $c_g=c_1$ for every $g\in G$. It follows that
+    $h(\lambda\sum_{g\in G}g)=\sum_{g\in G}\mu g=\mu\sum_{g\in G}g$ for some
+    $\mu\in\K$, hence $h(V)\subset V$.
+\end{proof}
+
+
+~\\
+\exercise{7.8}
+
+\begin{proof}
+    $(a)$ First of all, we shall determine the conjugacy classes of $S_4$.
+
+    We see that the partitions of 4 are $(1,1,1,1),\ (1,1,2),\ (2,2),\ (1,3),\
+    (4)$, which also describe how the elements of $S_4$ can be factored through
+    disjoint cycles. By computations, we see that $S_4$ has 5 conjugacy classes:
+    \begin{itemize}
+        \item the one of the identity, having only the identity;
+        \item the one of the swaps $(a\ b)$, $a\neq b$, which contains
+            $\frac{4\cdot 3}{2}=6$ elements, i.e. one for every unordered pair
+            of elements in $\{1,2,3,4\}$;
+        \item the one of the elements obtained by composing two disjoint swaps,
+            that is $(a\ b)(c\ d)$ with $a,b,c,d$ all distinct; here we have
+            $\frac{1}{2}\cdot\frac{4\cdot 3}{2}\cdot 1=3$ elements;
+        \item the one given by 3-cycles, which are
+            $\frac{4\cdot 3\cdot 2}{3}=8$;
+        \item the one given by 4-cycles, which are $\frac{4!}{4}=6$.
+    \end{itemize}
+
+    We want to prove that a finite group $G$ has one irreducible
+    $\K$-representation for every conjugacy class, which will conclude the proof.
+
+    We know that $\Class_{\K}(G)\cong\K^{G_{/\sim}}$, thus
+    $\dim_{\K}(\Class_{\K}(G))=\dim_{\K}(\K^{G_{/\sim}})=|G_{/\sim}|$.
+
+    Since the irreducible characters form a basis of $\Class_{\K}(G)$,
+    $\dim_\K(\Class_{\K}(G))$ is also the number of irreducible characters,
+    which correspond bijectively to irreducible representations.
+\end{proof}
+
+\begin{proof}
+    $(b)$ We already know from $(a)$ that the irreducible $\K$-representations
+    of $S_4$ are 5.
+
+    Remember that, since $\K$ is an algebraically closed field and
+    $char(\K)\nmid|G|$, $|G|=24$ is the sum of the squares of the dimensions
+    $d_i$ of the irreducible $\K$-representations by~\cite[thm. 9.14]{Tor10}.
+
+    As we know from the example concerning $S_3$ mentioned in class, there are
+    two representations of dimension $d_1=d_2=1$, namely the final
+    representation, which takes every element of $S_4$ to the identity of $\K$,
+    and the sign representation, which sends every $s\in S_4$ to the
+    automorphism of $\K$ given by $v\mapsto\sign(s)\cdot v$. We denote their
+    characters by $\chi_1^+,\ \chi_1^-$ respectively.
+    
+    Trying different positive integer values for the remaining $d_i$, we see
+    that this forces the other dimensions to be 2, 3 and 3.
+
+    The 2-dimensional irreducible representation will be given by
+    $S_4\xrightarrow{\alpha}\Aut_{\K}(V_2)$, its character by $\chi_2$.
+
+    The first 3-dimensional irreducible representation is given by the action of
+    $S_4$ on the interior diagonals of a square centered at the origin. We
+    denote its character by $\chi_3^+$, the morphism by $\rho$.
+
+    The second one is given by the tensor product of the first one with the sign
+    representation and its character will be denoted by $\chi_3^-$, the morphism
+    by $\rho'$. This representation is distinct from the other 3-dimensional one
+    because, for any swap $s\in S_4$, $\det(\rho(s))=1\neq -1=\det(\rho'(s))$.
+\end{proof}
+
+
+~\\
+\exercise{8.2}
+
+\begin{proof}
+    $(a)$ Let $\psi\in X(G)$. Given any $f=\sum_{\chi\in
+    X(G)}a_\chi\chi\in\Class_{\C}(G)$, since $X(G)$ gives an
+    orthonormal basis of $\Class_{\C}(G)$ with respect to the inner product, we
+    have that $\langle\psi,f\rangle=\langle\psi,\sum_{\chi\in
+    X(G)}a_\chi\chi\rangle=\sum_{\chi\in
+    X(G)}a_\chi\langle\psi,\chi\rangle=\sum_{\chi\in
+    X(G)}a_\chi\delta_{\psi,\chi}=a_{\psi}$.
+\end{proof}
+
+\begin{proof}
+    $(b)$ Suppose that $f=\sum_{\chi\in X(G)}a_\chi\chi,\ a_\chi\in\Z_{\geq 0}$,
+    and let $M:=\bigoplus_{S\in\mathcal{S}}S^{\langle f,\chi_S\rangle}$. Since
+    there are finitely many $\chi$, $M$ is a finitely generated
+    $\C[G]$-module. By construction, $\chi_M=\sum_{S\in\mathcal{S}}\langle
+    f,\chi_S\rangle\chi_S=f$.    
+    
+    Conversely, since $\C[G]$ is a semi-simple ring, any finitely generated
+    $\C[G]$-module $M$ is s.t. $M\cong\bigoplus_{S\in\mathcal{S}}S^{n_s}$.
+    It follows that $\chi_M=\sum_{S\in\mathcal{S}}n_S\chi_S$, which has positive
+    integer coefficients.
+\end{proof}
+
+
+~\\
+\exercise{8.10}
+
+\begin{proof}
+    $(a,b)$ First of all, we shall compute the character table of $S_4$. From
+    what we did for $S_3$, we remember that $\chi_1^+$ is associated to the
+    final representation, $\chi_1^-$ to the alternating one and therefore
+    $\chi_1^+(s)=\Tr(1),\ \chi_1^-(s)=\Tr(\sign(s))=\sign(s)$.
+    
+    Furthermore, by our earlier description, $\chi_3^+$ is associated
+    to the 3-dimensional permutation representation
+    $S_4\xrightarrow{\rho}\Aut_{\C}(V_4)$, where $V_4$ is the subspace of $\C^4$
+    given by the linear span of $e_1-e_2,\ e_2-e_3,\ e_3-e_4$ and
+    $\rho(s)(e_i-e_{i+1})=e_{s(i)}-e_{s(i+1)}$. Also, $\chi_3^-$ is obtained by
+    considering the 3-dimensional representation given by
+    $\rho'(s)=\sign(s)\rho(s)$.
+
+    Carrying out the computations, we see that the character table of $S_4$ is
+    the following one:
+    
+    \begin{tabular}{ll|l|l|l|l|l}
+        &  &1  &6  &8  &6  &3 \\
+        &$S_4$  &$\Id$  &$(1\ 2)$  &$(1\ 2\ 3)$  &$(1\ 2\ 3\ 4)$
+        &$(1\ 2)(3\ 4)$ \\ \hline
+        $\chi_1^+$  &$V_1$  &1  &1  &1  &1  &1 \\
+        $\chi_1^-$  &$V_2$  &1  &-1  &1  &-1  &1 \\
+        $\chi_2$  &$V_3$  &2  &0  &-1  &0  &2 \\
+        $\chi_3^+$  &$V_4$  &3  &1  &0  &-1  &-1 \\
+        $\chi_3^-$  &$V_5$  &3  &-1  &0  &1  &-1
+    \end{tabular}
+
+    ~\\
+    The row of $\chi_2$ has been obtained by remembering that these characters
+    are orthonormal, the one of $\chi_3^-$ by remembering that
+    $\chi_3^-(s)=\chi_1^-(s)\chi_3^+(s)$ for all $s\in S_4$.
+
+    From the table we see that $\chi_2^2$ takes values $4,\ 0,\ 1,\ 0,\ 4$ on
+    the conjugacy classes of $\Id$, $(1\ 2)$, $(1\ 2\ 3)$, $(1\ 2\ 3\ 4)$, 
+    $(1\ 2)(3\ 4)$ respectively. This gives
+    $\langle\chi_2^2,\chi_2^2\rangle=\frac{1}{|S_4|}(4^2\cdot 1+0^2\cdot
+    6+1^2\cdot 8+0^2\cdot 6+4^2\cdot 3)=\frac{1}{24}(16+8+48)=3$.
+
+    Since the only way to express 3 as a sum of squares of integers is
+    $3=1^2+1^2+1^2$, $\chi_2^2$ is given by the direct sum of 3 irreducible
+   representations.
+
+   Observe that, since $\langle f,h\rangle=\frac{1}{|S_4|}\sum_{g\in G}f(g)
+   \overline{h(g)}$, we have the following:
+    \begin{align*}
+        \langle\chi^2_2,\chi^+_1\rangle & =\frac{1}{|S_4|}(4\cdot 1\cdot
+        1+0\cdot 1\cdot 6+1\cdot 1\cdot 8+0\cdot 1\cdot 6+4\cdot 1\cdot 3) \\
+        & =\frac{1}{24}(4+8+12) \\
+        &=1 \\
+        \langle\chi^2_2,\chi^-_1\rangle &=\frac{1}{|S_4|}(4\cdot 1\cdot
+        1+0\cdot(-1)\cdot 6+1\cdot 1\cdot 8+0\cdot(-1)\cdot 6+4\cdot 1\cdot 3)
+        \\
+        &=\frac{1}{24}(4+8+12) \\
+        &=1 \\
+        \langle\chi^2_2,\chi_2\rangle
+        &=\frac{1}{|S_4|}(4\cdot2\cdot1+0\cdot0\cdot6+1\cdot(-1)\cdot8
+        +0\cdot0\cdot6+4\cdot2\cdot3) \\
+        &=\frac{1}{24}(8-8+24) \\
+        &=1 \\
+        \langle\chi^2_2,\chi^+_3\rangle &=\frac{1}{|S_4|}(4\cdot 3\cdot 1+0\cdot
+        0\cdot 6+1\cdot 0\cdot 8+0\cdot (-1)\cdot 6+4\cdot (-1)\cdot 3) \\
+        &=\frac{1}{24}(12-12) \\
+        &=0
+    \end{align*}
+    \begin{align*}
+        \langle\chi^2_2,\chi^-_3\rangle
+        &=\frac{1}{|S_4|}(4\cdot3\cdot1+0\cdot(-1)\cdot6+
+        1\cdot0\cdot8+0\cdot1\cdot6+4\cdot(-1)\cdot3) \\
+        &=\frac{1}{24}(12-12) \\
+        &=0 
+    \end{align*}
+
+    It follows that the vector space $V=V_3\otimes_\C V_3$ associated to the
+    representation linked to $\chi_2^2$ can be described by a copy of $V_1,\
+    V_2$ and $V_3$, that is $V=V_1\oplus V_2\oplus V_3$, with
+    $S_4\rightarrow\Aut_\C(V_1)\oplus\Aut_\C(V_2)\oplus\Aut_\C(V_3)\subset
+    \Aut_\C(V)$ given by $s\mapsto (\Id,\sign(s),\alpha(s))$, a 4-dimensional
+    representation. Also, $\chi^2_2$ can be expressed as a linear combination of
+    $\chi_1^+,\ \chi_1^-$ and $\chi_2$, whose coefficients are given by the
+    inner products, which gives us that $\chi_2^2=\chi_1^++\chi_1^-+\chi_2$.
+\end{proof}
+
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,284 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Class}{Class}
+
+
+\begin{document}
+
+\title{Representation Theory of Finite Groups - Assignment 5}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{9.1}
+
+\begin{proof}
+    $(1\implies 2)$ This comes from the fact that any irreducible
+    $\C$-representation is finite dimensional as the dimension has to divide
+    $|G|$.
+
+    $(2\implies 3)$ Any irreducible character $\chi\in X(G)$ corresponds to an
+    irreducible $\C$-representation $G\xrightarrow{\rho}\Aut_\C(V)$ and we know
+    that $\chi_V=\overline{\chi_{V^*}}$. Also, since $\chi_V=\overline{\chi_V}$,
+    we have that $\chi_{V^*}=\chi_V$. This happens if and only if the two
+    representations are equivalent, hence we have that $V\cong V^*$.
+
+    $(3\implies 4)$ Let now $g\in G$. We know that, for any character
+    $\chi_V\in X(G)$, $\overline{\chi_V(g)}=\chi_V(g^{-1})$ $(*)$. Also, for
+    irreducible characters, $\chi_V=\chi_{V^*}=\overline{\chi_V}$ because the
+    representations corresponding to $V$ and $V^*$ are isomorphic. This implies
+    $\chi_V(g)=\chi_V(g^{-1})$.
+    
+    Since irreducible characters generate $\Class_\C(G)$, this means that
+    $\chi(g)=\chi(g^{-1})$ for any $\chi\in\Class_\C(G)$. If $g\not\sim g^{-1}$,
+    then there would be a class function assigning distinct values to the two of
+    them, hence $g\sim g^{-1}$.
+
+    $(*)$ Given a $\C$-representation $G\xrightarrow{\rho}\Aut_\C(V)$, for any
+    $g\in G$ of finite order $n$ we have $\rho(g)^n=\rho(g^n)=\rho(1)=\Id$, thus
+    the characteristic polynomial of $\rho(g)$ divides $X^n-1$ and it has
+    distinct roots. It follows that there is a basis $B$ of eigenvectors
+    diagonalizing $\rho(g)$. Since changing basis does not affect the trace
+    we may then fix this one, which immediately gives that
+    $\chi(g)=\sum_i\lambda_i$, where the $\lambda_i$ are the eigenvalues of
+    $\rho(g)$. Clearly, with respect to our basis, $\rho(g^{-1})=\rho(g)^{-1}$
+    has the $\lambda_i^{-1}$ on the diagonal and therefore
+    $\chi(g^{-1})=\sum_i\lambda_i^{-1}$. Since $\lambda_i$ is a root of $X^n-1$,
+    it is a root of unity and therefore $\lambda_i^{-1}=\overline{\lambda_i}$.
+    It follows that $\chi(g^{-1})=\sum_i\lambda_i^{-1}=
+    \sum_i\overline{\lambda_i}=\overline{\sum_i\lambda_i}=\overline{\chi(g)}$.
+
+    $(4\implies 1)$ As shown earlier, $\chi(g^{-1})=\overline{\chi(g)}$
+    for any character $\chi\in\Class_\C(G)$. Also, since $g\sim g^{-1}$,
+    $\chi(g)=\chi(g^{-1})$, hence $\chi(g)=\overline{\chi(g)}$. This immediately
+    implies that $\chi$ is real valued.
+\end{proof}
+
+
+~\\
+\exercise{9.5}
+
+\begin{proof}
+    Let $S_4$ act on the set $Y$ of the faces of a cube by permuting the
+    diagonals and consider the induced group homomorphism
+    $S_4\xrightarrow{\rho}W_Y=\C^Y\cong\C^6$. Let now $\chi\in X(S_4)$ be the
+    associated representation. Looking at
+    the fixed points of the elements of $S_4$, we will determine
+    $\chi(s)$ for all $s\in S_4$. Indeed, as we are about to show, $\chi(s)$
+    is given by the cardinality of the set of fixed points in $Y$.
+
+    Let the linear transformation $\rho(s)$ be represented by a matrix with
+    respect to the canonical basis. This is a permutation matrix, i.e. it has
+    one non-zero entry in each row and column, which are indexed by the elements
+    of $Y$. We see that $a_{bc}=1$ if and only if $s\cdot c=b$ and it is 0
+    otherwise. From this it is clear that the non-zero diagonal entries
+    correspond to the elements in $Y$ fixed by $s$. Their number will then
+    correspond to $\chi(s)$.
+
+    Remember that, since $\chi$ is a class function, it is constant on the
+    conjugacy classes, which we have already described in a previous assignment.
+    
+    Clearly, $\rho(\Id_{S_4})$ fixes every face of the cube and therefore
+    $\chi(1)=6$. On the other hand, $\rho(i\ j)$ and $\rho(i\ j\ k)$ do not fix
+    any for distinct $i,j,k$, while $\rho((h\ i)(j\ k))$ and $\rho(h\ i\ j\ k)$
+    both fix two faces.
+
+    It follows that we may write $\chi=6[\Id_{S_4}]+2[(h\ i)(j\ k)]+2[(h\ i\ j\
+    k)]$ and we know that there is a unique way to describe it as a linear
+    combination of irreducible characters $\chi=\sum_ia_i\chi_i$. Look at the
+    following system of equations given by $\chi(s)=\sum_ia_i\chi_i(s)$ as $s$
+    ranges over the 5 conjugacy classes:
+    \begin{align*}
+        a_1+a_2+2a_3+3a_4+3a_5 &=6\quad [\Id_{S_4}] \\
+        a_1-a_2+a_4-a_5 &=0\quad [(i\ j)] \\
+        a_1+a_2-a_3 &=0\quad [(i\ j\ k)] \\
+        a_1-a_2-a_4+a_5 &=2\quad [(h\ i)(j\ k)] \\
+        a_1+a_2+2a_3-a_4-a_5 &=2\quad [(h\ i\ j\ k)]
+    \end{align*}
+
+    Solving this system of equations we find the solution $(1,0,1,0,1)$, hence
+    $\chi=\chi_1+\chi_3+\chi_5$, $W_Y=\bigoplus_{i=1}^3V_i$ and
+    $S_4\xrightarrow{\rho=\bigoplus_{i=1}^3\rho_i}
+    \bigoplus_{i=1}^3\Aut_\C(V_i)\subset\Aut_\C(W_Y)$.
+\end{proof}
+
+
+~\\
+\exercise{10.5}
+
+\begin{proof}
+    Let $f=\sum_{h\in G} c_hh\in\C[G]$. Noticing that multiplying $|G|e$ by
+    $h\in G$ on any side we are just permuting the terms, we have the following:
+    \begin{align*}
+        e\cdot f &= (\frac{1}{|G|}\sum_{g\in G} g)(\sum_{h\in G} c_hh) \\
+        &= \frac{1}{|G|}\sum_{g\in G} (\sum_{h\in G} c_hgh) \\
+        &= \frac{1}{|G|}\sum_{h\in G} (\sum_{g\in G} c_hgh) \\
+        &= \frac{1}{|G|}\sum_{h\in G} c_h (\sum_{g\in G} gh) \\
+        &= \frac{1}{|G|}\sum_{h\in G} c_h (\sum_{g\in G} hg) \\
+        &= \sum_{h\in G} c_hh (\frac{1}{|G|}\sum_{g\in G} g) \\
+        &= (\sum_{h\in G} c_hh)(\frac{1}{|G|}\sum_{g\in G} g) \\
+        &= f\cdot e
+    \end{align*}
+    It follows that $e\in Z(\C[G])$.
+
+    Observing that $e^2=\frac{1}{|G|^2}\sum_{h\in G}\sum_{g\in G}
+    hg=\frac{1}{|G|^2}\sum_{h\in G} h(\sum_{g\in G}
+    g)=\frac{1}{|G|^2}|G|\sum_{g\in G}g=\frac{1}{|G|}\sum_{g\in G}g=e$, we have
+    that $e$ is a root of the polynomial $p(X)=X^2-X\in\Z[X]$, hence it is
+    integral over $\Z$.
+\end{proof}
+
+
+~\\
+\exercise{10.8}
+
+\begin{proof}
+    $(a)$ We know that $\#(S_{3_/\sim})=3$ and therefore
+    $Z(\C[S_3])\cong\C\times\C\times\C$. We will make the isomorphism explicit.
+
+    Let's call $C_j$ the equivalence class of the elements of order $j$ in
+    $S_3$.
+
+    We already have an isomorphism
+    $\C[S_3]\xrightarrow{\rho}\Pi_{i=1}^3\Mat_{n_i}(\C)$ given by extending
+    $s\mapsto(\rho_i(s))_{i=1}^3$, where $n_i$ is the dimension of the $i$th
+    irreducible representation and therefore $n_1=n_2=1,\ n_2=2$. By restricting
+    it to $Z(\C[S_3])$ we will have the desired isomorphism.
+
+    We know that the elements of $Z(\C[S_3])$ have the form $\sum_ja_j\sum_{s\in
+    C_j}s$. Also, $\rho_1$ is the final representation
+    and therefore, on the first coordinate, $\sum_ja_j\sum_{s\in
+    C_j}s\mapsto\sum_ja_j\sum_{s\in C_j}1=\sum_j|C_j|a_j=
+    a_1+3a_2+2a_3$. Likewise, $\rho_2$ is the final representation, hence
+    $\sum_ja_j\sum_{s\in C_j}s\mapsto\sum_ja_j\sum_{s\in C_j}(-1)^{j+1}=
+    a_1-3a_2+2a_3$.
+
+    Finally, $\rho_3$ is the permutation representation, which is given by
+    taking the subspace $V$ of $\C^3$ spanned by $e_1-e_2,\ e_1-e_3$ and setting
+    $\rho_3(s)(e_i)=e_{s(i)}$.
+
+    We have the following:
+    \begin{align*}
+        \rho_3(1\ 2)&=\begin{bmatrix}
+            -1 & -1 \\
+            0 & 1
+        \end{bmatrix},\quad
+        \rho_3(1\ 3)=\begin{bmatrix}
+            1 & 0 \\
+            -1 & -1
+        \end{bmatrix},\quad
+        \rho_3(2\ 3)=\begin{bmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{bmatrix}, \\
+        \rho_3(1\ 2\ 3)&=\begin{bmatrix}
+            -1 & -1 \\
+            1 & 0
+        \end{bmatrix},\quad
+        \rho_3(1\ 3\ 2)=\begin{bmatrix}
+            0 & 1 \\
+            -1 & -1
+        \end{bmatrix}
+    \end{align*}
+
+    As before, we have on the third coordinate $\sum_ja_j\sum_{s\in C_j}s\mapsto
+    a_1\cdot\Id_V-a_3\cdot\Id_V$.
+
+    Consider the following system of equations as $k$ ranges from $1$ to $3$:
+    \begin{align*}
+        a_1+3a_2+2a_3=\delta_{1k} \\
+        a_1-3a_2+2a_3=\delta_{2k} \\
+        a_1-a_3=\delta_{3k}
+    \end{align*}
+
+    Solving them, we find the solution $(1/6,1/6,1/6)$ for $k=1$,
+    $(1/6,-1/6,1/6)$ for $k=2$ and $(2/3,0,1/2)$ for $k=3$, which give us the
+    unique elements mapped to $(\delta_{1k},\delta_{2k},\delta_{3k})$. Since
+    their images are $\C$-linearly independent they are linearly independent
+    themselves. Also, being $Z(\C[S_3])$ a 3-dimensional $\C$-vector space,
+    it follows that they generate the whole space. Finally, seeing the ring
+    homomorphism $Z(\C[S_3])\rightarrow\C\times\C\times\Mat_2(\C)$ given by
+    restricting the domain of the previously mentioned isomorphism as a
+    $\C$-linear application between $\C$-vector spaces, it becomes clear that
+    the elements lying in its image have the form $(a,b,c\cdot\Id_V)$ for
+    $a,b,c\in\C$, hence $Z(\C[S_3])\cong\C\times\C\times\C$.
+\end{proof}
+
+\begin{proof}
+    $(b)$ The previously mentioned isomorphism is naturally a
+    $\overline{\Z}$-algebra isomorphism, hence we may simply find the integral
+    closure of $\Z$ in $\C\times\C\times\C$, which will give us the desired
+    isomorphism by restricting the codomain.
+
+    Let $p\in\Z[X]$ be a monic polynomial. An element
+    $a=(a_i)_{i=1}^3\in\C\times\C\times\C$ is a zero
+    of this polynomial if and only if $p(a_i)=0$ for each $i$, which is
+    equivalent to saying that $a_i\in\overline{Z}\subset\C$. It follows that the
+    integral closure of $\Z$ in $\C\times\C\times\C$ is contained in
+    $\overline{\Z}\times\overline{\Z}\times\overline{\Z}$.
+
+    On the other hand, let
+    $a\in\overline{\Z}\times\overline{\Z}\times\overline{\Z}$. For each $a_i$,
+    let $p_i\in\Z[X]$ be the associated minimum polynomial and set
+    $p=p_1p_2p_3$. We see that $p\in\Z[X]$ is still monic and $p(a)=0$, thus $a$
+    belongs to the integral closure of $\Z$ in $\C\times\C\times\C$.
+
+    To find the generators of the algebraic closure as a
+    $\overline{\Z}$-submodule of $Z(\C[S_3])$, it is enough to look at the
+    preimages of $(1,0,0)$, $(0,1,0)$, $(0,0,1)$ under our isomorphism. By our
+    earlier computations, these are respectively $\frac{1}{6}\sum_{s\in S_3}s$,
+    $\sum_j\frac{(-1)^{j+1}}{6}\sum_{s\in C_j}s$,
+    $\frac{2}{3}-\frac{1}{2}\sum_{s\in C_3}s$.
+\end{proof}
+
+
+
+\printbibliography
+
+\end{document}
