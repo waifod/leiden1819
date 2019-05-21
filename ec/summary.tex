@@ -19,8 +19,9 @@
 \newcommand{\numberset}{\mathbb}
 \newcommand{\N}{\numberset{N}}
 \newcommand{\Z}{\numberset{Z}}
-\newcommand{\R}{\numberset{R}}
 \newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
 \newcommand{\K}{\numberset{K}}
 \newcommand{\F}{\numberset{F}}
 \newcommand{\n}{\mathcal{N}}
@@ -94,14 +95,15 @@
     \end{itemize}
 \end{prop}
 
-\begin{prop}
+\begin{thm}
     For all but finitely many $Q\in C_2$, $\#\phi^{-1}(Q)=\deg_s(\phi)$. If we
     are working over $\Q$, $=\deg(Q)$.
-\end{prop}
+\end{thm}
 
 \begin{prop}
     Let $C$ be a smooth curve, $f\in\overline{\K}(C)^\times$. Then there are
     finitely many points $P\in C$ s.t. $ord_P(f)\neq 0$.
+\end{prop}
 
 ---
 
@@ -127,7 +129,7 @@ smooth projective curve over $\K$.
 \end{prop}
 
 \begin{thm}[Riemann-Roch]
-    Given $D\in\Dv(C)$, $l(D)-l(K_C-D)=\deg(D)-g+1$.
+    Given $D\in\Dv(C)$, $l(D)-l(K_C-D)=\deg(D)-g+1$. Also, $\deg(K_c)=2g-2$.
 \end{thm}
 
 \begin{prop}
@@ -181,10 +183,9 @@ smooth projective curve over $\K$.
 \end{cor}
 
 \begin{thm}[Nagell-Lutz]
-    Let $E/\Q$ be an elliptic curve given in short Weierstrass form by
-    $y^2=x^3+ax+b$, $a,b\in\Z$. Suppose that $P=(x_P,y_P)\in E(\Q)^{tors}$.
+    Let $E/\Q$ be an elliptic curve. Suppose that $P=(x_P,y_P)\in E(\Q)^{tors}$.
     Then, $x_P,y_P\in\Z$ and either $y_P=0$, in which case $P$ has order 2, or
-    $y_P^2|4a^3+27b^2$.
+    $y_P^2|\Delta$.
 \end{thm}
 
 \begin{thm}[Mazur]
@@ -203,6 +204,17 @@ smooth projective curve over $\K$.
         \item $\sum_{\gamma\in D}ord_\gamma(f)\cdot\gamma=0\mod\Lambda$.
     \end{itemize}
 \end{prop}
+
+\begin{thm}
+    Let $\Lambda\subset\C$ be a lattice. Then any elliptic function on $\Lambda$
+    is an element of $\C(\wp_\Lambda,\wp'_\Lambda)$.
+\end{thm}
+
+\begin{thm}
+    Given any lattice $\Lambda\subset\C$, we have that:
+    $$(\wp_\Lambda'(z))^2=4\wp_\Lambda(z)^3-60\cdot
+    G_4(\Lambda)\wp_\Lambda(z)-140\cdot G_6(\Lambda).$$
+\end{thm}
 
 \printbibliography
 
