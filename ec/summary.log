@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.4.3)  20 MAY 2019 18:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.4.3)  28 MAY 2019 16:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1323,17 +1323,17 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/it' in size <10> not available
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-./summary.tex:149: Missing number, treated as zero.
+./summary.tex:147: Missing number, treated as zero.
 <to be read again> 
                    (
-l.149     Let $\char(
+l.147     Let $\char(
                      \K)\neq2,3$. If $C$ is given by a Weierstrass equation,...
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
 look up `weird error' in the index to The TeXbook.)
 
 
-LaTeX Warning: Empty bibliography on input line 219.
+LaTeX Warning: Empty bibliography on input line 217.
 
 [2] (./summary.aux)
 Package logreq Info: Writing requests to 'summary.run.xml'.
@@ -1362,7 +1362,7 @@ public/lm/lmr5.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share
 /fonts/type1/public/lm/lmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/symbols/msbm7.pfb>
-Output written on summary.pdf (2 pages, 213684 bytes).
+Output written on summary.pdf (2 pages, 213844 bytes).
 PDF statistics:
  81 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream

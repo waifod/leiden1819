@@ -67,7 +67,7 @@
 \maketitle
 
 \begin{thm}[Mordell]
-    Given an elliptic curve $E/\Q$, $\rk(E(\Q))=\rk(E(\Q)/2E(\Q))<\infty$.
+    Given an elliptic curve $E/\Q$, $\rk(E(\Q))<\infty$.
 \end{thm}
 
 \begin{thm}
@@ -91,14 +91,12 @@
     \begin{itemize}
         \item for every $Q\in C_2$, $\deg(\phi)=\sum_{P\in\phi^{-1}(Q)}e_\phi(P)$;
         \item If $C_2\xrightarrow{\psi}C_3$ is another morphism,
-            $e_{\psi\circ\phi}(P)=e_\phi(P)\cdot e_{\psi}(\phi(P))$.
+            $e_{\psi\circ\phi}(P)=e_\phi(P)\cdot e_{\psi}(\phi(P))$;
+        \item For all but finitely many $Q\in C_2$, 
+            $\#\phi^{-1}(Q)=\deg_s(\phi)$. If we are working over $\Q$,
+            $=\deg(\phi)$.
     \end{itemize}
 \end{prop}
-
-\begin{thm}
-    For all but finitely many $Q\in C_2$, $\#\phi^{-1}(Q)=\deg_s(\phi)$. If we
-    are working over $\Q$, $=\deg(Q)$.
-\end{thm}
 
 \begin{prop}
     Let $C$ be a smooth curve, $f\in\overline{\K}(C)^\times$. Then there are
