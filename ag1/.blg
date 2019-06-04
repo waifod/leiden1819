@@ -1,0 +1,5 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[1] Config.pm:343> INFO - Logfile is '/home/user/math/leiden1819/ag1/.blg'
+[87] biber:287> INFO - === Mon Jun  3, 2019, 17:47:41
+[129] Utils.pm:163> ERROR - Cannot find control file '/home/user/math/leiden1819/ag1/.bcf'! - did you pass the "backend=biber" option to BibLaTeX?
+[130] Biber.pm:113> INFO - ERRORS: 1

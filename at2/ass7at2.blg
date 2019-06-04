@@ -1,0 +1,15 @@
+[1] Config.pm:340> INFO - This is Biber 2.4
+[1] Config.pm:343> INFO - Logfile is 'ass7at2.blg'
+[121] biber:287> INFO - === Tue Jun  4, 2019, 11:59:00
+[383] Biber.pm:348> INFO - Reading 'ass7at2.bcf'
+[693] Biber.pm:742> INFO - Found 1 citekeys in bib section 0
+[776] Biber.pm:3151> INFO - Processing section 0
+[1123] Biber.pm:3308> INFO - Looking for bibtex format file '~/math/references.bib' for section 0
+[1196] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
+[1222] bibtex.pm:974> INFO - Found BibTeX data source '/home/user/math/references.bib'
+[1315] UCollate.pm:65> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1318] UCollate.pm:65> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1318] Biber.pm:3028> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-GB'
+[1318] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-GB'
+[1321] bbl.pm:519> INFO - Writing 'ass7at2.bbl' with encoding 'UTF-8'
+[1330] bbl.pm:615> INFO - Output to ass7at2.bbl
