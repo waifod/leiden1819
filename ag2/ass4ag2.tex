@@ -1,0 +1,390 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Spec}{Spec}
+
+
+\begin{document}
+
+\title{Algebraic Geometry II - Assignment 4}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{1}
+
+\begin{proof}
+    $(i)$ We know that, for any open $U\subset X\setminus K$, we have
+    $i_*\mathcal{F}(U)=\mathcal{F}(\emptyset)=0$, hence for any $x\in X\setminus
+    K$ we get that $m_x=[(V,m)]\in (i_*\mathcal{F})_x$ is s.t. $m_x=[(V,m)]=
+    [(V\setminus K,m|_{V\setminus K})]=[(V\setminus K,0|_{V\setminus K})]=0_x$
+    and therefore $(i_*\mathcal{F})_x=0$.
+
+    On the other hand, for any $x\in K$, we have that
+    $(i_*\mathcal{F})_x=\varinjlim_{x\in U\subset X}i_*\mathcal{F}(U)=
+    \varinjlim_{x\in U\subset X}\mathcal{F}(U\cap K)=\varinjlim_{x\in U\subset
+    K}\mathcal{F}(U)=\mathcal{F}_x$.
+
+    Now, given an exact sequence
+    $\mathcal{F}\xrightarrow{\phi}\mathcal{G}\xrightarrow{\psi}\mathcal{H}$ of
+    sheaves on $K$, consider the induced sequence
+    $i_*\mathcal{F}\xrightarrow{i_*\phi}i_*\mathcal{G}\xrightarrow{i_*\psi}
+    i_*\mathcal{H}$ of sheaves on $X$. We know that a sequence of sheaves on $X$
+    is exact if and only if for every $x\in X$ the induced sequence
+    $(i_*\mathcal{F})_x\xrightarrow{(i_*\phi)_x}(i_*\mathcal{G})_x
+    \xrightarrow{(i_*\psi)_x}(i_*\mathcal{H})_x$ on the stalks is exact.
+
+    For $x\in X\setminus K$, all of these stalks are 0 and the sequence is
+    trivially exact. For $x\in K$, the sequence becomes to
+    $\mathcal{F}_x\xrightarrow{\phi_x}\mathcal{G}_x\xrightarrow{\psi_x}
+    \mathcal{H}_x$, which is exact because the one we started from is. This
+    concludes the proof.
+\end{proof}
+
+\begin{proof}
+    $(ii)$ Let $U\subset V\subset X$ be open. We have that $V\cap K\subset U\cap
+    K$ are open of $K$ and the restriction map
+    $i_*\mathcal{F}(V)=\mathcal{F}(V\cap K)\rightarrow
+    i_*\mathcal{F}(U)=\mathcal{F}(U\cap K)$ is precisely the
+    restriction map $\mathcal{F}(V\cap K)\rightarrow\mathcal{F}(U\cap K)$. Since
+    the latter is surjective, so is the first, hence $i_*\mathcal{F}$ is a
+    flasque sheaf and the thesis follows.
+\end{proof}
+
+\begin{proof}
+    $(iii)$ We know that flasque sheaves are $\Gamma$-acyclic, hence, given a
+    flasque resolution of $\mathcal{F}$,
+    $(0)\rightarrow\mathcal{F}\rightarrow\mathcal{G}^\bullet$, and the induced
+    one on $i_*\mathcal{F}$, $(0)\rightarrow i_*\mathcal{F}\rightarrow
+    i_*\mathcal{G}^\bullet$, we have that $h^n(\Gamma(K,\mathcal{G}^\bullet))\cong
+    R^n\Gamma(K,\mathcal{F})=H^n(K,\mathcal{F})$,
+    $h^n(\Gamma(X,i_*\mathcal{G}^\bullet))
+    \cong R^n\Gamma(X,i_*\mathcal{F})=H^n(X,i_*\mathcal{F})$ for every $n\in\N$.
+
+    Notice that, given $\mathcal{G}^n\xrightarrow{\phi}\mathcal{G}^{n+1}$, the
+    morphism $i_*\mathcal{G}^n\xrightarrow{i_*\phi}i_*\mathcal{G}^{n+1}$ is
+    s.t. $i_*\phi(X)=\phi(i^{-1}(X))=\phi(K)$.
+
+    By definition, for $n\in\N_{>0}$:
+    \begin{align*}
+        h^n(\Gamma(X,i_*\mathcal{G}^\bullet))&=\ker(i_*\mathcal{G}^n(X)\rightarrow
+        i_*\mathcal{G}^{n+1}(X))/\im(i_*\mathcal{G}^{n-1}(X)\rightarrow
+        i_*\mathcal{G}^n(X)) \\
+        &=\ker(\mathcal{G}^n(K)\rightarrow\mathcal{G}^{n+1}(K))/
+        \im(\mathcal{G}^{n-1}(K)\rightarrow\mathcal{G}^n(K)) \\
+        &=h^n(\Gamma(K,\mathcal{G}^\bullet)
+    )\end{align*}
+
+    Similarly, for $n=0$, we have that:
+    \begin{align*}
+        h^0(\Gamma(X,i_*\mathcal{G}^\bullet))&=\ker(i_*\mathcal{G}^0(X)\rightarrow
+    i_*\mathcal{G}^1(X)) \\
+        &=\ker(\mathcal{G}^0(K)\rightarrow\mathcal{G}^1(K)) \\
+        &=h^0(\Gamma(K,\mathcal{G}^\bullet))
+    \end{align*}
+
+    The thesis follows.
+\end{proof}
+
+
+~\\
+\exercise{2}
+
+\begin{proof}
+    $(i)$ Let $x\in X\setminus\{\eta\}$. We know that $\overline{\{x\}}=Y$ is an
+    irreducible closed subscheme of $X$. Since $x\neq\eta$, $Y\subsetneq X$ by
+    uniqueness of the generic point.
+
+    Now, since $\dim(X)=1$, we have that $\dim(Y)=0$ and, having
+    $\overline{\{y\}}\subset Y$ for any $y\in Y$, being $\overline{\{y\}}$ an
+    irreducible closed subscheme of $Y$, we have that $\overline{\{y\}}=Y$, thus
+    $y=x$ again by the uniqueness of the generic point and $Y=\{x\}$.
+
+    It follows that $X=|X|\cup\{\eta\}$.
+\end{proof}
+
+\begin{proof}
+    $(ii)$ Let $K(X)\xrightarrow{\phi}\Pi_{x\in |X|}K(X)/\mathcal{O}_{X,x}$ be
+    the map $f\mapsto ([f]_x)_{x\in |X|}$, which is natural and $\K$-linear as
+    it is given by the direct product of the natural projections
+    $K(X)\rightarrow K(X)/\mathcal{O}_{X,x}$ for $x\in |X|$. We have to check
+    that we may restrict its codomain to $\bigoplus_{x\in
+    |X|}K(X)/\mathcal{O}_{X,x}$, which is equivalent to proving that, for any
+    $f\in K(X)$, $f\not\in\mathcal{O}_{X,x}$ for finitely many $x\in |X|$.
+
+    Let's cover $X$ by finitely many affine open subschemes
+    $(U_i=\Spec(R_i))_{i=1}^n$. Each $R_i$ will then be a
+    finitely generated $\K$-algebra and a domain because $X$ is an integral
+    $\K$-scheme of finite type.
+    
+    Also, $\eta\in U_i$ for every $i$ by density and it
+    corresponds to the zero-ideal of $R_i$, hence either $R_i$ is a field and
+    then $U_i=\{\eta\}$ (this actually can't even be), which implies that we may
+    discard $U_i$ from the
+    covering as it is redundant, or it isn't and therefore it has a maximal
+    ideal $\mi$ corresponding to some point $x\in U_i$ s.t. $x\neq\eta$. After
+    refining the covering, we may assume that $|U_i|>1$ and therefore, being $x$
+    closed, we have a chain of irreducible closed subschemes of $U_i$ given by
+    $\emptyset\subsetneq\{x\}\subsetneq U_i$. From this, $\dim(U_i)>0$. On the
+    other hand, since $\dim(X)=1$, $\dim(U_i)\leq 1$, hence $\dim(U_i)=1$.
+    
+    Remember that, for any $x\in X$, the
+    fraction field of $\mathcal{O}_{X,x}$ is given precisely by $K(X)$ and
+    corresponds to the localization at $(0)$.
+
+    Now, for any $x\in X$ there exists a $i$ s.t. $x\in U_i$ and therefore a
+    prime $\pid\subset R_i$ s.t. $(R_i)_\pid=\mathcal{O}_{X,x}$.
+
+    Let $f\in R_i$, $f\neq 0$. We will prove that there are finitely many prime
+    ideals $\pid\subset R_i$ s.t. $f\in\pid$.
+
+    Indeed, consider the ideal $(f)$. Since $R_i$ is Noetherian, it admits a
+    minimal primary decomposition $(f)=\bigcap_{j=0}^m\qid_j$. Taking radicals,
+    we have that $r((f))=\bigcap_{j=0}^mr(\qid_j)=\bigcap_{j=0}^m\pid_j$. If for
+    some prime $\pid$ we have $f\in\pid$, then
+    $\bigcap_{j=0}^m\pid_j\subset\pid$ and therefore $\pid_j\subset\pid$ for
+    some $j$. Since $R_i$ has Krull dimension 1, this means that $\pid_j=\pid$,
+    hence we have proved our claim.
+
+    Now, any element $f\in K(X)$, $f\neq 0$, is s.t. it can be written for every
+    $i$ as $a_i/b_i$ with $a_i,b_i\in R_i\setminus\{0\}$, where we can assume
+    $a_i,b_i$ to be relatively prime and therefore uniquely defined up to
+    invertibles because $R_i$ is a domain. Now, since $b_i\in\pid$ only for
+    finitely many primes in $R_i$, we have that $f=a_i/b_i\not\in
+    (R_i)_\pid=\mathcal{O}_{X,x}$ for finitely many points $x\in U_i$. Since the
+    $U_i$ form a finite covering of $X$, we have the thesis.
+\end{proof}
+
+\begin{proof}
+    $(iii)$ Let's consider for every open $\emptyset\subsetneq U\subset X$ the
+    natural map $\mathcal{K}(U)=K(X)\xrightarrow{\psi(U)}
+    (\bigoplus_{x\in |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x}))(U)=
+    \bigoplus_{x\in |X|\cap U}K(X)/\mathcal{O}_{X,x}$ given by
+    $res^X_U\circ\phi$. This by construction defines a morphism of sheaves as,
+    for every open $\emptyset\subsetneq V\subset U$,
+    $res^U_V\circ\psi(U)=res^U_V\circ res^X_U\circ\phi=res^X_V\circ\phi=\psi(V)=
+    \psi(V)\circ res^U_V$.
+
+    Consider the sequence
+    $(0)\rightarrow\mathcal{O}_X\rightarrow\mathcal{K}_X\xrightarrow
+    {\psi}\bigoplus_{x\in |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x})\rightarrow (0)$.
+    We want to show that it is exact on the stalks and therefore exact, which
+    will give us the thesis by the uniqueness up to unique isomorphism of the
+    cokernel.
+
+    If we can prove that $(\bigoplus_{x\in
+    |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x}))_y=K(X)/\mathcal{O}_{X,y}$ for all $y\in
+    |X|$ we are almost done as the sequence on the stalks then is
+    $0\rightarrow\mathcal{O}_{X,y}\rightarrow\mathcal{K}_{X,y}=K(X)\rightarrow
+    K(X)/\mathcal{O}_{X,y}\rightarrow 0$, which is exact ($\psi_y$ is precisely
+    the projection map).
+
+    Notice that each $y\in |X|$ is a closed point, hence
+    $(i_{x,*}(K(X)/\mathcal{O}_{X,x}))_y=K(X)/\mathcal{O}_{X,x}$ if $x=y$ and
+    $=0$ otherwise. Also, since we are working on a Noetherian topological
+    space, $(\bigoplus_{x\in
+    |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x}))(U)=\bigoplus_{x\in
+    |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x})(U)$.
+    
+    Let $[(U,(f_x)_{x\in |X|\cap U})]\in(\bigoplus_{x\in |X|}i_{x,*}(K(X)/
+    \mathcal{O}_{X,x}))_y$ and consider the finite closed subset
+    $W=\{x\in |X|\cap U\ |\ f_x\neq 0,\ y\neq x\}$. We see that $[(U,(f_x)_{x\in
+    |X|\cap U})]=[(U\setminus W,(f_x)_{x\in (|X|\cap U)\setminus W})]$ and
+    $f_x=0$ for all $x\in (|X|\cap U)\setminus W$ s.t. $y\neq x$, thus the stalk
+    is contained in $K(X)/\mathcal{O}_{X,y}$. On the other hand, by definition,
+    for every open $U$ with $y\in U$ we have $K(X)/\mathcal{O}_{X,y}\subset
+    (\bigoplus_{x\in|X|}i_{x,*}(K(X)/\mathcal{O}_{X,x}))(U)$, hence the stalk is
+    precisely $K(X)/\mathcal{O}_{X,y}$.
+    
+    We are left with checking exactness at $y=\eta$. Making use of the same
+    procedure, considering this time $W=\{x\in |X|\cap U\ |\ f_x\neq 0\}$, we
+    get $[(U,(f_x)_{x\in |X|\cap U})]=[(U\setminus W,(0_x)_{x\in (|X|\cap
+    U)\setminus W})]$, thus $(\bigoplus_{x\in |X|}i_{x,*}(K(X)/
+    \mathcal{O}_{X,x}))_\eta=0$, and $\mathcal{O}_{X,\eta}=K(X)=
+    \mathcal{K}_{X,\eta}$ hence the sequence becomes
+    $0\rightarrow K(X)\rightarrow K(X)\rightarrow 0\rightarrow 0$, which is
+    exact.
+\end{proof}
+
+\begin{proof}
+    $(iv)$ First of all, notice that the sheaf given by $K(X)/\mathcal{O}_{X,x}$
+    is trivially a flasque on $\{x\}$. Also, by $(1.iii)$ $i_{x,*}$ sends
+    flasque sheaves to flasque sheaves for any $x\in |X|$, hence
+    $i_{x,*}(K(X)/\mathcal{O}_{X,x})$ is again a flasque sheaf on $X$.
+
+    Clearly, for any open $U\subset X$ we have that $(\bigoplus_{x\in
+    |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x}))(U)=\bigoplus_{x\in
+    |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x})(U)=\bigoplus_{x\in
+    |X|\cap U}K(X)/\mathcal{O}_{X,x}$ and the restriction maps are the obvious
+    projections.
+
+    Let $V\subset U$, $(f_x)_{x\in |X|\cap V}\in\bigoplus_{x\in |X|\cap V}K(X)/
+    \mathcal{O}_{X,x}$. By setting $g_x=f_x$ for $x\in |X|\cap V$, $g_x=0$ for
+    $x\in U\setminus V$, we get an element $(g_x)_{x\in |X|\cap U}\in
+    \bigoplus_{x\in |X|\cap U}K(X)/\mathcal{O}_{X,x}$ which is mapped to
+    $(f_x)_{x\in |X|\cap V}$ under the restriction map.
+    
+    It follows that $\mathcal{K}_X/\mathcal{O}_X\cong
+    \bigoplus_{x\in |X|}i_{x,*}(K(X)/\mathcal{O}_{X,x})$ is a flasque sheaf.
+    Since $\mathcal{K}_X$ is a constant
+    sheaf and therefore flasque, being the sequence $(0)\rightarrow\mathcal{O}_X
+    \rightarrow\mathcal{K}_X\rightarrow\mathcal{K}_X/\mathcal{O}_X\rightarrow
+    (0)$ exact, we have that it is also a flasque resolution of $\mathcal{O}_X$
+    with $F_0=\mathcal{K}_X,\ F_1=\mathcal{K}_X/\mathcal{O}_X,\ F_i=(0)$ for
+    $i>1$.
+\end{proof}
+
+\begin{proof}
+    $(v)$ Using the just mentioned flasque resolution, by definition:
+    \begin{align*}
+        H^0(X,\mathcal{O}_X) &=\ker(\Gamma(X,F_0)\rightarrow\Gamma(X,F_1)) \\
+        &=\ker\left(K(X)\rightarrow\bigoplus_{x\in |X|}K(X)/
+        \mathcal{O}_{X,x}\right) \\
+        &=\bigcap_{x\in |X|}\mathcal{O}_{X,x}
+    \end{align*}
+    
+    This is because the only elements sent by our natural map to $([0]_x)_{x\in
+    |X|}$ are the ones which belong to $\mathcal{O}_{X,x}$ for all $x\in |X|$.
+
+    Similarly:
+    \begin{align*}
+        H^1(X,\mathcal{O}_X)
+        &=\ker(\Gamma(X,F_2)\rightarrow\Gamma(X,F_3))/\im(\Gamma(X,F_1)\rightarrow\Gamma(X,F_2)) \\
+        &=\left(\bigoplus_{x\in
+        |X|}K(X)/\mathcal{O}_{X,x}\right)/\im\left(K(X)\rightarrow
+        \bigoplus_{x\in |X|}K(X)/\mathcal{O}_{X,x}\right) \\
+        &=\coker\left(K(X)\rightarrow\bigoplus_{x\in
+        |X|}K(X)/\mathcal{O}_{X,x}\right)
+    \end{align*}
+\end{proof}
+
+\begin{proof}
+    $(vi)$ Remember that we have the following long exact sequence of cohomology
+    groups induced by the previously mentioned short exact sequence of sheaves:
+    $$\cdots\rightarrow H^{n-1}(X,\mathcal{K}_X/\mathcal{O}_X)\rightarrow
+    H^n(X,\mathcal{O}_X)\rightarrow H^n(X,\mathcal{K}_X)\rightarrow
+    H^n(X,\mathcal{K}_X/\mathcal{O}_X)\rightarrow\cdots$$
+
+    Since $\mathcal{K}_X$ and $\mathcal{K}_X/\mathcal{O}_X$ are flasque sheaves,
+    $H^n(X,\mathcal{K}_X)=H^{n-1}(X,\mathcal{K}_X/\mathcal{O}_X)=0$ for every
+    $n>1$, hence by exactness $H^n(X,\mathcal{O}_X)=0$ for such $n$.
+\end{proof}
+
+\begin{proof}
+    $(vii)$ We know already know that $X=\Ps^1_\K$ is a Noetherian integral
+    scheme and that $\Ps^1_\K=U_0\cup U_1$, where $U_0=\Spec(\K[x_{10}]),\
+    U_1=\Spec(\K[x_{01}])$ are open integral affine $\K$-subschemes of finite
+    type and Krull dimension 1. It follows that $\Ps^1_\K$ is also an integral
+    $\K$-scheme of finite type. We still have to prove that $\dim(X)=1$
+    to show that it is a curve.
+
+    Both and $U_0,\ U_1$ are irreducible and contain the unique generic point
+    $\eta$. Also, $U_{01}=U_0\cap U_1=\Spec(\K[x_{01},x_{10}])$ is irreducible as
+    well as it contains $\eta$.
+
+    Notice that every irreducible closed subset $V\subset X$ has to contain at
+    least one point $x\neq\eta$. If $x\in U_{01}$, then it is closed in both
+    $U_i$ and therefore closed in $X$. If $x\in X\setminus U_j\subset U_i$,
+    then, being closed in $U_i$, we have that $\{x\}=U_i\cap W=
+    (X\setminus U_j)\cap W$ for some closed subset $W\subset X$, hence it is
+    closed also in $X$. We have then a chain of irreducible closed subsets
+    $\{x\}\subset V\subset X$ and a decomposition $X=|X|\cup\{\eta\}$ because
+    every point $x\in U_i$ besides $\eta$ is closed.
+    
+    We know that the intersection of an irreducible closed subset with an open
+    subset is still irreducible (or empty), hence $V\cap U_i=U_i$, which
+    then implies $V=X$ as $U_i$ is dense in $X$, or $V\cap U_i=\{x\}$ for
+    some $x\in |X|$, or $V\cap U_i=\emptyset$, which then implies
+    $V=V\cap U_j=\{x\}$ for some $x\in |X|$. In the second case, either
+    $V\cap U_j=\emptyset$, and
+    therefore $V=\{x\}$, or $V\cap U_j=\{y\}$ for some $y\in |X|\setminus U_i$,
+    which gives us $V=\{x,y\}$, which is reducible as $\{x\}\cup\{y\}$ and
+    we have then a contradiction.
+
+    We can conclude that either $V=X$ or $V=\{x\}$, hence $\dim(X)=1$.
+
+    Notice that, since we are working with a $\K$-scheme,
+    $\K\subset\mathcal{O}_{X,x}$ for every $x\in X$. Clearly:
+    $$
+        \bigcap_{x\in U_i}\mathcal{O}_{X,x}=
+        \bigcap_{\pid\subset\K[x_{ji}]}\K[x_{ji}]_\pid
+        \subset\mathcal{O}_{X,\eta}=Q(\K[x_{ji}])= Q(\K[x_{ij}])
+    $$
+
+    To make things easier, we will denote $x_{ji}$ by $t$.
+
+    Since $\K$ is a field, $\K[t]$ is a principal ideal domain and therefore
+    $\emptyset\subsetneq\pid=(g(t))$ for some irreducible polynomial
+    $g(t)\in\K[t]$. Viceversa, every irreducible polynomial $g(t)\in\K[t]$
+    defines a prime ideal $\pid=(g(t))$.
+
+    We know that an element $f(t)=b(t)/c(t)\in Q(\K[t])$, where numerator and
+    denominator are coprime, is s.t. $f(t)\in\K[t]_{(g(t))}$ if and only if
+    $c(t)\not\in (g(t))$, i.e. $g(t)\nmid c(t)$. Since any non-constant
+    polynomial can be factored as a product of irreducible ones, if
+    $c(t)\not\in\K$ there exists
+    some prime $\pid$ s.t. $c(t)\in\pid$. It follows that the only elements of
+    $Q(\K[t])$ in $\bigcap_{\pid\subset\K[t]}\K[t]_\pid$ are the ones s.t.
+    $c(t)\in\K$, hence $\bigcap_{\pid\subset\K[x_{ji}]}\K[x_{ji}]_\pid=
+    \K[x_{ji}]$.
+
+    Finally, by $(2.v)$, since we can identify $x_{ij}$ with $x_{ji}^{-1}$, we
+    may write:
+    $$
+    H^0(X,\mathcal{O}_X)=\bigcap_{x\in |X|}\mathcal{O}_{X,x}
+    =\bigcap_{x\in X}\mathcal{O}_{X,x}
+    =\left(\bigcap_{x\in U_0}\mathcal{O}_{X,x}\right)\cap
+    \left(\bigcap_{x\in U_1}\mathcal{O}_{X,x}\right)
+    =\K[x_{10}]\cap\K[x_{01}]
+    =\K
+    $$
+\end{proof}
+
+\printbibliography
+
+\end{document}

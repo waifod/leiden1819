@@ -1,0 +1,402 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Spec}{Spec}
+
+\begin{document}
+
+\title{Algebraic Geometry II - Assignment 2}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{1}
+
+\begin{proof}
+    Remember that, in a category with a terminal object, the fiber product of
+    two objects over it is isomorphic to the product in a unique way, hence we
+    will define the diagonal morphism $X\xrightarrow{\Delta}X\times_{\Spec(\Z)}X$
+    as the unique map s.t. $p_i\circ\Delta=\Id_X$, just like we would do for the
+    usual product. Thanks to this, from now on we shall work forgetting that we
+    are working using a fiber product and make use instead of the product to
+    simplify the diagrams.
+    
+    Also, notice that the diagonal morphism exists for every product in every
+    category as it is the unique factorization of $\Id_X$ through the
+    projections $X\times X\xrightarrow{p_1,p_2}X$.
+
+    Consider two schemes $W,Z$ and morphisms $W\xrightarrow{f_1,f_2}Z$. It can
+    be shown that there exists an equalizer $W'\xrightarrow{e}W$ relative to
+    them. In the proof, however, we will not assume its existence.
+
+    Now, consider $W=X\times X,\ Z=X$, $f_i=p_i$. We will show that
+    $\Delta$ is actually the equalizer we mentioned and therefore, for every
+    point $y\in Z$, the natural inclusion $\Spec(k(y))\xhookrightarrow{\iota}
+    X\times X$ factors uniquely through it as $p_1\circ\iota=p_2\circ\iota$
+    by definition of $Z$, which will imply that $y\in\Delta(X)$.
+
+    Indeed, consider in any category an object $X$
+    s.t. its product exists and a morphism $Y\xrightarrow{g}X\times X$ s.t.
+    $p_1\circ g=p_2\circ g$.
+
+    We can consider the following diagrams:
+    \[
+    \begin{tikzcd}
+        Y\arrow[bend left]{drr}{p_2\circ g}\arrow[bend
+        right,swap]{ddr}{p_1\circ g}\arrow{dr}{g} \\
+        & X\times X\arrow[swap]{r}{p_2}\arrow{d}{p_1}
+        & X \\
+        & X
+    \end{tikzcd}
+    \begin{tikzcd}
+        Y\arrow[bend left]{drr}{p_2\circ\Delta\circ p_2\circ g}\arrow[bend
+        right,swap]{ddr}{p_1\circ\Delta\circ p_1\circ
+        g}\arrow[description]{dr}{\Delta\circ p_i\circ g} \\
+        & X\times X\arrow[swap]{r}{p_2}\arrow{d}{p_1}
+        & X \\
+        & X
+    \end{tikzcd}
+    \]
+
+    The diagram on the left is commutative and, by definition of $\Delta$,
+    $p_1\circ\Delta=p_2\circ\Delta=\Id_X$, hence $p_j\circ\Delta\circ p_i\circ
+    g=p_i\circ g=p_j\circ g=p_j\circ\Delta\circ p_j\circ g$, which implies that
+    the one on
+    the right is commutative as well and equal to the first one for any $i$
+    chosen. It follows, by uniqueness of the factorization, that $\Delta\circ
+    (p_i\circ g)=g$, i.e. $g$ factors through $\Delta$.
+
+    We still have to prove the uniqueness of the factorization through $\Delta$
+    and, to do this, it is enough to show that the diagonal morphism is
+    actually a monomorphism.
+
+    Indeed, let $X\times X\xrightarrow{h_1,h_2}Y$ be morphisms s.t.
+    $\Delta\circ h_1=\Delta\circ h_2$. Then, $h_1=(p_i\circ\Delta)\circ h_1=
+    (p_i\circ\Delta)\circ h_2=h_2$, which proves our claim.
+
+    It follows that $\Delta$ is indeed the equalizer of $p_1,p_2$, hence we have
+    the thesis.
+    
+    The other inclusion comes from the fact that
+    $p_1\circ\Delta=\Id_X=p_2\circ\Delta$, hence $p_1$ and $p_2$ coincide at
+    every point of $\Delta(X)$.
+
+    We have proved that $\Delta(X)=Z$. By definition, a scheme $X$ is separated
+    if and only if $Z$ is closed in $X\times X$, that is if and only if
+    $\Delta(X)$ is closed in $X\times X$, hence we may conclude.
+\end{proof}
+
+
+~\\
+\exercise{2}
+
+\begin{proof}
+    First of all we will prove that in the category of schemes the outer
+    diagram obtained by composing two pullback squares is again a pullback
+    square. It may be noticed that the proof actually works for any
+    category.
+    \[
+	\begin{tikzcd}
+        	T\arrow[bend left]{drrr}{t_2}\arrow[dotted, bend left, swap]{drr}{t'}\arrow[dotted]{dr}{t}\arrow[bend right, swap]{ddr}{t_1} \\
+		& X\times_Y (Y\times_Z K)\arrow{r}{q_2}\arrow{d}{q_1}
+		& Y\times_Z K\arrow{d}{p_1}\arrow{r}{p_2}
+		& K\arrow{d} \\
+		& X\arrow{r}{f}
+		& Y\arrow{r}{g}
+		& Z
+	\end{tikzcd}
+    \]
+	
+    First of all, we know that by composing commutative squares we get a
+    commutative diagram.
+	
+    Now, given two arrows $T\xrightarrow{t_1} X,\ T\xrightarrow{t_2} K$
+    making the diagram commute, we get a pair of arrows
+    $T\xrightarrow{f\circ t_1} Y,\ T\xrightarrow{t_2} K$ which again make
+    the diagram commute and, by the universal property of the pullback (we
+    are looking at the square on the right), this induces a unique arrow
+    $T\xrightarrow{t'} Y\times_Z K$ which factorizes them through the pair
+    $p_1,p_2$. In particular, $p_1\circ t'=f\circ t_2$, thus the pair $t',\
+    t_2$ makes the left side of the diagram commute.
+	
+    Doing the same with the pair of arrows $t_1,t'$ with respect to the
+    square on the left, we get a unique arrow $T\xrightarrow{t} X\times_Y
+    (Y\times_Z K)$ factorizing them through the arrows $q_1,q_2$.
+	
+    Putting everything together, we have factorized uniquely the pair
+    $t_1,t_2$ making the external diagram commute through the pair
+    $q_1,p_2\circ q_2$.
+	
+    Let $T\xrightarrow{t''} X\times_Y (Y\times_Z K)$ be another arrow making
+    the diagram commute. Considering $q_2\circ t''$, we see that it factors
+    the pair $f\circ t_1,t_2$ through $p_1,p_2$, hence $q_2\circ t''=t'$ by
+    the uniqueness of the factorization. Since $t''$ now factors the pair
+    $t_1,t'$ through $q_1,q_2$, for the same reason we get that $t''=t$.
+	
+    It follows that the external diagram we obtained by composing two
+    pullbacks is indeed a pullback with respect to the arrows
+    $X\xrightarrow{g\circ f} Z,\ K\rightarrow Z$, hence in particular
+    $X\times_Y (Y\times_Z K)\cong X\times_Z K$.
+	
+    Remember that the pullback of two arrows is not the object per se, but
+    the arrows from the object to the domains of the arrows we are
+    describing the pullback of. This means that the pullback of the pair
+    $g\circ f,K\rightarrow Z$ is actually the pair $q_1,p_2\circ q_2$.
+	
+    We will now prove that the morphism $Y\xrightarrow{g} Z$ is proper
+    keeping in mind the previously seen diagram. Since $Y,\ Z$ are separated
+    schemes and $g$ is of finite type, we only have to show that it is
+    universally closed. By definition this means that, for any morphism
+    $K\rightarrow Z$, the morphism $Y\times_Z K\xrightarrow{p_2} K$ is
+    closed.
+	
+    Let now $V\subset Y\times_Z K$ be closed. Being $f$ surjective, $q_2$ is
+    surjective as well by~\cite[p. 120, prop. 4]{Mum88}. This implies that
+    $p_2(V)=(p_2\circ q_2)(q_2^{-1}(V))$. By continuity, $q_2^{-1}(V)$ is
+    closed, hence, since $g\circ f$ is universally closed (proper) and
+    therefore $p_2\circ q_2$ is a closed map, $p_2(V)\subset K$ is closed.
+\end{proof}
+
+
+~\\
+\exercise{3}
+
+\begin{proof}
+    First of all, we will prove that, given an $A$-module $M$ and an affine
+    map $X=\Spec(A)\xrightarrow{f}Y=\Spec(B)$, $f_*\tilde{M}\cong
+    \tilde{M}_B$, where $M_B$ is the $B$-module induced by the map $f^\#$.
+
+    There is an obvious map $\tilde{M}_B\rightarrow\tilde{M}$ as
+    $\Gamma(Y,f_*\tilde{M})=\Gamma(X,\tilde{M})=M$. To verify that
+    it is an isomorphism, we only have to verify that sections over an open
+    $U\subset Y$ of $\tilde{M}_B$ and the ones over $f^{-1}(U)$ of
+    $\tilde{M}$ coincide.
+
+    We will first show that $f^{-1}(D(g))=D(f^\#(g))$.
+	
+    Indeed, a prime ideal $\pid\subset A$ satisfies $[\pid]\in f^{-1}(Y_g)$
+    if and only if $f([\pid])\in Y_g$, i.e. $g\not\in (f^\#)^{-1}(\pid)$
+    that is $f^\#(g)\not\in\pid$, which is equivalent to $[\pid]\in
+    X_{f^\#(g)}$, which proves our claim.
+	
+    We can now prove that $f_*\tilde{M}=\tilde{M}_B$.
+    
+    Since $g$ acts on $M_B$ as multiplication by $f^\#(g)$, we have that
+    $(M_B)_g=M_{f^\#(g)}=\Gamma(D(f^\#(g)),\tilde{M})=\Gamma(f^{-1}(D(g)),
+    \tilde{M})=\Gamma(D(g),f_*\tilde{M})$. Since the condition
+    $\Gamma(U,f_*\tilde{M})\cong\tilde{M}_B(U)$ is verified
+    on a basis of the topology of $Y$ and we are working with sheaves it is
+    verified on every open subset, thus $f_*\tilde{M}\cong\tilde{M}_B$. 
+
+    Now we claim that, given a map of quasi-coherent
+    $\mathcal{O}_X$-modules $\mathcal{F}\xrightarrow{\phi}\mathcal{G}$,
+    kernel, image sheaf and cokernel are also quasi-coherent.
+
+    Indeed, on an affine open $U=\Spec(A)\subset X$, we may write
+    $\tilde{p}=\phi|_U$, where $M\xrightarrow{p} N$ is a homomorphism of
+    $A$-modules $M$ and $N$ with $\mathcal{F}|_U=\tilde{M},\ \mathcal{G}|_U=
+    \tilde{N}$. We know that the functor $\sim$ is exact, hence $\ker(\phi|_U)=
+    \widetilde{\ker(p)},\ \im(\phi|_U)=\widetilde{\im(p)}$ and
+    $\coker(\phi|_U)=\widetilde{\coker(p)}$, hence the thesis.
+
+    Let now $X,Y$ be noetherian schemes, $X\xrightarrow{f} Y$ an affine map.
+    We will now prove that the $\mathcal{O}_Y$-module
+    $f_*\mathcal{O}_X$ is quasi-coherent. Also, since this is a local
+    condition on affine open subsets and the map is affine, we may assume
+    without loss of generality that $Y=\Spec(A)$.
+
+    Since $X$ is noetherian, it is quasi-compact and therefore we may cover
+    it by finitely many affine open subsets $(U_i)_{i=1}^n$. Also, for every
+    pair $U_i,U_j$ we know that $U_i\cap U_j$ is again quasi-compact and
+    therefore we may cover it by $(U_{ijk})_{k=1}^m$.
+
+    It follows that, given an open $V\subset Y$, we have the following exact
+    sequence:$$0\rightarrow\Gamma(f^{-1}(V),\mathcal{O}_X)\rightarrow\Pi_i
+    \Gamma(U_i\cap f^{-1}(V),\mathcal{O}_X)\rightarrow\Pi_{i,j,k}
+    \Gamma(U_{ijk}\cap f^{-1}(V),\mathcal{O}_X)$$
+
+    Since the sequence is compatible with the restriction maps induced by
+    the inclusions $W\subset V\subset Y$, we get an exact sequence of
+    sheaves on $Y$:$$0\rightarrow f_*\mathcal{O}_X\rightarrow\Pi_i
+    (f|_{U_i})_*\mathcal{O}_X|_{U_i}\rightarrow\Pi_{i,j,k}(f|_{U_{ijk}})_*
+    \mathcal{O}_X|_{U_{ijk}}$$
+	
+    The sheaves $(f|_{U_i})_*\mathcal{O}_X|_{U_i}$ and
+    $(f|_{U_{ijk}})_*\mathcal{O}_X|_{U_{ijk}}$ are both quasi-coherent by
+    the affine case and, since our coverings are finite,
+    $\Pi_i (f|_{U_i})_*\mathcal{O}_X|_{U_i}$ and
+    $\Pi_{i,j,k}(f|_{U_{ijk}})_*\mathcal{O}_X|_{U_{ijk}}$ are
+    finite products of quasi-coherent $\mathcal{O}_Y$-modules and therefore
+    quasi-coherent.
+
+    Since $f_*\mathcal{O}_X$ is the kernel of a homomorphism of
+    quasi-coherent $\mathcal{O}_Y$-modules, by what we have shown earlier it
+    is quasi-coherent as well.
+
+    Now we shall prove that the quasi-coherent $\mathcal{O}_Y$-module
+    $f_*\mathcal{O}_X$ is coherent if and only if $f$ is a finite morphism.
+	
+    Let $U$ be an affine open subset of $Y$. By definition of affine
+    morphism, $f^{-1}(U)$ is an affine open subset of $X$.
+	
+    Clearly $\Gamma(f^{-1}(U),\mathcal{O}_X)$ is a finitely generated
+    $\Gamma(f^{-1}(U),\mathcal{O}_X)$-module for every affine open subset
+    $U$ of $Y$. Seeing it like earlier as a $\Gamma(U,\mathcal{O}_Y)$-module
+    through the ring homomorphism
+    $\Gamma(U,\mathcal{O}_Y)\xrightarrow{f(U)}\Gamma(f^{-1}(U),
+    \mathcal{O}_X)$, we see that by definition the morphism is finite if and
+    only if $\Gamma(f^{-1}(U),\mathcal{O}_X)=f_*\mathcal{O}_X(U)$ (we are
+    abusing the notation because on the left we have a ring, on the right a
+    module) is finitely generated as a $\Gamma(U,\mathcal{O}_Y)$-module for
+    every affine open subset $U$ of $Y$, which is equivalent to
+    $f_*\mathcal{O}_X$ being a coherent sheaf of $\mathcal{O}_Y$-modules.
+\end{proof}
+
+
+~\\
+\exercise{4}
+
+\begin{proof}
+    Let $Y=\amalg_{i\in I}\Spec(A_i)$ be a scheme. We want to prove that, given
+    $U=\amalg_{i\in I} U_i$, $U_i$ open subset of $\Spec(A_i)$,
+    $\Gamma(\amalg_{i\in I} U_i,\mathcal{O}_Y)=\Pi_{i\in
+    I}\Gamma(U_i,\mathcal{O}_{\Spec(A_i)})$.
+
+    Of course, $\Gamma(U_i\cap U_j,\mathcal{O}_Y)=0$ for $i\neq j$, hence the
+    subset of $\Pi_{i\in I}\Gamma(U_i,\mathcal{O}_Y)\cong\Pi_{i\in
+    I}\Gamma(U_i,\Spec(A_i))$ given by the vectors of elements agreeing on the
+    overlappings is $\Pi_{i\in I}\Gamma(U_i,\mathcal{O}_Y)$ itself. It follows
+    that the ring homomorphism $\Gamma(\amalg_{i\in I}
+    U_i,\mathcal{O}_Y)\rightarrow\Pi_{i\in I}\Gamma(U_i,\mathcal{O}_Y)$ given by
+    $s\mapsto (s|_{U_i})_{i\in I}$ is an isomorphism by the sheaf axioms, hence
+    $\Gamma(\amalg_{i\in I}U_i,\mathcal{O}_Y)\cong\Pi_{i\in
+    I}\Gamma(U_i,\Spec(A_i))$.
+
+    Consider now the scheme $X=\amalg_{n\in\N}\Spec(\Z)$. By what we have
+    proved, $\Gamma(X,\mathcal{O}_X)=\Pi_{i\in\N}\Z$ and, considered
+    $f=(2)_{n\in\N}$, we will show that $X_f=\amalg_{n\in\N}\Spec(\Z[1/2])$
+    and the canonical ring homomorphism
+    $\Gamma(X,\mathcal{O}_X)_f\rightarrow\Gamma(X_f,\mathcal{O}_{X_f})=\Pi_{n\in\N}\Z[1/2]$
+    is not surjective.
+	
+    By definition, $x\in X_f$ if and only if $f(x)\neq 0$. We know that for
+    every $x\in X$ we have that $x\in\Spec(\Z)$ for some $n\in\N$, hence we
+    may write $x=[(p)]_n$ for $p\in\Z$ prime or $=0$. We get the following
+    commutative diagram describing the map
+    $\Gamma(X,\mathcal{O}_X)\rightarrow k(x)$:
+    \[
+	\begin{tikzcd}
+        	\Gamma(X,\mathcal{O}_X)\cong\Pi_{n\in\N}\Z\arrow{rr}{|^X_{\Spec(\Z)}=\pi_n}\arrow{dr}
+		&& \Gamma(\Spec(\Z),\mathcal{O}_X)\arrow{dl}\cong\Z \\
+		& k(x)\cong Q(\Z/p\Z)
+	\end{tikzcd}
+    \]
+	
+    Under these maps, we see that $f(x)=0$ for $x=[(p)]_n$ if and only if
+    $p=2$. It follows that $X_f\cap\Spec(\Z)=(\Spec(\Z))_2$ for all $n\in\N$
+    and therefore $X_f=\amalg_{n\in\N}(\Spec(\Z))_2\cong\amalg_{n\in\N}
+    \Spec(\Z[1/2])$.
+	
+    By what we proved earlier,
+    $\Gamma(X_f,\mathcal{O}_{X_f})=\Pi_{n\in\N}\Z[1/2]$. Of course, we
+    have a natural injection
+    $\Gamma(X,\mathcal{O}_X)_f=(\Pi_{n\in\N}\Z)_f\rightarrow\Gamma(X_f,
+    \mathcal{O}_{X_f})=\Pi_{n\in\N}\Z[1/2]$ given by the restriction map
+    $\Gamma(X,\mathcal{O}_X)\xrightarrow{|^X_{X_f}}\Gamma(X_f,
+    \mathcal{O}_X)=\Gamma(X_f,\mathcal{O}_{X_f})$,
+    which then factors through $\Gamma(X,\mathcal{O}_X)_f$ by the universal
+    property of the localization. Also, the injectivity of the map is given
+    by the fact that we are localizing with respect to elements which are
+    not zero-divisors.
+
+    On the other hand, we have that $(2^n)_{n\in\N}$ is not invertible in
+    $\Gamma(X,\mathcal{O}_X)_f$ but its image is invertible in
+    $\Gamma(X_f,\mathcal{O}_{X_f})$, hence the map is not an isomorphism and
+    in particular it is not surjective, for otherwise the inverse would be
+    the image of some element of the domain, which would then be the inverse
+    of $(2^n)_{n\in\N}$ in $\Gamma(X,\mathcal{O}_X)_f$ due to the
+    injectivity.
+	
+    We will now give a counterexample to the injectivity.
+	
+    Consider the scheme $Y=\amalg_{n\in\N}\Spec(\Z[x]/(x^n))$ and the
+    element
+    $f=(x)_{n\in\N}\in\Gamma(Y,\mathcal{O}_Y)=\Pi_{n\in\N}\Z[x]/(x^n)$. We
+    see that $f$ is not nilpotent, for given any $n\in\N$ we have $x^n$ at
+    the $(n+1)$th coordinate of $f^n$, which is $\neq 0$ in
+    $\Z[x]/(x^{n+1})$.
+	
+    On the other hand, for any $n\in\N$ we see that
+    $Y_f\cap\Spec(\Z[x]/(x^n))=\emptyset$, for the restriction map
+    $\Gamma(Y,\mathcal{O}_Y)\xrightarrow{|^Y_{\Spec(\Z[x]/(x^n))}}\Gamma(\Spec(\Z[x]/(x^n)),\mathcal{O}_Y)$
+    sends $f$ to $x$, which is nilpotent in $\Z[x]/(x^n)$ and therefore
+    $f([y])=0$ for every $[y]$ in $\Spec(\Z[x]/(x^n))$.
+	
+    In the following diagram describing the map $g\mapsto g([y])$ for
+    $y\in\Spec(\Z[x]/(x^n))$ we assume $p\in\Z$ to be either prime or 0 and
+    remember that the prime ideals of $\Z[x]/(x^n)$ have to contain $x$,
+    thus they correspond bijectively to the ones of $\Z$:
+    \[
+	\begin{tikzcd}
+		\Gamma(Y,\mathcal{O}_Y)\cong\Pi_{n\in\N}\Z[x]/(x^n)\arrow{rr}{|^Y_{\Spec(\Z[x]/(x^n))}=\pi_n}\arrow{dr}
+		&& \Gamma(\Spec(\Z[x]/(x^n)),\mathcal{O}_Y)\cong\Z[x]/(x^n)\arrow{dl} \\
+		& k([y])\cong Q((\Z[x]/(x^n))/y)\cong Q(\Z/p\Z)
+	\end{tikzcd}
+    \]
+	
+    It follows that $Y_f=\emptyset$, thus
+    $\Gamma(Y_f,\mathcal{O}_{Y_f})=\Gamma(Y_f,\mathcal{O}_Y)=0$. We only
+    have to prove that $\Gamma(Y,\mathcal{O}_Y)_f\neq 0$, which is given by
+    the fact that $f$ is not nilpotent and therefore the localization does
+    not trivialize the ring.
+\end{proof}
+
+\printbibliography
+
+\end{document}

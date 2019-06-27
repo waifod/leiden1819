@@ -1,0 +1,397 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Spec}{Spec}
+
+
+\begin{document}
+
+\title{Algebraic Geometry II - Assignment 3}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+\exercise{1}
+
+\begin{proof}
+    $(a)$ Let $x\in X$ be s.t. $\mathcal{F}_x=0$. Since $(U_i)_{i\in I}$ is an
+    affine open covering of $X$, $x\in U_i$ for some $i\in I$. We want to prove
+    that there exists an open $V'\subset X$ s.t. $x\in V'$ and
+    $\mathcal{F}|_{V'}=(0)$.
+    
+    Let now $(m_j)_{j\in J}$ be a finite system of generators for the
+    $\Gamma(U_i,\mathcal{O}_X|_{U_i})$-module $\Gamma(U_i,\mathcal{F}|_{U_i})=
+    M_i$. Since $[(U_i,m_j)]_x=0_x$, for every $j\in J$ there exists an open
+    $V_j\subset U_i$ s.t. $x\in V_j$ and $m_j|_{V_j}=0|_{V_j}$. Consider now
+    the open $V'=\bigcap_{j\in J}V_j$. By construction, $m_j|_W=0$ for every
+    open $W\subset V'$ and $j\in J$.
+
+    If we can prove that for every open $V\subset U_i$ the collection
+    $(m_j|_V)_{j\in J}$ is a system of generators for the
+    $\mathcal{O}_X(V)$-module $\tilde{M}_i(V)$ we
+    are done as it will mean that $\Gamma(W,\mathcal{F}|_{V'})=
+    \Gamma(W,\mathcal{F}|_{U_i})=0$ for every open $W\subset V'$ and therefore
+    $\mathcal{F}|_{V'}=(0)$.
+
+    $(*)$ We know that we have a natural isomorphism
+    $\mathcal{F}(U_i)\otimes_{\mathcal{O}_X(U_i)}\mathcal{O}_X(V)\cong
+    \mathcal{F}(V)$ since $\mathcal{F}$ is quasi-coherent. We see that the
+    restriction map $\mathcal{F}(U_i)\rightarrow\mathcal{F}(V)$ is s.t.
+    $m\mapsto m|_V=m\otimes_{\mathcal{O}_X(U_i)}1$, hence $(m_j)_{j\in J}$ is
+    sent to $(m_j\otimes_{\mathcal{O}_X(U_i)}1)_{j\in J}$. These elements
+    generate $\mathcal{F}(U_i)\otimes_{\mathcal{O}_X(U_i)}\mathcal{O}_X(V)$ as a
+    $\mathcal{O}_X(V)$-module, hence $(m_j|_V)_{j\in J}$ is a system of
+    generators for $\mathcal{F}(V)$ seen as such.
+
+    Now we will prove that $Supp(\mathcal{F})$ is closed.
+
+    Suppose that $x\in U=X\setminus Supp(\mathcal{F})$. Then, $\mathcal{F}_x=0$,
+    hence there is an open $V\subset X$ s.t. $x\in V$, $\mathcal{F}|_{V}=(0)$.
+    Now, for any $y\in V$, we see that an element $m_y=[(W,m)]\in\mathcal{F}_y$
+    is s.t. $m_y=[(W\cap V,m|_{W\cap V})]=[(W\cap V,0|_{W\cap V})]=0_y$, hence
+    $\mathcal{F}_y=0$. It follows that $V\subset U$ and therefore $U$ is open.
+\end{proof}
+
+\begin{proof}
+    $(b)$ Let's consider the quotient sheaf $\mathcal{F}=
+    \mathcal{L}/(\mathcal{O}_X\cdot s)$. We know that it is the sheafification
+    of the quotient presheaf $\mathcal{G}$ given by
+    $\mathcal{G}(U)=\mathcal{L}(U)/(\mathcal{O}_X\cdot s(U))$. Since
+    $\mathcal{F}$ is the cokernel of the natural inclusion $\mathcal{O}_X\cdot
+    s\hookrightarrow\mathcal{L}$ and both $\mathcal{O}_X\cdot s$ and
+    $\mathcal{L}$ are quasi-coherent $\mathcal{O}_X$-modules, $\mathcal{F}$ is a
+    quasi-coherent $\mathcal{O}_X$-module as well.
+
+    By definition, $x\in X\setminus Supp(\mathcal{F})$ if and only if
+    $\mathcal{F}_x=0$. We have that $\mathcal{F}_y=\mathcal{G}_y$ for all
+    $y\in X$ and therefore $\mathcal{F}_x=\mathcal{G}_x$. We want to prove that
+    $x\in X_s$.
+
+    Consider now an affine open covering $(U_i)_{i\in I}$ s.t.
+    $\mathcal{L}|_{U_i}$ is free of rank 1. Consider a $U_i$ with $x\in U_i$.
+    Let $l\in\mathcal{L}(U_i)$ be the generating element. We know that, for any
+    open $W\subset U_i,\ l|_W$ will generate the $\mathcal{O}(W)$-module
+    $\mathcal{L}(W)$ by an argument given in $(*)$.
+
+    Since $\mathcal{G}_x=0$, we know that
+    $[l]|_V=0|_V$ for some open $V\subset U_i$, $x\in V$. This means that
+    $l|_V=r\cdot s|_V$ for some $r\in\mathcal{O}_X(V)$ and $l|_W=r|_W\cdot
+    s|_W$ for all $W\subset V$, hence $s|_{W}$ is a generator of
+    $\mathcal{L}(W)$ on these opens.
+    
+    Consider now an element $t_x=[(U,t)]\in\mathcal{L}_x$. We know that
+    $t|_{U\cap V}=r\cdot s|_{U\cap V}$ for some $r\in\mathcal{O}_X(U\cap V)$,
+    hence $t_x=r_x\cdot s_x$ and therefore $s_x$ generates $\mathcal{L}_x$, thus
+    $x\in X_s$.
+
+    On the other hand, suppose that $x\in Supp(\mathcal{F})$. By definition and
+    a previous consideration, $\mathcal{G}_x=\mathcal{F}_x\neq 0$.
+
+    If $s_x$ was a generator of $\mathcal{L}_x$, then, for any element
+    $m_x=[(U,m)]\in\mathcal{G}_x$, considered an element $t\in\mathcal{L}(U)$ in
+    the class of $m$, we would have that $t_x=r_x\cdot s_x$ for some
+    $r_x=[(V,r)]\in\mathcal{O}_{X,x}$ and therefore, for some open $W\subset
+    U\cap V$ with $x\in W$, $l|_W=r|_W\cdot s|_W$, which implies that
+    $m|_W=0|_W$ and therefore $m_x=0$. This gives $\mathcal{G}_x=0$, a
+    contradiction. It follows that $x\not\in X_s$.
+
+    We have proved that $X_s=X\setminus Supp(\mathcal{F})$, hence we have the
+    thesis by applying $(a)$ if we can show that there is an affine open
+    covering $(V_j)_{j\in J}$ where $\mathcal{F}|_{V_j}\cong\tilde{M}_j$ for
+    some finitely generated $\Gamma(V_j,\mathcal{O}_X)$-module $M_j$.
+
+    We know that the $U_i$ cover $X$ and
+    $\mathcal{L}|_{U_i}\cong\mathcal{O}_X|_{U_i}$.
+    Looking at the short exact sequence $0\rightarrow\mathcal{O}_X\cdot
+    s(U_i)\rightarrow\mathcal{L}(U_i)\rightarrow
+    \mathcal{L}(U_i)/(\mathcal{O}_X\cdot s(U_i))\rightarrow 0$ and applying the
+    tilde-construction, we have the short exact sequence of
+    $\mathcal{O}_X|_{U_i}$-modules $(0)\rightarrow\mathcal{O}_X\cdot s|_{U_i}
+    \rightarrow\mathcal{L}|_{U_i}\rightarrow
+    \widetilde{\mathcal{L}(U_i)/(\mathcal{O}_X\cdot
+    s(U_i))}=\mathcal{L}/(\mathcal{O}_X\cdot s)|_{U_i}\rightarrow (0)$.
+    
+    The sheafs $\widetilde{\mathcal{L}(U_i)/(\mathcal{O}\cdot s(U_i))}$ agree on
+    the overlaps and glueing them together we get
+    $\mathcal{L}/(\mathcal{O}_X\cdot s)$.
+
+    Since the quotient of a finitely generated $\mathcal{O}_X|_{U_i}$-module is
+    again a finitely generated $\mathcal{O}_X|_{U_i}$-module, we have that
+    $\Gamma(U_i,\mathcal{L}/(\mathcal{O}_x\cdot
+    s))=\mathcal{L}(U_i)/(\mathcal{O}_X\cdot s(U_i))$ is one, hence $(U_i)_{i\in
+    I}$ is the desired cover by affine open subsets.
+\end{proof}
+
+
+~\\
+\exercise{2}
+
+\begin{proof}
+    $(a)$ We know that a scheme is reduced if and only if all of its stalks are.
+    Also, since $Z$ is the disjoint union of two affine schemes, we know that
+    $\mathcal{O}_{Z,z_i}$ is given by the stalk of $\Spec(\K)$, that is
+    $\K=\Gamma(\{z_i\},\Spec(\K))=\Gamma(\{z_i\},\mathcal{O}_Z)$ itself. They
+    are trivially reduced because they are fields, hence $Z$ is reduced.
+
+    Thanks to our description we see that the restriction maps
+    $\Gamma(Z,\mathcal{O}_Z)=\mathcal{O}_{Z,z_0}\times\mathcal{O}_{Z,z_1}\cong
+    \K\times\K\rightarrow\Gamma(\{z_i\},\mathcal{O}_Z)=\mathcal{O}_{Z,z_i}=\K$
+    are given by the projections $p_i$ and the same goes for the ones to the
+    stalks.
+
+    It follows that $(s_i)_{z_i}=1\in\mathcal{O}_{Z,z_i},\
+    (s_i)_{z_j}=0\in\mathcal{O}_{Z,z_j}$, where $s_0=(1,0),\ s_1=(0,1)$, hence
+    $Z_i=Z_{s_i}=\{z_i\}$.
+
+    The description of the $\K$-scheme $\mathcal{O}_Z$ as a 2-decorated sheaf
+    naturally gives a morphism of schemes $Z\rightarrow X=\Ps^1_\K$, which is
+    described by sending $x_{ij}\in\Gamma(U_i,\mathcal{O}_X)=\K[x_{ij}]$ to
+    $s_j/s_i\in\Gamma(Z_i,\mathcal{O}_Z)$. However, since $s_j|_{Z_i}=0|_{Z_i}$,
+    $s_j/s_i=0$, hence the map $\Gamma(U_i,\mathcal{O}_X)\xrightarrow{i^\#(U_i)}
+    \Gamma(Z_i,\mathcal{O}_{Z})$ is the $\K$-algebra homomorphism s.t.
+    $x_{ij}\mapsto 0$.
+
+    This implies that the point $z_i\in\Z$ of the closed affine subscheme $Z_i$
+    is mapped by the morphism induced by $i^\#$ on the affine subschemes $Z_i,\
+    U_i$ to the point of $U_i\subset\Ps^1_\K\cong\A^1_\K$ corresponding to the
+    maximal ideal of $\K[x_{ji}]=\Gamma(U_i,\mathcal{O}_X)$ given by
+    $\ker(i^\#(U_i))=(x_{ij})$, that is the origin of the affine line, which
+    corresponds to $(1:0)$ if $i=0$, to $(0:1)$ if $i=1$, thus
+    $i(Z)=\{(1:0),(0:1)\}$ and it is given by the disjoint union of two closed
+    points.
+
+    Now, we know that $i_*\mathcal{O}_Z(U)=\mathcal{O}_Z(i^{-1}(U))$, hence it
+    is $\K\times\K$ if $Z\subset U$, $\K$ if $x_i\in U$ and $x_j\not\in U$, $0$
+    otherwise.
+
+    Notice that $(i_*\mathcal{O}_Z)_x=\varinjlim_{x\in U} i^*\mathcal{O}_Z(U)$
+    and, since for every $V\subset U\subset U_i$ with $z_i\in V$ the map
+    $\Gamma(U,i_*\mathcal{O}_Z)\cong\K\rightarrow\Gamma(V,i_*\mathcal{O}_Z)
+    \cong\K$ is the identity, we have that $(i_*\mathcal{O}_Z)_{z_i}=\K$. On the
+    other hand, if $x\in X\setminus Z$, then for any
+    $f_x=[(U,f)]\in(i_*\mathcal{O}_Z)_x$ we have that $f_x=[(U\setminus
+    Z,f|_{U\setminus Z})]=[(U\setminus Z,0|_{U\setminus Z})]=0_x$, thus
+    $(i_*\mathcal{O}_Z)_x=0$.
+    
+    Since the maps $\mathcal{O}_{X,x}\xrightarrow{i^\#_x}(i_*\mathcal{O}_{Z})_x$
+    are $\K$-algebra homomorphisms, for $x\in Z$ we have the surjectivity, while
+    for $x\in X\setminus Z$ it is trivial. It follows that
+    $\mathcal{O}_X\xrightarrow{i^\#}i_*\mathcal{O}_Z$ is surjective.
+
+    Since $Z\xrightarrow{i}X$ is a closed map between the underlying topological
+    spaces and $\mathcal{O}_X\xrightarrow{i^\#}i_*\mathcal{O}_Z$ is
+    surjective for every $x\in X$, by definition we have that the morphism of
+    schemes $i$ is a closed immersion.
+\end{proof}
+
+\begin{proof}
+    $(b)$ We have that
+    $\Gamma(X,\mathcal{O}_X)\xrightarrow{i^\#(X)}\Gamma(X,i_*\mathcal{O}_Z)$ is
+    a $\K$-algebra homomorphism from $\K$ to $\K\times\K$. Since $\K$ is a
+    field, $i^\#(X)$ is injective and its image is a field as well. This implies
+    that the map can't be surjective because $\K\times\K$ is not a field.
+\end{proof}
+
+\begin{proof}
+    $(c)$ We have that $S=\K[x_0,x_1],\ I=(x_0x_1)$ is a homogeneous ideal and
+    $M=S/I$ is a $S$-module. Looking at the notes of lecture 10, we construct
+    the $\mathcal{O}_X$-module $\tilde{M}$.
+
+    In the construction, given $X=\Ps^1_\K=U_0\cup U_1$, we attach to each
+    affine patch $U_i$ the sheaf $\widetilde{(M_{x_i})_0}$.
+
+    Now, the sections on $U_i$ are given by $(M_{x_i})_0=\left( \left(
+    \frac{\K[x_0,x_1]}{(x_0x_1)} \right)_{x_i}\right)_0=(\K[x_i,x_i^{-1}])_0$.
+
+    The elements of $\K[x_i,x_i^{-1}]$ are of the form
+    $\sum_{j,k}a_{jk}x_i^j(x_i^{-1})^k$ and the only ones of degree zero are
+    s.t. $a_{jk}\neq 0$ only for $j-k=0$, thus $(M_{x_i})_0=\K$.
+
+    On the overlap $U_0\cap U_1$ we have the sheaf
+    $\widetilde{(M_{x_0x_1})_0}$, however we see that $(M_{x_0x_1})_0=\left(
+    \left(\frac{\K[x_0,x_1]}{(x_0x_1)} \right)_{x_0x_1}\right)_0=0$. Thanks to
+    the natural isomorphism
+    $(M_{x_0})_{0,x_1/x_0}\cong(M_{x_0x_1})_0\cong(M_{x_1})_{0,x_0/x_1}$ we may
+    then glue our sheaves along the overlap $U_0\cap U_1$. We have that
+    $\tilde{M}(U_i)=\K,\ \tilde{M}(U_0\cap U_1)=0$ and, since the sections of
+    the two modules always agree on the overlap, $\tilde{M}(X)=\K\times\K$.
+    
+    From now on we shall use freely the description of the sheaf in terms of its
+    stalks thanks to the isomorphism between a sheaf and its sheafification.
+
+    Since $ \tilde{M}(U_0\cap U_1)=0$, we have for every $x\in U_0\cap U_1$ that
+    $\tilde{M}_x=0$. On the other hand, since $\tilde{M}(U_i)=\K$, this implies
+    $\tilde{M}_{(1:0)}=\tilde{M}_{(0:1)}=\K$.
+
+    Indeed, we know that the elements of $\tilde{M}(U_i)$ correspond to maps
+    $U_i\rightarrow\amalg_{x\in U_i}\tilde{M}_x$, thus, since $\tilde{M}_x=0$
+    for $x\in U_i\setminus Z$, $\K\subset\tilde{M}_{z_i}$. This implies that for
+    any $m_{z_i}=[(U,m)]\in\tilde{M}_{z_i}$ we have that
+    $m_x=0_x=(0|_{U_i\setminus Z})_x$ for any $x\in U\setminus Z$, thus we may
+    consider $m|_{U\cap U_i},\ 0|_{U_i\setminus Z}$ and
+    define an element $m'\in\tilde{M}(U_i)$ by considering the map given by
+    $z_i\mapsto m_{z_i}\ x\mapsto 0_x$ for $x\in U_i\setminus Z$. Since this
+    gives all of the possible maps $U_i\rightarrow\amalg_{x\in U_i}\tilde{M}_x$,
+    we have proved our claim.
+    
+    We can immediately extend our argument to show that
+    $\tilde{M}_{z_i}=\tilde{M}(U)$ whenever $z_i\in U\subset U_i$ or
+    $=\K\times\K$ if $Z\subset U$.
+
+    Indeed in the former case we have that, for any
+    $m_{z_i}=[(V,m)]\in\tilde{M}_{z_i}$, we may consider $m|_{V\cap U_i},\
+    0|_{U\setminus Z}$ and define a section on $U$ by
+    setting $z_i\mapsto m_{z_i},\ x\mapsto 0_x$ for $x\in U\setminus Z$. By the
+    same argument as before we have the thesis.
+
+    Likewise, if $Z\subset U$, considered
+    $m^i_{z_i}=[(V_i,m^i)]\in\tilde{M}_{z_i}$, we may consider the triplet
+    $m^i|_{V_i\cap U_i},\ 0|_{X\setminus Z}$ and set $z_i\mapsto m^i_{z_i},\
+    x\mapsto 0_x$ for $x\in U\setminus Z$.
+
+    Summarizing, we have then the following:
+    \[
+        \tilde{M}(U)=\begin{cases}
+            \K\times\K\textit{ if }Z\subset U \\
+            \K\textit{ if }\emptyset\subsetneq Z\cap U\subsetneq Z \\
+            0\textit{ otherwise}
+        \end{cases}
+    \]
+
+    We also see that the restriction maps are given by the projections, hence,
+    comparing this with the definition of $i_*\mathcal{O}_Z$ in $(b)$, we see
+    that this latter sheaf is isomorphic to $\tilde{M}$.
+\end{proof}
+
+\begin{proof}
+    $(d)$ Consider the short exact sequence of $S$-modules $0\rightarrow
+    I\rightarrow S\rightarrow M\rightarrow 0$. By applying the
+    tilde-construction, which is an exact functor, we get a short exact sequence
+    of $\mathcal{O}_X$-modules,
+    $(0)\rightarrow\tilde{I}\rightarrow\mathcal{O}_X\rightarrow
+    \tilde{M}\cong i_*\mathcal{O}_Z\rightarrow (0)$.
+    
+    Since the induced map $\mathcal{O}_X\rightarrow i_*\mathcal{O}_Z$ is the
+    same as $i^\#$ and $\tilde{I}$ is the kernel of this map, being the kernel
+    unique up to unique isomorphism, it follows that
+    $\tilde{I}\cong\mathcal{I}$ is the ideal sheaf associated to $Z$.
+\end{proof}
+
+\begin{proof}
+    $(e)$ Notice that $M_d$ is the sub-$\K$-module of $M=S/I$ given by all
+    elements represented by homogeneous polynomials of degree $d$. Since
+    $S=\K[x_0,x_1]$ and $I=(x_0x_1)$, every element divisible
+    by $x_0x_1$ is zero, therefore every element in $M_d$ is uniquely
+    represented by a linear combination of the monomials $x_0^d,\ x_1^d$, hence
+    $\dim_\K(M_d)=2$ for $d>0$ and $=1$ for $d=0$.
+
+    To compute $\dim_\K(\Gamma(X,\tilde{M}\otimes\mathcal{O}_X(d)))$, we will
+    first give a description of the sheaf itself. We know that it is the
+    sheafification of the presheaf $\mathcal{G}$ given by
+    $\mathcal{G}(U)=\tilde{M}(U)\otimes_{\mathcal{O}_X(U)}\mathcal{O}_X(d)(U)$.
+
+    We know that $\mathcal{O}_X(d)$ is an invertible sheaf for every
+    $d\in\Z_{\geq 0}$ and $X$ is compact, thus we may find a finite covering by
+    affine opens
+    $(V_i)_{i\in I}$ s.t. $\mathcal{O}_X|_{V_i}\cong\mathcal{O}_X|_{V_i}$.
+    Let $V\subset V_i$ be
+    open. We know that $\mathcal{G}(V)=\tilde{M}(V)\otimes_{\mathcal{O}_X(V)}
+    \mathcal{O}_X(d)(V)\cong\tilde{M}(V)
+    \otimes_{\mathcal{O}_X(V)}\mathcal{O}_X(V)=
+    \tilde{M}(V)$ naturally and this isomorphism is compatible with
+    the restriction maps, which implies that
+    $\mathcal{G}|_{V_i}\cong\tilde{M}|_{V_i}$ and therefore
+    $(\tilde{M}\otimes\mathcal{O}_X(d))_x=\mathcal{G}_x=\tilde{M}_x$ for all
+    $x\in X$.
+
+    Observe that, for any pair of elements
+    $m^i_{z_i}=[(V_i,m^i)]\in\mathcal{G}_{z_i}\cong\K$, where $z_0,\ z_1$ are
+    the two points in $Z$, we have that $m^i_x=0_x$ for all
+    $x\in V_i\setminus Z$, thus, considering the triplet
+    $m^i|_{V_i\setminus Z},\ 0|_{X\setminus Z}$, we may define an element
+    $s\in\Gamma(X,\tilde{M}\otimes\mathcal{O}_X(d))$ by setting
+    $z_i\mapsto m^i_{z_i},\ x\mapsto 0_x$ for all
+    $x\in X\setminus Z$. Since all the stalks at any $x\in X\setminus Z$ are 0,
+    this gives rise to every possible map $X\rightarrow\amalg_{x\in
+    X}\mathcal{G}_x$. We therefore have that
+    $\Gamma(X,\tilde{M}\otimes\mathcal{O}_X(d))\cong\K\times\K$ for every
+    $d\in\Z_{\geq 0}$, thus
+    $\dim_\K(\Gamma(X,\tilde{M}\otimes\mathcal{O}_X(d)))=2$.
+
+    Also, it may be noted that our earlier construction shows that
+    $\Gamma(U_i,\tilde{M}\otimes\mathcal{O}(d))$ is given by all of the possible
+    maps $U_i\rightarrow\amalg_{x\in U_i}\mathcal{G}_x$, hence
+    $\Gamma(U_i,\tilde{M}\otimes\mathcal{O}_X(d))\cong\K$.
+\end{proof}
+
+\begin{proof}
+    $(f)$ For $d=0$ the dimensions of the two $\K$-vector spaces differ, thus
+    $\alpha_0$ is not an isomorphism. We may therefore focus on $d>0$.
+
+    To show that this map is an isomorphism it is sufficient to prove that it is
+    injective, for we are working with equidimensional $\K$-vector spaces and a
+    $\K$-linear application.
+
+    Consider $m=a_0x_0^d+a_1x_1^d\in M_d$. Then, under the map $M_d\rightarrow
+    (M_{x_i})_0=\tilde{M}(U_i)$ given by $m\mapsto m/x_i^d$ we have that $x_j^d$
+    is sent to 0, for $x_j$ is killed by the localization at $x_i$, while
+    $x_i^d$ is sent the unit, hence $m/x_i^d=a_i$ and therefore
+    $\frac{m}{x_i^d}\otimes x_i^d=a_i\otimes x_i^d$ in
+    $\Gamma(U_i,\tilde{M}\otimes\mathcal{O}_X(d))\cong\K$.
+
+    Now, two elements $m_j=a_jx_0^d+b_jx_1^d\in M_d$ are
+    mapped to the same element in $\Gamma(X,\tilde{M}\otimes\mathcal{O}_X(d))$
+    if and only if $m_0/x_i^d=m_1/x_i^d$ for $i=0,1$ by the sheaf axioms, that
+    is if and only if $a_0=a_1,\ b_0=b_1$, hence $\alpha_d$ is injective.
+\end{proof}
+
+
+
+
+
+\printbibliography
+
+\end{document}

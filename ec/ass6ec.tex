@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{newlfont}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{~/math/references.bib}
+
+\newcommand{\numberset}{\mathbb}
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\C}{\numberset{C}}
+\newcommand{\K}{\numberset{K}}
+\newcommand{\F}{\numberset{F}}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\aid}{\mathfrak{a}}
+\newcommand{\bid}{\mathfrak{b}}
+\newcommand{\pid}{\mathfrak{p}}
+\newcommand{\qid}{\mathfrak{q}}
+\newcommand{\mi}{\mathfrak{m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Ps}{\mathbb{P}}
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
+
+
+\begin{document}
+
+\title{Elliptic Curves - Assignment 6}
+
+\author{Matteo Durante, s2303760, Leiden University}
+
+\maketitle
+
+
+\exercise{1}
+
+\begin{proof}
+    $(a)$ Since $\char(\C)=0$, by~\cite[cor. 6.4]{Sil09} for any $m\in\Z_{>0}$
+    we have that $E[n]=\Z/n\Z\times\Z/n\Z$. Consider the subset of $E_{tors}$
+    given by $H=\bigcup_{n\in\N}E[2n+1]$. This defines a subgroup since, given
+    any elements $e_{2m+1}\in E[2m+1],\ e_{2n+1}\in E[2n+1]$, we have that
+    $e_{2m+1}-e_{2n+1}\in E[2(2mn+m+n)+1]$. Also, it is a torsion group.
+    
+    Since each $E[n]$ is finite but strictly increasing in size with $n\in\N$
+    and the countably infinite union of finite sets is countably infinite,
+    $E_{tors}=\bigcup_{n\in\N} E[n+1]$ is countably infinite and the same goes
+    for $H\subset E_{tors}$.
+
+    Let now $e\in H$. We know that there exists a $n\in\N$ s.t. $e\in E[2n+1]$.
+    Since $2k+(2n+1)m=1$ for some $k,m\neq 0$, we may set $e'=ke$. By
+    construction, $2e'=e$, hence $H\subset 2H$.
+\end{proof}
+
+\begin{proof}
+    $(b)$ By the fundamental theorem of algebra, we know that for any $x\in\C$
+    we may find a $y\in\C$ s.t. $(x,y)\in E$. Since $\C$ is uncountably
+    infinite, $E$ has uncountably many points. By a previous argument,
+    $E_{tors}=\bigcup_{n\in\N}E[n+1]$ is countably infinite, hence
+    $E\setminus E_{tors}$ is uncountably infinite, which implies that there are
+    infinitely many points with infinite order. Let $e_0\in E$ be one of these.
+
+    Remember that the isogeny $E\xrightarrow{[2]}E$ is surjective, hence there
+    is a point $e_1\in E$ s.t. $2e_1=e_0$. Iterating, we get for any $e_n\in
+    E$ a point $e_{n+1}\in E$ s.t. $2e_{n+1}=e_n$.
+
+    Consider $h\in H=<e_n\ |\ n\in\N>$, where $h=\sum_n k_ne_n\neq 0$ can be
+    written s.t. $2\nmid k_n$ for every $k_n\neq 0,\ n>0$, as, given
+    $k_n=2k'_{n-1}$, $k_ne_n=k'_{n-1}e_{n-1}$.
+    
+    Let $m$ be the maximal $n$ with $k_n\neq 0$. If $m=0$, $h\in H$ has
+    trivially infinite order, hence we consider $m>0$. We then see that
+    $2^mh=(\sum_n 2^{m-n}k_n)e_0$ and, since $2^{m-m}k_m=k_m$ is odd
+    while $2|2^{m-n}k_n$ for all of the other $n,\ \sum_n 2^{m-n}k_n\neq 0$ and
+    again $h$ has infinite order.
+
+    We have $H$ is a torsion-free group. Also, it is countably infinite because
+    it has a countably infinite system of generators. Since for any $n\in\N$ we
+    have that $2e_{n+1}=e_n$, $e_n\in 2H$, which implies that $H\subset 2H$.
+\end{proof}
+
+\begin{proof}
+    $(c)$ Remember that $S=E\setminus E_{tors}$ is uncountably infinite.
+
+    Suppose that $(e_i)_{i=0}^n\subset S$ is a finite set of independent
+    elements. Such a set exists, for we may just pick a single element. We will
+    show that we can pick an element $e_{n+1}\in S$ s.t.
+    $(e_i)_{i=0}^{n+1}$ is still a system of independent elements.
+
+    Indeed, let $G_n=<e_i\ |\ i=0,\ldots,n>$. Since it is finitely generated, it
+    is countable, hence for any $m\in\Z\setminus\{0\}$ we have that
+    $[m]^{-1}(G_n)$ is countable and the same goes for
+    $\bigcup_{m\in\Z\setminus\{0\}}[m]^{-1}(G_n)$. Notice that this is the set
+    of elements $e\in E$ s.t. $me\in G_n$, hence
+    $\bigcup_{m\in\Z\setminus\{0\}}[m]^{-1}(G_n)$ is the set of elements of $E$
+    related to the $e_i$. By a previous argument, this implies that there exists
+    an element $e_{n+1}\in S\setminus G_n$, hence we may extend our system of
+    independent elements.
+
+    Consider now the system of generators of $H=\bigcup_{n\in\N} G_n$ given by
+    $(e_n)_{n\in\N}$. If these elements were not independent, then we would have
+    some relation $\sum k_ne_n=0$, which is not possible because then, given the
+    maximal index appearing in this equation $m\in\N$, $(e_i)_{i=0}^m$ would not
+    be a system of independent elements.
+
+    This implies that $H\cong\bigoplus_{n\in\N}\Z$, which is clearly
+    torsion-free and s.t. $H/2H\cong\bigoplus_{n\in\N}\Z/2\Z$ is infinite.
+\end{proof}
+
+
+~\\
+\exercise{2}
+
+\begin{proof}
+    Observe that the elliptic curve $E$ given by $y^2=x(x^2+13)$ has a 2-torsion
+    point at $(0,0),\ a=0,\ b=13\neq 0,\ a^2-4b\neq0$. Referring
+    to~\cite[lemma 4]{Bri18}, we have another elliptic curve $E'$ given by
+    $v^2=u(u^2-52),\ a'=0,\ b'=-52$. Also, referring to~\cite[lemma 4,5]{Bri18},
+    we have two 2-isogenies $E\xrightarrow{\phi}E',\ 
+    E'\xrightarrow{\hat{\phi}}E$ s.t. $[2]=\hat{\phi}\circ\phi$.
+
+    Referring to~\cite[lemma 6,7]{Bri18}, to compute
+    $\im(q)\subset\Q^*/(\Q^*)^2$ we have to look at the square-free integers $r$
+    dividing $b'=-52$, i.e. $r\in\{\pm 1,\pm 2,-4,\pm 13,\pm 26\}$, and check
+    for which values the diophantine equation given by $r^2l^4-52m^4=rn^2$ has
+    non-trivial solutions.
+
+    First of all, $q((0,0))=[-52]=[-13]$. Also, for $r=-1$, we find the solution
+    $(2,1,6)$.
+    
+    Setting $r=\pm2$, the equation becomes $4l^4-52m^4=\pm2n^2$, whence
+    $2l^4-26m^4=\pm n^2$. It follows that $n=2k$ for some $k\in\Z$, which gives
+    us $l^4-13m^4=\pm 2k^2$.
+
+    We may now assume $\gcd(k,l,m)=d=1$, for otherwise if $d>1$ we would have
+    that $d^2|k$ and therefore $(k/d^2,l/d,m/d)$ would be another solution with
+    $\gcd(k/d^2,l/d,m/d)=1$.
+    Looking at the equation $\mod 8$, since the square residues are
+    $\{0,\pm1\}$, we have that $l^4\equiv 0,1\mod 8,\ -13n^4\equiv 0,3\mod 8,\
+    \pm2k^2\equiv 0,\pm 2\mod 8$. Checking every combination, we see that there
+    is a solution if and only if they are all $\equiv 0\mod 8$, which implies
+    that $2|k,l,m$, a contradiction.
+
+    It follows that $\im(q)=\{[\pm 1],[\pm 13]\}$, for $[1]=[-1]^2,\
+    [13]=[-1][-13]$ and if there were $[\pm 26]$ there would also be $[\pm
+    2]=[13][\pm 26]$, which is absurd.
+
+    We get that $E'(\Q)/\phi(E(\Q))\cong\im(q)$ is a group of order 4 generated
+    by the elements corresponding to $[-1]$ and $[-13]$, which are respectively
+    the classes of $(-4,12)$ and $(0,0)$.
+
+    To compute $E(\Q)/\hat{\phi}(E'(\Q))$ we have refer again to~\cite[lemma
+    6,7]{Bri18} and look at the square-free integers $r$ dividing $b=13$, that
+    is $r\in\{\pm1,\pm13\}$. We see that that $q((0,0))=[-13]$ and, setting
+    $r=-1$, the diophantine equation $l^4+13m^4=-n^2$ has a no non-trivial
+    solutions because the left side is always positive, the right one negative.
+    It follows, by a previous reasoning, that $\im(q)=\{[1],[-13]\}$.
+
+    We get that $E(\Q)/\hat{\phi}(E'(\Q))\cong\im(q)$ has order 2 and it is
+    generated by the class of the point corresponding to $[-13]$, that is
+    $(0,0)$.
+
+    Applying~\cite[lemma 9]{Bri18}, we see that a system of generators for
+    $E(\Q)/2E(\Q)$ is given by the images of $[(0,0)],[(-4,12)]\in
+    E'(\Q)/\phi(E(\Q))$ and an element which is mapped to $[(0,0)]\in
+    E(\Q)/\hat{\phi}(E'(\Q))$. The former correspond to $[\hat{\phi}(0,0)]=[O]$,
+    which does not contribute, and $[\hat{\phi}(-4,12)]=[(9/4,51/8)]$, while for
+    the latter we may choose $[(0,0)]\in E(\Q)/2E(\Q)$ itself.
+
+    This implies that $E(\Q)/2E(\Q)$ is a group of rank 2 and order 4 generated
+    by $\{[(0,0)],[(9/4,51/8)]\}$.
+\end{proof}
+
+
+\printbibliography
+
+\end{document}
